@@ -26,6 +26,7 @@
 #define FTOK_FILE "Master.c"
 key_t ciao;
 key_t ciao1;
+ciao = 254394;
 
 #define ERROR                                                                                                                              \
     if (errno){                                                                                                                            \
@@ -128,7 +129,11 @@ void createIPCs(char* file) {
     fclose(in_progetto);
     fclose(out_progetto);
 
-    if ((shmAtomi     = shmget(ftok(ciao1, 'p'), sizeof(Atomo) * var->N_ATOM_MAX   , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+
+    //printf("%d \n", ftok("prova.c", "z"));
+    printf("%d \n", shmget(ftok("prova.c", 'q'), 5   , IPC_CREAT | IPC_EXCL | 744));
+
+    if ((shmAtomi     = shmget(ftok(ciao1, 'r'), sizeof(Atomo) * var->N_ATOM_MAX   , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm        = semget(ftok(ciao, 'a'), 1                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila       = msgget(ftok(ciao, 'g'),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi   = semget(ftok(ciao, 't'), 1                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
