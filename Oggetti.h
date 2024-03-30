@@ -2,12 +2,11 @@
 
 /*enum stampa {INIZIALE, GIORNALIERA, FINALE};*/
 
-typedef struct Var {
+ struct Var {
 int ENERGY_DEMAND;
 int N_ATOMI_INIT;
 int N_ATOM_MAX;
 int MIN_N_ATOMICO;
-int STEP_ATTIVATORE;
 int STEP_ALIMENTAZIONE;
 int ENERGY_EXPLODE_THRESHOLD;
 int flagTerminazione; 
@@ -35,16 +34,16 @@ int semEnergia;     //Forse non serve
 
 /* Memorie Codivise*/
 int shmAtomi; Atomo* atomi;
-int shmVar;     Var*   var;
+int shmVar;     //Var*   var;
 int shmPila;    int*   pila;
 
 /* Flag Terminazione e controlloSegnali*/
 int flagTempesta;
 int flagTerminazione;
 
-/* File */
+/* File 
 FILE* out_progetto;
-FILE* in_progetto;
+FILE* in_progetto;*/
 
 /* Variabili Globali */
 //int Atomo;

@@ -1,11 +1,9 @@
-#define NATOM_MAX 10
-FILE* file_configurazione;
-struct Atomo {
-    int numero_atomico;
-    int energia;
-    // Altre informazioni dell'atomo, se necessario
-};
+/*
 
+
+
+//#define NATOM_MAX 10
+FILE* file_configurazione;
 struct Atomo crea_atomo() {
     struct Atomo nuovo_atomo;
     nuovo_atomo.numero_atomico = (rand() % NATOM_MAX) + 1;
@@ -46,4 +44,4 @@ void creaIPCS(struct Configurazione *configurazione) {
     fscanf(file, "ENERGY_EXPLODE_THRESHOLD: %d\n", &configurazione->ENERGY_EXPLODE_THRESHOLD);
 
     fclose(file);
-}
+}*/

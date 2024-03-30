@@ -1,9 +1,3 @@
-double RandomPosition() {
-    double i = (double) (rand() % (var->SO_lato + 1));
-    if (i < var->SO_lato) i += (double)(rand() % 100) / 100;
-    return i;
-}
-
 int creazione_porti() {
     int i, j, k;
 

@@ -1,12 +1,10 @@
 #include "lib_header.h"
 
-int main()
-{
+int main() {
     printf("Stampo il test()\n");
     test();
-    return 0;
+    return 1; 
 }
-
 void test(){
       printf("Testing createIPCs()\n");
     createIPCs("Progetto.out");

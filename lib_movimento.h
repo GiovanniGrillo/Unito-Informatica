@@ -15,7 +15,7 @@ int pop() {
     reserveSem(semPila, 0);
     reserveSem(semPila, 1);
 
-    if(var->flagTerminazione == 0)
+    if(var->flagTerminazione == 1)
     if((pila  = shmat(shmPila,  NULL, 0)) != ( int*   ) -1){
         nave = pila[pila[var->n_navi] - 1];
         --pila[var->n_navi];

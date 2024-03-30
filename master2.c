@@ -4,17 +4,6 @@
 #include <sys/shm.h>
 #include "libreia2.h"
 
-
-struct Configurazione {
-    int ENERGY_DEMAND;
-    int N_ATOMI_INIT;
-    int N_ATOM_MAX;
-    int MIN_N_ATOMICO;
-    int STEP_ATTIVATORE;
-    int STEP_ALIMENTAZIONE;
-    int SIM_DURATION;
-    int ENERGY_EXPLODE_THRESHOLD;
-};
 struct Configurazione *attshm(key_t chiave) {
     int id_memoria_condivisa = shmget(chiave, sizeof(struct Configurazione), IPC_CREAT | 0666);
     if (id_memoria_condivisa == -1) {

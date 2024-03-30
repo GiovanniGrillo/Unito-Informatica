@@ -17,16 +17,11 @@
 #include "Oggetti.h"
 
 /*Da sistemare le define per le librerie opportune*/
-#define STEP_ATTIVATORE 1
 #define atomi_da_scindere [10] 
-#define MAX_ATOMI 10 // per ora li faccio runnare in locale
+ // per ora li faccio runnare in locale
 
-
-#define PERMISSIONS 0744
+#define PERMISSIONS 0666
 #define FTOK_FILE "Master.c"
-key_t ciao;
-key_t ciao1;
-ciao = 254394;
 
 #define ERROR                                                                                                                              \
     if (errno){                                                                                                                            \
@@ -104,42 +99,42 @@ void createIPCs(char* file) {
     char temp[20];
     char boolean[6];
     int i;
-    
-    if ((shmAtomi = shmget(ciao, sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    // una volta che Var sarà inizializzata si potrà usare sizeof(Var)
+    if ((shmAtomi = shmget(ftok("atomo.c", "a"), 2, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((var = shmat(shmAtomi, NULL, 0)) == (void *) -1) ERROR;
     
-    out_progetto = fopen("Progetto.out", "w");
-    in_progetto  = fopen(file, "r");
+    /*out_progetto = fopen("Progetto.out", "b");
+    in_progetto  = fopen(file, "c");
         setbuf(out_progetto, NULL);
-        fprintf(out_progetto, "------------------------------------------------------------------------------\n");
-        fprintf(out_progetto, "       Inizio esecuzione progetto di Sistemi Operativi (2023/2024)       \n");
-        fprintf(out_progetto, "                                    di                                    \n");
-        fprintf(out_progetto, "        Alessndro, Siviero Francesco, Grillo Giovanni            \n");
-        fprintf(out_progetto, "------------------------------------------------------------------------------\n");
+        printf(out_progetto, "------------------------------------------------------------------------------\n");
+        printf(out_progetto, "       Inizio esecuzione progetto di Sistemi Operativi (2023/2024)       \n");
+        printf(out_progetto, "                                    di                                    \n");
+        printf(out_progetto, "        Alessndro, Siviero Francesco, Grillo Giovanni            \n");
+        printf(out_progetto, "------------------------------------------------------------------------------\n");
 
-                                                                                fprintf(out_progetto, "-  %s %d\n","STEP_ATTIVATORE:", STEP_ATTIVATORE);
+                                                                             fprintf(out_progetto, "-  %s %d\n","STEP_ATTIVATORE:", STEP_ATTIVATORE);
                                                                                 fprintf(out_progetto, "-  %s %d\n","SIM_DURATION:", SIM_DURATION);
 
         fscanf(in_progetto, "%s %d\n",temp, &var->ENERGY_DEMAND);               fprintf(out_progetto, "-  %s %d\n",temp, var->ENERGY_DEMAND);
         fscanf(in_progetto, "%s %d\n",temp, &var->N_ATOMI_INIT);                fprintf(out_progetto, "-  %s %d\n",temp, var->N_ATOMI_INIT);
         fscanf(in_progetto, "%s %d\n",temp, &var->STEP_ALIMENTAZIONE);          fprintf(out_progetto, "-  %s %d\n",temp, var->STEP_ALIMENTAZIONE);
         fscanf(in_progetto, "%s %d\n",temp, &var->ENERGY_EXPLODE_THRESHOLD);    fprintf(out_progetto, "-  %s %d\n",temp, var->ENERGY_EXPLODE_THRESHOLD);
-        fprintf(out_progetto, "------------------------------------------------------------------------------\n\n");
+        fprintf(out_progetto, "------------------------------------------------------------------------------\n\n");*/
 
-    fclose(in_progetto);
-    fclose(out_progetto);
+    /*fclose(in_progetto);
+    fclose(out_progetto);*/
 
 
     //printf("%d \n", ftok("prova.c", "z"));
-    printf("%d \n", shmget(ftok("prova.c", 'q'), 5   , IPC_CREAT | IPC_EXCL | 744));
+    //printf("%d \n", shmget(ftok("prova.c", 'q'), 5   , IPC_CREAT | IPC_EXCL | 744));
 
-    if ((shmAtomi     = shmget(ftok(ciao1, 'r'), sizeof(Atomo) * var->N_ATOM_MAX   , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semShm        = semget(ftok(ciao, 'a'), 1                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((msgPila       = msgget(ftok(ciao, 'g'),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi   = semget(ftok(ciao, 't'), 1                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmAtomi     = shmget(ftok("Movimento.c", 'd'), 10  , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semShm        = semget(ftok("Master.c", 'e'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((msgPila       = msgget(ftok("Giornaliera.c", 'f'),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi   = semget(ftok("/Makefile", 'g'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
-    out_progetto = fopen("Progetto.out", "a");
-    setbuf(out_progetto, NULL);
+    //out_progetto = fopen("Progetto.out", "a");
+    //setbuf(out_progetto, NULL);
 
     return;
 }
@@ -157,16 +152,16 @@ void deallocIPCs() {
 }
 
 void loadIPCs() {
-    if ((shmVar        = shmget(ftok(FTOK_FILE, 'v'), sizeof(Var)                         , PERMISSIONS)) == -1) ERROR;
+    if ((shmVar        = shmget(ftok(FTOK_FILE, 'i'), sizeof(Var)                         , PERMISSIONS)) == -1) ERROR;
     if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
-    if ((shmPila       = shmget(ftok(FTOK_FILE, 'i'), sizeof(int)   * (var -> N_ATOM_MAX) , PERMISSIONS)) == -1) ERROR;
-    if ((msgPila       = msgget(ftok(FTOK_FILE, 'g')                                      , PERMISSIONS)) == -1) ERROR;
-    if ((semPila       = semget(ftok(FTOK_FILE, 's'), 2                                   , PERMISSIONS)) == -1) ERROR;
-    if ((semShm        = semget(ftok(FTOK_FILE, 'a'), 1                                   , PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi   = semget(ftok(FTOK_FILE, 't'), 1                                   , PERMISSIONS)) == -1) ERROR;
+    if ((shmPila       = shmget(ftok(FTOK_FILE, 'j'), sizeof(int)   * (var -> N_ATOM_MAX) , PERMISSIONS)) == -1) ERROR;
+    if ((msgPila       = msgget(ftok(FTOK_FILE, 'k')                                      , PERMISSIONS)) == -1) ERROR;
+    if ((semPila       = semget(ftok(FTOK_FILE, 'l'), 2                                   , PERMISSIONS)) == -1) ERROR;
+    if ((semShm        = semget(ftok(FTOK_FILE, 'm'), 1                                   , PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi   = semget(ftok(FTOK_FILE, 'n'), 1                                   , PERMISSIONS)) == -1) ERROR;
 
-    out_progetto = fopen("Progetto.out", "a");
-    setbuf(out_progetto, NULL);
+    //out_progetto = fopen("Progetto.out", "a");
+    //setbuf(out_progetto, NULL);
     set_sem(semProcessi, 0, 0);
     
     return;

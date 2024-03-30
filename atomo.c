@@ -8,8 +8,8 @@
 #include <sys/shm.h>
 #include <sys/sem.h>
 #include <sys/msg.h>
-#include "lib_header.h"
 #include "lib_atomo.h"
+
 
 
 

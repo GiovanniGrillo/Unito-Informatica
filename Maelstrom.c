@@ -1,4 +1,4 @@
-#include "lib_header.h"
+/* #include "lib_header.h"
 
 int main() {
     setbuf(stdout, NULL);
@@ -34,4 +34,4 @@ int main() {
 
     unloadIPCs();
     exit(0);
-}
+}*/
