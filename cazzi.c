@@ -3,14 +3,14 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include "Oggetti.h"
+#include <sched.h>
 
 
 // Definizione della struttura dati condivisa
 
-
 // Funzione per attaccare l'area di memoria condivisa
 struct Var *attshm() {
-    key_t KEY = 1234; // Chiave arbitraria
+    key_t KEY = ftok("cazzi.c", 'a');   
     int shmid = shmget(KEY, sizeof(struct Var), IPC_CREAT | 0666);
     if (shmid == -1) {
         perror("shmget");
@@ -29,47 +29,200 @@ struct Var *attshm() {
 struct Atomo crea_atomo() {
     printf("sto iniziando a creare un atomo\n");
     struct Atomo nuovo_atomo;
-    nuovo_atomo.numero_atomico = (Var.ENERGY_DEMAND);
+    nuovo_atomo.numero_atomico = (rand() % Var.N_ATOM_MAX) + 1;
     printf("atomo creato\n");
     return nuovo_atomo;
     
 }
+void simulateFission(struct Atomo *padre) {
+    // Verifica se il numero atomico è minore o uguale a MIN_N_ATOMICO
+    if (padre->numero_atomico <= Var.MIN_N_ATOMICO) {
+       struct Var *sharedVar= attshm(); 
+        sharedVar->scorie=sharedVar->scorie+1;
+        shmdt(sharedVar);
+        printf("Atomo con numero atomico minore o uguale a MIN_N_ATOMICO. Terminato e conteggiato nelle statistiche fra le scorie.\n");
+        return;
+    }
+
+    // Fork per creare un nuovo atomo (processo figlio)
+    pid_t pid = fork();
+
+    if (pid == -1) {
+        perror("Fork failed");
+        exit(EXIT_FAILURE);
+    } else if (pid == 0) {
+        // Processo figlio
+        int numero_casuale = rand() % padre->numero_atomico + 1;
+        printf("Processo padre  con numero atomico: %d\n", padre->numero_atomico);
+
+
+        struct Atomo figlio = {(padre->numero_atomico)-numero_casuale};
+        padre->numero_atomico =(padre->numero_atomico -(figlio.numero_atomico));
+        printf("Processo figlio creato con numero atomico: %d\n", figlio.numero_atomico);
+        
+        // Simula la scissione
+        //printf("Scissione avvenuta. Numero atomico figlio: %fd\n", figlio.numero_atomico);
+
+        // Calcola l'energia liberata durante la scissione
+        int releaseEnergy = energy(padre->numero_atomico, figlio.numero_atomico);
+        struct Var *sharedVar= attshm(); 
+        sharedVar->enrgia=sharedVar->enrgia+releaseEnergy;
+        shmdt(sharedVar);
+
+        
+
+
+
+        printf("Energia liberata: %d\n", releaseEnergy);
+        printf("dopo la scissione padre: %d figlio %d",padre->numero_atomico,figlio.numero_atomico);
+        /*comunicare l'energia alla centrale*/
+
+        exit(EXIT_SUCCESS);
+    } else {
+        // Processo padre
+        wait(NULL);
+        
+    }
+}
+int energy(int n1, int n2) {
+    return n1 * n2 - (n1 > n2 ? n1 : n2);
+}
+
 
 int main() {
+    printf("Benvenuto in cazzi!\n");
+
+    srand((unsigned int)time(NULL));
+    Var.ENERGY_DEMAND = 100;
+    Var.N_ATOMI_INIT = 10;
+    Var.N_ATOM_MAX = 20;
+    Var.MIN_N_ATOMICO = 5;
+    Var.STEP_ALIMENTAZIONE = 2;
+    Var.ENERGY_EXPLODE_THRESHOLD = 50;
+    Var.flagTerminazione = 0;
+    Var.scorie=0;
+    Var.enrgia=0;
     // Attacca l'area di memoria condivisa
     struct Var *sharedVar = attshm();
 
+
+
     // Inizializzazione dei valori
-    sharedVar->ENERGY_DEMAND = 100;
-    sharedVar->N_ATOMI_INIT = 10;
-    sharedVar->N_ATOM_MAX = 20;
-    sharedVar->MIN_N_ATOMICO = 5;
-    sharedVar->STEP_ALIMENTAZIONE = 2;
-    sharedVar->ENERGY_EXPLODE_THRESHOLD = 50;
-    sharedVar->flagTerminazione = 0;
-
-
-
-    struct Atomo Iniziale =crea_atomo(); 
-    printf("%d\n",Iniziale.numero_atomico);
-
-
-
+    sharedVar->ENERGY_DEMAND = Var.ENERGY_DEMAND;
+    sharedVar->N_ATOMI_INIT = Var.N_ATOMI_INIT;
+    sharedVar->N_ATOM_MAX = Var.N_ATOM_MAX;
+    sharedVar->MIN_N_ATOMICO = Var.MIN_N_ATOMICO;
+    sharedVar->STEP_ALIMENTAZIONE = Var.STEP_ALIMENTAZIONE;
+    sharedVar->ENERGY_EXPLODE_THRESHOLD = Var.ENERGY_EXPLODE_THRESHOLD;
+    sharedVar->flagTerminazione = Var.flagTerminazione;
+    sharedVar->scorie=Var.scorie;
+    sharedVar->enrgia=Var.enrgia;
     printf("Valore : %d\n", sharedVar->ENERGY_DEMAND);
+    printf("Benvenuto in cazzi2!\n");
     
 
     // Stacca l'area di memoria condivisa
     shmdt(sharedVar);
 
-
-    struct Var *sharedVar2 = attshm();
-     sharedVar2->flagTerminazione=10;
-     printf("valore :%d\n",sharedVar2->flagTerminazione);
-    shmdt(sharedVar2);
+    struct Atomo Iniziale =crea_atomo(); 
+    printf("%d\n",Iniziale.numero_atomico);
+    simulateFission(&Iniziale);
 
 
-    // Rimuovi completamente l'area di memoria condivisa (se necessario)
-    // shmctl(shmid, IPC_RMID, NULL);
+
+    printf("addio in cazzi!\n");
 
     return 0;
 }
+
+/*
+**************************************************
+
+
+
+int main() {
+    pid_t pidMovimento; 
+    pid_t pidGiornaliera;
+    pid_t pidMaelstrom;
+    int i;
+    setbuf(stdout, NULL);
+    srand(time(NULL));
+ 
+    switch ((pidMovimento = fork())) {
+        case -1:    
+            ERROR;
+
+        case  0:    
+            execl("./Movimento", "./Movimento", NULL);
+                printf("Movimento non avviato correttamente\n");                         
+                ERROR;
+
+        default:    
+            break;
+    }
+
+    printf("------------------------------------\n");
+    printf("     PROCESSO Maelstrom - Start     \n");
+    printf("------------------------------------\n");
+
+    switch ((pidMaelstrom = fork())) {
+        case -1:    
+            ERROR;
+
+        case  0:    
+            if(var->setOnMaelstrom == FALSE) exit(0);
+                execl("./Maelstrom", "./Maelstrom", NULL); 
+                printf("Maelstrom non avviato correttamente\n");                         
+                ERROR;
+                exit(0);
+
+        default:    
+            break;
+    }
+    
+    printf("--------------------------------------\n");
+    printf("     PROCESSO Giornaliera - Start     \n");
+    printf("--------------------------------------\n");
+
+    switch ((pidGiornaliera = fork())) {
+        case -1:    
+            ERROR;
+
+        case  0:    
+            execl("./Giornaliera", "./Giornaliera", NULL); 
+            printf("Giornaliera non avviato correttamente\n");
+            kill(pidMovimento, SIGTERM);
+            ERROR;
+
+        default:    
+            waitpid(pidGiornaliera, NULL, 0);
+    } 
+
+    kill(pidMovimento, SIGTERM);
+    kill(pidMaelstrom, SIGTERM);
+    ++var->flagTerminazione; 
+
+    for(i = 0;semctl(semProcessi, 0, GETVAL) != 0; ++i){
+        sleep(1);
+        printf("   PROCESSI - ancora attivi: %d\n", semctl(semProcessi, 0, GETVAL));
+        if(i>5){
+            printf("   ERRORE - TERMINAZIONE FORZATA\n");
+            killpg(getpid(), SIGKILL);
+        }
+    }
+    
+    --var->flagTerminazione;
+    attShm();{
+        if (stampa(FINALE) == -1) ERROR;
+    }
+        detShm();
+
+    deallocIPCs();
+
+    printf("--------------------------------------\n");
+    printf("     PROCESSO Master - Terminato      \n");
+    printf("--------------------------------------\n");
+        
+    exit(0);
+}
+*/

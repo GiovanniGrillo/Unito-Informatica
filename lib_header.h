@@ -29,7 +29,49 @@
         exit(1);                                                                                                                           \
     }
 
-int reserveSem(int id_sem, int n_sem) {
+void createIPCS() {
+    printf("STO CREANDO LE RISORSE DI COMUNICAZIONE FRA PROCESSI\n");
+
+    key_t shmVar_key;
+    shmVar_key = ftok("cazzi.c", 'v');
+    
+
+    if ((shmVar  = shmget(shmVar_key, sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
+
+    var->ENERGY_DEMAND = 100;
+    var->N_ATOMI_INIT = 10;
+    var->N_ATOM_MAX = 20;
+    var->MIN_N_ATOMICO = 5;
+    var->STEP_ALIMENTAZIONE = 2;
+    var->ENERGY_EXPLODE_THRESHOLD = 50;
+    var->flagTerminazione = 0;
+    var->scorie=0;
+    var->enrgia=0;
+
+    return;
+}
+void deallocIPC(){
+    if (shmctl(shmVar, IPC_RMID, 0) == -1) { ERROR; } else printf("     shmVar        |   deallocati     \n");
+    return;
+}
+
+void loadIPCs() {
+       key_t shmVar_key;
+    shmVar_key = ftok("cazzi.c", 'v');
+    if ((shmVar        = shmget(shmVar_key, sizeof(Var) , PERMISSIONS)) == -1) ERROR;
+    if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
+    return;
+    }
+
+void unloadIPCs() {
+    if((shmdt(var)) == -1) ERROR;
+    return;
+}
+
+
+
+/*int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
 
     s_ops.sem_num = n_sem;
@@ -128,7 +170,7 @@ void createIPCs(char* file) {
     //printf("%d \n", ftok("prova.c", "z"));
     //printf("%d \n", shmget(ftok("prova.c", 'q'), 5   , IPC_CREAT | IPC_EXCL | 744));
 
-    if ((shmAtomi     = shmget(ftok("Movimento.c", 'd'), 10  , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    /*if ((shmAtomi     = shmget(ftok("Movimento.c", 'd'), 10  , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm        = semget(ftok("Master.c", 'e'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila       = msgget(ftok("Giornaliera.c", 'f'),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi   = semget(ftok("/Makefile", 'g'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -162,7 +204,7 @@ void loadIPCs() {
 
     //out_progetto = fopen("Progetto.out", "a");
     //setbuf(out_progetto, NULL);
-    set_sem(semProcessi, 0, 0);
+    //set_sem(semProcessi, 0, 0);
     
     return;
 }
@@ -170,4 +212,4 @@ void loadIPCs() {
 void unloadIPCs() {
     if((shmdt(var)) == -1) ERROR;
     return;
-}
+}*/

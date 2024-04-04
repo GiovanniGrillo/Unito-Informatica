@@ -1,12 +1,20 @@
--Sistemare memorie condivise 60% del prg                                                                                                ~
+IMPORTANTI 
+INIZIALIZZARE i semafori da mettere nella memoria condivisa                                                                             ~
+
+COSE GENERALI
+-implementare Alimentatore                                                                                                              ~
+-Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore)                                                             ~
+-Sistemare memorie condivise 60% del prg (per adesso sembrano funzionare)                                                               ✔
 -Sitemare "Struct atomo FIglio struct Atomo figlio = {(padre->numero_atomico)/2, 0}" non basata dividere per due                        ~
 -Pulire il prg dalle funzioni vecchie inutili                                                                                           ~
 -Capire come gestire la stampa giornaliera, se mantenere la stessa lib Header e l'identazione di stampa pari al vecchio prg             ~
 -Capire quali variabili di iterazione, scorr di lista e quantitative sono da mantenere e quali da eliminare dal vecchio.                ✔
 -Sistemare il MakeFIle per eseguire (non serve più C89)                                                                                 ~
--Implementare Alimentatore.c però prima finire mem condivisa per usare le variabili                                                     ~
-
+-Sistemare progetto conf, rimuovere dalle struct ENERGY_DEMAND, N_ATOM_MAX, N_ATOM_MIN                                                  ~
 
 --Versione "normal" 30--
 -Valutare se aggiungere al progetto: "Inibitore" e "Assorbe" 
 -Capire come implementare una richiesta di attivazione "Inibitore" a run-time. 
+
+
+
