@@ -15,6 +15,6 @@ COSE GENERALI
 --Versione "normal" 30--
 -Valutare se aggiungere al progetto: "Inibitore" e "Assorbe" 
 -Capire come implementare una richiesta di attivazione "Inibitore" a run-time. 
-
+Ciao
 
 
