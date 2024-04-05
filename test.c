@@ -1,20 +1,20 @@
 #include "lib_header.h"
-
+#include "lib_alimentatore.h"
 
 int main(){
     pid_t pidAtomo; 
     pid_t pidAttivatore;
     createIPCS();
-    
-    
 
-     switch ((pidAttivatore = fork())) {
-        case -1:    
+    if(set_sem(semShm, 0, 1) == -1) ERROR;
+    
+    switch ((pidAttivatore = fork())) {
+        case -1:
             ERROR;
 
-        case  0:    
+        case  0:
                 execl("./attivatore", "./attivatore", NULL); 
-                printf("Attivatore non avviato correttamente\n");                         
+                printf("Attivatore non avviato correttamente\n");
                 ERROR;
                 exit(0);
 
@@ -38,11 +38,6 @@ int main(){
 
 
     printf("provo a fare partire attivatore");
-    deallocIPC();
-     printf("test ha finito le cose da fare \n");
-  
+    printf("test ha finito le cose da fare \n");
 
 }
-
-
-

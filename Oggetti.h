@@ -12,6 +12,7 @@ int ENERGY_EXPLODE_THRESHOLD;
 int flagTerminazione; 
 int scorie;
 int enrgia;
+int STEP_ATTIVATORE;
 } Var;
 
 typedef struct Atomo {
@@ -36,8 +37,8 @@ int msgPila;
 /* Semafori */
 int semAttivatore;
 int semShm;
-int semProcessi; 
-int semEnergia;     //Forse non serve
+int semProcessi;
+//int semEnergia;     //Forse non serve
 
 /* Memorie Codivise*/
 int shmAtomi; Atomo* atomi;

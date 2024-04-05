@@ -14,21 +14,27 @@
 
 int main() {
     printf("Benvenuto in Atomo! \n");
-   
-    testcoda();
-   
+        testcoda();
 
-    // Simula la creazione di un atomo iniziale
-    loadIPCs();
-    struct Atomo iniziale = crea_atomo();
-    printf("Atomo iniziale creato con numero atomico: %d\n", iniziale.numero_atomico);
 
-    // Simula la fissione dell'atomo iniziale
-    
-    simulateFission(&iniziale);
-    unloadIPCs();
+        // Simula la creazione di un atomo iniziale
+        attShm();
+        struct Atomo iniziale = crea_atomo();
+        printf("Atomo iniziale creato con numero atomico: %d\n", iniziale.numero_atomico);
+
+        // Simula la fissione dell'atomo iniziale
+        
+        simulateFission(&iniziale);
+        dettShm();
     return 0;
-}
+    }
+
+
+ 
+
+
+
+
 
 
 int testcoda() {

@@ -10,7 +10,7 @@
 
 // Funzione per attaccare l'area di memoria condivisa
 struct Var *attshm() {
-    key_t KEY = ftok("cazzi.c", 'a');   
+    key_t KEY = ftok("cazzi.c", 'a');
     int shmid = shmget(KEY, sizeof(struct Var), IPC_CREAT | 0666);
     if (shmid == -1) {
         perror("shmget");
@@ -29,14 +29,14 @@ struct Var *attshm() {
 struct Atomo crea_atomo() {
     printf("sto iniziando a creare un atomo\n");
     struct Atomo nuovo_atomo;
-    nuovo_atomo.numero_atomico = (rand() % Var.N_ATOM_MAX) + 1;
+    nuovo_atomo.numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
     printf("atomo creato\n");
     return nuovo_atomo;
     
 }
 void simulateFission(struct Atomo *padre) {
     // Verifica se il numero atomico è minore o uguale a MIN_N_ATOMICO
-    if (padre->numero_atomico <= Var.MIN_N_ATOMICO) {
+    if (padre->numero_atomico <= var->MIN_N_ATOMICO) {
        struct Var *sharedVar= attshm(); 
         sharedVar->scorie=sharedVar->scorie+1;
         shmdt(sharedVar);
@@ -93,36 +93,12 @@ int main() {
     printf("Benvenuto in cazzi!\n");
 
     srand((unsigned int)time(NULL));
-    Var.ENERGY_DEMAND = 100;
-    Var.N_ATOMI_INIT = 10;
-    Var.N_ATOM_MAX = 20;
-    Var.MIN_N_ATOMICO = 5;
-    Var.STEP_ALIMENTAZIONE = 2;
-    Var.ENERGY_EXPLODE_THRESHOLD = 50;
-    Var.flagTerminazione = 0;
-    Var.scorie=0;
-    Var.enrgia=0;
-    // Attacca l'area di memoria condivisa
-    struct Var *sharedVar = attshm();
-
-
-
-    // Inizializzazione dei valori
-    sharedVar->ENERGY_DEMAND = Var.ENERGY_DEMAND;
-    sharedVar->N_ATOMI_INIT = Var.N_ATOMI_INIT;
-    sharedVar->N_ATOM_MAX = Var.N_ATOM_MAX;
-    sharedVar->MIN_N_ATOMICO = Var.MIN_N_ATOMICO;
-    sharedVar->STEP_ALIMENTAZIONE = Var.STEP_ALIMENTAZIONE;
-    sharedVar->ENERGY_EXPLODE_THRESHOLD = Var.ENERGY_EXPLODE_THRESHOLD;
-    sharedVar->flagTerminazione = Var.flagTerminazione;
-    sharedVar->scorie=Var.scorie;
-    sharedVar->enrgia=Var.enrgia;
-    printf("Valore : %d\n", sharedVar->ENERGY_DEMAND);
+    
     printf("Benvenuto in cazzi2!\n");
     
 
     // Stacca l'area di memoria condivisa
-    shmdt(sharedVar);
+   
 
     struct Atomo Iniziale =crea_atomo(); 
     printf("%d\n",Iniziale.numero_atomico);

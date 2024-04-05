@@ -9,6 +9,12 @@ int main(int argc, char const *argv[]){
     // Invia il messaggio all'Atomo
     key_t msg_key;
     msg_key = ftok("attivatore.c", 'z');
+
+    // for (int i = 0; i < SIM_DURATION; i++)
+    // {
+        
+
+        
     int msgid = msgget(msg_key, IPC_CREAT | 0666);
     if (msgid == -1) {
         perror("msgget");
@@ -19,6 +25,8 @@ int main(int argc, char const *argv[]){
         exit(1);
     }
     printf("Messaggio inviato all'atomo.\n");
+
+    
 
     return 0;
 }
