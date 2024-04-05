@@ -1,6 +1,6 @@
 IMPORTANTI 
 INIZIALIZZARE i semafori da mettere nella memoria condivisa                                                                             ~
-
+Ciao ciao ciao 
 COSE GENERALI
 -implementare Alimentatore                                                                                                              ~
 -Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore)                                                             ~
