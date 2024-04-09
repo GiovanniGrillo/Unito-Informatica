@@ -3,15 +3,17 @@ int main()
 {
     printf("Sono dentro! \n");
     createIPCS();
-    printf("valoreIniziale :%d\n",var->ENERGY_DEMAND);
-
+    printf("Setto il semaforo \n");
+    if(set_sem(semShm, 0, 1) == -1) ERROR;
+    printf("Finito di settare il semaforo\n");
     attShm();
     
-    printf("valore DOpo gli ipc :%d\n",var->ENERGY_DEMAND);
+    creazione_atomi(20);
+   
 
 
     dettShm();
-    deallocIPC();
-    printf("Sono fuori! \n");
+
+    printf("\nSono fuori! \n");
     return 0;
 }

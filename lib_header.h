@@ -32,8 +32,9 @@
 
 void createIPCS() {
     printf("STO CREANDO LE RISORSE DI COMUNICAZIONE FRA PROCESSI\n");
-    key_t shmVar_key; shmVar_key = ftok("cazzi.c", 'v');
-
+    key_t shmVar_key = ftok("cazzi.c", 'v');
+    key_t shmpila_key=ftok("test2.c","m");
+    key_t shmATOMI_key=ftok("test.c","p");
 
 
     if ((shmVar  = shmget(shmVar_key, sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -49,18 +50,27 @@ void createIPCS() {
     var->scorie=0;
     var->enrgia=0;
     var->STEP_ATTIVATORE=1;
-    if ((semShm=semget(ftok(FTOK_FILE, 'w'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-
+    var->n_atomi=0;
+    if ((semShm=    semget(ftok(FTOK_FILE, 'w'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmPila=   shmget(shmpila_key, sizeof(int)   * (var->N_ATOMI_INIT + 1) , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if (shmAtomi=   shmget(shmATOMI_key, sizeof(int)   * (var->N_ATOM_MAX + 1) , IPC_CREAT | IPC_EXCL | PERMISSIONS) == -1) ERROR;
+    printf("HO FINITO DI  CREARE LE RISORSE DI COMUNICAZIONE FRA PROCESSI\n");
     return;
 }
 
 
 void attShm() {
+
+     printf("STO ATTACCANDO LA MEMORIA\n");
     reserveSem (semShm,0);
     key_t shmVar_key;
     shmVar_key = ftok("cazzi.c", 'v');
     if ((shmVar = shmget(shmVar_key, sizeof(Var) , PERMISSIONS)) == -1) ERROR;
+
+
     if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
+    if((atomi = shmat(shmAtomi,  NULL, 0)) == ( Atomo* ) -1) ERROR;
+    printf("HO  FINITO DI ATTACCARE LA MEMORIA\n");
     return;
 }
 
@@ -119,6 +129,31 @@ pid_t newProcess() {
 void endProcess() {
     reserveSem(semProcessi, 0);
     exit(0);
+}
+
+
+int creazione_atomi(int numero_atomi_da_creare)
+{
+    int i;
+
+    if ((pila = shmat(shmPila, NULL, 0)) == (int *)-1)
+        ERROR;
+
+    for (i = 0; i < numero_atomi_da_creare; ++i)
+    {
+        atomi[i].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
+        //pila[i]         = i;
+        var->n_atomi++;
+        
+    }
+    printf("%d il valore di var->n_atomi è ", var->n_atomi);
+    //pila[var->n_atomi] = var->n_atomi;
+
+   
+
+    if ((shmdt(pila)) == -1)
+        ERROR;
+    return 0;
 }
 
 

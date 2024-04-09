@@ -9,14 +9,17 @@ int N_ATOM_MAX;
 int MIN_N_ATOMICO;
 int STEP_ALIMENTAZIONE;
 int ENERGY_EXPLODE_THRESHOLD;
-int flagTerminazione; 
+int flagTerminazione;
+int fork_atomi;
 int scorie;
 int enrgia;
 int STEP_ATTIVATORE;
+int n_atomi;
 } Var;
 
 typedef struct Atomo {
     int numero_atomico;
+
 } Atomo;
 
 /*
@@ -36,12 +39,12 @@ int msgPila;
 
 /* Semafori */
 int semAttivatore;
+int semPila;
 int semShm;
 int semProcessi;
-//int semEnergia;     //Forse non serve
 
 /* Memorie Codivise*/
-int shmAtomi; Atomo* atomi;
+int shmAtomi;   Atomo* atomi;
 int shmVar;     Var*   var;
 int shmPila;    int*   pila;
 

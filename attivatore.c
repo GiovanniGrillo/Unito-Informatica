@@ -1,4 +1,5 @@
 #include "lib_header.h"
+//ATTIVATORE NON CREA ATOMI MA COMUNICA LA NECESSITà DI EFFETTUARE LA SCISSION
 
 int main(int argc, char const *argv[]){
     struct msg_buffer {
@@ -7,15 +8,10 @@ int main(int argc, char const *argv[]){
     message.msg_type = 1; // Imposta il tipo di messaggio
 
     // Invia il messaggio all'Atomo
-    key_t msg_key;
-    msg_key = ftok("attivatore.c", 'z');
 
-    // for (int i = 0; i < SIM_DURATION; i++)
-    // {
-        
 
         
-    int msgid = msgget(msg_key, IPC_CREAT | 0666);
+    int msgid = msgget(ftok("attivatore.c", 'z'), IPC_CREAT | 0666);
     if (msgid == -1) {
         perror("msgget");
         exit(1);
