@@ -1,20 +1,18 @@
 IMPORTANTI 
-INIZIALIZZARE i semafori da mettere nella memoria condivisa                                                                             ~
-Ciao ciao ciao 
+I SEMAFORI DI LOAD IPCS SONO COMMENTATI. GESTIRE IL SEMOFORO DEI PROCESSI                                                               ~
+Sistemare "Struct atomo FIglio struct Atomo figlio = {(padre->numero_atomico)/2, 0}" non basata dividere per due                        ~
+Sistemare attivatore che manda i messaggi e attiva atomo.                                                                               ~
+pulire alimentatore                                                                                                                     ~
+
 COSE GENERALI
 -implementare Alimentatore                                                                                                              ~
 -Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore)                                                             ~
--Sistemare memorie condivise 60% del prg (per adesso sembrano funzionare)                                                               ✔
--Sitemare "Struct atomo FIglio struct Atomo figlio = {(padre->numero_atomico)/2, 0}" non basata dividere per due                        ~
--Pulire il prg dalle funzioni vecchie inutili                                                                                           ~
 -Capire come gestire la stampa giornaliera, se mantenere la stessa lib Header e l'identazione di stampa pari al vecchio prg             ~
--Capire quali variabili di iterazione, scorr di lista e quantitative sono da mantenere e quali da eliminare dal vecchio.                ✔
 -Sistemare il MakeFIle per eseguire (non serve più C89)                                                                                 ~
--Sistemare progetto conf, rimuovere dalle struct ENERGY_DEMAND, N_ATOM_MAX, N_ATOM_MIN                                                  ~
 
 --Versione "normal" 30--
--Valutare se aggiungere al progetto: "Inibitore" e "Assorbe" 
--Capire come implementare una richiesta di attivazione "Inibitore" a run-time. 
+-Valutare se aggiungere al progetto: "Inibitore" e "Assorbe"
+-Capire come implementare una richiesta di attivazione "Inibitore" a run-time.
 
 
 

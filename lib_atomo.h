@@ -1,4 +1,3 @@
-
 #include "lib_header.h"
 
 
@@ -15,24 +14,30 @@ int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
 
-/*struct Var *attshm() {
-    key_t KEY = ftok("cazzi.c", 'a');   
-    int shmid = shmget(KEY, sizeof(struct Var), IPC_CREAT | 0666);
-    if (shmid == -1) {
-        perror("shmget");
+
+int testcoda() {
+    key_t msg_key;
+    msg_key = ftok("attivatore.c", 'z');
+    int msgid = msgget(msg_key, IPC_CREAT | 0666);
+    if (msgid == -1) {
+        perror("msgget");
         exit(1);
     }
 
-    // Collegamento all'area di memoria condivisa
-    struct Var *sharedVar = (struct Var *)shmat(shmid, NULL, 0);
-    if (sharedVar == (void *)-1) {
-        perror("shmat");
+    // Attende un messaggio di tipo 1
+    if (msgrcv(msgid, &message, sizeof(message), 1, 0) == -1) {
+        perror("msgrcv");
         exit(1);
     }
+    printf("Messaggio ricevuto dall'attivatore.\n");
 
-    return sharedVar;
-}*/
- 
+    // Opzionale: Rimuovi la coda di messaggi dopo l'uso
+    // msgctl(msgid, IPC_RMID, NULL);
+
+    return 0;
+}
+
+
 void simulateFission(struct Atomo *padre) {
     // Verifica se il numero atomico è minore o uguale a MIN_N_ATOMICO
     if (padre->numero_atomico <= var->MIN_N_ATOMICO) {
@@ -66,10 +71,6 @@ void simulateFission(struct Atomo *padre) {
         int releaseEnergy = energy(padre->numero_atomico, figlio.numero_atomico);
         
         var->enrgia=var->enrgia+releaseEnergy;
-     
-
-        
-
 
 
         printf("Energia liberata: %d\n", releaseEnergy);

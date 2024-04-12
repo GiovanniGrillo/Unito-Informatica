@@ -17,12 +17,9 @@
 #include "Oggetti.h"
 
 /*Da sistemare le define per le librerie opportune*/
-#define atomi_da_scindere [10] 
-
- // per ora li faccio runnare in locale
-
+#define atomi_da_scindere [10]
 #define PERMISSIONS 0666
-#define FTOK_FILE "cazzi.c"
+#define FTOK_FILE "attivatore.c"
 
 #define ERROR                                                                                                                              \
     if (errno){                                                                                                                            \
@@ -31,13 +28,9 @@
     }
 
 void createIPCS() {
-    printf("STO CREANDO LE RISORSE DI COMUNICAZIONE FRA PROCESSI\n");
-    key_t shmVar_key = ftok("cazzi.c", 'v');
-    key_t shmpila_key=ftok("test2.c","m");
-    key_t shmATOMI_key=ftok("test.c","p");
+    //aggiungere il semaforo ipcs
 
-
-    if ((shmVar  = shmget(shmVar_key, sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmVar  = shmget(ftok("attivatore.c", 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
 
     var->ENERGY_DEMAND = 100;
@@ -51,42 +44,47 @@ void createIPCS() {
     var->enrgia=0;
     var->STEP_ATTIVATORE=1;
     var->n_atomi=0;
-    if ((semShm=    semget(ftok(FTOK_FILE, 'w'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shmPila=   shmget(shmpila_key, sizeof(int)   * (var->N_ATOMI_INIT + 1) , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if (shmAtomi=   shmget(shmATOMI_key, sizeof(int)   * (var->N_ATOM_MAX + 1) , IPC_CREAT | IPC_EXCL | PERMISSIONS) == -1) ERROR;
-    printf("HO FINITO DI  CREARE LE RISORSE DI COMUNICAZIONE FRA PROCESSI\n");
+
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     return;
 }
 
 
 void attShm() {
-
-     printf("STO ATTACCANDO LA MEMORIA\n");
     reserveSem (semShm,0);
-    key_t shmVar_key;
-    shmVar_key = ftok("cazzi.c", 'v');
-    if ((shmVar = shmget(shmVar_key, sizeof(Var) , PERMISSIONS)) == -1) ERROR;
-
-
     if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
-    if((atomi = shmat(shmAtomi,  NULL, 0)) == ( Atomo* ) -1) ERROR;
-    printf("HO  FINITO DI ATTACCARE LA MEMORIA\n");
+    if((atomi = shmat(shmAtomi ,NULL,0))==(void*)-1)    ERROR;
+    return;
+}
+
+
+void loadIPCs() {
+    if ((shmVar        = shmget(ftok("attivatore.c", 'z'), sizeof(Var), PERMISSIONS)) == -1)                                            ERROR;
+    if ((var           = shmat (shmVar  , NULL, 0)) == (void*) -1)                                                                      ERROR;
+    if ((shmAtomi      = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi   = semget(ftok(FTOK_FILE, 'd'), 1, PERMISSIONS)) == -1)                                                           ERROR;
+
+    //set_sem(semProcessi, 0, 0);d
     return;
 }
 
 void dettShm() {
+    if((shmdt(var)) == -1)   ERROR;
+    if((shmdt(atomi)) == -1) ERROR;
     releaseSem(semShm,0);
-    if((shmdt(var)) == -1) ERROR;
     return;
 }
 
 void deallocIPC(){
-    if (shmctl(shmVar, IPC_RMID, 0) == -1) { ERROR; } else printf("     shmVar        |   deallocati     \n");
+
+    if (shmctl(shmVar,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("\n     shmVar        |   deallocati     \n");
+    if (shmctl(shmAtomi, IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     shmAtomi      |   deallocati     \n");
+    if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
+    if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
     return;
-
 }
-
-
 
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
@@ -122,40 +120,38 @@ int set_sem(int semID, int semNum, int val) {
 }
 
 pid_t newProcess() {
-    releaseSem(semProcessi, 0);
+    //(releaseSem(semProcessi, 0);
     return fork();
 }
 
 void endProcess() {
-    reserveSem(semProcessi, 0);
+    //reserveSem(semProcessi, 0);
     exit(0);
 }
-
 
 int creazione_atomi(int numero_atomi_da_creare)
 {
     int i;
 
-    if ((pila = shmat(shmPila, NULL, 0)) == (int *)-1)
-        ERROR;
+    // if ((pila = shmat(shmPila, NULL, 0)) == (int *)-1)
+    //     ERROR;
 
     for (i = 0; i < numero_atomi_da_creare; ++i)
     {
-        atomi[i].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
+        atomi[var->n_atomi].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
         //pila[i]         = i;
         var->n_atomi++;
         
     }
-    printf("%d il valore di var->n_atomi è ", var->n_atomi);
+    printf("Il valore di var->n_atomi è %d ", var->n_atomi);
     //pila[var->n_atomi] = var->n_atomi;
 
    
 
-    if ((shmdt(pila)) == -1)
-        ERROR;
+    // if ((shmdt(pila)) == -1)
+    //     ERROR;
     return 0;
 }
-
 
 
 

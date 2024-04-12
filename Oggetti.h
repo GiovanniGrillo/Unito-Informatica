@@ -15,11 +15,12 @@ int scorie;
 int enrgia;
 int STEP_ATTIVATORE;
 int n_atomi;
+int energia;
 } Var;
 
 typedef struct Atomo {
+    pid_t pidAtomo;
     int numero_atomico;
-
 } Atomo;
 
 /*
@@ -57,6 +58,6 @@ FILE* out_progetto;
 FILE* in_progetto;*/
 
 /* Variabili Globali */
-//int Atomo;
+
 /*pid_t pid; 
 pid_t pidAtomo; */
