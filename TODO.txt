@@ -1,11 +1,13 @@
-IMPORTANTI 
-I SEMAFORI DI LOAD IPCS SONO COMMENTATI. GESTIRE IL SEMOFORO DEI PROCESSI                                                               ~
-Sistemare "Struct atomo FIglio struct Atomo figlio = {(padre->numero_atomico)/2, 0}" non basata dividere per due                        ~
-Sistemare attivatore che manda i messaggi e attiva atomo.                                                                               ~
-pulire alimentatore                                                                                                                     ~
+IMPORTANTI !!
 
-COSE GENERALI
--implementare Alimentatore                                                                                                              ~
+//domani mattina
+implementare il for in modo che cicli correttamente secondo quello che ci serve (var->fork_atomi)
+fatto cio testare se i messaggi multipli vengono ricevuti 
+Sistemare attivatore che manda i messaggi e attiva atomo.
+fare in modo che atomo riceva x messaggi                                                                                                ~
+I SEMAFORI DI LOAD IPCS SONO COMMENTATI. GESTIRE IL SEMOFORO DEI PROCESSI                                                               ~
+
+COSE GENERALI                                                                                                                           ~
 -Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore)                                                             ~
 -Capire come gestire la stampa giornaliera, se mantenere la stessa lib Header e l'identazione di stampa pari al vecchio prg             ~
 -Sistemare il MakeFIle per eseguire (non serve più C89)                                                                                 ~

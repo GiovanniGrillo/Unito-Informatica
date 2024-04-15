@@ -38,7 +38,7 @@ int main() {
       
 
         attShm();
-        Atomo a_rand = atomi[rand() % (var->n_atomi)];
+        Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
         dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
@@ -60,17 +60,17 @@ int main() {
                 if (a_rand.numero_atomico > var->MIN_N_ATOMICO && figlio.numero_atomico > var->MIN_N_ATOMICO) {
                     int liberata = energy(a_rand.numero_atomico, figlio.numero_atomico);
                     printf("\nenergia liberata: %d", liberata);
-                    var->energia += liberata;
+                    centrale->energia += liberata;
                 } else {
                             printf("\naumento scorie\n");
-                            var->scorie += 2;
-                            --var->n_atomi;
+                            centrale->scorie += 2;
+                            --centrale->n_atomi;
                             dettShm();
                             exit(0);
                         }
 
-                atomi[var->n_atomi] = figlio;
-                var->n_atomi++;
+                atomi[centrale->n_atomi] = figlio;
+                centrale->n_atomi++;
                 dettShm();
                 exit(0);
             }

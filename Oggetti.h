@@ -11,12 +11,15 @@ int STEP_ALIMENTAZIONE;
 int ENERGY_EXPLODE_THRESHOLD;
 int flagTerminazione;
 int fork_atomi;
-int scorie;
-int enrgia;
 int STEP_ATTIVATORE;
-int n_atomi;
-int energia;
 } Var;
+
+typedef struct Centrale{
+    int energia;
+    int n_atomi;
+    int scorie;
+}Centrale;
+
 
 typedef struct Atomo {
     pid_t pidAtomo;
@@ -48,6 +51,7 @@ int semProcessi;
 int shmAtomi;   Atomo* atomi;
 int shmVar;     Var*   var;
 int shmPila;    int*   pila;
+int shmCentrale; Centrale* centrale;
 
 /* Flag Terminazione e controlloSegnali*/
 int flagTempesta;

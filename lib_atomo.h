@@ -42,7 +42,7 @@ void simulateFission(struct Atomo *padre) {
     // Verifica se il numero atomico è minore o uguale a MIN_N_ATOMICO
     if (padre->numero_atomico <= var->MIN_N_ATOMICO) {
         
-        var->scorie=var->scorie+1;
+        centrale->scorie=centrale->scorie+1;
        
         printf("Atomo con numero atomico minore o uguale a MIN_N_ATOMICO. Terminato e conteggiato nelle statistiche fra le scorie.\n");
         return;
@@ -70,7 +70,7 @@ void simulateFission(struct Atomo *padre) {
         // Calcola l'energia liberata durante la scissione
         int releaseEnergy = energy(padre->numero_atomico, figlio.numero_atomico);
         
-        var->enrgia=var->enrgia+releaseEnergy;
+        centrale->energia=centrale->energia+releaseEnergy;
 
 
         printf("Energia liberata: %d\n", releaseEnergy);

@@ -44,23 +44,27 @@ void createIPCS() {
     var->STEP_ALIMENTAZIONE = 2;
     var->ENERGY_EXPLODE_THRESHOLD = 50;
     var->flagTerminazione = 0;
-    var->scorie=0;
-    var->enrgia=0;
     var->STEP_ATTIVATORE=1;
-    var->n_atomi=0;
     var->fork_atomi=0;
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+
+    if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
+    if((centrale=shmat(shmCentrale,NULL,IPC_CREAT))==-1) ERROR;
+   
+    centrale->energia=0;
+    centrale->n_atomi=0;
+    centrale->scorie=0;
     return;
 }
 
 
 void attShm() {
     reserveSem (semShm,0);
-    if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
-    if((atomi = shmat(shmAtomi ,NULL,0))==(void*)-1)    ERROR;
+    if ((centrale = shmat(shmCentrale, NULL, 0)) == (void*) -1) ERROR;
+    if ((atomi    = shmat(shmAtomi, NULL ,0))    == (void*) -1) ERROR;
     return;
 }
 
@@ -78,6 +82,7 @@ void loadIPCs() {
 void dettShm() {
     if((shmdt(var)) == -1)   ERROR;
     if((shmdt(atomi)) == -1) ERROR;
+    if((shmdt(centrale)) == -1) ERROR;
     releaseSem(semShm,0);
     return;
 }
@@ -86,6 +91,7 @@ void deallocIPC(){
 
     if (shmctl(shmVar,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("\n     shmVar        |   deallocati     \n");
     if (shmctl(shmAtomi, IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     shmAtomi      |   deallocati     \n");
+    if (shmctl(shmCentrale, IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     shmCentrale      |   deallocata     \n");
     if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
     if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
     return;
@@ -143,12 +149,12 @@ int creazione_atomi(int numero_atomi_da_creare)
 
     for (i = 0; i < numero_atomi_da_creare; ++i)
     {
-        atomi[var->n_atomi].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
+        atomi[centrale->n_atomi].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
         //pila[i]         = i;
-        var->n_atomi++;
+        centrale->n_atomi++;
         
     }
-    printf("Il valore di var->n_atomi è %d ", var->n_atomi);
+    printf("Il valore di var->n_atomi è %d ", centrale->n_atomi);
     //pila[var->n_atomi] = var->n_atomi;
 
    
