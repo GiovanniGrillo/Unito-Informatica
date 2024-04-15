@@ -29,8 +29,12 @@
 
 void createIPCS() {
     //aggiungere il semaforo ipcs
-
+    printf("eccomi");
+    
     if ((shmVar  = shmget(ftok("attivatore.c", 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    
+    printf("allora funziona!");
+
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
 
     var->ENERGY_DEMAND = 100;
@@ -44,6 +48,7 @@ void createIPCS() {
     var->enrgia=0;
     var->STEP_ATTIVATORE=1;
     var->n_atomi=0;
+    var->fork_atomi=0;
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 1, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;

@@ -26,16 +26,12 @@ int main() {
     attShm();
     creazione_atomi(20);
     dettShm();
-        printf("ciao!5");
+
     /* --- Possibili semafori extra --- */
-    printf("ciao!");
-    for (;var -> flagTerminazione == 0 || var->fork_atomi > 0 && exec < 3; ++exec) {
+
     // Selezione di un atomo
-    
-    printf("exec%d", exec);
-        // int prova_msg = msgrcv(msgPila, &message, (sizeof(message)-sizeof(long)), 0, 0);
-        // printf("Messaggio: %d", prova_msg);
-      
+    for (; exec < 1; ++exec) {
+        printf("sono nel ciclo infinito \n");
 
         attShm();
         Atomo a_rand = atomi[rand() % (var->n_atomi)];
@@ -45,6 +41,7 @@ int main() {
             case -1: 
                 printf("Errore pidMovimento (exec = %d)\n", exec); 
                 break;
+            
             case 0: {
                 printf("\nSTO ENTRANDO NEL FIGLIO\n");
                 printf("\nNUMERO ATOMICO PADRE %d", a_rand.numero_atomico);
@@ -54,7 +51,7 @@ int main() {
                 struct Atomo figlio;
                 figlio.numero_atomico = a_rand.numero_atomico - numero_casuale;
                 a_rand.numero_atomico -= figlio.numero_atomico;
-                printf("\nProcesso figlio creato con numero atomico: %d\n", figlio.numero_atomico);
+                printf("Processo figlio creato con numero atomico: %d\n", figlio.numero_atomico);
                 printf("\nNUMERO ATOMICO PADRE dopo la scissione %d", a_rand.numero_atomico);
                 
                 if (a_rand.numero_atomico > var->MIN_N_ATOMICO && figlio.numero_atomico > var->MIN_N_ATOMICO) {
@@ -62,13 +59,10 @@ int main() {
                     printf("\nenergia liberata: %d", liberata);
                     var->energia += liberata;
                 } else {
-                            printf("\naumento scorie\n");
-                            var->scorie += 2;
-                            --var->n_atomi;
-                            dettShm();
-                            exit(0);
-                        }
-
+                    printf("\naumento scorie\n");
+                    var->scorie += 2;
+                }
+                
                 atomi[var->n_atomi] = figlio;
                 var->n_atomi++;
                 dettShm();
@@ -78,8 +72,5 @@ int main() {
                 break;
         }
     }
-
- 
- return 0;
-
+    return 0;
 }
