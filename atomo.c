@@ -10,7 +10,6 @@
 #include <sys/msg.h>
 #include "lib_atomo.h"
 
-
 // se ti bagghi quando ti riapriamo disisntallo c e rinuncio agli studi.
 int main() {
     srand(time(NULL));
@@ -22,27 +21,29 @@ int main() {
 
     /* --- Apertura IPC --- */
     createIPCS();
-    if (set_sem(semShm, 0, 1) == -1) ERROR;
+    if (set_sem(semShm, 0, 1) == -1) {
+        ERROR;
+    }
     attShm();
     creazione_atomi(20);
     dettShm();
-        printf("ciao!5");
+    printf("ciao!5");
+
     /* --- Possibili semafori extra --- */
     printf("ciao!");
-    for (;var -> flagTerminazione == 0 || var->fork_atomi > 0 && exec < 3; ++exec) {
-    // Selezione di un atomo
-    
-    printf("exec%d", exec);
+    for (; var->flagTerminazione == 0 || var->fork_atomi > 0 && exec < 3; ++exec) {
+        // Selezione di un atomo
+        printf("exec%d", exec);
+        
         // int prova_msg = msgrcv(msgPila, &message, (sizeof(message)-sizeof(long)), 0, 0);
         // printf("Messaggio: %d", prova_msg);
-      
 
         attShm();
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
         dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
-            case -1: 
+            case -1:
                 printf("Errore pidMovimento (exec = %d)\n", exec); 
                 break;
             case 0: {
@@ -62,12 +63,12 @@ int main() {
                     printf("\nenergia liberata: %d", liberata);
                     centrale->energia += liberata;
                 } else {
-                            printf("\naumento scorie\n");
-                            centrale->scorie += 2;
-                            --centrale->n_atomi;
-                            dettShm();
-                            exit(0);
-                        }
+                    printf("\naumento scorie\n");
+                    centrale->scorie += 2;
+                    --centrale->n_atomi;
+                    dettShm();
+                    exit(0);
+                }
 
                 atomi[centrale->n_atomi] = figlio;
                 centrale->n_atomi++;
@@ -79,7 +80,5 @@ int main() {
         }
     }
 
- 
- return 0;
-
+    return 0;
 }
