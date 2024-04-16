@@ -39,7 +39,7 @@ alimentatore: alimentatore.c
 	@echo "Eseguo alimentatore"
 	@./alimentatore
 
-clean:
+c:
 	@echo "Rimuovo gli eseguibili:"
 	rm -f test test2 atomo attivatore alimentatore
 
