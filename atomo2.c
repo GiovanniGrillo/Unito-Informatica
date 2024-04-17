@@ -1,66 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <time.h>
+#include <math.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/sem.h>
+#include <sys/msg.h>
 #include "lib_atomo.h"
 
-int main() {
-    /*PROVA*/
-    key_t key = 1234;  // Chiave IPC statica per il debugging
-    int msgid = msgget(key, IPC_CREAT | 0666);
-    /*PROVA*/
 
+int main() {
     srand(time(NULL));
     printf("Benvenuto in Atomo! \n");
-
     /* --- Variabili locali --- */
     int exec = 0;
-    printf("sto per loaddare \n");
 
-    /* --- Apertura IPC --- */
-    loadIPCs();
+   /* --- Apertura IPC --- */
     // createIPCS();
-    
+    // if (set_sem(semShm, 0, 1) == -1) ERROR;
+    loadIPCs();
     attShm();
     creazione_atomi(20);
+    printf("\noraoroaoraora");
+    
     dettShm();
 
-    /* --- Ricezione messaggi e gestione atomi --- */
-    // int msgid = msgget(ftok("attivatore.c", 'm'), 0666); // Assicurati che i permessi e la chiave siano corretti
-    if (msgid == -1) {
-        perror("msgget");
-        exit(1);
-    }
-    int p=1;
-
-    while ((var->flagTerminazione == 0 || var->fork_atomi > 0) && exec < 3) {
-        if (msgrcv(msgid, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
-            perror("msgrcv");
-            continue; // Continua il ciclo in caso di errore
-        }
-        printf("Messaggio ricevuto: avvia scissione\n");
+   //if (set_sem(semShm, 0, 1) == -1) ERROR;
+  
+     
+    /* --- Possibili semafori extra --- */
+    printf("\nciao!");
+    for (; exec < 3; ++exec) {
+    // Selezione di un atomo
+    
+    printf("\exec%d", exec);
+        // int prova_msg = msgrcv(msgPila, &message, (sizeof(message)-sizeof(long)), 0, 0);
+        // printf("Messaggio: %d", prova_msg);
+      
 
         attShm();
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
         dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
-            case -1:
-                perror("Errore nella creazione del processo figlio");
+            case -1: 
+                printf("Errore pidMovimento (exec = %d)\n", exec); 
                 break;
-            case 0:
-                // Codice eseguito nel processo figlio
-                esegui_scissione(a_rand);
-                
-                break;
-            default:
-                wait(NULL); // Il processo padre aspetta la fine del figlio
-                break;
-        }
-        exec++;
-    }
-
-    return 0;
-}
-
-void esegui_scissione(Atomo a_rand) {
-    printf("\nSTO ENTRANDO NEL FIGLIO\n");
+            case 0: {
+                printf("\nSTO ENTRANDO NEL FIGLIO\n");
                 printf("\nNUMERO ATOMICO PADRE %d", a_rand.numero_atomico);
                 attShm();
                 int numero_casuale = rand() % a_rand.numero_atomico + 1;
@@ -87,4 +76,13 @@ void esegui_scissione(Atomo a_rand) {
                 centrale->n_atomi++;
                 dettShm();
                 exit(0);
+            }
+            default:
+                break;
+        }
+    }
+
+ 
+ return 0;
+
 }

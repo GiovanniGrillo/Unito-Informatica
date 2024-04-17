@@ -26,11 +26,6 @@ typedef struct Atomo {
     int numero_atomico;
 } Atomo;
 
-/*
-typedef struct msg {
-    long m_type;
-    int  n;
-} msg;*/
 
 struct msg_buffer {
     long msg_type;

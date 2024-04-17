@@ -52,7 +52,7 @@ void createIPCS() {
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
-    if((centrale=shmat(shmCentrale,NULL,IPC_CREAT))==-1) ERROR;
+    if((centrale=shmat(shmCentrale,NULL,0))==-1) ERROR;
    
     centrale->energia=0;
     centrale->n_atomi=0;
@@ -68,19 +68,25 @@ void attShm() {
     return;
 }
 
-
 void loadIPCs() {
-    if ((shmVar        = shmget(ftok("attivatore.c", 'z'), sizeof(Var), PERMISSIONS)) == -1)                                            ERROR;
-    if ((var           = shmat (shmVar  , NULL, 0)) == (void*) -1)                                                                      ERROR;
-    if ((shmAtomi      = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi   = semget(ftok(FTOK_FILE, 'd'), 1, PERMISSIONS)) == -1)                                                           ERROR;
+    if ((shmVar = shmget(ftok("attivatore.c", 'a'), sizeof(Var), PERMISSIONS)) == -1) ERROR;
+    if ((var = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
 
-    //set_sem(semProcessi, 0, 0);d
+    if ((shmAtomi = shmget(ftok(FTOK_FILE, "b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), PERMISSIONS)) == -1) ERROR;
+    if ((semShm = semget(ftok(FTOK_FILE, 'c'), 10, PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10, PERMISSIONS)) == -1) ERROR;
+
+    if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1) ERROR;
+    if ((centrale = shmat(shmCentrale, NULL, 0)) == (void *) -1) ERROR;
+
     return;
 }
 
+
+
+
 void dettShm() {
-    if((shmdt(var)) == -1)   ERROR;
+    //if((shmdt(var)) == -1)   ERROR;
     if((shmdt(atomi)) == -1) ERROR;
     if((shmdt(centrale)) == -1) ERROR;
     releaseSem(semShm,0);
@@ -91,7 +97,7 @@ void deallocIPC(){
 
     if (shmctl(shmVar,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("\n     shmVar        |   deallocati     \n");
     if (shmctl(shmAtomi, IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     shmAtomi      |   deallocati     \n");
-    if (shmctl(shmCentrale, IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     shmCentrale      |   deallocata     \n");
+    if (shmctl(shmCentrale, IPC_RMID, 0) == -1)   { ERROR; }   else    printf("     shmCentrale      |   deallocata     \n");
     if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
     if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
     return;
