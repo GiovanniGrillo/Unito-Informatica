@@ -1,43 +1,26 @@
 #include "lib_atomo.h"
 
 int main() {
-    /*PROVA*/
-    key_t key = 1234;  // Chiave IPC statica per il debugging
-    int msgid = msgget(key, IPC_CREAT | 0666);
-    /*PROVA*/
-
     srand(time(NULL));
     printf("Benvenuto in Atomo! \n");
 
     /* --- Variabili locali --- */
     int exec = 0;
     printf("sto per loaddare \n");
-
     /* --- Apertura IPC --- */
     loadIPCs();
-    // createIPCS();
-    
-    attShm();
-    creazione_atomi(20);
-    dettShm();
 
-    /* --- Ricezione messaggi e gestione atomi --- */
-    // int msgid = msgget(ftok("attivatore.c", 'm'), 0666); // Assicurati che i permessi e la chiave siano corretti
-    if (msgid == -1) {
-        perror("msgget");
-        exit(1);
-    }
-    int p=1;
-
-    while ((var->flagTerminazione == 0 || var->fork_atomi > 0) && exec < 3) {
-        if (msgrcv(msgid, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
-            perror("msgrcv");
+    while (( var->fork_atomi > 0) ) {
+        if (msgrcv(msgPila, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
+            ERROR;
             continue; // Continua il ciclo in caso di errore
         }
-        printf("Messaggio ricevuto: avvia scissione\n");
+        printf("\nMessaggio ricevuto: avvia scissione\n");
 
         attShm();
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
+        printf("Numero atomico prima della scissione: %d\n", a_rand.numero_atomico);
+        int numero_casuale = rand() % a_rand.numero_atomico + 1;
         dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
@@ -47,15 +30,16 @@ int main() {
             case 0:
                 // Codice eseguito nel processo figlio
                 esegui_scissione(a_rand);
-                
+                exit(0);
                 break;
             default:
                 wait(NULL); // Il processo padre aspetta la fine del figlio
                 break;
         }
         exec++;
-    }
 
+    }
+    unloadIPCs();
     return 0;
 }
 
@@ -77,11 +61,15 @@ void esegui_scissione(Atomo a_rand) {
                     centrale->energia += liberata;
                 } else {
                             printf("\naumento scorie\n");
+                            var->fork_atomi--;
+                            printf("-----------------------------------------il valore di fork atomi è %d",var->fork_atomi);
                             centrale->scorie += 2;
                             --centrale->n_atomi;
                             dettShm();
                             exit(0);
                         }
+                var->fork_atomi--;
+                printf("-----------------------------------------il valore di fork atomi è %d",var->fork_atomi);
 
                 atomi[centrale->n_atomi] = figlio;
                 centrale->n_atomi++;

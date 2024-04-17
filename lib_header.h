@@ -50,6 +50,7 @@ void createIPCS() {
     if ((shmAtomi       = shmget(ftok(FTOK_FILE,"b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((msgPila       =  msgget(ftok(FTOK_FILE, 'e'),IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
     if((centrale=shmat(shmCentrale,NULL,0))==-1) ERROR;
@@ -77,7 +78,8 @@ void loadIPCs() {
     if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10, PERMISSIONS)) == -1) ERROR;
 
     if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1) ERROR;
-    if ((centrale = shmat(shmCentrale, NULL, 0)) == (void *) -1) ERROR;
+
+    if ((msgPila       = msgget(ftok(FTOK_FILE, 'e')    , PERMISSIONS)) == -1) ERROR;
 
     return;
 }
@@ -100,8 +102,15 @@ void deallocIPC(){
     if (shmctl(shmCentrale, IPC_RMID, 0) == -1)   { ERROR; }   else    printf("     shmCentrale      |   deallocata     \n");
     if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
     if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
+    if (msgctl(msgPila       , IPC_RMID, 0) == -1) { ERROR; } else     printf(":::  msgPila       :   deallocati  :::\n");
     return;
 }
+
+void unloadIPCs() {
+    if((shmdt(var)) == -1) ERROR;
+    return;
+}
+
 
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
@@ -169,10 +178,6 @@ int creazione_atomi(int numero_atomi_da_creare)
     //     ERROR;
     return 0;
 }
-
-
-
-
 
 /*void createIPCs(char* file) {
     char temp[20];
@@ -243,10 +248,6 @@ void loadIPCs() {
     //setbuf(out_progetto, NULL);
     //set_sem(semProcessi, 0, 0);
     
-    return;
-}
-void unloadIPCs() {
-    if((shmdt(var)) == -1) ERROR;
     return;
 }
 */
