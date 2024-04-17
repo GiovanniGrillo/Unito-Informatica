@@ -1,19 +1,10 @@
-IMPORTANTI !!
-
-//domani mattina
-implementare il for in modo che cicli correttamente secondo quello che ci serve (var->fork_atomi)
-fatto cio testare se i messaggi multipli vengono ricevuti 
-Sistemare attivatore che manda i messaggi e attiva atomo.
-fare in modo che atomo riceva x messaggi                                                                                                ~
+IMPORTANTI !!                                                                                                                           ~
 I SEMAFORI DI LOAD IPCS SONO COMMENTATI. GESTIRE IL SEMOFORO DEI PROCESSI                                                               ~
-
+Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore) 
 COSE GENERALI                                                                                                                           ~
--Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore)                                                             ~
+                                                                                                                                        ~
 -Capire come gestire la stampa giornaliera, se mantenere la stessa lib Header e l'identazione di stampa pari al vecchio prg             ~
 
 --Versione "normal" 30--
 -Valutare se aggiungere al progetto: "Inibitore" e "Assorbe"
 -Capire come implementare una richiesta di attivazione "Inibitore" a run-time.
-
-
-
