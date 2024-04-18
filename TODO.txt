@@ -1,6 +1,9 @@
 IMPORTANTI !!                                                                                                                           ~
-I SEMAFORI DI LOAD IPCS SONO COMMENTATI. GESTIRE IL SEMOFORO DEI PROCESSI                                                               ~
-Implementare i casi in cui la centrale si rompe(da faro dopo Alimentatore) 
+                                                                                                                                       ~
+Implementare i casi in cui la centrale si rompe
+-aggiungere i controlli in caso la pila di atomi[i] sia vuota se no va in segfaault 
+-da capire come sincronizzare le sleep in modo che tutto funzioni in ordine
+
 COSE GENERALI                                                                                                                           ~
                                                                                                                                         ~
 -Capire come gestire la stampa giornaliera, se mantenere la stessa lib Header e l'identazione di stampa pari al vecchio prg             ~

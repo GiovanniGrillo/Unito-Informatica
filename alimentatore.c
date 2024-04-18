@@ -5,29 +5,25 @@
 #define N_NUOVI_ATOMI 10
 
 int main() {
+    printf("\nBenvenuto in alimentatore!\n");
     setbuf(stdout, NULL);
-    // loadIPCs();
-    createIPCS();
-    if (set_sem(semShm, 0, 1) == -1) ERROR;
-    for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
-        provasleep();
-        printf("\n-------------------------------");
-        printf("\n   RESOCONTO GIORNALIERO %3d ", giorno);
-        printf("\n-------------------------------\n");
-        printf("          -> GIORNO %d\n", giorno + 1);
+    loadIPCs();
+    for(int i=0;i<2;i++) {
+        if(var->flagTerminazione==1){
+            unloadIPCs();
+            endProcess();
+        }
+        
         attShm(); {
-
             if (creazione_atomi(N_NUOVI_ATOMI)) ERROR; 
-            printf("\ngli atomi creati fino ad adesso sono :%d\n", centrale->n_atomi);
+            printf("\nHEY SONO ALIMENTATORE HO CREATO %d nuovi atomi fino ad adesso sono : %d ---------------------------------\n",N_NUOVI_ATOMI, centrale->n_atomi);
 
         } dettShm();
-        printf(" -> (DET)\n");
+        sleep(1);
     }
-
-   
-    printf("--------------------------------------\n");
-    printf("   PROCESSO Giornaliera - Terminato   \n");
-    printf("--------------------------------------\n");
-    exit(0);
     
+
+    unloadIPCs();
+    exit(0);
+
 }

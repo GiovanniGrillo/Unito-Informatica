@@ -1,16 +1,14 @@
 #include "lib_header.h"
 
-int main(int argc, char const *argv[]) {
+int main() {
     //createIPCS();
-     loadIPCs();
+    loadIPCs();
     
-    printf("benvenuto in attivatore");
+    printf("\n\nBenvenuto in attivatore!\n");
     message.msg_type = 1;
-
-    printf("sto per entrare nel while");
     int i=0;
-    while (i<5) {
-        sleep(var->STEP_ATTIVATORE);
+    while (i<50) {
+        
         if (msgsnd(msgPila, &message, sizeof(message)-sizeof(long), 0) == -1) {
             ERROR;
             exit(1);
@@ -19,9 +17,11 @@ int main(int argc, char const *argv[]) {
         ++var->fork_atomi;
         dettShm();
         printf("Messaggio inviato all'atomo.\n");
+        i++;
+        sleep(0.3);
 
-        ++i;
     }
+    unloadIPCs();
     return 0;
 }
 

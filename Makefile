@@ -2,7 +2,7 @@ all: PROGETTO
 
 PROGETTO: Prova
 
-Prova: test test2 atomo atomo2 attivatore alimentatore
+prova: clear atomo alimentatore attivatore test2
 
 test: test.c
 	gcc test.c -o test -w
@@ -43,11 +43,11 @@ alimentatore: alimentatore.c
 	gcc alimentatore.c -o alimentatore -w
 	@echo "Faccio ipcrm -a"
 	ipcrm -a
-	@echo "Eseguo alimentatore"
-	@./alimentatore
+	@echo "<-----Devi eseguire alimentatore----->"
+	# @./alimentatore
 
-c:
+clear:
 	@echo "Rimuovo gli eseguibili:"
-	rm -f test test2 atomo atomo2 attivatore alimentatore
+	rm -f test2 atomo attivatore alimentatore
 
 .PHONY: all clean

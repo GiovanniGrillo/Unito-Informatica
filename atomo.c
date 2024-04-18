@@ -2,15 +2,17 @@
 
 int main() {
     srand(time(NULL));
-    printf("Benvenuto in Atomo! \n");
+    printf("\nBenvenuto in Atomo! \n");
 
     /* --- Variabili locali --- */
     int exec = 0;
     printf("sto per loaddare \n");
     /* --- Apertura IPC --- */
     loadIPCs();
-
-    while (( var->fork_atomi > 0) ) {
+    set_sem(semProcessi, 0, 0);
+    if(var -> flagTerminazione != 0) endProcess();
+    while ((var->fork_atomi > 0) ) {
+        if(var -> flagTerminazione != 0) endProcess();
         if (msgrcv(msgPila, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
             ERROR;
             continue; // Continua il ciclo in caso di errore
@@ -20,7 +22,6 @@ int main() {
         attShm();
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
         printf("Numero atomico prima della scissione: %d\n", a_rand.numero_atomico);
-        int numero_casuale = rand() % a_rand.numero_atomico + 1;
         dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
@@ -30,7 +31,8 @@ int main() {
             case 0:
                 // Codice eseguito nel processo figlio
                 esegui_scissione(a_rand);
-                exit(0);
+                endProcess();
+                
                 break;
             default:
                 wait(NULL); // Il processo padre aspetta la fine del figlio
@@ -57,22 +59,30 @@ void esegui_scissione(Atomo a_rand) {
                 
                 if (a_rand.numero_atomico > var->MIN_N_ATOMICO && figlio.numero_atomico > var->MIN_N_ATOMICO) {
                     int liberata = energy(a_rand.numero_atomico, figlio.numero_atomico);
+                    if(liberata>var->ENERGY_EXPLODE_THRESHOLD){
+                        printf("\ncentrale esplosa, troppa energia liberata\n");
+                        var->flagTerminazione=1;
+                        dettShm();
+                        endProcess();
+                    }
                     printf("\nenergia liberata: %d", liberata);
                     centrale->energia += liberata;
                 } else {
                             printf("\naumento scorie\n");
                             var->fork_atomi--;
-                            printf("-----------------------------------------il valore di fork atomi è %d",var->fork_atomi);
-                            centrale->scorie += 2;
                             --centrale->n_atomi;
+                            printf("-----------------------------------------il valore di fork atomi è %d,e abbiamo %d atomi nella centrale",var->fork_atomi,centrale->n_atomi);
+                            centrale->scorie += 2;
+                            
                             dettShm();
-                            exit(0);
+                            endProcess();
                         }
                 var->fork_atomi--;
-                printf("-----------------------------------------il valore di fork atomi è %d",var->fork_atomi);
+                
 
                 atomi[centrale->n_atomi] = figlio;
                 centrale->n_atomi++;
+                printf("-----------------------------------------il valore di fork atomi è %d e abbiamo %d atomi nella centrale",var->fork_atomi,centrale->n_atomi);
                 dettShm();
-                exit(0);
+                endProcess();
 }

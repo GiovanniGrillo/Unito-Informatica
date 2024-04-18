@@ -4,19 +4,8 @@
 int main()
 {
     createIPCS();
-
-    pid_t pippolo;
-    switch (pippolo=fork())
-    {
-    case -1 /* constant-expression */:
-        ERROR;
-        break;
-    case 0:
-        execl("./atomo", "./atomo", NULL);
-        printf("Atomo non avviato correttamente\n");
-        ERROR;
-    default:
-        break;
-    }
-    return 0;
+    if (set_sem(semShm, 0, 1) == -1) ERROR;
+    attShm();
+    stampa();
+    dettShm();
 }

@@ -42,7 +42,7 @@ void createIPCS() {
     var->N_ATOM_MAX = 20;
     var->MIN_N_ATOMICO = 5;
     var->STEP_ALIMENTAZIONE = 2;
-    var->ENERGY_EXPLODE_THRESHOLD = 50;
+    var->ENERGY_EXPLODE_THRESHOLD = 50000000;
     var->flagTerminazione = 0;
     var->STEP_ATTIVATORE=1;
     var->fork_atomi=0;
@@ -52,12 +52,15 @@ void createIPCS() {
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila       =  msgget(ftok(FTOK_FILE, 'e'),IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
-    if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
+    if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,    IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
     if((centrale=shmat(shmCentrale,NULL,0))==-1) ERROR;
    
-    centrale->energia=0;
+    centrale->energia=var->ENERGY_DEMAND;
     centrale->n_atomi=0;
     centrale->scorie=0;
+
+    printf("\nIl PID del semaforo semShm è %d", semShm);
+    printf("\nIl PID del semaforo semProcessi è %d", semProcessi);
     return;
 }
 
@@ -70,17 +73,13 @@ void attShm() {
 }
 
 void loadIPCs() {
-    if ((shmVar = shmget(ftok("attivatore.c", 'a'), sizeof(Var), PERMISSIONS)) == -1) ERROR;
-    if ((var = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
-
+    if ((shmVar = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), PERMISSIONS)) == -1)                             ERROR;
+    if ((var = shmat(shmVar, NULL, 0)) == (void *) -1)                                                       ERROR;
     if ((shmAtomi = shmget(ftok(FTOK_FILE, "b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), PERMISSIONS)) == -1) ERROR;
-    if ((semShm = semget(ftok(FTOK_FILE, 'c'), 10, PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10, PERMISSIONS)) == -1) ERROR;
-
-    if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1) ERROR;
-
-    if ((msgPila       = msgget(ftok(FTOK_FILE, 'e')    , PERMISSIONS)) == -1) ERROR;
-
+    if ((semShm = semget(ftok(FTOK_FILE, 'c'), 10, PERMISSIONS)) == -1)                                      ERROR;
+    if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10, PERMISSIONS)) == -1)                                 ERROR;
+    if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1)                                 ERROR;
+    if ((msgPila       = msgget(ftok(FTOK_FILE, 'e'), PERMISSIONS)) == -1)                                   ERROR;
     return;
 }
 
@@ -102,7 +101,7 @@ void deallocIPC(){
     if (shmctl(shmCentrale, IPC_RMID, 0) == -1)   { ERROR; }   else    printf("     shmCentrale      |   deallocata     \n");
     if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
     if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
-    if (msgctl(msgPila       , IPC_RMID, 0) == -1) { ERROR; } else     printf(":::  msgPila       :   deallocati  :::\n");
+    if (msgctl(msgPila       , IPC_RMID, 0) == -1) { ERROR; }  else     printf(":::  msgPila       :   deallocati  :::\n");
     return;
 }
 
@@ -146,12 +145,12 @@ int set_sem(int semID, int semNum, int val) {
 }
 
 pid_t newProcess() {
-    //(releaseSem(semProcessi, 0);
+    releaseSem(semProcessi, 0);
     return fork();
 }
 
 void endProcess() {
-    //reserveSem(semProcessi, 0);
+    reserveSem(semProcessi, 0);
     exit(0);
 }
 
@@ -169,7 +168,7 @@ int creazione_atomi(int numero_atomi_da_creare)
         centrale->n_atomi++;
         
     }
-    printf("Il valore di var->n_atomi è %d ", centrale->n_atomi);
+    printf("\n(funzione creazione atomi)Il valore di var->n_atomi è %d ", centrale->n_atomi);
     //pila[var->n_atomi] = var->n_atomi;
 
    
@@ -179,75 +178,32 @@ int creazione_atomi(int numero_atomi_da_creare)
     return 0;
 }
 
-/*void createIPCs(char* file) {
-    char temp[20];
-    char boolean[6];
-    int i;
-    // una volta che Var sarà inizializzata si potrà usare sizeof(Var)
-    if ((shmAtomi = shmget(ftok("atomo.c", "a"), 2, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((var = shmat(shmAtomi, NULL, 0)) == (void *) -1) ERROR;
-    
-    /*out_progetto = fopen("Progetto.out", "b");
-    in_progetto  = fopen(file, "c");
-        setbuf(out_progetto, NULL);
-        printf(out_progetto, "------------------------------------------------------------------------------\n");
-        printf(out_progetto, "       Inizio esecuzione progetto di Sistemi Operativi (2023/2024)       \n");
-        printf(out_progetto, "                                    di                                    \n");
-        printf(out_progetto, "        Alessndro, Siviero Francesco, Grillo Giovanni            \n");
-        printf(out_progetto, "------------------------------------------------------------------------------\n");
+void stampa() {
+    for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
+        sleep(1);
+        printf("\n╔═════════════════════════════╗\n");
+        printf("║  RESOCONTO GIORNALIERO %3d  ║\n", giorno + 1);
+        printf("╠═════════════════════════════╝\n");
+        printf("::::::::::: GIORNO %d\n", giorno + 1);
+        attShm(); {                                     printf(":: >>> (ATT)\n");
+            printf("\nnumero atomi %d",centrale->n_atomi);
+            printf("\nenergia prodotta %d",centrale->energia);
+            printf("\nnumero scorie %d",centrale->scorie);
+            printf("\nprelevo energia per la centrale");
+            // if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
+            // {
+            //     var->flagTerminazione=1;
+            //     printf("\n------------------------BLACKOUT DELLA CENTRALE--------------------------------FUNZICA--");
+            //     dettShm();
+            //     endProcess();
+            // }
+            //prelievo giornaliero dell'energia
+            centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
+        dettShm();                                     printf(":: >>> (DET)\n");
 
-                                                                             fprintf(out_progetto, "-  %s %d\n","STEP_ATTIVATORE:", STEP_ATTIVATORE);
-                                                                                fprintf(out_progetto, "-  %s %d\n","SIM_DURATION:", SIM_DURATION);
-
-        fscanf(in_progetto, "%s %d\n",temp, &var->ENERGY_DEMAND);               fprintf(out_progetto, "-  %s %d\n",temp, var->ENERGY_DEMAND);
-        fscanf(in_progetto, "%s %d\n",temp, &var->N_ATOMI_INIT);                fprintf(out_progetto, "-  %s %d\n",temp, var->N_ATOMI_INIT);
-        fscanf(in_progetto, "%s %d\n",temp, &var->STEP_ALIMENTAZIONE);          fprintf(out_progetto, "-  %s %d\n",temp, var->STEP_ALIMENTAZIONE);
-        fscanf(in_progetto, "%s %d\n",temp, &var->ENERGY_EXPLODE_THRESHOLD);    fprintf(out_progetto, "-  %s %d\n",temp, var->ENERGY_EXPLODE_THRESHOLD);
-        fprintf(out_progetto, "------------------------------------------------------------------------------\n\n");
-
-    fclose(in_progetto);
-    fclose(out_progetto);
-
-
-    //printf("%d \n", ftok("prova.c", "z"));
-    //printf("%d \n", shmget(ftok("prova.c", 'q'), 5   , IPC_CREAT | IPC_EXCL | 744));
-
-    if ((shmAtomi     = shmget(ftok("Movimento.c", 'd'), 10  , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semShm        = semget(ftok("Master.c", 'e'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((msgPila       = msgget(ftok("Giornaliera.c", 'f'),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi   = semget(ftok("/Makefile", 'g'), 10                                 , IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-
-    //out_progetto = fopen("Progetto.out", "a");
-    //setbuf(out_progetto, NULL);
-
+    }
+    printf("::::::::::::::::::::::::::::::::::::::::::\n");
+    printf(":::    Terminato  :::\n");
+    printf("::::::::::::::::::::::::::::::::::::::::::\n::\n");
     return;
 }
-
-void deallocIPCs() {
-    int i;
-    reserveSem(semShm, 0);
-                                                                printf("--------------------------------------\n");
-    if (shmctl(shmAtomi      , IPC_RMID, 0) == -1) { ERROR; } else printf("     shmAtomi      |   deallocati     \n");
-    if (semctl(semShm        , IPC_RMID, 0) == -1) { ERROR; } else printf("     semShm        |   deallocati     \n");
-    if (msgctl(msgPila       , IPC_RMID, 0) == -1) { ERROR; } else printf("     msgPila       |   deallocati     \n");
-    if (semctl(semProcessi   , IPC_RMID, 0) == -1) { ERROR; } else printf("     semProcessi   |   deallocati     \n");
-                                                                printf("--------------------------------------\n");
-    return;
-}
-
-void loadIPCs() {
-    if ((shmVar        = shmget(ftok(FTOK_FILE, 'i'), sizeof(Var)                         , PERMISSIONS)) == -1) ERROR;
-    if ((var = shmat(shmVar  , NULL, 0)) == (void*) -1) ERROR;
-    if ((shmPila       = shmget(ftok(FTOK_FILE, 'j'), sizeof(int)   * (var -> N_ATOM_MAX) , PERMISSIONS)) == -1) ERROR;
-    if ((msgPila       = msgget(ftok(FTOK_FILE, 'k')                                      , PERMISSIONS)) == -1) ERROR;
-    if ((semPila       = semget(ftok(FTOK_FILE, 'l'), 2                                   , PERMISSIONS)) == -1) ERROR;
-    if ((semShm        = semget(ftok(FTOK_FILE, 'm'), 1                                   , PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi   = semget(ftok(FTOK_FILE, 'n'), 1                                   , PERMISSIONS)) == -1) ERROR;
-
-    //out_progetto = fopen("Progetto.out", "a");
-    //setbuf(out_progetto, NULL);
-    //set_sem(semProcessi, 0, 0);
-    
-    return;
-}
-*/
