@@ -10,6 +10,8 @@ int main() {
     
     createIPCS();
     if (set_sem(semShm, 0, 1) == -1) ERROR;
+    if(set_sem(semProcessi, 0, 1)==-1) ERROR;
+    if(set_sem(semFissione,0,1)==-1) ERROR;
     attShm();
     creazione_atomi(var->N_ATOMI_INIT);
     dettShm();

@@ -29,11 +29,9 @@
 
 void createIPCS() {
     //aggiungere il semaforo ipcs
-    printf("eccomi");
     
     if ((shmVar  = shmget(ftok("attivatore.c", 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     
-    printf("allora funziona!");
 
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
 
@@ -51,6 +49,7 @@ void createIPCS() {
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila       =  msgget(ftok(FTOK_FILE, 'e'),IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if((shmCentrale=shmget(ftok(FTOK_FILE,"l"),10,    IPC_CREAT | IPC_EXCL | PERMISSIONS))==-1) ERROR;
     if((centrale=shmat(shmCentrale,NULL,0))==-1) ERROR;
@@ -59,8 +58,6 @@ void createIPCS() {
     centrale->n_atomi=0;
     centrale->scorie=0;
 
-    printf("\nIl PID del semaforo semShm è %d", semShm);
-    printf("\nIl PID del semaforo semProcessi è %d", semProcessi);
     return;
 }
 
@@ -78,8 +75,11 @@ void loadIPCs() {
     if ((shmAtomi = shmget(ftok(FTOK_FILE, "b"), sizeof(Atomo) * (var->N_ATOM_MAX + 1), PERMISSIONS)) == -1) ERROR;
     if ((semShm = semget(ftok(FTOK_FILE, 'c'), 10, PERMISSIONS)) == -1)                                      ERROR;
     if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10, PERMISSIONS)) == -1)                                 ERROR;
-    if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1)                                 ERROR;
     if ((msgPila       = msgget(ftok(FTOK_FILE, 'e'), PERMISSIONS)) == -1)                                   ERROR;
+    if ((semFissione= semget(ftok(FTOK_FILE, 'f'), 10, PERMISSIONS)) == -1)                                 ERROR;
+    if ((shmCentrale = shmget(ftok(FTOK_FILE, "l"), 10, PERMISSIONS)) == -1)                                 ERROR;
+    
+    
     return;
 }
 
@@ -102,6 +102,7 @@ void deallocIPC(){
     if (semctl(semShm,   IPC_RMID, 0) == -1)      { ERROR; }   else    printf("     semShm        |   deallocati     \n");
     if (semctl(semProcessi,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semProcessi   |   deallocati     \n");
     if (msgctl(msgPila       , IPC_RMID, 0) == -1) { ERROR; }  else     printf(":::  msgPila       :   deallocati  :::\n");
+    if (semctl(semFissione,   IPC_RMID, 0) == -1) { ERROR; }   else    printf("     semFissione   |   deallocati     \n");
     return;
 }
 
@@ -145,12 +146,13 @@ int set_sem(int semID, int semNum, int val) {
 }
 
 pid_t newProcess() {
-    releaseSem(semProcessi, 0);
+    reserveSem(semFissione,0);
+    //releaseSem(semProcessi, 0);
     return fork();
 }
 
 void endProcess() {
-    reserveSem(semProcessi, 0);
+    //reserveSem(semProcessi, 0);
     exit(0);
 }
 

@@ -38,7 +38,7 @@ int msgPila;
 
 /* Semafori */
 int semAttivatore;
-// int semPila;
+int semFissione;
 int semShm;
 int semProcessi;
 

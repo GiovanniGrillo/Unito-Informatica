@@ -1,11 +1,6 @@
-#include "lib_header.h"
+#include <stdio.h>
 
-
-int main()
-{
-    createIPCS();
-    if (set_sem(semShm, 0, 1) == -1) ERROR;
-    attShm();
-    stampa();
-    dettShm();
+int main() {
+    printf("\033[1;31mHello World\033[0m\n");
+    return 0;
 }

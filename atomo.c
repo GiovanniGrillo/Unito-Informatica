@@ -2,14 +2,14 @@
 
 int main() {
     srand(time(NULL));
-    printf("\nBenvenuto in Atomo! \n");
+    printf("\n\033[1;34mBenvenuto in Atomo!\033[0m\n \n");
 
     /* --- Variabili locali --- */
     int exec = 0;
-    printf("sto per loaddare \n");
+
     /* --- Apertura IPC --- */
     loadIPCs();
-    set_sem(semProcessi, 0, 0);
+    
     if(var -> flagTerminazione != 0) endProcess();
     while ((var->fork_atomi > 0) ) {
         if(var -> flagTerminazione != 0) endProcess();
@@ -17,12 +17,14 @@ int main() {
             ERROR;
             continue; // Continua il ciclo in caso di errore
         }
-        printf("\nMessaggio ricevuto: avvia scissione\n");
+        
 
         attShm();
+        
+        printf("\n\033[1;34mMessaggio ricevuto\033[0m");
+        
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
-        printf("Numero atomico prima della scissione: %d\n", a_rand.numero_atomico);
-        dettShm();
+        //dettShm();
         
         switch (a_rand.pidAtomo = newProcess()) {
             case -1:
@@ -30,7 +32,9 @@ int main() {
                 break;
             case 0:
                 // Codice eseguito nel processo figlio
+                
                 esegui_scissione(a_rand);
+          
                 endProcess();
                 
                 break;
@@ -46,16 +50,17 @@ int main() {
 }
 
 void esegui_scissione(Atomo a_rand) {
-    printf("\nSTO ENTRANDO NEL FIGLIO\n");
-                printf("\nNUMERO ATOMICO PADRE %d", a_rand.numero_atomico);
-                attShm();
+    printf("\nSTO ESEGUENDO SCISSIONE\n");
+    
+                printf("\n\033[1;34mNUMERO ATOMICO PADRE %d\033[0m", a_rand.numero_atomico);
+                // attShm();
                 int numero_casuale = rand() % a_rand.numero_atomico + 1;
                 printf("\n%d numero casuale", numero_casuale);
                 struct Atomo figlio;
                 figlio.numero_atomico = a_rand.numero_atomico - numero_casuale;
                 a_rand.numero_atomico -= figlio.numero_atomico;
-                printf("\nProcesso figlio creato con numero atomico: %d\n", figlio.numero_atomico);
-                printf("\nNUMERO ATOMICO PADRE dopo la scissione %d", a_rand.numero_atomico);
+                printf("\n \033[1;34m atomo figlio creato con numero atomico: %d, il padre ha numero atomico post scissione :%d\n\033[0m", figlio.numero_atomico,a_rand.numero_atomico);
+           
                 
                 if (a_rand.numero_atomico > var->MIN_N_ATOMICO && figlio.numero_atomico > var->MIN_N_ATOMICO) {
                     int liberata = energy(a_rand.numero_atomico, figlio.numero_atomico);
@@ -65,16 +70,17 @@ void esegui_scissione(Atomo a_rand) {
                         dettShm();
                         endProcess();
                     }
-                    printf("\nenergia liberata: %d", liberata);
+                    printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
                     centrale->energia += liberata;
                 } else {
-                            printf("\naumento scorie\n");
+                            printf("\n\033[1;34maumento scorie \033[0m \n");
                             var->fork_atomi--;
                             --centrale->n_atomi;
-                            printf("-----------------------------------------il valore di fork atomi è %d,e abbiamo %d atomi nella centrale",var->fork_atomi,centrale->n_atomi);
+                            printf("\n\033[1;34m-----------------------------------------il valore di fork atomi è %d,e abbiamo %d atomi nella centrale \033[0m ",var->fork_atomi,centrale->n_atomi);
                             centrale->scorie += 2;
                             
                             dettShm();
+                            releaseSem(semFissione,0);
                             endProcess();
                         }
                 var->fork_atomi--;
@@ -82,7 +88,8 @@ void esegui_scissione(Atomo a_rand) {
 
                 atomi[centrale->n_atomi] = figlio;
                 centrale->n_atomi++;
-                printf("-----------------------------------------il valore di fork atomi è %d e abbiamo %d atomi nella centrale",var->fork_atomi,centrale->n_atomi);
+                printf("\n\033[1;34m-----------------------------------------il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ",var->fork_atomi,centrale->n_atomi);
                 dettShm();
+                releaseSem(semFissione,0);
                 endProcess();
 }
