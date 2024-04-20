@@ -8,7 +8,7 @@ test: test.c
 	gcc test.c -o test -w
 	@echo "Faccio ipcrm -a"
 	ipcrm -a
-	@echo "-----Eseguo test2-----"
+	@echo "-----Eseguo test-----"
 	@./test2
 
 test2: test2.c
@@ -33,5 +33,3 @@ alimentatore: alimentatore.c
 clear:
 	@echo "Rimuovo gli eseguibili:"
 	rm -f test2 atomo attivatore alimentatore
-
-.PHONY: all clean

@@ -16,10 +16,8 @@
 
 #include "Oggetti.h"
 
-/*Da sistemare le define per le librerie opportune*/
-#define atomi_da_scindere [10]
-#define PERMISSIONS       0666
-#define FTOK_FILE         "attivatore.c"
+#define PERMISSIONS  0666
+#define FTOK_FILE    "attivatore.c"
 
 #define ERROR                                                                                                                              \
     if (errno){                                                                                                                            \
@@ -28,20 +26,18 @@
     }
 
 void createIPCS() {
-    //aggiungere il semaforo ipcs
-
     if ((shmVar  = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
 
-    var->ENERGY_DEMAND = 100;
+    var->ENERGY_DEMAND            = 100;
     var->ENERGY_EXPLODE_THRESHOLD = 5000000;
-    var->flagTerminazione = 0;
-    var->fork_atomi = 0;
-    var->MIN_N_ATOMICO = 5;
-    var->N_ATOMI_INIT = 10;
-    var->N_ATOM_MAX = 20;
-    var->STEP_ALIMENTAZIONE = 700000000; //0.7s
-    var->STEP_ATTIVATORE = 900000000; //0.9s
+    var->flagTerminazione         = 0;
+    var->fork_atomi               = 0;
+    var->MIN_N_ATOMICO            = 5;
+    var->N_ATOMI_INIT             = 10;
+    var->N_ATOM_MAX               = 20;
+    var->STEP_ALIMENTAZIONE       = 700000000; //0.7s
+    var->STEP_ATTIVATORE          = 900000000; //0.9s
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -51,8 +47,7 @@ void createIPCS() {
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((centrale       = shmat(shmCentrale,NULL,0))                                            == -1) ERROR;
-    
-   
+
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
     centrale->scorie  = 0;
@@ -77,7 +72,7 @@ void loadIPCs() {
     if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), 10,                                    PERMISSIONS)) == -1) ERROR;
-    
+
     return;
 }
 
@@ -175,8 +170,8 @@ void stampa() {
     for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
         reserveSem(semAttivatore,0);
         reserveSem(semProcessi,  0);
-        
-        
+
+
         printf("\n\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
         printf("\n╔═════════════════════════════╗\n");
         printf(  "║  RESOCONTO GIORNALIERO %3d  ║\n", giorno + 1);
