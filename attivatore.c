@@ -4,7 +4,7 @@ int main() {
     //createIPCS();
     loadIPCs();
     
-    printf("\n\n\033[1;31mBenvenuto in attivatore!\033[0m\n");
+    printf("\n\n\033[1;31m Benvenuto in attivatore!\033[0m\n");
     message.msg_type = 1;
     int i=0;
     while (i<30) {

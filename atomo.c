@@ -9,7 +9,7 @@ int main() {
 
     /* --- Apertura IPC --- */
     loadIPCs();
-    
+
     if(var -> flagTerminazione != 0) endProcess();
     while ((var->fork_atomi > 0) ) {
         if(var -> flagTerminazione != 0) endProcess();
@@ -17,26 +17,26 @@ int main() {
             ERROR;
             continue; // Continua il ciclo in caso di errore
         }
-        
+
 
         attShm();
-        
+
         printf("\n\033[1;34mMessaggio ricevuto\033[0m");
-        
+
         Atomo a_rand = atomi[rand() % (centrale->n_atomi)];
         //dettShm();
-        
+
         switch (a_rand.pidAtomo = newProcess()) {
             case -1:
                 perror("Errore nella creazione del processo figlio");
                 break;
             case 0:
                 // Codice eseguito nel processo figlio
-                
+
                 esegui_scissione(a_rand);
-          
+
                 endProcess();
-                
+
                 break;
             default:
                 wait(NULL); // Il processo padre aspetta la fine del figlio
@@ -51,7 +51,7 @@ int main() {
 
 void esegui_scissione(Atomo a_rand) {
     printf("\nSTO ESEGUENDO SCISSIONE\n");
-    
+
                 printf("\n\033[1;34mNUMERO ATOMICO PADRE %d\033[0m", a_rand.numero_atomico);
                 // attShm();
                 int numero_casuale = rand() % a_rand.numero_atomico + 1;
@@ -84,7 +84,7 @@ void esegui_scissione(Atomo a_rand) {
                             endProcess();
                         }
                 var->fork_atomi--;
-                
+
 
                 atomi[centrale->n_atomi] = figlio;
                 centrale->n_atomi++;

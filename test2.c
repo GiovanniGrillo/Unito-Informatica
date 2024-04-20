@@ -9,14 +9,14 @@ int main() {
     srand(time(NULL));
     
     createIPCS();
-    if (set_sem(semShm, 0, 1) == -1) ERROR;
-    if(set_sem(semProcessi, 0, 1)==-1) ERROR;
-    if(set_sem(semFissione,0,1)==-1) ERROR;
+    if(set_sem(semShm,      0, 1) == -1) ERROR;
+    if(set_sem(semProcessi, 0, 1) == -1) ERROR;
+    if(set_sem(semFissione, 0, 1) == -1) ERROR;
+
     attShm();
     creazione_atomi(var->N_ATOMI_INIT);
     dettShm();
    
-
     pidAttivatore = fork();
     if (pidAttivatore == -1) {
         ERROR;
@@ -52,14 +52,13 @@ int main() {
     waitpid(pidAtomo, NULL, 0);
     waitpid(pidAlimentatore, NULL,0);
 
-    
 
     kill(pidAttivatore,     SIGTERM);
     kill(pidAtomo,          SIGTERM);
     kill(pidAlimentatore,   SIGTERM);
     var->flagTerminazione = 1;
 
-    printf("\nSono fuori! \n");
+    printf("\nSono fuori!\n");
     return 0;
 }
 
