@@ -20,31 +20,15 @@ test2: test2.c
 
 atomo: atomo.c
 	gcc atomo.c -o atomo -w
-	@echo "Faccio ipcrm -a"
-	ipcrm -a
-	@echo "<-----Devi eseguire atomo----->"
-	# @./atomo
 
 atomo2: atomo2.c
 	gcc atomo2.c -o atomo2 -w
-	@echo "Faccio ipcrm -a"
-	ipcrm -a
-	@echo "<-----Devi eseguire atomo2----->"
-	# @./atomo2
 
 attivatore: attivatore.c
 	gcc attivatore.c -o attivatore -w
-	@echo "Faccio ipcrm -a"
-	ipcrm -a
-	@echo "<-----Devi eseguire attivatore----->"
-	# @./attivatore
 
 alimentatore: alimentatore.c
 	gcc alimentatore.c -o alimentatore -w
-	@echo "Faccio ipcrm -a"
-	ipcrm -a
-	@echo "<-----Devi eseguire alimentatore----->"
-	# @./alimentatore
 
 clear:
 	@echo "Rimuovo gli eseguibili:"

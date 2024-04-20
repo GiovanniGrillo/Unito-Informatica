@@ -8,6 +8,10 @@ int main() {
 
     if (set_sem(semShm, 0, 1) == -1) ERROR;
     
+    if (set_sem(semAttivatore, 0, 1) == -1) ERROR;
+    
+    if (set_sem(semFissione, 0, 1) == -1) ERROR;
+    
     switch ((pidAttivatore = fork())) {
         case -1:
             ERROR;

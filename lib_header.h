@@ -31,25 +31,27 @@ void createIPCS() {
     //aggiungere il semaforo ipcs
 
     if ((shmVar  = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1) ERROR;
+    if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
 
-    var->ENERGY_DEMAND            = 100;
-    var->N_ATOMI_INIT             = 10;
-    var->N_ATOM_MAX               = 20;
-    var->MIN_N_ATOMICO            = 5;
-    var->STEP_ALIMENTAZIONE       = 2;
-    var->ENERGY_EXPLODE_THRESHOLD = 500;
-    var->flagTerminazione         = 0;
-    var->STEP_ATTIVATORE          = 1;
-    var->fork_atomi               = 0;
+    var->ENERGY_DEMAND = 100;
+    var->ENERGY_EXPLODE_THRESHOLD = 5000000;
+    var->flagTerminazione = 0;
+    var->fork_atomi = 0;
+    var->MIN_N_ATOMICO = 5;
+    var->N_ATOMI_INIT = 10;
+    var->N_ATOM_MAX = 20;
+    var->STEP_ALIMENTAZIONE = 700000000; //0.7s
+    var->STEP_ATTIVATORE = 900000000; //0.9s
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shmCentrale    = shmget(ftok(FTOK_FILE,'l'),  10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((centrale       = shmat(shmCentrale,NULL,0))                                            == -1) ERROR;
+    
    
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
@@ -66,14 +68,15 @@ void attShm() {
 }
 
 void loadIPCs() {
-    if ((shmVar      = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
-    if ((var         = shmat (shmVar, NULL, 0)) == (void *) -1)                                                 ERROR;
-    if ((shmAtomi    = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_ATOM_MAX + 1), PERMISSIONS)) == -1) ERROR;
-    if ((semShm      = semget(ftok(FTOK_FILE, 'c'), 10,                                    PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi = semget(ftok(FTOK_FILE, 'd'), 10,                                    PERMISSIONS)) == -1) ERROR;
-    if ((msgPila     = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
-    if ((semFissione = semget(ftok(FTOK_FILE, 'f'), 10,                                    PERMISSIONS)) == -1) ERROR;
-    if ((shmCentrale = shmget(ftok(FTOK_FILE, 'l'), 10,                                    PERMISSIONS)) == -1) ERROR;
+    if ((shmVar         = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
+    if ((var            = shmat (shmVar, NULL, 0)) == (void *) -1)                                                 ERROR;
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_ATOM_MAX + 1), PERMISSIONS)) == -1) ERROR;
+    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                    PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10,                                    PERMISSIONS)) == -1) ERROR;
+    if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
+    if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10,                                    PERMISSIONS)) == -1) ERROR;
+    if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                    PERMISSIONS)) == -1) ERROR;
+    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), 10,                                    PERMISSIONS)) == -1) ERROR;
     
     return;
 }
@@ -87,13 +90,14 @@ void dettShm() {
 }
 
 void deallocIPC(){
-    if (shmctl(shmVar,      IPC_RMID, 0) == -1) { ERROR; }   else  printf("\n   shmVar        |   deallocati     \n");
-    if (shmctl(shmAtomi,    IPC_RMID, 0) == -1) { ERROR; }   else  printf("     shmAtomi      |   deallocati     \n");
-    if (shmctl(shmCentrale, IPC_RMID, 0) == -1) { ERROR; }   else  printf("     shmCentrale   |   deallocata     \n");
-    if (semctl(semShm,      IPC_RMID, 0) == -1) { ERROR; }   else  printf("     semShm        |   deallocati     \n");
-    if (semctl(semProcessi, IPC_RMID, 0) == -1) { ERROR; }   else  printf("     semProcessi   |   deallocati     \n");
-    if (msgctl(msgPila,     IPC_RMID, 0) == -1) { ERROR; }   else  printf("     msgPila       |   deallocati     \n");
-    if (semctl(semFissione, IPC_RMID, 0) == -1) { ERROR; }   else  printf("     semFissione   |   deallocati     \n");
+    if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar        |   deallocati     \n");
+    if (shmctl(shmAtomi,     IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmAtomi      |   deallocati     \n");
+    if (shmctl(shmCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmCentrale   |   deallocata     \n");
+    if (semctl(semShm,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semShm        |   deallocati     \n");
+    if (semctl(semProcessi,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semProcessi   |   deallocati     \n");
+    if (msgctl(msgPila,      IPC_RMID, 0) == -1) { ERROR; }  else  printf("     msgPila       |   deallocati     \n");
+    if (semctl(semFissione,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
+    if (semctl(semAttivatore,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     return;
 }
 
@@ -106,7 +110,7 @@ void unloadIPCs() {
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
     s_ops.sem_num = n_sem;
-    s_ops.sem_op = -1;
+    s_ops.sem_op  = -1;
     s_ops.sem_flg = 0;
     return semop(id_sem, &s_ops, 1);
 }
@@ -122,7 +126,7 @@ union semun {
 int releaseSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
     s_ops.sem_num = n_sem;
-    s_ops.sem_op = 1;
+    s_ops.sem_op  = 1;
     s_ops.sem_flg = 0;
     return semop(id_sem, &s_ops, 1);
 }
@@ -169,8 +173,11 @@ int creazione_atomi(int numero_atomi_da_creare)
 
 void stampa() {
     for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
-        sleep(1);
-
+        reserveSem(semAttivatore,0);
+        reserveSem(semProcessi,  0);
+        
+        
+        printf("\n\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
         printf("\n╔═════════════════════════════╗\n");
         printf(  "║  RESOCONTO GIORNALIERO %3d  ║\n", giorno + 1);
         printf(  "╠═════════════════════════════╝\n");
@@ -181,18 +188,26 @@ void stampa() {
             printf("\nenergia prodotta %d",centrale->energia);
             printf("\nnumero scorie %d"   ,centrale->scorie);
             printf("\nprelevo energia per la centrale");
-            // if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
-            // {
-            //     var->flagTerminazione=1;
-            //     printf("\n------------------------BLACKOUT DELLA CENTRALE--------------------------------FUNZICA--");
-            //     dettShm();
-            //     endProcess();
-            // }
-            //prelievo giornaliero dell'energia
+            if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
+             {
+                 var->flagTerminazione=1;
+                 printf("\n------------------------BLACKOUT DELLA CENTRALE--------------------------------FUNZICA--");
+                 dettShm();
+                 endProcess();
+             }
+             //prelievo giornaliero dell'energia
             centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
         dettShm();                                     printf(":: >>> (DET)\n");
+        if(giorno==SIM_DURATION-1){
+            var->flagTerminazione=1;
+        }
+        releaseSem(semAttivatore,0);
+        releaseSem(semProcessi,0);
+    
+        sleep(1);
 
     }
+    printf("\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
     printf("╔═════════════════════════════╗\n");
     printf("║          Terminato          ║\n");
     printf("╠═════════════════════════════╢\n\n");
