@@ -16,12 +16,15 @@ int main() {
 
         ++numMessaggiRicevuti;
         attShm();
-
-        Atomo a_PADRE = atomi[rand() % (centrale->n_atomi)];
+        
+        if (centrale->n_atomi > 0)
+        {
+            Atomo a_PADRE = atomi[rand() % (centrale->n_atomi)];
 
         switch (a_PADRE.pidAtomo = newProcess()) {
             case -1:
-                perror("Errore nella creazione del processo figlio");
+                perror("MELTDOWN");
+                exit(1);
                 break;
             case 0:
                 esegui_scissione(a_PADRE);
@@ -30,7 +33,9 @@ int main() {
             default:
                 wait(NULL);
                 break;
+            }
         }
+        else{ printf("Atomo finiti nella centrale");    }
     }
     unloadIPCs();
     return 0;

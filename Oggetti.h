@@ -1,4 +1,4 @@
-#define SIM_DURATION 10
+#define SIM_DURATION 2
 
 /*enum stampa {INIZIALE, GIORNALIERA, FINALE};*/
 
@@ -52,9 +52,9 @@ int shmCentrale; Centrale* centrale;
 int flagTempesta;
 int flagTerminazione;
 
-/* File 
+// File 
 FILE* out_progetto;
-FILE* in_progetto;*/
+FILE* in_progetto;
 
 /* Variabili Globali */
 

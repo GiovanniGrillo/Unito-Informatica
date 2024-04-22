@@ -1,11 +1,18 @@
 IMPORTANTI !!
+
 Implementare i casi in cui la centrale si rompe con Prog.conf (manca il controllo sulla fork)->impostare che stoppi tutto 
 quando uno di questi succede
--aggiungere i controlli in caso la pila di atomi[i] sia vuota se no va in segfault 
 
 
+CHICCHE DA SISTEMARE
+il processo attivatore deve partire sempre prima di atomo, o la simulazione non funziona
+se al primo ciclo di iterazine l'atomo  finisce i messaggi ricevuti poi non parte più :D
 COSE GENERALI
 
 --Versione "normal" 30--
 -Valutare se aggiungere al progetto: "Inibitore" e "Assorbe"
 -Capire come implementare una richiesta di attivazione "Inibitore" a run-time.
+
+
+
+

@@ -25,6 +25,7 @@ int main() {
             printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i + 1);
             ++i;
             dettShm();
+            
         }
         releaseSem(semAttivatore, 0);
         nanosleep(&req, NULL);

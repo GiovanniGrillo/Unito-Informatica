@@ -13,11 +13,11 @@
 #include <errno.h>
 #include <time.h>
 #include <math.h>
-
 #include "Oggetti.h"
 
 #define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
+
 
 #define ERROR                                                                                                                              \
     if (errno){                                                                                                                            \
@@ -25,20 +25,36 @@
         exit(1);                                                                                                                           \
     }
 
-void createIPCS() {
+void createIPCS(char* file) {
+    char temp[20], boolean[6];
+
     if ((shmVar  = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
 
-    var->ENERGY_DEMAND            = 100;
-    var->ENERGY_EXPLODE_THRESHOLD = 5000000;
-    var->flagTerminazione         = 0;
-    var->fork_atomi               = 0;
-    var->MIN_N_ATOMICO            = 5;
-    var->N_ATOMI_INIT             = 10;
-    var->N_ATOM_MAX               = 20;
-    var->STEP_ALIMENTAZIONE       = 700000000; //0.7s
-    var->STEP_ATTIVATORE          = 900000000; //0.9s
+    out_progetto = fopen("Progetto.out", "w");
+    in_progetto  = fopen(file, "r");
+    setbuf(out_progetto, NULL);
 
+fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_DEMAND); fprintf(out_progetto, "*  %s %d\n", temp, var->ENERGY_DEMAND);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_EXPLODE_THRESHOLD);fprintf(out_progetto, "*  %s %d\n", temp, var->ENERGY_EXPLODE_THRESHOLD);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->flagTerminazione);fprintf(out_progetto, "*  %s %d\n", temp, var->flagTerminazione);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->fork_atomi);fprintf(out_progetto, "*  %s %d\n", temp, var->fork_atomi);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->MIN_N_ATOMICO);fprintf(out_progetto, "*  %s %d\n", temp, var->MIN_N_ATOMICO);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOMI_INIT);fprintf(out_progetto, "*  %s %d\n", temp, var->N_ATOMI_INIT);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOM_MAX);fprintf(out_progetto, "*  %s %d\n", temp, var->N_ATOM_MAX);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ALIMENTAZIONE);fprintf(out_progetto, "*  %s %d\n", temp, var->STEP_ALIMENTAZIONE);
+
+fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ATTIVATORE);fprintf(out_progetto, "*  %s %d\n", temp, var->STEP_ATTIVATORE);
+
+ fclose(in_progetto);
+fclose(out_progetto);
     if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_ATOM_MAX + 1), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -51,7 +67,8 @@ void createIPCS() {
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
     centrale->scorie  = 0;
-
+    out_progetto = fopen("Progetto.out", "a");
+    setbuf(out_progetto, NULL);
     return;
 }
 
@@ -172,27 +189,27 @@ void stampa() {
         reserveSem(semProcessi,  0);
 
 
-        printf("\n\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
-        printf("\n╔═════════════════════════════╗\n");
-        printf(  "║  RESOCONTO GIORNALIERO %3d  ║\n", giorno + 1);
-        printf(  "╠═════════════════════════════╝\n");
-        printf(  "╠--- GIORNO %d\n", giorno + 1);
-        attShm(); {                                     printf(":: >>> (ATT)\n");
+        fprintf(out_progetto,"\n\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
+        fprintf(out_progetto,"\n╔═════════════════════════════╗\n");
+        fprintf(out_progetto,  "║  RESOCONTO GIORNALIERO %3d  ║\n", giorno + 1);
+        fprintf(out_progetto,  "╠═════════════════════════════╝\n");
+        fprintf(out_progetto,  "╠--- GIORNO %d\n", giorno + 1);
+        attShm(); {                                     fprintf(out_progetto,":: >>> (ATT)\n");
 
-            printf("\nnumero atomi %d"    ,centrale->n_atomi);
-            printf("\nenergia prodotta %d",centrale->energia);
-            printf("\nnumero scorie %d"   ,centrale->scorie);
-            printf("\nprelevo energia per la centrale");
+            fprintf(out_progetto,"\nnumero atomi %d"    ,centrale->n_atomi);
+            fprintf(out_progetto,"\nenergia prodotta %d",centrale->energia);
+            fprintf(out_progetto,"\nnumero scorie %d"   ,centrale->scorie);
+            fprintf(out_progetto,"\nprelevo energia per la centrale");
             if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
              {
                  var->flagTerminazione=1;
-                 printf("\n------------------------BLACKOUT DELLA CENTRALE--------------------------------FUNZICA--");
+                 fprintf(out_progetto,"\n------------------------BLACKOUT DELLA CENTRALE--------------------------------FUNZICA--");
                  dettShm();
                  endProcess();
              }
              //prelievo giornaliero dell'energia
             centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
-        dettShm();                                     printf(":: >>> (DET)\n");
+        dettShm();                                     fprintf(out_progetto,":: >>> (DET)\n");
         if(giorno==SIM_DURATION-1){
             var->flagTerminazione=1;
         }
@@ -202,9 +219,9 @@ void stampa() {
         sleep(1);
 
     }
-    printf("\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
-    printf("╔═════════════════════════════╗\n");
-    printf("║          Terminato          ║\n");
-    printf("╠═════════════════════════════╢\n\n");
+    fprintf(out_progetto,"\033[1;33mIl valore di flagTerminazione è %d\033[0m\n", var->flagTerminazione);
+    fprintf(out_progetto,"╔═════════════════════════════╗\n");
+    fprintf(out_progetto,"║          Terminato          ║\n");
+    fprintf(out_progetto,"╠═════════════════════════════╢\n\n");
     return;
 }

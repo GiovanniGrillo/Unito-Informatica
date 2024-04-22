@@ -8,15 +8,20 @@
         setbuf(stdout, NULL);
         srand(time(NULL));
         
-        createIPCS();
-        if(set_sem(semShm,      0, 1) == -1) ERROR;
-        if(set_sem(semAttivatore,      0, 1) == -1) ERROR;
+        createIPCS("Progetto.conf");
+        if(set_sem(semShm,           0, 1) == -1) ERROR;
+        if(set_sem(semAttivatore,    0, 1) == -1) ERROR;
         if(set_sem(semFissione,      0, 1) == -1) ERROR;
         if(set_sem(semProcessi,      0, 1) == -1) ERROR;
 
         attShm();
         creazione_atomi(var->N_ATOMI_INIT);
         dettShm();
+    printf("::::::::::::::::::::::::::::::::::::::::::\n");
+    printf(":::  PROCESSO ATTIVATORE - Start       :::\n");
+    printf("::::::::::::::::::::::::::::::::::::::\n::\n");
+
+
     
         pidAttivatore = fork();
         if (pidAttivatore == -1) {
@@ -27,23 +32,28 @@
             ERROR;
             exit(0);
         }
-
-        pidAtomo = fork();
-        if (pidAtomo == -1) {
-            ERROR;
-        } else if (pidAtomo == 0) {
-            execl("./atomo", "./atomo", NULL);
-            printf("\nAtomo non avviato correttamente\n");
-            ERROR;
-            exit(0);
-        }
-
+    printf("::::::::::::::::::::::::::::::::::::::::::\n");
+    printf(":::  PROCESSO ALIMENTATORE - Start     :::\n");
+    printf("::::::::::::::::::::::::::::::::::::::\n::\n");
         pidAlimentatore = fork();
         if (pidAlimentatore == -1) {
             ERROR;
         } else if (pidAlimentatore == 0) {
             execl("./alimentatore", "./alimentatore", NULL);
             printf("\nAlimentatore non avviato correttamente\n");
+            ERROR;
+            exit(0);
+        }
+    printf("::::::::::::::::::::::::::::::::::::::::::\n");
+    printf(":::  PROCESSO ATOMO - Start            :::\n");
+    printf("::::::::::::::::::::::::::::::::::::::\n::\n"); 
+           pidAtomo = fork();
+        if (pidAtomo == -1) {
+            
+            ERROR;
+        } else if (pidAtomo == 0) {
+            execl("./atomo", "./atomo", NULL);
+            printf("\nAtomo non avviato correttamente\n");
             ERROR;
             exit(0);
         }

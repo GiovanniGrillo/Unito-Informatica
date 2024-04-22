@@ -1,5 +1,4 @@
 #include "lib_header.h"
-#include "lib_alimentatore.h"
 
 #define N_NUOVI_ATOMI 10
 
