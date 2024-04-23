@@ -1,16 +1,14 @@
-#define SIM_DURATION 2
-
-/*enum stampa {INIZIALE, GIORNALIERA, FINALE};*/
+#define SIM_DURATION 30
 
 typedef struct Var {
 int ENERGY_DEMAND;
-int N_ATOMI_INIT;
-int N_ATOM_MAX;
-int MIN_N_ATOMICO;
-int STEP_ALIMENTAZIONE;
 int ENERGY_EXPLODE_THRESHOLD;
 int flagTerminazione;
 int fork_atomi;
+int MIN_N_ATOMICO;
+int N_ATOMI_INIT;
+int N_ATOM_MAX;
+int STEP_ALIMENTAZIONE;
 int STEP_ATTIVATORE;
 } Var;
 
@@ -57,6 +55,3 @@ FILE* out_progetto;
 FILE* in_progetto;
 
 /* Variabili Globali */
-
-/*pid_t pid; 
-pid_t pidAtomo; */
