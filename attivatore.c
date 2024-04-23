@@ -12,7 +12,7 @@ int main() {
     while (flagTerminazione != 1) {
         reserveSem(semAttivatore, 0);
         int i = 0;
-        while (i < 100) {
+        while (i < 20) {
             if (var->flagTerminazione == 1) {
                 exit(0);
             }

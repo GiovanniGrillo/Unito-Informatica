@@ -13,7 +13,7 @@ int STEP_ATTIVATORE;
 } Var;
 
 typedef struct Centrale{
-    int energia;
+    long int energia;
     int n_atomi;
     int scorie;
 }Centrale;

@@ -36,6 +36,7 @@ void esegui_scissione(Atomo a_PADRE) {
             dettShm();
             endProcess();
         }
+        printf("\033[0;35m");         printf("energia presente nella centrale è: %d\n",centrale->energia);         printf("\033[0m");
         printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
         centrale->energia += liberata;
         var->fork_atomi--;
