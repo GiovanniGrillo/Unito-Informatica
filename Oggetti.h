@@ -39,6 +39,7 @@ int semAttivatore;
 int semFissione;
 int semShm;
 int semProcessi;
+int semCentrale;
 
 /* Memorie Codivise*/
 int shmAtomi;   Atomo* atomi;
