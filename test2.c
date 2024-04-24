@@ -7,7 +7,7 @@
 
         setbuf(stdout, NULL);
         srand(time(NULL));
-        
+
         createIPCS("Progetto.conf");
         if(set_sem(semShm,           0, 1) == -1) ERROR;
         if(set_sem(semAttivatore,    0, 1) == -1) ERROR;
@@ -22,7 +22,7 @@
     printf("::::::::::::::::::::::::::::::::::::::\n::\n");
 
 
-    
+
         pidAttivatore = fork();
         if (pidAttivatore == -1) {
             ERROR;

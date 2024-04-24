@@ -32,6 +32,7 @@ void esegui_scissione(Atomo a_PADRE) {
         int liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico);
         if((centrale->energia += liberata) > var->ENERGY_EXPLODE_THRESHOLD) {
             printf("\ncentrale esplosa, troppa energia liberata\n");
+            printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
             var->flagTerminazione = 1;
             dettShm();
             endProcess();

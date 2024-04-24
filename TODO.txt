@@ -1,17 +1,15 @@
-IMPORTANTI !!
+~~IMPORTANTI~~
+-Implementare i casi in cui la centrale si rompe con Prog.conf (manca il controllo sulla fork)->impostare che stoppi tutto quando uno di questi succede.
+-Per energia presente nella centrale > 50'000 esplode. Non capisco se sia un errore di lettura di ENERGY_EXPLODE_THRESHOLD.
+-Non dealloca un semaforo alla fine della simulazione.
+-Quando entra in "centrale esplosa, troppa energia liberata" il terminale rimane in attesa.
 
-Implementare i casi in cui la centrale si rompe con Prog.conf (manca il controllo sulla fork)->impostare che stoppi tutto 
-quando uno di questi succede
+~~CHICCHE DA SISTEMARE~~
+-Il processo attivatore deve partire sempre prima di atomo, o la simulazione non funziona
+-Se al primo ciclo di iterazine l'atomo  finisce i messaggi ricevuti poi non parte più
 
-CHICCHE DA SISTEMAREciaicoiciicic
-il processo attivatore deve partire sempre prima di atomo, o la simulazione non funziona
-se al primo ciclo di iterazine l'atomo  finisce i messaggi ricevuti poi non parte più :D
-COSE GENERALI
+~~COSE GENERALI~~
 
 --Versione "normal" 30--
--Valutare se aggiungere al progetto: "Inibitore" e "Assorbe"
--Capire come implementare una richiesta di attivazione "Inibitore" a run-time.
-
-
-
-
+    -Valutare se aggiungere al progetto: "Inibitore" e "Assorbe"
+    -Capire come implementare una richiesta di attivazione "Inibitore" a run-time.
