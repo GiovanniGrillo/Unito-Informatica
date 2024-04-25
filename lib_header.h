@@ -30,7 +30,7 @@ void createIPCS() {
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
 
     var->ENERGY_DEMAND            = 100;
-    var->ENERGY_EXPLODE_THRESHOLD = 5000;
+    var->ENERGY_EXPLODE_THRESHOLD = 5000000;
     var->flagTerminazione         = 0;
     var->fork_atomi               = 0;
     var->MIN_N_ATOMICO            = 5;
@@ -95,6 +95,7 @@ void deallocIPC(){
     if (msgctl(msgPila,      IPC_RMID, 0) == -1) { ERROR; }  else  printf("     msgPila       |   deallocati     \n");
     if (semctl(semFissione,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semAttivatore,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
+    if (semctl(semCentrale,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     return;
 }
 

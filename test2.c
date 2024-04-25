@@ -44,7 +44,7 @@
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ATOMO - Start            :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n"); 
-           pidAtomo = fork();
+            pidAtomo = fork();
         if (pidAtomo == -1) {
             
             ERROR;
