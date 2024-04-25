@@ -6,7 +6,6 @@ int main() {
 
     struct timespec req = {0,var->STEP_ATTIVATORE};
     message.msg_type = 1;
-    int i = 0;
     int j = 0;
 
     while (flagTerminazione != 1) {
@@ -25,7 +24,7 @@ int main() {
             printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i + 1);
             ++i;
             dettShm();
-            
+
         }
         releaseSem(semAttivatore, 0);
         nanosleep(&req, NULL);

@@ -55,4 +55,8 @@ int flagTerminazione;
 FILE* out_progetto;
 FILE* in_progetto;
 
+
 /* Variabili Globali */
+   pid_t pidAtomo;
+   pid_t pidAttivatore;
+   pid_t pidAlimentatore;

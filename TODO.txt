@@ -1,6 +1,5 @@
 ~~IMPORTANTI~~
 -Implementare i casi in cui la centrale si rompe con Prog.conf (manca il controllo sulla fork)->impostare che stoppi tutto quando uno di questi succede.
--Per energia presente nella centrale > 50'000 esplode. Non capisco se sia un errore di lettura di ENERGY_EXPLODE_THRESHOLD.
 -Non dealloca un semaforo alla fine della simulazione.
 -Quando entra in "centrale esplosa, troppa energia liberata" il terminale rimane in attesa.
 

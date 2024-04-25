@@ -1,9 +1,6 @@
     #include "lib_header.h"
 
     int main() {
-        pid_t pidAtomo;
-        pid_t pidAttivatore;
-        pid_t pidAlimentatore;
 
         setbuf(stdout, NULL);
         srand(time(NULL));

@@ -8,6 +8,10 @@ int exec = 0;
 int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
+endall(){
+    deallocIPC();
+}
+
 
 void esegui_scissione(Atomo a_PADRE) {
     printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
@@ -35,6 +39,11 @@ void esegui_scissione(Atomo a_PADRE) {
             printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
             var->flagTerminazione = 1;
             dettShm();
+              var->flagTerminazione=1;
+
+            kill(pidAttivatore,     SIGTERM);
+            kill(pidAtomo,          SIGTERM);
+            kill(pidAlimentatore,   SIGTERM);
             endProcess();
         }
         printf("\033[0;35m");         printf("energia presente nella centrale è: %d\n",centrale->energia);         printf("\033[0m");
