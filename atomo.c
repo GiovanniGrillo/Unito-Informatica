@@ -19,7 +19,7 @@ int main() {
         
         if (centrale->n_atomi > 0)
         {
-            Atomo a_PADRE = atomi[rand() % (centrale->n_atomi)];
+            Atomo a_PADRE = atomi[(centrale->n_atomi)];
 
         switch (a_PADRE.pidAtomo = newProcess()) {
             case -1:

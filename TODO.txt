@@ -1,11 +1,7 @@
 ~~IMPORTANTI~~
--Implementare i casi in cui la centrale si rompe con Prog.conf (manca il controllo sulla fork)->impostare che stoppi tutto quando uno di questi succede.
--Non dealloca un semaforo alla fine della simulazione.
--Quando entra in "centrale esplosa, troppa energia liberata" il terminale rimane in attesa.
+capire perchè se si aumenta la define di attivatore si blocca 
+stampe 
 
-~~CHICCHE DA SISTEMARE~~
--Il processo attivatore deve partire sempre prima di atomo, o la simulazione non funziona
--Se al primo ciclo di iterazine l'atomo  finisce i messaggi ricevuti poi non parte più
 
 ~~COSE GENERALI~~
 

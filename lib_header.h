@@ -30,7 +30,7 @@ void createIPCS() {
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
 
     var->ENERGY_DEMAND            = 100;
-    var->ENERGY_EXPLODE_THRESHOLD = 5000000;
+    var->ENERGY_EXPLODE_THRESHOLD = 500;
     var->flagTerminazione         = 0;
     var->fork_atomi               = 0;
     var->MIN_N_ATOMICO            = 5;
