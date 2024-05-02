@@ -8,6 +8,7 @@ test: test.c
 
 test2: test2.c
 	gcc test2.c -o test2 -Wvla -Wextra -Werror -w
+	ipcrm -a
 	./test2
 
 atomo: atomo.c

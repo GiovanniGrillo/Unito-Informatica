@@ -10,7 +10,6 @@ int main() {
 
         if(var->flagTerminazione != 0) endProcess();
         if (msgrcv(msgPila, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
-            ERROR;
             continue;
         }
 

@@ -5,7 +5,7 @@
         setbuf(stdout, NULL);
         srand(time(NULL));
 
-        createIPCS();
+        createIPCS("Progetto.conf");
        
         if(set_sem(semShm,           0, 1) == -1) ERROR;
         if(set_sem(semAttivatore,    0, 1) == -1) ERROR;
@@ -56,10 +56,7 @@
         }
         
         stampa();
-        // Aspetta la terminazione di tutti e tre i processi
-        // waitpid(pidAttivatore, NULL, 0);
-        // waitpid(pidAtomo, NULL, 0);
-        // waitpid(pidAlimentatore, NULL,0);
+       
 
 
         kill(pidAttivatore,     SIGTERM);

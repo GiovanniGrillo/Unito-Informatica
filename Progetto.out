@@ -1,9 +1,25 @@
+╔═════════════════════════════════════════════════════════════╗
+║ Inizio esecuzione progetto di Sistemi Operativi (2023/2024) ║
+║                                di                           ║
+║ GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO    ║
+╠═════════════════════════════════════════════════════════════╝
+║SIM_DURATION: 30
+║ENERGY_DEMAND: 100
+║ENERGY_EXPLODE_THRESHOLD: 5000000
+║flagTerminazione: 0
+║fork_atomi: 0
+║IN_N_ATOMICO: 5
+║N_ATOMI_INIT: 100
+║N_ATOM_MAX: 40
+║N_MSG: 2
+║STEP_ALIMENTAZIONE: 700000000
+║STEP_ATTIVATORE: 900000000
 
 ╔═════════════════════════════╗
 ║          GIORNO  1          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1000
+║ Numero atomi 100
 ║ Energia prodotta 100
 ║ Numero scorie 0
 ║ Prelevo energia per la centrale
@@ -12,16 +28,243 @@
 ║          GIORNO  2          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1105
-║ Energia prodotta 20908
-║ Numero scorie 95
+║ Numero atomi 102
+║ Energia prodotta 258
+║ Numero scorie 2
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  3          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1120
-║ Energia prodotta 37280
-║ Numero scorie 180
+║ Numero atomi 103
+║ Energia prodotta 246
+║ Numero scorie 3
 ║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  4          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 106
+║ Energia prodotta 168
+║ Numero scorie 4
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  5          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 107
+║ Energia prodotta 432
+║ Numero scorie 5
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  6          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 110
+║ Energia prodotta 452
+║ Numero scorie 6
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  7          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 111
+║ Energia prodotta 362
+║ Numero scorie 7
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  8          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 112
+║ Energia prodotta 292
+║ Numero scorie 8
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO  9          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 115
+║ Energia prodotta 206
+║ Numero scorie 9
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 10          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 116
+║ Energia prodotta 382
+║ Numero scorie 10
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 11          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 118
+║ Energia prodotta 418
+║ Numero scorie 12
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 12          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 118
+║ Energia prodotta 318
+║ Numero scorie 14
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 13          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 121
+║ Energia prodotta 330
+║ Numero scorie 15
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 14          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 122
+║ Energia prodotta 260
+║ Numero scorie 16
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 15          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 122
+║ Energia prodotta 160
+║ Numero scorie 18
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 16          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 125
+║ Energia prodotta 144
+║ Numero scorie 19
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 17          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 126
+║ Energia prodotta 804
+║ Numero scorie 20
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 18          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 129
+║ Energia prodotta 710
+║ Numero scorie 21
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 19          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 130
+║ Energia prodotta 658
+║ Numero scorie 22
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 20          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 132
+║ Energia prodotta 632
+║ Numero scorie 24
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 21          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 133
+║ Energia prodotta 580
+║ Numero scorie 25
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 22          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 133
+║ Energia prodotta 480
+║ Numero scorie 27
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 23          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 136
+║ Energia prodotta 380
+║ Numero scorie 28
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 24          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 137
+║ Energia prodotta 280
+║ Numero scorie 29
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 25          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 140
+║ Energia prodotta 220
+║ Numero scorie 30
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 26          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 141
+║ Energia prodotta 264
+║ Numero scorie 31
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 27          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 144
+║ Energia prodotta 164
+║ Numero scorie 32
+║ Prelevo energia per la centrale
+
+╔═════════════════════════════╗
+║          GIORNO 28          ║
+╠═════════════════════════════╝
+║
+║ Numero atomi 145
+║ Energia prodotta 84
+║ Numero scorie 33
+║ Prelevo energia per la centrale
+
+██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██

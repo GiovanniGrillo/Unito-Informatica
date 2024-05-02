@@ -1,6 +1,6 @@
 #include "lib_header.h"
 
-#define N_NUOVI_ATOMI 100
+#define N_NUOVI_ATOMI 2
 
 int main() {
     printf("\n\033[1;32mBenvenuto in alimentatore!\033[0m\n");
