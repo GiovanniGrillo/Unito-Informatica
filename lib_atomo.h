@@ -51,7 +51,7 @@ void esegui_scissione(Atomo a_PADRE) {
         centrale->energia += liberata;
         var->fork_atomi--;
         atomi[centrale->n_atomi] = figlio;
-        centrale->n_atomi++;
+        
         printf("\n\033[1;34m il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ", var->fork_atomi, centrale->n_atomi);
         dettShm();
         releaseSem(semFissione, 0);

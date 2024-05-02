@@ -5,15 +5,16 @@
         setbuf(stdout, NULL);
         srand(time(NULL));
 
-        createIPCS("Progetto.conf");
+        createIPCS();
+       
         if(set_sem(semShm,           0, 1) == -1) ERROR;
         if(set_sem(semAttivatore,    0, 1) == -1) ERROR;
         if(set_sem(semFissione,      0, 1) == -1) ERROR;
         if(set_sem(semProcessi,      0, 1) == -1) ERROR;
-
         attShm();
         creazione_atomi(var->N_ATOMI_INIT);
         dettShm();
+      
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ATTIVATORE - Start       :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n");
@@ -46,7 +47,6 @@
     printf("::::::::::::::::::::::::::::::::::::::\n::\n"); 
             pidAtomo = fork();
         if (pidAtomo == -1) {
-            
             ERROR;
         } else if (pidAtomo == 0) {
             execl("./atomo", "./atomo", NULL);
@@ -60,14 +60,13 @@
         // waitpid(pidAttivatore, NULL, 0);
         // waitpid(pidAtomo, NULL, 0);
         // waitpid(pidAlimentatore, NULL,0);
-        
-        
-        var->flagTerminazione=1;
+
 
         kill(pidAttivatore,     SIGTERM);
-        kill(pidAtomo,          SIGTERM);
         kill(pidAlimentatore,   SIGTERM);
+
         printf("\nSono fuori!\n");
+
         deallocIPC();
         return 0;
     }
