@@ -8,6 +8,7 @@ int fork_atomi;
 int MIN_N_ATOMICO;
 int N_ATOMI_INIT;
 int N_ATOM_MAX;
+int N_MSG;
 int STEP_ALIMENTAZIONE;
 int STEP_ATTIVATORE;
 } Var;

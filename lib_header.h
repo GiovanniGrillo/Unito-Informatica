@@ -32,25 +32,25 @@ void createIPCS() {
     out_progetto= fopen("Progetto.out", "w");
     setbuf(out_progetto, NULL);
     var->ENERGY_DEMAND            = 100;
-    var->ENERGY_EXPLODE_THRESHOLD = 500000;
+    var->ENERGY_EXPLODE_THRESHOLD = 50000;
     var->flagTerminazione         = 0;
     var->fork_atomi               = 0;
     var->MIN_N_ATOMICO            = 5;
     var->N_ATOMI_INIT             = 1000;
-    var->N_ATOM_MAX               = 40;   
+    var->N_ATOM_MAX               = 40;
+    var->N_MSG                    = 250;
     var->STEP_ALIMENTAZIONE       = 700000000; //0.7s
     var->STEP_ATTIVATORE          = 900000000; //0.9s
 
-    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * 50000, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale) * (var->ENERGY_DEMAND), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((centrale       = shmat(shmCentrale,NULL,0))                                            == -1) ERROR;
-   
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),                                                IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((centrale       = shmat(shmCentrale,NULL,0))                                                                                       == -1) ERROR;
 
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
@@ -71,14 +71,14 @@ void attShm() {
 void loadIPCs() {
     if ((shmVar         = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
     if ((var            = shmat (shmVar, NULL, 0)) == (void *) -1)                                                 ERROR;
-    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->ENERGY_DEMAND), PERMISSIONS)) == -1) ERROR;
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3, PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
     if ((semFissione    = semget(ftok(FTOK_FILE, 'f'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                    PERMISSIONS)) == -1) ERROR;
-    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale) * (var->ENERGY_DEMAND),  PERMISSIONS)) == -1) ERROR;
+    if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),      PERMISSIONS)) == -1) ERROR;
 
     return;
 }
@@ -99,7 +99,7 @@ void deallocIPC(){
     if (msgctl(msgPila,      IPC_RMID, 0) == -1) { ERROR; }  else  printf("     msgPila       |   deallocati     \n");
     if (semctl(semFissione,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semAttivatore,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
-    if (semctl(semCentrale,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
+    if (semctl(semCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     return;
 }
 

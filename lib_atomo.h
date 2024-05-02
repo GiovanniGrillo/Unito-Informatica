@@ -39,7 +39,7 @@ void esegui_scissione(Atomo a_PADRE) {
             printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
             var->flagTerminazione = 1;
             dettShm();
-              var->flagTerminazione=1;
+            deallocIPC();
 
             kill(pidAttivatore,     SIGTERM);
             kill(pidAtomo,          SIGTERM);

@@ -16,7 +16,7 @@ int main() {
 
         ++numMessaggiRicevuti;
         attShm();
-        
+
         if (centrale->n_atomi > 0)
         {
             Atomo a_PADRE = atomi[(centrale->n_atomi)];
