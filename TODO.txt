@@ -1,7 +1,4 @@
 ~~IMPORTANTI~~
-capire perchè se si aumenta la define di attivatore si blocca 
-stampe 
-
 
 ~~COSE GENERALI~~
 

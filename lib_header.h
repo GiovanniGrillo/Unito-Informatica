@@ -25,7 +25,7 @@
         exit(1);                                                                                                                           \
     }
 
-long int convert_to_nanoseconds(int n) {
+long int converti_in_milioni(int n) {
     return n * 100000000;
 }
 
@@ -44,21 +44,20 @@ void createIPCS(char* file) {
     fprintf(out_progetto, "║                                di                           ║\n");
     fprintf(out_progetto, "║ GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO    ║\n");
     fprintf(out_progetto, "╠═════════════════════════════════════════════════════════════╝\n");
-                                                                                    fprintf(out_progetto, "║%s %d\n","SIM_DURATION:", SIM_DURATION);
-    fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_DEMAND);                  fprintf(out_progetto, "║ENERGY_DEMAND: %d\n", var->ENERGY_DEMAND);
-    fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_EXPLODE_THRESHOLD);       fprintf(out_progetto, "║ENERGY_EXPLODE_THRESHOLD: %d\n", var->ENERGY_EXPLODE_THRESHOLD);
-    fscanf(in_progetto, "%s %d\n", temp, &var->flagTerminazione);               fprintf(out_progetto, "║flagTerminazione: %d\n", var->flagTerminazione);
-    fscanf(in_progetto, "%s %d\n", temp, &var->fork_atomi);                     fprintf(out_progetto, "║fork_atomi: %d\n", var->fork_atomi);
-    fscanf(in_progetto, "%s %d\n", temp, &var->MIN_N_ATOMICO);                  fprintf(out_progetto, "║IN_N_ATOMICO: %d\n", var->MIN_N_ATOMICO);
-    fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOMI_INIT);                   fprintf(out_progetto, "║N_ATOMI_INIT: %d\n", var->N_ATOMI_INIT);
-    fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOM_MAX);                     fprintf(out_progetto, "║N_ATOM_MAX: %d\n", var->N_ATOM_MAX);
-    fscanf(in_progetto, "%s %d\n", temp, &var->N_MSG);                          fprintf(out_progetto, "║N_MSG: %d\n", var->N_MSG);
+                                                                                    fprintf(out_progetto, "║%s %14d\n","SIM_DURATION:", SIM_DURATION);
+    fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_DEMAND);                  fprintf(out_progetto, "║ENERGY_DEMAND: %14d\n", var->ENERGY_DEMAND);
+    fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_EXPLODE_THRESHOLD);       fprintf(out_progetto, "║ENERGY_EXPLODE_THRESHOLD: %3d\n", var->ENERGY_EXPLODE_THRESHOLD);
+    fscanf(in_progetto, "%s %d\n", temp, &var->flagTerminazione);               fprintf(out_progetto, "║flagTerminazione: %9d\n", var->flagTerminazione);
+    fscanf(in_progetto, "%s %d\n", temp, &var->fork_atomi);                     fprintf(out_progetto, "║fork_atomi: %15d\n", var->fork_atomi);
+    fscanf(in_progetto, "%s %d\n", temp, &var->MIN_N_ATOMICO);                  fprintf(out_progetto, "║MIN_N_ATOMICO: %12d\n", var->MIN_N_ATOMICO);
+    fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOMI_INIT);                   fprintf(out_progetto, "║N_ATOMI_INIT: %15d\n", var->N_ATOMI_INIT);
+    fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOM_MAX);                     fprintf(out_progetto, "║N_ATOM_MAX: %16d\n", var->N_ATOM_MAX);
+    fscanf(in_progetto, "%s %d\n", temp, &var->N_MSG);                          fprintf(out_progetto, "║N_MSG: %22d\n", var->N_MSG);
+    fscanf(in_progetto, "%s %d\n", temp, &var->N_NUOVI_ATOMI);                  fprintf(out_progetto, "║N_NUOVI_ATOMI: %14d\n", var->N_NUOVI_ATOMI);
     fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ALIMENTAZIONE);
-    var->STEP_ALIMENTAZIONE = convert_to_nanoseconds(var->STEP_ALIMENTAZIONE);  fprintf(out_progetto, "║STEP_ALIMENTAZIONE: %d\n", var->STEP_ALIMENTAZIONE);
+    var->STEP_ALIMENTAZIONE = converti_in_milioni(var->STEP_ALIMENTAZIONE);  fprintf(out_progetto, "║STEP_ALIMENTAZIONE: %15d\n", var->STEP_ALIMENTAZIONE);
     fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ATTIVATORE);
-    var->STEP_ATTIVATORE = convert_to_nanoseconds(var->STEP_ATTIVATORE);        fprintf(out_progetto, "║STEP_ATTIVATORE: %d\n", var->STEP_ATTIVATORE);
-    // var->STEP_ALIMENTAZIONE = 700000000;
-    // var->STEP_ATTIVATORE = 900000000;
+    var->STEP_ATTIVATORE = converti_in_milioni(var->STEP_ATTIVATORE);        fprintf(out_progetto, "║STEP_ATTIVATORE: %18d\n", var->STEP_ATTIVATORE);
     printf("\nil vero valore di energy demand %d", var->ENERGY_DEMAND);
     printf("\nil vero valore di energy demand %d", var->ENERGY_EXPLODE_THRESHOLD);
     printf("\nil vero valore di energy demand %d", var->flagTerminazione);
@@ -73,7 +72,7 @@ void createIPCS(char* file) {
     fclose(in_progetto);
     fclose(out_progetto);
 
-    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3*(var->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),                                                IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
