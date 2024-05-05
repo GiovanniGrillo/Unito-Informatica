@@ -12,7 +12,7 @@
 ║N_ATOMI_INIT:             100
 ║N_ATOM_MAX:               40
 ║N_MSG:                    200
-║N_NUOVI_ATOMI:            200
+║N_NUOVI_ATOMI:            350
 ║STEP_ALIMENTAZIONE:       700000000
 ║STEP_ATTIVATORE:          900000000
 
@@ -20,43 +20,24 @@
 ║          GIORNO  1          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 100
-║ Energia prodotta 100
-║ Numero scorie 0
+║ Numero atomi 100║ Numero nuovi atomi 100
+
+║ Energia prodotta 100║ Energia prodotta nuova 100
+
+║ Numero scorie 0║ Numero nuove scorie 0
+
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
-║          GIORNO  2          ║
+║          GIORNO  1          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 398
-║ Energia prodotta 17916
-║ Numero scorie 102
+║ Numero atomi 100║ Numero nuovi atomi 100
+
+║ Energia prodotta 0║ Energia prodotta nuova 0
+
+║ Numero scorie 0║ Numero nuove scorie 0
+
 ║ Prelevo energia per la centrale
 
-╔═════════════════════════════╗
-║          GIORNO  3          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 503
-║ Energia prodotta 35434
-║ Numero scorie 197
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO  4          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 820
-║ Energia prodotta 50772
-║ Numero scorie 280
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO  5          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 932
-║ Energia prodotta 67576
-║ Numero scorie 368
-║ Prelevo energia per la centrale
+██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██

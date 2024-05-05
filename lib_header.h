@@ -68,9 +68,10 @@ void createIPCS(char* file) {
     printf("\nil vero valore di energy demand %d", var->N_MSG);
     printf("\nil vero valore di energy demand %d", var->STEP_ALIMENTAZIONE);
     printf("\nil vero valore di energy demand %d", var->STEP_ATTIVATORE);
-
+    printf("ciao");
     fclose(in_progetto);
     fclose(out_progetto);
+    printf("suca");
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3*(var->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -81,12 +82,19 @@ void createIPCS(char* file) {
     if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((centrale       = shmat(shmCentrale,NULL,0))                                                                                       == -1) ERROR;
+    if ((shmInibitore    = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
+    inibitore->active=0;
+    inibitore->absorbed_energy=0;
+    inibitore->scissioni_negate=0;
+    printf("suca2");
 
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
     centrale->scorie  = 0;
 
     if((shmdt(centrale)) == -1) ERROR;
+    if((shmdt(inibitore)) == -1) ERROR;
 
     out_progetto = fopen("Progetto.out", "a");
     setbuf(out_progetto, NULL);
@@ -95,6 +103,7 @@ void createIPCS(char* file) {
 
 void attShm() {
     reserveSem (semShm,0);
+    if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
     if ((centrale = shmat(shmCentrale, NULL, 0)) == (void*) -1) ERROR;
     if ((atomi    = shmat(shmAtomi,    NULL, 0)) == (void*) -1) ERROR;
     return;
@@ -103,7 +112,7 @@ void attShm() {
 void loadIPCs() {
     if ((shmVar         = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
     if ((var            = shmat (shmVar, NULL, 0)) == (void *) -1)                                                 ERROR;
-    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3, PERMISSIONS)) == -1) ERROR;
+    if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3*(var->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semProcessi    = semget(ftok(FTOK_FILE, 'd'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((msgPila        = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
@@ -111,6 +120,7 @@ void loadIPCs() {
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),      PERMISSIONS)) == -1) ERROR;
+    if ((shmInibitore    = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),                    PERMISSIONS)) == -1) ERROR;
 
     return;
 }
@@ -118,12 +128,13 @@ void loadIPCs() {
 void dettShm() {
     if((shmdt(atomi)) == -1)    ERROR;
     if((shmdt(centrale)) == -1) ERROR;
+    if((shmdt(inibitore)) == -1) ERROR;
     releaseSem(semShm,0);
     return;
 }
 
 void deallocIPC(){
-    if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar        |   deallocati     \n");
+    if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar      |   deallocati     \n");
     if (shmctl(shmAtomi,     IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmAtomi      |   deallocati     \n");
     if (shmctl(shmCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmCentrale   |   deallocata     \n");
     if (semctl(semShm,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semShm        |   deallocati     \n");
@@ -132,6 +143,7 @@ void deallocIPC(){
     if (semctl(semFissione,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semAttivatore,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
+    if (shmctl(shmInibitore, IPC_RMID, 0) == -1) { ERROR; }  else  printf("    shmInibitore   |   deallocati     \n");
     return;
 }
 
@@ -201,19 +213,32 @@ int creazione_atomi(int numero_atomi_da_creare)
 }
 
 void stampa() {
+    int prev_n_atomi=0, prev_energia=0, prev_scorie=0;
+
     for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
         reserveSem(semAttivatore,0);
         reserveSem(semProcessi,  0);
+      
 
         fprintf(out_progetto, "\n╔═════════════════════════════╗\n");
         fprintf(out_progetto,   "║          GIORNO %2d          ║\n", giorno + 1);
         fprintf(out_progetto,   "╠═════════════════════════════╝\n║\n");
 
         attShm(); {
+            
 
             fprintf(out_progetto,"║ Numero atomi %d"    ,centrale->n_atomi);
+            fprintf(out_progetto,"║ Numero nuovi atomi %d\n", centrale->n_atomi - prev_n_atomi);
+        
+
             fprintf(out_progetto,"\n║ Energia prodotta %d",centrale->energia);
+            fprintf(out_progetto,"║ Energia prodotta nuova %d\n", centrale->energia - prev_energia);
+       
+
             fprintf(out_progetto,"\n║ Numero scorie %d"   ,centrale->scorie);
+            fprintf(out_progetto,"║ Numero nuove scorie %d\n", centrale->scorie - prev_scorie);
+
+
             fprintf(out_progetto,"\n║ Prelevo energia per la centrale\n");
             if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
              {
@@ -224,6 +249,9 @@ void stampa() {
              }
              //prelievo giornaliero dell'energia
             centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
+        prev_n_atomi = centrale->n_atomi;
+        prev_energia = centrale->energia;
+        prev_scorie  = centrale->scorie;
         dettShm();
         if(giorno==SIM_DURATION-1){
             var->flagTerminazione=1;

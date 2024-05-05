@@ -15,7 +15,14 @@ int main() {
 
         ++numMessaggiRicevuti;
         attShm();
+        if(inibitore->active==1){
+            int casuale = rand()%2;
+            if(casuale==1){ 
+                inibitore->scissioni_negate++;
+                endProcess();
+            }
 
+        }
         if (centrale->n_atomi > 0)
         {
             Atomo a_PADRE = atomi[(centrale->n_atomi)];

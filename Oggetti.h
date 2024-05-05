@@ -31,6 +31,12 @@ struct msg_buffer {
     long msg_type;
 } message;
 
+typedef struct Inibitore {
+    int active; 
+    int absorbed_energy;
+    int scissioni_negate;   
+}Inibitore;
+
 /* Coda di messaggi */
 int semPila;
 int msgPila;
@@ -48,6 +54,7 @@ int shmAtomi;   Atomo* atomi;
 int shmVar;     Var*   var;
 int shmPila;    int*   pila;
 int shmCentrale; Centrale* centrale;
+int shmInibitore;  Inibitore* inibitore;
 
 /* Flag Terminazione e controlloSegnali*/
 int flagTempesta;
@@ -62,3 +69,4 @@ FILE* in_progetto;
    pid_t pidAtomo;
    pid_t pidAttivatore;
    pid_t pidAlimentatore;
+   pid_t pidInibitore;

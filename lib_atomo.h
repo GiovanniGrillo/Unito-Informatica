@@ -33,18 +33,35 @@ void esegui_scissione(Atomo a_PADRE) {
         a_PADRE.numero_atomico -= figlio.numero_atomico;
 
         //printf("\n \033[1;34m atomo figlio creato con numero atomico: %d, il padre ha numero atomico post scissione :%d\n\033[0m", figlio.numero_atomico, a_PADRE.numero_atomico);
-        int liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico);
-        if((centrale->energia += liberata) > var->ENERGY_EXPLODE_THRESHOLD) {
-            printf("\ncentrale esplosa, troppa energia liberata\n");
-            printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
-            var->flagTerminazione = 1;
-            dettShm();
-            deallocIPC();
+        int liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico); 
+        if(inibitore->active==1){
+            int liberatasoft=(int)(liberata * 0.80);
+            inibitore->absorbed_energy+=(liberata - liberatasoft );
+            liberata = liberatasoft;
+        }
 
-            kill(pidAttivatore,     SIGTERM);
-            kill(pidAtomo,          SIGTERM);
-            kill(pidAlimentatore,   SIGTERM);
-            endProcess();
+        if((centrale->energia += liberata) > var->ENERGY_EXPLODE_THRESHOLD) {
+            if(inibitore->active==1){
+                printf("\nLa centrale stava esplodendo il processo inibitore è intervenuto\n");
+                int energia_da_assorbire= (int)(centrale->energia*0.80);
+                inibitore->absorbed_energy+=energia_da_assorbire;
+                centrale->energia-=energia_da_assorbire;
+                
+                printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
+
+               
+            }else{
+                 printf("\ncentrale esplosa, troppa energia liberata\n");
+                printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
+                var->flagTerminazione = 1;
+                dettShm();
+                deallocIPC();
+                kill(pidAttivatore,     SIGTERM);
+                kill(pidAtomo,          SIGTERM);
+                kill(pidAlimentatore,   SIGTERM);
+                endProcess();
+            }
+            
         }
         printf("\033[0;35m");         printf("energia presente nella centrale è: %d\n",centrale->energia);         printf("\033[0m");
         printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
