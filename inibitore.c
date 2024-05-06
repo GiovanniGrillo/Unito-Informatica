@@ -5,7 +5,7 @@
 #include "lib_header.h"
 
 // Funzione per gestire il segnale SIGUSR1
-void handle_signal(int signum) {
+void handle_signal_inibitore(int signum) {
     attShm();
     if (inibitore->active==1)
     {
@@ -32,8 +32,10 @@ int main() {
     //  attShm();
     //     creazione_atomi(var->N_ATOMI_INIT);
     //     dettShm();
+    printf("\033[1;37mTesto bianco\033[0m");
     loadIPCs();
-      if (signal(SIGINT, handle_signal) == SIG_ERR) {
+    printf("\033[1;37mTesto bianco2\033[0m");
+      if (signal(SIGUSR1, handle_signal_inibitore) == SIG_ERR) {
         perror("Impossibile impostare il gestore per SIGUSR1");
         return 1;
     }
@@ -42,10 +44,7 @@ int main() {
        sleep(1);
     
     }
-    if (signal(SIGINT, handle_signal) == SIG_ERR) {
-        perror("Impossibile impostare il gestore per SIGUSR1");
-        return 1;
-    }
+   
 
     
    

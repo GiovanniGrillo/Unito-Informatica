@@ -15,29 +15,3 @@
 ║N_NUOVI_ATOMI:            350
 ║STEP_ALIMENTAZIONE:       700000000
 ║STEP_ATTIVATORE:          900000000
-
-╔═════════════════════════════╗
-║          GIORNO  1          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 100║ Numero nuovi atomi 100
-
-║ Energia prodotta 100║ Energia prodotta nuova 100
-
-║ Numero scorie 0║ Numero nuove scorie 0
-
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO  1          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 100║ Numero nuovi atomi 100
-
-║ Energia prodotta 0║ Energia prodotta nuova 0
-
-║ Numero scorie 0║ Numero nuove scorie 0
-
-║ Prelevo energia per la centrale
-
-██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██

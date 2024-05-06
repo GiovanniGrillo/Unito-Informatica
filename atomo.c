@@ -4,6 +4,7 @@ int main() {
     srand(time(NULL));
     printf("\n\033[1;34mBenvenuto in Atomo!\033[0m\n \n");
     loadIPCs();
+    printf("\n\033[1;34mBenvenuto2 in Atomo!\033[0m\n \n");
 
     if(var->flagTerminazione != 0) endProcess();
     while ((var->fork_atomi > 0)) {

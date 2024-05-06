@@ -14,7 +14,9 @@
         attShm();
         creazione_atomi(var->N_ATOMI_INIT);
         dettShm();
-      
+     
+        
+        // signal(SIGINT, handle_sigint);    
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ATTIVATORE - Start       :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n");
