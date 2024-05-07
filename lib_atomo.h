@@ -8,14 +8,21 @@ int exec = 0;
 int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
-endall(){
-    deallocIPC();
-}
-
 
 void esegui_scissione(Atomo a_PADRE) {
     printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
+if(inibitore->active==1){
+            int casuale = rand()%2;
+out_progetto = fopen("Progetto.out", "a");        
+ fprintf(out_progetto, "\nIl numero casuale è %d", casuale);
+            if(casuale==1){
+                    inibitore->scissioni_negate++;
+                    dettShm();
+                    releaseSem(semFissione, 0);
+                    endProcess();
+            }
 
+        }
     if(a_PADRE.numero_atomico < var->MIN_N_ATOMICO) {
         var->fork_atomi;
         --centrale->n_atomi;

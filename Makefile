@@ -1,6 +1,4 @@
-all: prova
-
-prova: clear atomo alimentatore attivatore inibitore test2 
+all: clear atomo alimentatore attivatore inibitore test2
 
 test: test.c
 	gcc test.c -o test -Wvla -Wextra -Werror -w
@@ -27,4 +25,4 @@ inibitore: inibitore.c
 	gcc inibitore.c -o inibitore -Wvla -Wextra -w
 
 clear:
-	rm -f test2 atomo attivatore alimentatore
+	rm -f test2 atomo attivatore inibitore alimentatore

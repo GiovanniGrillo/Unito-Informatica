@@ -42,12 +42,6 @@ int main() {
      while (var->flagTerminazione!=1 ) {
         printf("hey sto aspettando ");
        sleep(1);
-    
     }
-   
-
-    
-   
-
     return 0;
 }
