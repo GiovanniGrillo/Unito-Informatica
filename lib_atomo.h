@@ -22,9 +22,6 @@ void esegui_scissione(Atomo a_PADRE) {
 
         int numero_casuale = rand() % (a_PADRE.numero_atomico - 1) + 1;
 
-
-     
-
         struct Atomo figlio;
         figlio.numero_atomico = a_PADRE.numero_atomico - numero_casuale;
         a_PADRE.numero_atomico -= figlio.numero_atomico;
@@ -47,7 +44,7 @@ void esegui_scissione(Atomo a_PADRE) {
                 printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
 
             }else{
-                 printf("\ncentrale esplosa, troppa energia liberata\n");
+                printf("\ncentrale esplosa, troppa energia liberata\n");
                 printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
                 var->flagTerminazione = 1;
                 dettShm();

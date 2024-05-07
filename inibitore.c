@@ -1,8 +1,7 @@
 #include "lib_header.h"
 
-
 int main() {
-    printf("\033[35mBenvenuto in Inibitore!\033[0m\n");
+    printf("\033[33mBenvenuto in Inibitore!\033[0m\n");
 
     loadIPCs();
 
@@ -11,9 +10,8 @@ int main() {
         while (var->flagTerminazione != 1) {
             attShm();
             out_progetto = fopen("Progetto.out", "a");
-            fprintf(out_progetto,"\n------------------------ciao.sono entrato in inibitore");
+            fprintf(out_progetto,"\n-FOTTITI");
             dettShm();
             nanosleep(&attesa, NULL);
         }
-
 }

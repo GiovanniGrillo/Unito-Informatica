@@ -32,9 +32,9 @@ struct msg_buffer {
 } message;
 
 typedef struct Inibitore {
-    int active; 
+    int active;
     int absorbed_energy;
-    int scissioni_negate;   
+    int scissioni_negate;
 }Inibitore;
 
 /* Coda di messaggi */

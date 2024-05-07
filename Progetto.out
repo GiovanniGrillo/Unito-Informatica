@@ -1,7 +1,7 @@
 ╔═════════════════════════════════════════════════════════════╗
 ║ Inizio esecuzione progetto di Sistemi Operativi (2023/2024) ║
-║                                di                           ║
-║ GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO    ║
+║                             di                              ║
+║   GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO  ║
 ╠═════════════════════════════════════════════════════════════╝
 ║SIM_DURATION:              5
 ║ENERGY_DEMAND:            100
@@ -34,12 +34,12 @@
 ║          GIORNO  2          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 810
-║ Numero nuovi atomi 710
-║ Energia prodotta 1170
-║ Energia prodotta nuova 1170
-║ Numero scorie 0
-║ Numero nuove scorie 0
+║ Numero atomi 808
+║ Numero nuovi atomi 708
+║ Energia prodotta 2066
+║ Energia prodotta nuova 2066
+║ Numero scorie 1
+║ Numero nuove scorie 1
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
@@ -48,12 +48,12 @@
 ║          GIORNO  3          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1165
-║ Numero nuovi atomi 355
-║ Energia prodotta 2078
-║ Energia prodotta nuova 1008
-║ Numero scorie 0
-║ Numero nuove scorie 0
+║ Numero atomi 1159
+║ Numero nuovi atomi 351
+║ Energia prodotta 2186
+║ Energia prodotta nuova 220
+║ Numero scorie 3
+║ Numero nuove scorie 2
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
@@ -62,11 +62,11 @@
 ║          GIORNO  4          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1870
+║ Numero atomi 1864
 ║ Numero nuovi atomi 705
-║ Energia prodotta 2766
-║ Energia prodotta nuova 788
-║ Numero scorie 0
+║ Energia prodotta 3620
+║ Energia prodotta nuova 1534
+║ Numero scorie 3
 ║ Numero nuove scorie 0
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
@@ -76,26 +76,25 @@
 ║          GIORNO  5          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 2223
+║ Numero atomi 2217
 ║ Numero nuovi atomi 353
-║ Energia prodotta 3676
-║ Energia prodotta nuova 1010
-║ Numero scorie 1
+║ Energia prodotta 3960
+║ Energia prodotta nuova 440
+║ Numero scorie 4
 ║ Numero nuove scorie 1
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
-------------------------ciao.sono entrato in inibitore
------------------------ciao-.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
-------------------------ciao.sono entrato in inibitore
+-FOTTITI
+-FOTTITI
+-FOTTITI
+-FOTTITI
+-FOTTITI
+-FOTTITI
+-FOTTITI
+-FOTTITI
 Il valore di flagTerminazione è 1
 ╔═════════════════════════════╗
 ║          Terminato          ║
 ╠═════════════════════════════╢
-

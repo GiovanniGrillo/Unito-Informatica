@@ -38,13 +38,13 @@ void createIPCS(char* file) {
 
     if ((shmVar  = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((var     = shmat(shmVar, NULL, 0)) == (void *) -1)                                               ERROR;
-        
+
     fprintf(out_progetto, "╔═════════════════════════════════════════════════════════════╗\n");
     fprintf(out_progetto, "║ Inizio esecuzione progetto di Sistemi Operativi (2023/2024) ║\n");
-    fprintf(out_progetto, "║                                di                           ║\n");
-    fprintf(out_progetto, "║ GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO    ║\n");
+    fprintf(out_progetto, "║                             di                              ║\n");
+    fprintf(out_progetto, "║   GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO  ║\n");
     fprintf(out_progetto, "╠═════════════════════════════════════════════════════════════╝\n");
-                                                                                    fprintf(out_progetto, "║%s %14d\n","SIM_DURATION:", SIM_DURATION);
+                                                                                fprintf(out_progetto, "║%s %14d\n","SIM_DURATION:", SIM_DURATION);
     fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_DEMAND);                  fprintf(out_progetto, "║ENERGY_DEMAND: %14d\n", var->ENERGY_DEMAND);
     fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_EXPLODE_THRESHOLD);       fprintf(out_progetto, "║ENERGY_EXPLODE_THRESHOLD: %3d\n", var->ENERGY_EXPLODE_THRESHOLD);
     fscanf(in_progetto, "%s %d\n", temp, &var->flagTerminazione);               fprintf(out_progetto, "║flagTerminazione: %9d\n", var->flagTerminazione);
@@ -55,23 +55,23 @@ void createIPCS(char* file) {
     fscanf(in_progetto, "%s %d\n", temp, &var->N_MSG);                          fprintf(out_progetto, "║N_MSG: %22d\n", var->N_MSG);
     fscanf(in_progetto, "%s %d\n", temp, &var->N_NUOVI_ATOMI);                  fprintf(out_progetto, "║N_NUOVI_ATOMI: %14d\n", var->N_NUOVI_ATOMI);
     fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ALIMENTAZIONE);
-    var->STEP_ALIMENTAZIONE = converti_in_milioni(var->STEP_ALIMENTAZIONE);  fprintf(out_progetto, "║STEP_ALIMENTAZIONE: %15d\n", var->STEP_ALIMENTAZIONE);
+    var->STEP_ALIMENTAZIONE = converti_in_milioni(var->STEP_ALIMENTAZIONE);     fprintf(out_progetto, "║STEP_ALIMENTAZIONE: %15d\n", var->STEP_ALIMENTAZIONE);
     fscanf(in_progetto, "%s %d\n", temp, &var->STEP_ATTIVATORE);
-    var->STEP_ATTIVATORE = converti_in_milioni(var->STEP_ATTIVATORE);        fprintf(out_progetto, "║STEP_ATTIVATORE: %18d\n", var->STEP_ATTIVATORE);
-    printf("\nil vero valore di energy demand %d", var->ENERGY_DEMAND);
-    printf("\nil vero valore di energy demand %d", var->ENERGY_EXPLODE_THRESHOLD);
-    printf("\nil vero valore di FlagTerminazione %d", var->flagTerminazione);
-    printf("\nil vero valore di energy demand %d", var->fork_atomi);
-    printf("\nil vero valore di energy demand %d", var->MIN_N_ATOMICO);
-    printf("\nil vero valore di energy demand %d", var->N_ATOMI_INIT);
-    printf("\nil vero valore di energy demand %d", var->N_ATOM_MAX);
-    printf("\nil vero valore di energy demand %d", var->N_MSG);
-    printf("\nil vero valore di energy demand %d", var->STEP_ALIMENTAZIONE);
-    printf("\nil vero valore di energy demand %d", var->STEP_ATTIVATORE);
+    var->STEP_ATTIVATORE    = converti_in_milioni(var->STEP_ATTIVATORE);        fprintf(out_progetto, "║STEP_ATTIVATORE: %18d\n", var->STEP_ATTIVATORE);
+
+    printf("\nil vero valore di var->ENERGY_DEMAND %d", var->ENERGY_DEMAND);
+    printf("\nil vero valore di var->ENERGY_EXPLODE_THRESHOLD %d", var->ENERGY_EXPLODE_THRESHOLD);
+    printf("\nil vero valore di var->FlagTerminazione %d", var->flagTerminazione);
+    printf("\nil vero valore di var->fork_atomi %d", var->fork_atomi);
+    printf("\nil vero valore di var->MIN_N_ATOMICO %d", var->MIN_N_ATOMICO);
+    printf("\nil vero valore di var->N_ATOMI_INIT %d", var->N_ATOMI_INIT);
+    printf("\nil vero valore di var->N_ATOM_MAX %d", var->N_ATOM_MAX);
+    printf("\nil vero valore di var->N_MSG %d", var->N_MSG);
+    printf("\nil vero valore di var->STEP_ALIMENTAZIONE %d", var->STEP_ALIMENTAZIONE);
+    printf("\nil vero valore di var->STEP_ATTIVATORE %d", var->STEP_ATTIVATORE);
 
     fclose(in_progetto);
     fclose(out_progetto);
-
 
     if ((shmAtomi       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atomo) * (var->N_MSG)*(SIM_DURATION)*3*(var->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semShm         = semget(ftok(FTOK_FILE, 'c'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -81,17 +81,16 @@ void createIPCS(char* file) {
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((centrale       = shmat(shmCentrale,NULL,0))                                                                                       == -1) ERROR;
-    if ((shmInibitore    = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
-    inibitore->active=0;
-    inibitore->absorbed_energy=0;
-    inibitore->scissioni_negate=0;
+    if ((centrale       = shmat(shmCentrale,NULL,0))                                                                                       == -1) ERROR;  //== (void*) -1
+    if ((shmInibitore   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),                             IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((inibitore      = shmat(shmInibitore, NULL, 0)) == (void*) -1)                                                                            ERROR;
+    inibitore->active           = 0;
+    inibitore->absorbed_energy  = 0;
+    inibitore->scissioni_negate = 0;
 
-
-    centrale->energia = var->ENERGY_DEMAND;
-    centrale->n_atomi = 0;
-    centrale->scorie  = 0;
+    centrale->energia           = var->ENERGY_DEMAND;
+    centrale->n_atomi           = 0;
+    centrale->scorie            = 0;
 
     if((shmdt(centrale))  == -1) ERROR;
     if((shmdt(inibitore)) == -1) ERROR;
@@ -104,8 +103,8 @@ void createIPCS(char* file) {
 void attShm() {
     reserveSem (semShm,0);
     if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
-    if ((centrale  = shmat(shmCentrale, NULL, 0))  == (void*) -1) ERROR;
-    if ((atomi     = shmat(shmAtomi,    NULL, 0))  == (void*) -1) ERROR;
+    if ((centrale  = shmat(shmCentrale,  NULL, 0)) == (void*) -1) ERROR;
+    if ((atomi     = shmat(shmAtomi,     NULL, 0)) == (void*) -1) ERROR;
     return;
 }
 
@@ -120,8 +119,7 @@ void loadIPCs() {
     if ((semAttivatore  = semget(ftok(FTOK_FILE, 'g'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((semCentrale    = semget(ftok(FTOK_FILE, 'h'), 10,                                    PERMISSIONS)) == -1) ERROR;
     if ((shmCentrale    = shmget(ftok(FTOK_FILE, 'l'), sizeof(Centrale)*(sizeof(int)*3),      PERMISSIONS)) == -1) ERROR;
-    if ((shmInibitore    = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),                    PERMISSIONS)) == -1) ERROR;
-
+    if ((shmInibitore   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),                     PERMISSIONS)) == -1) ERROR;
     return;
 }
 
@@ -143,7 +141,7 @@ void deallocIPC(){
     if (semctl(semFissione,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semAttivatore,IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
     if (semctl(semCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semFissione   |   deallocati     \n");
-    if (shmctl(shmInibitore, IPC_RMID, 0) == -1) { ERROR; }  else  printf("    shmInibitore   |   deallocati     \n");
+    if (shmctl(shmInibitore, IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmInibitore  |   deallocati     \n");
     return;
 }
 
@@ -151,7 +149,6 @@ void unloadIPCs() {
     if((shmdt(var)) == -1) ERROR;
     return;
 }
-
 
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
@@ -190,7 +187,6 @@ pid_t newProcess() {
 }
 
 void endProcess() {
-  
     exit(0);
 }
 
@@ -200,22 +196,18 @@ int creazione_atomi(int numero_atomi_da_creare)
     printf("ehy centrale n_atomi è uguale a %d", centrale->n_atomi);
     while(i<numero_atomi_da_creare)
     {
-    
         atomi[centrale->n_atomi].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
-        atomi[centrale->n_atomi].pidAtomo = (0) ;
+        atomi[centrale->n_atomi].pidAtomo = (0);
         ++centrale->n_atomi;
         ++i;
-        
     }
-    printf("\n(funzione creazione atomi)Il valore di var->n_atomi è %d ", centrale->n_atomi);
+    printf("\n(funzione creazione atomi)Il valore di var->n_atomi è %d", centrale->n_atomi);
 
     return 0;
 }
 
 void stampa() {
     int prev_n_atomi=0, prev_energia=0, prev_scorie=0, prev_energiaAssorbed=0, prev_scissioninegate=0;
-    
-    
 
     for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
         reserveSem(semAttivatore,0);
@@ -226,15 +218,12 @@ void stampa() {
         fprintf(out_progetto,   "╠═════════════════════════════╝\n║\n");
 
         attShm(); {
-            
 
             fprintf(out_progetto,"║ Numero atomi %d\n"    ,centrale->n_atomi);
             fprintf(out_progetto,"║ Numero nuovi atomi %d\n", centrale->n_atomi - prev_n_atomi);
-        
 
             fprintf(out_progetto,"║ Energia prodotta %d\n",centrale->energia);
             fprintf(out_progetto,"║ Energia prodotta nuova %d\n", centrale->energia - prev_energia);
-       
 
             fprintf(out_progetto,"║ Numero scorie %d\n"   ,centrale->scorie);
             fprintf(out_progetto,"║ Numero nuove scorie %d\n", centrale->scorie - prev_scorie);
@@ -276,7 +265,7 @@ void stampa() {
     fprintf(out_progetto,"\nIl valore di flagTerminazione è %d\n", var->flagTerminazione);
     fprintf(out_progetto,"╔═════════════════════════════╗\n");
     fprintf(out_progetto,"║          Terminato          ║\n");
-    fprintf(out_progetto,"╠═════════════════════════════╢\n\n");
+    fprintf(out_progetto,"╠═════════════════════════════╢");
     return;
 }
 

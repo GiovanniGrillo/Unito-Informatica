@@ -29,7 +29,6 @@ int main() {
                     exit(1);
                     break;
                 case 0:
-
                     esegui_scissione(a_PADRE);
                     endProcess();
                     break;
@@ -38,7 +37,7 @@ int main() {
                     break;
                 }
             }
-            else{ printf("Atomo finiti nella centrale");    }
+            else{printf("Atomo finiti nella centrale");}
         }
     }
     unloadIPCs();
