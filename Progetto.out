@@ -11,7 +11,7 @@
 ║MIN_N_ATOMICO:            5
 ║N_ATOMI_INIT:             100
 ║N_ATOM_MAX:               40
-║N_MSG:                    100
+║N_MSG:                      5
 ║N_NUOVI_ATOMI:            350
 ║STEP_ALIMENTAZIONE:       700000000
 ║STEP_ATTIVATORE:          900000000
@@ -30,62 +30,412 @@
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
+numero casuale =:297
+numero casuale =:414
+numero casuale =:297
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
 ╔═════════════════════════════╗
 ║          GIORNO  2          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 805
-║ Numero nuovi atomi 705
-║ Energia prodotta 440
-║ Energia prodotta nuova 440
-║ Numero scorie 91
-║ Numero nuove scorie 91
+║ Numero atomi 808
+║ Numero nuovi atomi 708
+║ Energia prodotta 848
+║ Energia prodotta nuova 848
+║ Numero scorie 1
+║ Numero nuove scorie 1
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
 ╔═════════════════════════════╗
 ║          GIORNO  3          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1154
-║ Numero nuovi atomi 349
-║ Energia prodotta 1782
-║ Energia prodotta nuova 1442
-║ Numero scorie 148
-║ Numero nuove scorie 57
+║ Numero atomi 1163
+║ Numero nuovi atomi 355
+║ Energia prodotta 1544
+║ Energia prodotta nuova 796
+║ Numero scorie 1
+║ Numero nuove scorie 0
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
 ╔═════════════════════════════╗
 ║          GIORNO  4          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1854
-║ Numero nuovi atomi 700
-║ Energia prodotta 3044
-║ Energia prodotta nuova 1362
-║ Numero scorie 198
-║ Numero nuove scorie 50
+║ Numero atomi 1866
+║ Numero nuovi atomi 703
+║ Energia prodotta 2490
+║ Energia prodotta nuova 1046
+║ Numero scorie 2
+║ Numero nuove scorie 1
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:474
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:1993
+numero casuale =:474
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:1236
+numero casuale =:1993
+numero casuale =:474
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
+numero casuale =:733
+numero casuale =:1236
+numero casuale =:1993
+numero casuale =:474
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
 ╔═════════════════════════════╗
 ║          GIORNO  5          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 2204
-║ Numero nuovi atomi 350
-║ Energia prodotta 4844
-║ Energia prodotta nuova 1900
-║ Numero scorie 248
-║ Numero nuove scorie 50
+║ Numero atomi 2221
+║ Numero nuovi atomi 355
+║ Energia prodotta 3924
+║ Energia prodotta nuova 1534
+║ Numero scorie 2
+║ Numero nuove scorie 0
 ║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  0
 ║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora 0
 ║ Prelevo energia per la centrale
 
+numero casuale =:733
+numero casuale =:1236
+numero casuale =:1993
+numero casuale =:474
+numero casuale =:945
+numero casuale =:1498
+numero casuale =:241
+numero casuale =:680
+numero casuale =:560
+numero casuale =:694
+numero casuale =:782
+numero casuale =:295
+numero casuale =:283
+numero casuale =:632
+numero casuale =:959
+numero casuale =:283
+numero casuale =:166
+numero casuale =:215
+numero casuale =:232
+numero casuale =:277
+numero casuale =:348
+numero casuale =:381
+numero casuale =:372
+numero casuale =:414
+numero casuale =:297
 Il valore di flagTerminazione è 1
 ╔═════════════════════════════╗
 ║          Terminato          ║

@@ -21,9 +21,9 @@ void esegui_scissione(Atomo a_PADRE) {
     } else {
 
         int numero_casuale = rand() % (a_PADRE.numero_atomico - 1) + 1;
-        out_progetto = fopen("Progetto.out", "a");
 
-        //operazione probabilistica di inibitore 
+
+     
 
         struct Atomo figlio;
         figlio.numero_atomico = a_PADRE.numero_atomico - numero_casuale;
@@ -64,7 +64,7 @@ void esegui_scissione(Atomo a_PADRE) {
         printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
         centrale->energia += liberata;
         --var->fork_atomi;
-        centrale->n_atomi++;
+         centrale->n_atomi++;
         atomi[centrale->n_atomi] = figlio;
 
         printf("\n\033[1;34m il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ", var->fork_atomi, centrale->n_atomi);

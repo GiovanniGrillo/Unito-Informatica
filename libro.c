@@ -7,6 +7,7 @@
 // Funzione per gestire il segnale SIGUSR1
 void handle_signal_inibitore(int signum) {
     attShm();
+    out_progetto = fopen("Progetto.out", "a");
     if (inibitore->active==1)
     {
         fprintf(out_progetto, "\nINIBITORE è ATTIVO LO SPENGO \n");
