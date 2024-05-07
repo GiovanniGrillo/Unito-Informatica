@@ -57,15 +57,15 @@
             exit(0);
         }
 
-        pidInibitore = fork();
-        if (pidInibitore == -1) {
-            ERROR;
-        } else if (pidAtomo == 0) {
-            execl("./inibitore", "./inibitore", NULL);
-            printf("\n Inibitore non avviato correttamente\n");
-            ERROR;
-            exit(0);
-        }
+        // pidInibitore = fork();
+        // if (pidInibitore == -1) {
+        //     ERROR;
+        // } else if (pidAtomo == 0) {
+        //     execl("./inibitore", "./inibitore", NULL);
+        //     printf("\n Inibitore non avviato correttamente\n");
+        //     ERROR;
+        //     exit(0);
+        // }
         
         stampa();
        

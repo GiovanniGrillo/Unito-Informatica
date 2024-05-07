@@ -239,12 +239,12 @@ void stampa() {
 
             fprintf(out_progetto,"\n║ Numero scorie %d"   ,centrale->scorie);
             fprintf(out_progetto,"\n║ Numero nuove scorie %d\n", centrale->scorie - prev_scorie);
-            if(inibitore->active=1){
+            if(inibitore->active==1){
             fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib %d"   ,inibitore->absorbed_energy);
             fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib nuova %d"   ,inibitore->absorbed_energy-prev_energiaAssorbed);
 
-            fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib %d"   ,inibitore->scissioni_negate);
-            fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib %d"   ,inibitore->scissioni_negate-prev_scissioninegate);
+            fprintf(out_progetto,"\n║ Numero scissioni negate dall'inib %d"   ,inibitore->scissioni_negate);
+            fprintf(out_progetto,"\n║ Numero scissioni negate dall'inib %d"   ,inibitore->scissioni_negate-prev_scissioninegate);
             }else{
                 fprintf(out_progetto,"\n║L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  %d "   ,prev_energiaAssorbed);
                 fprintf(out_progetto,"\n║L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora %d   ",prev_scissioninegate);
@@ -260,6 +260,8 @@ void stampa() {
              }
              //prelievo giornaliero dell'energia
             centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
+        prev_scissioninegate=inibitore->scissioni_negate;
+        prev_energiaAssorbed=inibitore->absorbed_energy;
         prev_n_atomi = centrale->n_atomi;
         prev_energia = centrale->energia;
         prev_scorie  = centrale->scorie;

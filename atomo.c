@@ -16,14 +16,8 @@ int main() {
 
         ++numMessaggiRicevuti;
         attShm();
-        if(inibitore->active==1){
-            int casuale = rand()%2;
-            if(casuale==1){ 
-                inibitore->scissioni_negate++;
-                endProcess();
-            }
-
-        }
+        
+     
         if (centrale->n_atomi > 0)
         {
             Atomo a_PADRE = atomi[(centrale->n_atomi)];
@@ -34,6 +28,16 @@ int main() {
                 exit(1);
                 break;
             case 0:
+                // if(inibitore->active==1){
+                    
+                //       // Genera un numero casuale
+                //     if (a_PADRE.numero_atomico % 2 == 0) {
+                //         fprintf(out_progetto,"\nHO ASSORBITO UNA SCISSIONE");
+                //         ++inibitore->scissioni_negate;
+                //         dettShm();  // Controlla se il numero casuale è pari
+                //         endProcess();
+                //     }
+                // }
                 esegui_scissione(a_PADRE);
                 endProcess();
                 break;
