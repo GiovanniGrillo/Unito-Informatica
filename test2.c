@@ -6,7 +6,7 @@
         srand(time(NULL));
 
         createIPCS("Progetto.conf");
-       
+
         if(set_sem(semShm,           0, 1) == -1) ERROR;
         if(set_sem(semAttivatore,    0, 1) == -1) ERROR;
         if(set_sem(semFissione,      0, 1) == -1) ERROR;
@@ -15,65 +15,79 @@
         creazione_atomi(var->N_ATOMI_INIT);
         dettShm();
 
-
         // if(signal(SIGINT, handle_sigint) == -1) ERROR;
+
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ATTIVATORE - Start       :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n");
 
+        switch ((pidAttivatore = fork())) {
+                case -1:
+                    ERROR;
 
+                case  0:
+                    execl("./attivatore", "./attivatore", NULL);
+                        printf("attivatore non avviato correttamente\n");
+                        ERROR;
 
-        pidAttivatore = fork();
-        if (pidAttivatore == -1) {
-            ERROR;
-        } else if (pidAttivatore == 0) {
-            execl("./attivatore", "./attivatore", NULL);
-            printf("\nAttivatore non avviato correttamente\n");
-            ERROR;
-            exit(0);
+                default:
+                    break;
         }
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ALIMENTATORE - Start     :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n");
-        pidAlimentatore = fork();
-        if (pidAlimentatore == -1) {
-            ERROR;
-        } else if (pidAlimentatore == 0) {
-            execl("./alimentatore", "./alimentatore", NULL);
-            printf("\nAlimentatore non avviato correttamente\n");
-            ERROR;
-            exit(0);
+
+        switch ((pidAlimentatore = fork())) {
+                case -1:
+                    ERROR;
+
+                case  0:
+                    execl("./alimentatore", "./alimentatore", NULL);
+                        printf("alimentatore non avviato correttamente\n");
+                        ERROR;
+
+                default:
+                    break;
         }
     printf("::::::::::::::::::::::::::::::::::::::::::\n");
     printf(":::  PROCESSO ATOMO - Start            :::\n");
     printf("::::::::::::::::::::::::::::::::::::::\n::\n"); 
-            pidAtomo = fork();
-        if (pidAtomo == -1) {
-            ERROR;
-        } else if (pidAtomo == 0) {
-            execl("./atomo", "./atomo", NULL);
-            printf("\nAtomo non avviato correttamente\n");
-            ERROR;
-            exit(0);
+
+        switch ((pidAtomo = fork())) {
+                case -1:
+                    ERROR;
+
+                case  0:
+                    execl("./atomo", "./atomo", NULL);
+                        printf("atomo non avviato correttamente\n");
+                        ERROR;
+
+                default:
+                    break;
+        }
+    printf("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n");
+    printf("▓::  PROCESSO INIBITORE - Start        ::▓\n");
+    printf("::::::::::::::::::::::::::::::::::::::\n::\n");
+
+        switch ((pidInibitore = fork())) {
+                case -1:
+                    ERROR;
+
+                case  0:
+                    execl("./inibitore", "./inibitore", NULL);
+                        printf("inibitore non avviato correttamente\n");
+                        ERROR;
+
+                default:
+                    break;
         }
 
-        // pidInibitore = fork();
-        // if (pidInibitore == -1) {
-        //     ERROR;
-        // } else if (pidAtomo == 0) {
-        //     execl("./inibitore", "./inibitore", NULL);
-        //     printf("\n Inibitore non avviato correttamente\n");
-        //     ERROR;
-        //     exit(0);
-        // }
-        
-        stampa();
-       
 
+        stampa();
 
         kill(pidAttivatore,     SIGTERM);
         kill(pidAlimentatore,   SIGTERM);
-
+        // kill(pidInibitore,      SIGTERM);
 
         printf("\nSono fuori!\n");
 

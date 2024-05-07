@@ -12,9 +12,6 @@ test2: test2.c
 atomo: atomo.c
 	gcc atomo.c -o atomo -Wvla -Wextra -Werror -w
 
-atomo2: atomo2.c
-	gcc atomo2.c -o atomo2 -Wvla -Wextra -Werror -w
-
 attivatore: attivatore.c
 	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror -w
 
