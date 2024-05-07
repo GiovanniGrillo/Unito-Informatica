@@ -60,7 +60,7 @@ void createIPCS(char* file) {
     var->STEP_ATTIVATORE = converti_in_milioni(var->STEP_ATTIVATORE);        fprintf(out_progetto, "║STEP_ATTIVATORE: %18d\n", var->STEP_ATTIVATORE);
     printf("\nil vero valore di energy demand %d", var->ENERGY_DEMAND);
     printf("\nil vero valore di energy demand %d", var->ENERGY_EXPLODE_THRESHOLD);
-    printf("\nil vero valore di energy demand %d", var->flagTerminazione);
+    printf("\nil vero valore di FlagTerminazione %d", var->flagTerminazione);
     printf("\nil vero valore di energy demand %d", var->fork_atomi);
     printf("\nil vero valore di energy demand %d", var->MIN_N_ATOMICO);
     printf("\nil vero valore di energy demand %d", var->N_ATOMI_INIT);
@@ -84,16 +84,16 @@ void createIPCS(char* file) {
     if ((centrale       = shmat(shmCentrale,NULL,0))                                                                                       == -1) ERROR;
     if ((shmInibitore    = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),              IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
-    inibitore->active=1;
+    inibitore->active=0;
     inibitore->absorbed_energy=0;
     inibitore->scissioni_negate=0;
-   
+
 
     centrale->energia = var->ENERGY_DEMAND;
     centrale->n_atomi = 0;
     centrale->scorie  = 0;
 
-    if((shmdt(centrale)) == -1) ERROR;
+    if((shmdt(centrale))  == -1) ERROR;
     if((shmdt(inibitore)) == -1) ERROR;
 
     out_progetto = fopen("Progetto.out", "a");
@@ -104,8 +104,8 @@ void createIPCS(char* file) {
 void attShm() {
     reserveSem (semShm,0);
     if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
-    if ((centrale = shmat(shmCentrale, NULL, 0)) == (void*) -1) ERROR;
-    if ((atomi    = shmat(shmAtomi,    NULL, 0)) == (void*) -1) ERROR;
+    if ((centrale  = shmat(shmCentrale, NULL, 0))  == (void*) -1) ERROR;
+    if ((atomi     = shmat(shmAtomi,    NULL, 0))  == (void*) -1) ERROR;
     return;
 }
 
@@ -134,7 +134,7 @@ void dettShm() {
 }
 
 void deallocIPC(){
-    if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar      |   deallocati     \n");
+    if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar        |   deallocati     \n");
     if (shmctl(shmAtomi,     IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmAtomi      |   deallocati     \n");
     if (shmctl(shmCentrale,  IPC_RMID, 0) == -1) { ERROR; }  else  printf("     shmCentrale   |   deallocata     \n");
     if (semctl(semShm,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("     semShm        |   deallocati     \n");
@@ -220,7 +220,6 @@ void stampa() {
     for(int giorno = 0; giorno < SIM_DURATION; ++giorno) {
         reserveSem(semAttivatore,0);
         reserveSem(semProcessi,  0);
-       
 
         fprintf(out_progetto, "\n╔═════════════════════════════╗\n");
         fprintf(out_progetto,   "║          GIORNO %2d          ║\n", giorno + 1);
@@ -229,34 +228,33 @@ void stampa() {
         attShm(); {
             
 
-            fprintf(out_progetto,"║ Numero atomi %d"    ,centrale->n_atomi);
+            fprintf(out_progetto,"║ Numero atomi %d\n"    ,centrale->n_atomi);
             fprintf(out_progetto,"║ Numero nuovi atomi %d\n", centrale->n_atomi - prev_n_atomi);
         
 
-            fprintf(out_progetto,"\n║ Energia prodotta %d",centrale->energia);
-            fprintf(out_progetto,"\n║ Energia prodotta nuova %d\n", centrale->energia - prev_energia);
+            fprintf(out_progetto,"║ Energia prodotta %d\n",centrale->energia);
+            fprintf(out_progetto,"║ Energia prodotta nuova %d\n", centrale->energia - prev_energia);
        
 
-            fprintf(out_progetto,"\n║ Numero scorie %d"   ,centrale->scorie);
-            fprintf(out_progetto,"\n║ Numero nuove scorie %d\n", centrale->scorie - prev_scorie);
+            fprintf(out_progetto,"║ Numero scorie %d\n"   ,centrale->scorie);
+            fprintf(out_progetto,"║ Numero nuove scorie %d\n", centrale->scorie - prev_scorie);
             if(inibitore->active==1){
-            fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib %d"   ,inibitore->absorbed_energy);
-            fprintf(out_progetto,"\n║ Numero energia assorbita dall'inib nuova %d"   ,inibitore->absorbed_energy-prev_energiaAssorbed);
+            fprintf(out_progetto,"║ Numero energia assorbita dall'inib %d\n"   ,inibitore->absorbed_energy);
+            fprintf(out_progetto,"║ Numero energia assorbita dall'inib nuova %d\n"   ,inibitore->absorbed_energy-prev_energiaAssorbed);
 
-            fprintf(out_progetto,"\n║ Numero scissioni negate dall'inib %d"   ,inibitore->scissioni_negate);
-            fprintf(out_progetto,"\n║ Numero scissioni negate dall'inib %d"   ,inibitore->scissioni_negate-prev_scissioninegate);
+            fprintf(out_progetto,"║ Numero scissioni negate dall'inib %d\n"   ,inibitore->scissioni_negate);
+            fprintf(out_progetto,"║ Numero scissioni negate dall'inib %d\n"   ,inibitore->scissioni_negate-prev_scissioninegate);
             }else{
-                fprintf(out_progetto,"\n║L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  %d "   ,prev_energiaAssorbed);
-                fprintf(out_progetto,"\n║L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora %d   ",prev_scissioninegate);
+                fprintf(out_progetto,"║ L'INIBITORE è SPENTO  Numero energia assorbita dall'inib fin ora  %d\n",prev_energiaAssorbed);
+                fprintf(out_progetto,"║ L'INIBITORE è SPENTO Numero scissioni dall'inib fin ora %d\n",prev_scissioninegate);
             }
 
-            fprintf(out_progetto,"\n║ Prelevo energia per la centrale\n");
-            if ((centrale->energia)-(var->ENERGY_DEMAND)<0)
-             {
-                 var->flagTerminazione=1;
-                 fprintf(out_progetto,"\n██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██");
-                 dettShm();
-                 endProcess();
+            fprintf(out_progetto,"║ Prelevo energia per la centrale\n");
+            if ((centrale->energia)-(var->ENERGY_DEMAND)<0) {
+                var->flagTerminazione=1;
+                fprintf(out_progetto,"\n██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██");
+                dettShm();
+                endProcess();
              }
              //prelievo giornaliero dell'energia
             centrale->energia=centrale->energia-var->ENERGY_DEMAND;}
@@ -282,9 +280,7 @@ void stampa() {
     return;
 }
 
-
-   void handle_sigint(int sig) 
-                {               
+void handle_sigint(int sig) {
     printf("\nRicevuto SIGINT! Passo il controllo all'inibitore.\n"); 
-    kill(pidInibitore, SIGUSR1);  // Invia SIGUSR1 all'inibitore
-                } 
+    kill(pidInibitore, SIGUSR1);
+}

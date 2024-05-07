@@ -2,7 +2,6 @@
 
 /* --- Variabili locali --- */
 int numMessaggiRicevuti = 0;
-int exec = 0;
 /* ------------------------ */
 
 int energy(int n1, int n2) {
@@ -11,36 +10,27 @@ int energy(int n1, int n2) {
 
 void esegui_scissione(Atomo a_PADRE) {
     printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
-if(inibitore->active==1){
-            int casuale = rand()%2;
-out_progetto = fopen("Progetto.out", "a");        
- fprintf(out_progetto, "\nIl numero casuale è %d", casuale);
-            if(casuale==1){
-                    inibitore->scissioni_negate++;
-                    dettShm();
-                    releaseSem(semFissione, 0);
-                    endProcess();
-            }
-
-        }
+    //if controllo se è minore delle condizioni
     if(a_PADRE.numero_atomico < var->MIN_N_ATOMICO) {
-        var->fork_atomi;
+        ++centrale->scorie;
         --centrale->n_atomi;
-        //printf("\n\033[1;34m il valore di fork atomi è %d, e abbiamo %d atomi nella centrale \033[0m ", var->fork_atomi, centrale->n_atomi);
-        centrale->scorie++;
+        --var->fork_atomi;
         dettShm();
         releaseSem(semFissione, 0);
         endProcess();
     } else {
 
         int numero_casuale = rand() % (a_PADRE.numero_atomico - 1) + 1;
+        out_progetto = fopen("Progetto.out", "a");
+
+        //operazione probabilistica di inibitore 
 
         struct Atomo figlio;
         figlio.numero_atomico = a_PADRE.numero_atomico - numero_casuale;
         a_PADRE.numero_atomico -= figlio.numero_atomico;
-
-        //printf("\n \033[1;34m atomo figlio creato con numero atomico: %d, il padre ha numero atomico post scissione :%d\n\033[0m", figlio.numero_atomico, a_PADRE.numero_atomico);
         int liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico); 
+
+
         if(inibitore->active==1){
             int liberatasoft=(int)(liberata * 0.80);
             inibitore->absorbed_energy+=(liberata - liberatasoft );
@@ -53,10 +43,9 @@ out_progetto = fopen("Progetto.out", "a");
                 int energia_da_assorbire= (int)(centrale->energia*0.80);
                 inibitore->absorbed_energy+=energia_da_assorbire;
                 centrale->energia-=energia_da_assorbire;
-                
+
                 printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
 
-               
             }else{
                  printf("\ncentrale esplosa, troppa energia liberata\n");
                 printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
@@ -68,14 +57,16 @@ out_progetto = fopen("Progetto.out", "a");
                 kill(pidAlimentatore,   SIGTERM);
                 endProcess();
             }
-            
         }
-        printf("\033[0;35m");         printf("energia presente nella centrale è: %d\n",centrale->energia);         printf("\033[0m");
+        //atomo figlio -> centrale.nAtomi++ atomi[centrale.natomi]=figlio
+
+        printf("\033[0;35m");   printf("energia presente nella centrale è: %d\n",centrale->energia);  printf("\033[0m");
         printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
         centrale->energia += liberata;
-        var->fork_atomi--;
+        --var->fork_atomi;
+        centrale->n_atomi++;
         atomi[centrale->n_atomi] = figlio;
-        
+
         printf("\n\033[1;34m il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ", var->fork_atomi, centrale->n_atomi);
         dettShm();
         releaseSem(semFissione, 0);

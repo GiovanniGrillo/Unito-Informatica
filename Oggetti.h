@@ -1,4 +1,4 @@
-#define SIM_DURATION 30
+#define SIM_DURATION 5
 
 typedef struct Var {
 int ENERGY_DEMAND;
