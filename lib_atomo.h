@@ -10,6 +10,18 @@ int energy(int n1, int n2) {
 
 void esegui_scissione(Atomo a_PADRE) {
     printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
+    if(inibitore->active==1){
+        int random=rand()%5;
+        if(random==0){
+        inibitore->scissioni_negate++;
+        ++centrale->scorie;
+        --centrale->n_atomi;
+        --var->fork_atomi;
+        dettShm();
+        releaseSem(semFissione, 0);
+        endProcess();}
+    }
+    
     //if controllo se è minore delle condizioni
     if(a_PADRE.numero_atomico < var->MIN_N_ATOMICO) {
         ++centrale->scorie;
@@ -55,10 +67,9 @@ void esegui_scissione(Atomo a_PADRE) {
                 endProcess();
             }
         }
-        //atomo figlio -> centrale.nAtomi++ atomi[centrale.natomi]=figlio
 
-        printf("\033[0;35m");   printf("energia presente nella centrale è: %d\n",centrale->energia);  printf("\033[0m");
-        printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
+         printf("\033[0;35m");   printf("energia presente nella centrale è: %d\n",centrale->energia);  printf("\033[0m");
+         printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
         centrale->energia += liberata;
         --var->fork_atomi;
          centrale->n_atomi++;

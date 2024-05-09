@@ -1,8 +1,4 @@
-all: clear atomo alimentatore attivatore inibitore test2
-
-test: test.c
-	gcc test.c -o test -Wvla -Wextra -Werror -w
-	ipcrm -a
+all: clear atomo alimentatore attivatore inibitore
 
 test2: test2.c
 	gcc test2.c -o test2 -Wvla -Wextra -Werror -w
@@ -11,6 +7,7 @@ test2: test2.c
 
 atomo: atomo.c
 	gcc atomo.c -o atomo -Wvla -Wextra -Werror -w
+	gcc test2.c -o test2 -Wvla -Wextra -Werror -w
 
 attivatore: attivatore.c
 	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror -w

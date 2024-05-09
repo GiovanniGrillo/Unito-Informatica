@@ -1,4 +1,4 @@
-#define SIM_DURATION 5
+#define SIM_DURATION 20
 
 typedef struct Var {
 int ENERGY_DEMAND;
@@ -48,6 +48,7 @@ int semFissione;
 int semShm;
 int semProcessi;
 int semCentrale;
+int semInibitore;
 
 /* Memorie Codivise*/
 int shmAtomi;   Atomo* atomi;

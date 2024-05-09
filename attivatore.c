@@ -3,7 +3,8 @@
 int main() {
     printf("\n\n\033[1;31mBenvenuto in attivatore!\033[0m\n");
     loadIPCs();
-
+    
+    signal(SIGINT, handle_sigint);
     struct timespec req = {0,var->STEP_ATTIVATORE};
     message.msg_type = 1;
     int j = 0;
@@ -22,6 +23,7 @@ int main() {
             attShm();
             ++var->fork_atomi;
             printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i + 1);
+            fflush(stdout);
             ++i;
             dettShm();
 
