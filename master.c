@@ -15,10 +15,9 @@ int main() {
     attShm();
     creazione_atomi(var->N_ATOMI_INIT);
     dettShm();
-    
 
 
-    signal(SIGINT, handle_sigint);
+    if(signal(SIGINT, handle_sigint) == -1) ERROR;
 
 
     printf("\n══════════════════════════════════\n");
@@ -56,13 +55,11 @@ int main() {
     printf("══════════════════════════════════\n");
     printf("══ PROCESSO INIBITORE     -Start ═\n");
     printf("══════════════════════════════════\n");
-    
     switch ((pidInibitore = fork())) {
         case -1:
             ERROR;
 
         case 0:
-            
             execl("./inibitore", "./inibitore", NULL);
             printf("inibitore non avviato correttamente\n");
             ERROR;
@@ -79,7 +76,6 @@ int main() {
             ERROR;
 
         case 0:
-            
             execl("./atomo", "./atomo", NULL);
             printf("atomo non avviato correttamente\n");
             ERROR;
@@ -88,11 +84,9 @@ int main() {
             break;
     }
 
-
     stampa();
 
     printf("\nSono fuori!\n");
-
     deallocIPC();
     return 0;
 }
