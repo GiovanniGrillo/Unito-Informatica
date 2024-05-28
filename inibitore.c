@@ -6,7 +6,7 @@ int main() {
 
     loadIPCs();
 
-    if(signal(SIGINT, handle_sig_inibitore) == -1) ERROR;
+    if(signal(SIGINT, handle_sig_inibitore) == SIG_ERR) ERROR;
 
     while (var->flagTerminazione != 1) {
         reserveSem(semInibitore, 0);

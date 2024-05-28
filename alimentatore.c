@@ -4,7 +4,7 @@ int main() {
     printf("\n\033[1;32mBenvenuto in alimentatore!\033[0m\n");
     setbuf(stdout, NULL);
     loadIPCs();
-    signal(SIGINT, handle_sigint);
+    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
     struct timespec req = {0,var->STEP_ALIMENTAZIONE};
 
     while(var->flagTerminazione != 1) {

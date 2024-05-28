@@ -4,11 +4,11 @@ int main() {
     srand(time(NULL));
     printf("\n\033[1;34mBenvenuto in Atomo!\033[0m\n \n");
     loadIPCs();
-    signal(SIGINT, handle_sigint);
+    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
     while(var->flagTerminazione != 1) {
         while ((var->fork_atomi > 0)) {
-            signal(SIGINT, handle_sigint);
+            if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
             if(var->flagTerminazione != 0)
                 endProcess();

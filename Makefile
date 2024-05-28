@@ -1,19 +1,19 @@
 all: clear alimentatore attivatore atomo inibitore master
 
 alimentatore: alimentatore.c
-	gcc alimentatore.c -o alimentatore -Wvla -Wextra -Werror -w
+	gcc alimentatore.c -o alimentatore -Wvla -Wextra -Werror
 
 attivatore: attivatore.c
-	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror -w
+	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror
 
 atomo: atomo.c
-	gcc atomo.c -o atomo -Wvla -Wextra -Werror -w
+	gcc atomo.c -o atomo -Wvla -Wextra -Werror
 
 inibitore: inibitore.c
-	gcc inibitore.c -o inibitore -Wvla -Wextra -w
+	gcc inibitore.c -o inibitore -Wvla -Wextra
 
 master: master.c
-	gcc master.c -o master -Wvla -Wextra -Werror -w
+	gcc master.c -o master -Wvla -Wextra -Werror
 	ipcrm -a
 	./master
 

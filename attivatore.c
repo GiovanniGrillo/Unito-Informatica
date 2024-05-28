@@ -4,7 +4,7 @@ int main() {
     printf("\n\n\033[1;31mBenvenuto in attivatore!\033[0m\n");
     loadIPCs();
 
-    if(signal(SIGINT, handle_sigint) == -1) ERROR;
+    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
     struct timespec req = {0, var->STEP_ATTIVATORE};
     message.msg_type = 1;
 

@@ -20,10 +20,12 @@
 #define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
 
-#define ERROR                                                                                                                              \
-    if (errno){                                                                                                                            \
-    fprintf(stderr, "ERROR - line %d: file \"%s\" (pid %ld) - n %d - (%s)\n", __LINE__, __FILE__, (int)getpid(), errno, strerror(errno));  \
-        exit(1);                                                                                                                           \
+#define ERROR                                                                                                                                     \
+    {                                                                                                                                             \
+        if (errno) {                                                                                                                              \
+            fprintf(stderr, "ERROR - line %d: file \"%s\" (pid %d) - n %d - (%s)\n", __LINE__, __FILE__, getpid(), errno, strerror(errno)); \
+            exit(1);                                                                                                                              \
+        }                                                                                                                                         \
     }
 
 long int converti_in_milioni(int n) {
@@ -73,7 +75,7 @@ void createIPCS(char* file) {
     if ((centrale       = shmat(shmCentrale,NULL,0))    == (void*) -1)                                                                            ERROR;
     if ((shmInibitore   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inibitore),                             IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((inibitore      = shmat(shmInibitore, NULL, 0)) == (void*) -1)                                                                            ERROR;
-    if (fscanf(in_progetto, "%s %s", temp, boolean) != 2) {ERROR;fclose(in_progetto);return 1;}
+    if (fscanf(in_progetto, "%s %s", temp, boolean) != 2) {ERROR;fclose(in_progetto);return;}
 
     inibitore->InibitoreSetup = (strcmp(boolean, "true") == 0);               fprintf(out_progetto, "║InibitoreSetup = %s\n", inibitore->InibitoreSetup ? "true" : "false");
     inibitore->absorbed_energy  = 0;
@@ -93,13 +95,6 @@ void createIPCS(char* file) {
     return;
 }
 
-void attShm() {
-    reserveSem (semShm,0);
-    if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
-    if ((centrale  = shmat(shmCentrale,  NULL, 0)) == (void*) -1) ERROR;
-    if ((atomi     = shmat(shmAtomi,     NULL, 0)) == (void*) -1) ERROR;
-    return;
-}
 
 void loadIPCs() {
     if ((shmVar         = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
@@ -117,13 +112,6 @@ void loadIPCs() {
     return;
 }
 
-void dettShm() {
-    if((shmdt(atomi))     == -1) ERROR;
-    if((shmdt(centrale))  == -1) ERROR;
-    if((shmdt(inibitore)) == -1) ERROR;
-    releaseSem(semShm,0);
-    return;
-}
 
 void deallocIPC(){
     if (shmctl(shmVar,       IPC_RMID, 0) == -1) { ERROR; }  else  printf("\n     shmVar        |   deallocati     \n");
@@ -153,6 +141,30 @@ int reserveSem(int id_sem, int n_sem) {
     return semop(id_sem, &s_ops, 1);
 }
 
+int releaseSem(int id_sem, int n_sem) {
+    struct sembuf s_ops;
+    s_ops.sem_num = n_sem;
+    s_ops.sem_op  = 1;
+    s_ops.sem_flg = 0;
+    return semop(id_sem, &s_ops, 1);
+}
+
+void attShm() {
+    reserveSem (semShm,0);
+    if ((inibitore = shmat(shmInibitore, NULL, 0)) == (void*) -1) ERROR;
+    if ((centrale  = shmat(shmCentrale,  NULL, 0)) == (void*) -1) ERROR;
+    if ((atomi     = shmat(shmAtomi,     NULL, 0)) == (void*) -1) ERROR;
+    return;
+}
+
+void dettShm() {
+    if((shmdt(atomi))     == -1) ERROR;
+    if((shmdt(centrale))  == -1) ERROR;
+    if((shmdt(inibitore)) == -1) ERROR;
+    releaseSem(semShm,0);
+    return;
+}
+
 union semun {
     int val;
     struct semid_ds *buf;
@@ -161,13 +173,6 @@ union semun {
     void *__pad;
 };
 
-int releaseSem(int id_sem, int n_sem) {
-    struct sembuf s_ops;
-    s_ops.sem_num = n_sem;
-    s_ops.sem_op  = 1;
-    s_ops.sem_flg = 0;
-    return semop(id_sem, &s_ops, 1);
-}
 
 int set_sem(int semID, int semNum, int val) {
     union semun arg;

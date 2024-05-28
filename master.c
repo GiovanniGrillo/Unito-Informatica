@@ -17,7 +17,7 @@ int main() {
     dettShm();
 
 
-    if(signal(SIGINT, handle_sigint) == -1) ERROR;
+    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
 
     printf("\n══════════════════════════════════\n");
