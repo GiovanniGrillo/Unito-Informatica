@@ -38,307 +38,126 @@
 ║          GIORNO  2          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1287
-║ Numero nuovi atomi 1187
-║ Energia prodotta 33320
-║ Energia prodotta nuova 33320
-║ Numero scorie 78
-║ Numero nuove scorie 78
-║ Numero energia assorbita dall'inib 4252
-║ Numero energia assorbita dall'inib nuova 4252
-║ Numero scissioni negate dall'inib 52
-║ Numero scissioni negate dall'inib 52
+║ Numero atomi 1238
+║ Numero nuovi atomi 1138
+║ Energia prodotta 27798
+║ Energia prodotta nuova 27798
+║ Numero scorie 106
+║ Numero nuove scorie 106
+║ Numero energia assorbita dall'inib 3562
+║ Numero energia assorbita dall'inib nuova 3562
+║ Numero scissioni negate dall'inib 65
+║ Numero scissioni negate dall'inib 65
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  3          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1906
-║ Numero nuovi atomi 619
-║ Energia prodotta 64216
-║ Energia prodotta nuova 30996
-║ Numero scorie 186
-║ Numero nuove scorie 108
-║ Numero energia assorbita dall'inib 8207
-║ Numero energia assorbita dall'inib nuova 3955
-║ Numero scissioni negate dall'inib 126
-║ Numero scissioni negate dall'inib 74
+║ Numero atomi 1864
+║ Numero nuovi atomi 626
+║ Energia prodotta 51598
+║ Energia prodotta nuova 23900
+║ Numero scorie 198
+║ Numero nuove scorie 92
+║ Numero energia assorbita dall'inib 6627
+║ Numero energia assorbita dall'inib nuova 3065
+║ Numero scissioni negate dall'inib 124
+║ Numero scissioni negate dall'inib 59
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  4          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 3040
-║ Numero nuovi atomi 1134
-║ Energia prodotta 91612
-║ Energia prodotta nuova 27496
-║ Numero scorie 268
-║ Numero nuove scorie 82
-║ Numero energia assorbita dall'inib 11722
-║ Numero energia assorbita dall'inib nuova 3515
-║ Numero scissioni negate dall'inib 178
-║ Numero scissioni negate dall'inib 52
+║ Numero atomi 2993
+║ Numero nuovi atomi 1129
+║ Energia prodotta 79122
+║ Energia prodotta nuova 27624
+║ Numero scorie 297
+║ Numero nuove scorie 99
+║ Numero energia assorbita dall'inib 10157
+║ Numero energia assorbita dall'inib nuova 3530
+║ Numero scissioni negate dall'inib 189
+║ Numero scissioni negate dall'inib 65
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  5          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 3668
-║ Numero nuovi atomi 628
-║ Energia prodotta 119026
-║ Energia prodotta nuova 27514
-║ Numero scorie 360
-║ Numero nuove scorie 92
-║ Numero energia assorbita dall'inib 15247
-║ Numero energia assorbita dall'inib nuova 3525
-║ Numero scissioni negate dall'inib 238
-║ Numero scissioni negate dall'inib 60
+║ Numero atomi 3579
+║ Numero nuovi atomi 586
+║ Energia prodotta 103556
+║ Energia prodotta nuova 24534
+║ Numero scorie 402
+║ Numero nuove scorie 105
+║ Numero energia assorbita dall'inib 13292
+║ Numero energia assorbita dall'inib nuova 3135
+║ Numero scissioni negate dall'inib 262
+║ Numero scissioni negate dall'inib 73
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  6          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 4731
-║ Numero nuovi atomi 1063
-║ Energia prodotta 141740
-║ Energia prodotta nuova 22814
-║ Numero scorie 474
-║ Numero nuove scorie 114
-║ Numero energia assorbita dall'inib 18158
-║ Numero energia assorbita dall'inib nuova 2911
-║ Numero scissioni negate dall'inib 309
-║ Numero scissioni negate dall'inib 71
+║ Numero atomi 4736
+║ Numero nuovi atomi 1157
+║ Energia prodotta 141652
+║ Energia prodotta nuova 38196
+║ Numero scorie 485
+║ Numero nuove scorie 83
+║ Numero energia assorbita dall'inib 18153
+║ Numero energia assorbita dall'inib nuova 4861
+║ Numero scissioni negate dall'inib 320
+║ Numero scissioni negate dall'inib 58
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  7          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 5332
-║ Numero nuovi atomi 601
-║ Energia prodotta 166070
-║ Energia prodotta nuova 24430
-║ Numero scorie 549
-║ Numero nuove scorie 75
-║ Numero energia assorbita dall'inib 21274
-║ Numero energia assorbita dall'inib nuova 3116
-║ Numero scissioni negate dall'inib 355
-║ Numero scissioni negate dall'inib 46
+║ Numero atomi 5355
+║ Numero nuovi atomi 619
+║ Energia prodotta 165274
+║ Energia prodotta nuova 23722
+║ Numero scorie 555
+║ Numero nuove scorie 70
+║ Numero energia assorbita dall'inib 21189
+║ Numero energia assorbita dall'inib nuova 3036
+║ Numero scissioni negate dall'inib 371
+║ Numero scissioni negate dall'inib 51
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  8          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 5916
-║ Numero nuovi atomi 584
-║ Energia prodotta 184932
-║ Energia prodotta nuova 18962
-║ Numero scorie 619
-║ Numero nuove scorie 70
-║ Numero energia assorbita dall'inib 23705
-║ Numero energia assorbita dall'inib nuova 2431
-║ Numero scissioni negate dall'inib 404
-║ Numero scissioni negate dall'inib 49
+║ Numero atomi 6431
+║ Numero nuovi atomi 1076
+║ Energia prodotta 186002
+║ Energia prodotta nuova 20828
+║ Numero scorie 631
+║ Numero nuove scorie 76
+║ Numero energia assorbita dall'inib 23854
+║ Numero energia assorbita dall'inib nuova 2665
+║ Numero scissioni negate dall'inib 425
+║ Numero scissioni negate dall'inib 54
 ║ Prelevo energia per la centrale
 
 ╔═════════════════════════════╗
 ║          GIORNO  9          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 6995
-║ Numero nuovi atomi 1079
-║ Energia prodotta 203246
-║ Energia prodotta nuova 18414
-║ Numero scorie 676
-║ Numero nuove scorie 57
-║ Numero energia assorbita dall'inib 26057
-║ Numero energia assorbita dall'inib nuova 2352
-║ Numero scissioni negate dall'inib 450
-║ Numero scissioni negate dall'inib 46
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 10          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 7581
-║ Numero nuovi atomi 586
-║ Energia prodotta 219326
-║ Energia prodotta nuova 16180
-║ Numero scorie 724
-║ Numero nuove scorie 48
-║ Numero energia assorbita dall'inib 28129
-║ Numero energia assorbita dall'inib nuova 2072
-║ Numero scissioni negate dall'inib 477
-║ Numero scissioni negate dall'inib 27
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 11          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 8655
-║ Numero nuovi atomi 1074
-║ Energia prodotta 234020
-║ Energia prodotta nuova 14794
-║ Numero scorie 770
-║ Numero nuove scorie 46
-║ Numero energia assorbita dall'inib 30022
-║ Numero energia assorbita dall'inib nuova 1893
-║ Numero scissioni negate dall'inib 508
-║ Numero scissioni negate dall'inib 31
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 12          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 9231
-║ Numero nuovi atomi 576
-║ Energia prodotta 250922
-║ Energia prodotta nuova 17002
-║ Numero scorie 812
-║ Numero nuove scorie 42
-║ Numero energia assorbita dall'inib 32188
-║ Numero energia assorbita dall'inib nuova 2166
-║ Numero scissioni negate dall'inib 539
-║ Numero scissioni negate dall'inib 31
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 13          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 10281
-║ Numero nuovi atomi 1050
-║ Energia prodotta 263164
-║ Energia prodotta nuova 12342
-║ Numero scorie 860
-║ Numero nuove scorie 48
-║ Numero energia assorbita dall'inib 33767
-║ Numero energia assorbita dall'inib nuova 1579
-║ Numero scissioni negate dall'inib 576
-║ Numero scissioni negate dall'inib 37
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 14          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 10838
-║ Numero nuovi atomi 557
-║ Energia prodotta 277158
-║ Energia prodotta nuova 14094
-║ Numero scorie 901
-║ Numero nuove scorie 41
-║ Numero energia assorbita dall'inib 35573
-║ Numero energia assorbita dall'inib nuova 1806
-║ Numero scissioni negate dall'inib 602
-║ Numero scissioni negate dall'inib 26
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 15          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 11371
-║ Numero nuovi atomi 533
-║ Energia prodotta 288762
-║ Energia prodotta nuova 11704
-║ Numero scorie 955
-║ Numero nuove scorie 54
-║ Numero energia assorbita dall'inib 37069
-║ Numero energia assorbita dall'inib nuova 1496
-║ Numero scissioni negate dall'inib 642
-║ Numero scissioni negate dall'inib 40
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 16          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 12438
-║ Numero nuovi atomi 1067
-║ Energia prodotta 304272
-║ Energia prodotta nuova 15610
-║ Numero scorie 990
-║ Numero nuove scorie 35
-║ Numero energia assorbita dall'inib 39053
-║ Numero energia assorbita dall'inib nuova 1984
-║ Numero scissioni negate dall'inib 661
-║ Numero scissioni negate dall'inib 19
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 17          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 12997
-║ Numero nuovi atomi 559
-║ Energia prodotta 316646
-║ Energia prodotta nuova 12474
-║ Numero scorie 1024
-║ Numero nuove scorie 34
-║ Numero energia assorbita dall'inib 40648
-║ Numero energia assorbita dall'inib nuova 1595
-║ Numero scissioni negate dall'inib 683
-║ Numero scissioni negate dall'inib 22
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 18          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 14046
-║ Numero nuovi atomi 1049
-║ Energia prodotta 328310
-║ Energia prodotta nuova 11764
-║ Numero scorie 1063
-║ Numero nuove scorie 39
-║ Numero energia assorbita dall'inib 42152
-║ Numero energia assorbita dall'inib nuova 1504
-║ Numero scissioni negate dall'inib 709
-║ Numero scissioni negate dall'inib 26
-║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 19          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 14582
-║ Numero nuovi atomi 536
-║ Energia prodotta 340130
-║ Energia prodotta nuova 11920
-║ Numero scorie 1105
-║ Numero nuove scorie 42
-║ Numero energia assorbita dall'inib 43672
-║ Numero energia assorbita dall'inib nuova 1520
-║ Numero scissioni negate dall'inib 743
+║ Numero atomi 7023
+║ Numero nuovi atomi 592
+║ Energia prodotta 207062
+║ Energia prodotta nuova 21160
+║ Numero scorie 682
+║ Numero nuove scorie 51
+║ Numero energia assorbita dall'inib 26547
+║ Numero energia assorbita dall'inib nuova 2693
+║ Numero scissioni negate dall'inib 459
 ║ Numero scissioni negate dall'inib 34
 ║ Prelevo energia per la centrale
-
-╔═════════════════════════════╗
-║          GIORNO 20          ║
-╠═════════════════════════════╝
-║
-║ Numero atomi 15638
-║ Numero nuovi atomi 1056
-║ Energia prodotta 350016
-║ Energia prodotta nuova 9986
-║ Numero scorie 1131
-║ Numero nuove scorie 26
-║ Numero energia assorbita dall'inib 44948
-║ Numero energia assorbita dall'inib nuova 1276
-║ Numero scissioni negate dall'inib 760
-║ Numero scissioni negate dall'inib 17
-║ Prelevo energia per la centrale
-
-Il valore di flagTerminazione è 1
-╔═════════════════════════════╗
-║          Terminato          ║
-╠═════════════════════════════╢
