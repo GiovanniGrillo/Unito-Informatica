@@ -13,4 +13,6 @@ int main() {
         releaseSem(semInibitore, 0);
         nanosleep(&att, NULL);
     }
+    unloadIPCs();
+    return 0;
 }

@@ -51,9 +51,10 @@ void esegui_scissione(Atomo a_PADRE) {
 
                 printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
             } else {
+                var->flagTerminazione = 1;
                 printf("\ncentrale esplosa, troppa energia liberata\n");
                 printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
-                var->flagTerminazione = 1;
+
                 dettShm();
                 deallocIPC();
                 kill(pidAttivatore,   SIGTERM);

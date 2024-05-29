@@ -192,7 +192,6 @@ void endProcess() {
 int creazione_atomi(int numero_atomi_da_creare) {
     int i = 0;
     printf("ehy centrale n_atomi è uguale a %d", centrale->n_atomi);
-    fflush(stdout);
     while (i < numero_atomi_da_creare) {
         atomi[centrale->n_atomi].numero_atomico = (rand() % var->N_ATOM_MAX) + 1;
         atomi[centrale->n_atomi].pidAtomo = (0);
@@ -200,7 +199,6 @@ int creazione_atomi(int numero_atomi_da_creare) {
         ++i;
     }
     printf("\n(funzione creazione atomi)Il valore di var->n_atomi è %d", centrale->n_atomi);
-    fflush(stdout);
     return 0;
 }
 
@@ -214,7 +212,6 @@ void handle_sig_inibitore(int sig) {
         inibitore->InibitoreSetup = false;
     }
     printf("adesso vale %d", inibitore->InibitoreSetup);
-    fflush(stdout);
     dettShm();
 }
 

@@ -22,7 +22,6 @@ int main() {
             attShm();
             ++var->fork_atomi;
             printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i+1);
-            fflush(stdout);
             ++i;
             dettShm();
         }
