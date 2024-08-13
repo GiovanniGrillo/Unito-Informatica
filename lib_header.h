@@ -15,7 +15,7 @@
 #include <time.h>
 #include <math.h>
 
-#include "Oggetti.h"
+#include "resources.h"
 
 #define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
@@ -23,7 +23,7 @@
 #define ERROR                                                                                                                                     \
     {                                                                                                                                             \
         if (errno) {                                                                                                                              \
-            fprintf(stderr, "ERROR - line %d: file \"%s\" (pid %d) - n %d - (%s)\n", __LINE__, __FILE__, getpid(), errno, strerror(errno)); \
+            fprintf(stderr, "ERROR - line %d: file \"%s\" (pid %d) - n %d - (%s)\n", __LINE__, __FILE__, getpid(), errno, strerror(errno));       \
             exit(1);                                                                                                                              \
         }                                                                                                                                         \
     }
@@ -50,8 +50,8 @@ void createIPCS(char* file) {
                                                                               fprintf(out_progetto, "║%s %14d\n","SIM_DURATION:",       SIM_DURATION);
     fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_DEMAND);                fprintf(out_progetto, "║ENERGY_DEMAND: %14d\n",           var->ENERGY_DEMAND);
     fscanf(in_progetto, "%s %d\n", temp, &var->ENERGY_EXPLODE_THRESHOLD);     fprintf(out_progetto, "║ENERGY_EXPLODE_THRESHOLD: %3d\n", var->ENERGY_EXPLODE_THRESHOLD);
-    fscanf(in_progetto, "%s %d\n", temp, &var->flagTerminazione);             fprintf(out_progetto, "║flagTerminazione: %9d\n",         var->flagTerminazione);
-    fscanf(in_progetto, "%s %d\n", temp, &var->fork_atomi);                   fprintf(out_progetto, "║fork_atomi: %15d\n",              var->fork_atomi);
+    fscanf(in_progetto, "%s %d\n", temp, &var->exitFlag);             fprintf(out_progetto, "║exitFlag: %9d\n",         var->exitFlag);
+    fscanf(in_progetto, "%s %d\n", temp, &var->atomFork);                   fprintf(out_progetto, "║atomFork: %15d\n",              var->atomFork);
     fscanf(in_progetto, "%s %d\n", temp, &var->MIN_N_ATOMICO);                fprintf(out_progetto, "║MIN_N_ATOMICO: %12d\n",           var->MIN_N_ATOMICO);
     fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOMI_INIT);                 fprintf(out_progetto, "║N_ATOMI_INIT: %15d\n",            var->N_ATOMI_INIT);
     fscanf(in_progetto, "%s %d\n", temp, &var->N_ATOM_MAX);                   fprintf(out_progetto, "║N_ATOM_MAX: %16d\n",              var->N_ATOM_MAX);
@@ -252,7 +252,7 @@ void stampa() {
             if ((centrale->energia) - (var->ENERGY_DEMAND) < 0) {
                 if (inibitore->InibitoreSetup == true) {
                     if (inibitore->absorbed_energy - var->ENERGY_DEMAND) {
-                        var->flagTerminazione = 1;
+                        var->exitFlag = 1;
                         fprintf(out_progetto, "\n██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██");
                         dettShm();
                         endProcess();
@@ -261,7 +261,7 @@ void stampa() {
                         fprintf(out_progetto, "\n██══█══█══█══█L'INIBITORE HA PERSMESSO ALLA CENTRALE DI NON FINIRE IN BLACK OUT█══█══█══█══██");
                     }
                 } else {
-                    var->flagTerminazione = 1;
+                    var->exitFlag = 1;
                     fprintf(out_progetto, "\n██══█══█══█══█BLACKOUT DELLA CENTRALE█══█══█══█══██");
                     dettShm();
                     endProcess();
@@ -277,7 +277,7 @@ void stampa() {
         prev_scorie = centrale->scorie;
         dettShm();
         if (giorno == SIM_DURATION - 1) {
-            var->flagTerminazione = 1;
+            var->exitFlag = 1;
         }
         releaseSem(semAttivatore, 0);
         releaseSem(semProcessi, 0);
@@ -286,7 +286,7 @@ void stampa() {
         sleep(1);
     }
 
-    fprintf(out_progetto, "\nIl valore di flagTerminazione è %d\n", var->flagTerminazione);
+    fprintf(out_progetto, "\nIl valore di exitFlag è %d\n", var->exitFlag);
     fprintf(out_progetto, "╔═════════════════════════════╗\n");
     fprintf(out_progetto, "║          Terminato          ║\n");
     fprintf(out_progetto, "╠═════════════════════════════╢");

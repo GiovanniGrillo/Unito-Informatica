@@ -14,7 +14,7 @@ void esegui_scissione(Atomo a_PADRE) {
             inibitore->scissioni_negate++;
             ++centrale->scorie;
             --centrale->n_atomi;
-            --var->fork_atomi;
+            --var->atomFork;
             dettShm();
             releaseSem(semFissione, 0);
             endProcess();
@@ -22,24 +22,27 @@ void esegui_scissione(Atomo a_PADRE) {
     }
 
     // Controllo se è minore delle condizioni
-    if (a_PADRE.numero_atomico < var->MIN_N_ATOMICO) {
+    if (a_PADRE.numero_atomico <= var->MIN_N_ATOMICO) {
         ++centrale->scorie;
         --centrale->n_atomi;
-        --var->fork_atomi;
+        --var->atomFork;
         dettShm();
         releaseSem(semFissione, 0);
         endProcess();
     } else {
-        int numero_casuale = rand() % (a_PADRE.numero_atomico - 1) + 1;
+       // int numero_casuale = rand() % (a_PADRE.numero_atomico - 1) + 1;
         struct Atomo figlio;
-        figlio.numero_atomico   = a_PADRE.numero_atomico - numero_casuale;
-        a_PADRE.numero_atomico -= figlio.numero_atomico;
-        int liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico);
+        //GUARDA QUI
+        figlio.numero_atomico   = a_PADRE.numero_atomico / 2;
+        a_PADRE.numero_atomico = a_PADRE.numero_atomico - figlio.numero_atomico;
+        int liberata = 0;
+        if(a_PADRE.numero_atomico == figlio.numero_atomico)
+            liberata = energy(a_PADRE.numero_atomico, figlio.numero_atomico);
 
         if (inibitore->InibitoreSetup == true) {
-            int liberatasoft = (int)(liberata * 0.80);
-            inibitore->absorbed_energy += (liberata - liberatasoft);
-            liberata = liberatasoft;
+            float rand_num = (float)rand() / RAND_MAX * 0.5;
+            inibitore->absorbed_energy += (liberata * rand_num);
+            liberata -= (liberata * rand_num);
         }
 
         if ((centrale->energia += liberata) > var->ENERGY_EXPLODE_THRESHOLD) {
@@ -51,7 +54,7 @@ void esegui_scissione(Atomo a_PADRE) {
 
                 printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
             } else {
-                var->flagTerminazione = 1;
+                var->exitFlag = 1;
                 printf("\ncentrale esplosa, troppa energia liberata\n");
                 printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", var->ENERGY_EXPLODE_THRESHOLD);
 
@@ -67,14 +70,14 @@ void esegui_scissione(Atomo a_PADRE) {
         printf("\033[0;35m");
         printf("energia presente nella centrale è: %d\n", centrale->energia);
         printf("\033[0m");
-        printf("\n\033[1;34menergia liberata: %d \033[0m ", liberata);
+        printf("\n\033[;34menergia liberata: %d \033[0m ", liberata);
 
         centrale->energia += liberata;
-        --var->fork_atomi;
+        --var->atomFork;
         ++centrale->n_atomi;
         atomi[centrale->n_atomi] = figlio;
 
-        printf("\n\033[1;34m il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ", var->fork_atomi, centrale->n_atomi);
+        printf("\n\033[1;34m il valore di fork atomi è %d e abbiamo %d atomi nella centrale \033[0m ", var->atomFork, centrale->n_atomi);
         dettShm();
         releaseSem(semFissione, 0);
         endProcess();

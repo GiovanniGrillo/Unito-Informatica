@@ -7,7 +7,11 @@ int main() {
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
     struct timespec req = {0,var->STEP_ALIMENTAZIONE};
 
-    while(var->flagTerminazione != 1) {
+    for(;;){
+        if(var->exitFlag == 1){
+            unloadIPCs();
+            exit(0);
+        }
         reserveSem(semProcessi, 0);
         attShm();
         {
@@ -18,6 +22,4 @@ int main() {
         releaseSem(semProcessi, 0);
         nanosleep(&req, NULL);
     }
-    unloadIPCs();
-    exit(0);
 }

@@ -8,7 +8,7 @@ int main() {
 
     if(signal(SIGINT, handle_sig_inibitore) == SIG_ERR) ERROR;
 
-    while (var->flagTerminazione != 1) {
+    while (var->exitFlag != 1) {
         reserveSem(semInibitore, 0);
         releaseSem(semInibitore, 0);
         nanosleep(&att, NULL);

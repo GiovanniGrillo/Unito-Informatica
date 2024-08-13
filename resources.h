@@ -5,8 +5,8 @@
 typedef struct Var {
     int ENERGY_DEMAND;
     int ENERGY_EXPLODE_THRESHOLD;
-    int flagTerminazione;
-    int fork_atomi;
+    int exitFlag;
+    int atomFork;
     int MIN_N_ATOMICO;
     int N_ATOMI_INIT;
     int N_ATOM_MAX;
@@ -58,7 +58,7 @@ struct msg_buffer {
 
 /* Flag Terminazione e controlloSegnali*/
     int flagTempesta;
-    int flagTerminazione;
+    int exitFlag;
 
 /* File */
     FILE* out_progetto;

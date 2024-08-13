@@ -6,11 +6,11 @@ int main() {
     loadIPCs();
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
-    while(var->flagTerminazione != 1) {
-        while ((var->fork_atomi > 0)) {
+    while(var->exitFlag != 1) {
+        while ((var->atomFork > 0)) {
             if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
-            if(var->flagTerminazione != 0)
+            if(var->exitFlag != 0)
                 endProcess();
             if (msgrcv(msgPila, &message, sizeof(message) - sizeof(long), 1, 0) == -1) {
                 continue;
@@ -33,7 +33,6 @@ int main() {
                         endProcess();
                         break;
                     default:
-                        wait(NULL);
                         break;
                 }
             } else {
