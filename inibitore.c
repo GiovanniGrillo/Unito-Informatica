@@ -8,9 +8,9 @@ int main() {
 
     if(signal(SIGINT, handle_sig_inibitore) == SIG_ERR) ERROR;
 
-    while (var->exitFlag != 1) {
-        reserveSem(semInibitore, 0);
-        releaseSem(semInibitore, 0);
+    while (vars->exit_flag != 1) {
+        reserveSem(sem_inhibitor, 0);
+        releaseSem(sem_inhibitor, 0);
         nanosleep(&att, NULL);
     }
     unloadIPCs();

@@ -6,14 +6,14 @@ int main() {
 
     createIPCS("Progetto.conf");
 
-    if (set_sem(semShm,        0, 1) == -1) ERROR;
-    if (set_sem(semAttivatore, 0, 1) == -1) ERROR;
-    if (set_sem(semFissione,   0, 1) == -1) ERROR;
-    if (set_sem(semProcessi,   0, 1) == -1) ERROR;
-    if (set_sem(semInibitore,  0, 1) == -1) ERROR;
+    if (set_sem(sem_shm,        0, 1) == -1) ERROR;
+    if (set_sem(sem_activator, 0, 1) == -1) ERROR;
+    if (set_sem(sem_fission,   0, 1) == -1) ERROR;
+    if (set_sem(sem_processes,   0, 1) == -1) ERROR;
+    if (set_sem(sem_inhibitor,  0, 1) == -1) ERROR;
 
     attShm();
-    creazione_atomi(var->N_ATOMI_INIT);
+    create_atoms(vars->N_ATOMI_INIT);
     dettShm();
 
 
@@ -23,7 +23,7 @@ int main() {
     printf("\n══════════════════════════════════\n");
     printf("══ PROCESSO ATTIVATORE    -Start ═\n");
     printf("══════════════════════════════════\n");
-    switch ((pidAttivatore = fork())) {
+    switch ((Activator_pid = fork())) {
         case -1:
             ERROR;
 
@@ -39,7 +39,7 @@ int main() {
     printf("══════════════════════════════════\n");
     printf("══ PROCESSO ALIMENTATORE  -Start ═\n");
     printf("══════════════════════════════════\n");
-    switch ((pidAlimentatore = fork())) {
+    switch ((Powersupply_pid = fork())) {
         case -1:
             ERROR;
 
@@ -55,13 +55,13 @@ int main() {
     printf("══════════════════════════════════\n");
     printf("══ PROCESSO INIBITORE     -Start ═\n");
     printf("══════════════════════════════════\n");
-    switch ((pidInibitore = fork())) {
+    switch ((Inhibitor_pid = fork())) {
         case -1:
             ERROR;
 
         case 0:
-            execl("./inibitore", "./inibitore", NULL);
-            printf("inibitore non avviato correttamente\n");
+            execl("./inhibitor", "./inhibitor", NULL);
+            printf("inhibitor non avviato correttamente\n");
             ERROR;
 
         default:
@@ -71,7 +71,7 @@ int main() {
     printf("══════════════════════════════════\n");
     printf("══ PROCESSO ATOMO         -Start ═\n");
     printf("══════════════════════════════════\n\n");
-    switch ((pidAtomo = fork())) {
+    switch ((atom_pid = fork())) {
         case -1:
             ERROR;
 
@@ -84,7 +84,7 @@ int main() {
             break;
     }
 
-    stampa();
+    daily_Log();
 
     printf("\nSono fuori!\n");
     deallocIPC();

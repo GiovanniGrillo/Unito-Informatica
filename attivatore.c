@@ -5,28 +5,28 @@ int main() {
     loadIPCs();
 
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
-    struct timespec req = {0, var->STEP_ATTIVATORE};
+    struct timespec req = {0, vars->STEP_ATTIVATORE};
     message.msg_type = 1;
 
-    while (exitFlag != 1) {
-        reserveSem(semAttivatore, 0);
+    while (vars->exit_flag != 1) {
+        reserveSem(sem_activator, 0);
         int i = 0;
-        while (i < var->N_MSG) {
-            if (var->exitFlag == 1) {
+        while (i < vars->N_MSG) {
+            if (vars->exit_flag == 1) {
                 exit(0);
             }
-            if (msgsnd(msgPila, &message, sizeof(message) - sizeof(long), 0) == -1) {
+            if (msgsnd(msg_stack, &message, sizeof(message) - sizeof(long), 0) == -1) {
                 ERROR;
                 exit(1);
             }
             attShm();
-            ++var->atomFork;
+            ++vars->atom_Fork;
             printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i+1);
             ++i;
             dettShm();
         }
-        releaseSem(semAttivatore, 0);
-        nanosleep(&req, NULL);
+        releaseSem(sem_activator, 0);
+        // nanosleep(&req, NULL);
     }
     unloadIPCs();
     return 0;

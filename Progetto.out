@@ -3,10 +3,10 @@
 ║                             di                              ║
 ║   GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO  ║
 ╠═════════════════════════════════════════════════════════════╝
-║SIM_DURATION:             20
+║SIM_DURATION:             10
 ║ENERGY_DEMAND:            100
-║ENERGY_EXPLODE_THRESHOLD: 500000
-║flagTerminazione:         0
+║ENERGY_EXPLODE_THRESHOLD: 500
+║exit_flag:                0
 ║atomFork:               0
 ║MIN_N_ATOMICO:            5
 ║N_ATOMI_INIT:            1000
@@ -16,18 +16,179 @@
 ║STEP_ALIMENTAZIONE:       900000000
 ║STEP_ATTIVATORE:          900000000
 ║
-║InibitoreSetup = false
+║InibitoreSetup = true
 
 ╔═════════════════════════════╗
 ║          GIORNO  1          ║
 ╠═════════════════════════════╝
 ║
-║ Numero atomi 1000
-║ Numero nuovi atomi 1000
+║ Numero atoms 1000
+║ Numero nuovi atoms 1000
 ║ Energia prodotta 100
 ║ Energia prodotta nuova 100
 ║ Numero scorie 0
 ║ Numero nuove scorie 0
-║ INIBITORE SPENTO  Numero energia assorbita dall'inib fin ora  0
-║ INIBITORE SPENTO  Numero scissioni dall'inib fin ora 0
-║ Prelevo energia per la centrale
+║ Numero scissioni effettuate dall'inib 0
+║ Numero energy assorbita dall'inib 0
+║ Numero energy assorbita dall'inib nuova 0
+║ Numero scissioni negate dall'inib 0
+║ Numero scissioni negate dall'inib 0
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  2          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 2404
+║ Numero nuovi atoms 1404
+║ Energia prodotta 498
+║ Energia prodotta nuova 498
+║ Numero scorie 243
+║ Numero nuove scorie 243
+║ Numero scissioni effettuate dall'inib 647
+║ Numero energy assorbita dall'inib 75758
+║ Numero energy assorbita dall'inib nuova 75758
+║ Numero scissioni negate dall'inib 163
+║ Numero scissioni negate dall'inib 163
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  3          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 3635
+║ Numero nuovi atoms 1231
+║ Energia prodotta 500
+║ Energia prodotta nuova 102
+║ Numero scorie 427
+║ Numero nuove scorie 184
+║ Numero scissioni effettuate dall'inib 1062
+║ Numero energy assorbita dall'inib 123357
+║ Numero energy assorbita dall'inib nuova 47599
+║ Numero scissioni negate dall'inib 274
+║ Numero scissioni negate dall'inib 111
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  4          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 4732
+║ Numero nuovi atoms 1097
+║ Energia prodotta 498
+║ Energia prodotta nuova 98
+║ Numero scorie 512
+║ Numero nuove scorie 85
+║ Numero scissioni effettuate dall'inib 1244
+║ Numero energy assorbita dall'inib 145135
+║ Numero energy assorbita dall'inib nuova 21778
+║ Numero scissioni negate dall'inib 328
+║ Numero scissioni negate dall'inib 54
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  5          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 5832
+║ Numero nuovi atoms 1100
+║ Energia prodotta 500
+║ Energia prodotta nuova 102
+║ Numero scorie 593
+║ Numero nuove scorie 81
+║ Numero scissioni effettuate dall'inib 1425
+║ Numero energy assorbita dall'inib 166254
+║ Numero energy assorbita dall'inib nuova 21119
+║ Numero scissioni negate dall'inib 382
+║ Numero scissioni negate dall'inib 54
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  6          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 6413
+║ Numero nuovi atoms 581
+║ Energia prodotta 500
+║ Energia prodotta nuova 100
+║ Numero scorie 648
+║ Numero nuove scorie 55
+║ Numero scissioni effettuate dall'inib 1561
+║ Numero energy assorbita dall'inib 179240
+║ Numero energy assorbita dall'inib nuova 12986
+║ Numero scissioni negate dall'inib 408
+║ Numero scissioni negate dall'inib 26
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  7          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 8022
+║ Numero nuovi atoms 1609
+║ Energia prodotta 500
+║ Energia prodotta nuova 100
+║ Numero scorie 739
+║ Numero nuove scorie 91
+║ Numero scissioni effettuate dall'inib 1761
+║ Numero energy assorbita dall'inib 206043
+║ Numero energy assorbita dall'inib nuova 26803
+║ Numero scissioni negate dall'inib 468
+║ Numero scissioni negate dall'inib 60
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  8          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 9629
+║ Numero nuovi atoms 1607
+║ Energia prodotta 500
+║ Energia prodotta nuova 100
+║ Numero scorie 832
+║ Numero nuove scorie 93
+║ Numero scissioni effettuate dall'inib 1961
+║ Numero energy assorbita dall'inib 232412
+║ Numero energy assorbita dall'inib nuova 26369
+║ Numero scissioni negate dall'inib 516
+║ Numero scissioni negate dall'inib 48
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO  9          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 10688
+║ Numero nuovi atoms 1059
+║ Energia prodotta 496
+║ Energia prodotta nuova 96
+║ Numero scorie 903
+║ Numero nuove scorie 71
+║ Numero scissioni effettuate dall'inib 2091
+║ Numero energy assorbita dall'inib 247920
+║ Numero energy assorbita dall'inib nuova 15508
+║ Numero scissioni negate dall'inib 558
+║ Numero scissioni negate dall'inib 42
+║ Prelevo energy per la power_plant
+
+╔═════════════════════════════╗
+║          GIORNO 10          ║
+╠═════════════════════════════╝
+║
+║ Numero atoms 12263
+║ Numero nuovi atoms 1575
+║ Energia prodotta 498
+║ Energia prodotta nuova 102
+║ Numero scorie 977
+║ Numero nuove scorie 74
+║ Numero scissioni effettuate dall'inib 2240
+║ Numero energy assorbita dall'inib 265628
+║ Numero energy assorbita dall'inib nuova 17708
+║ Numero scissioni negate dall'inib 596
+║ Numero scissioni negate dall'inib 38
+║ Prelevo energy per la power_plant
+
+Il valore di exit_flag è 1
+╔═════════════════════════════╗
+║          Terminato          ║
+╠═════════════════════════════╢

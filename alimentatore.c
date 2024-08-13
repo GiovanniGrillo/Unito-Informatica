@@ -1,25 +1,26 @@
 #include "lib_header.h"
 
-int main() {
+int main(){
     printf("\n\033[1;32mBenvenuto in alimentatore!\033[0m\n");
     setbuf(stdout, NULL);
     loadIPCs();
-    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
-    struct timespec req = {0,var->STEP_ALIMENTAZIONE};
+    if (signal(SIGINT, handle_sigint) == SIG_ERR)
+        ERROR;
+    struct timespec req = {0, vars->STEP_ALIMENTAZIONE};
 
-    for(;;){
-        if(var->exitFlag == 1){
-            unloadIPCs();
-            exit(0);
-        }
-        reserveSem(semProcessi, 0);
+    while (vars->exit_flag != 1)
+    {
+        reserveSem(sem_processes, 0);
         attShm();
-        {
-            if (creazione_atomi(var->N_NUOVI_ATOMI) == -1) ERROR;
-            printf("\n\033[1;32mHEY SONO ALIMENTATORE HO CREATO %d nuovi atomi fino ad adesso sono : %d ---------------------------------\033[0m\n",var->N_NUOVI_ATOMI, centrale->n_atomi);
-        }
+        
+            if (create_atoms(vars->N_NUOVI_ATOMI) == -1)
+                ERROR;
+            printf("\n\033[1;32mHEY SONO ALIMENTATORE HO CREATO %d nuovi atoms fino ad adesso sono : %d---------\033[0m\n", vars->N_NUOVI_ATOMI, power_plant->atom_count);
+        
         dettShm();
-        releaseSem(semProcessi, 0);
+        releaseSem(sem_processes, 0);
         nanosleep(&req, NULL);
     }
+    unloadIPCs();
+    exit(0);
 }

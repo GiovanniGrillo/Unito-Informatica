@@ -1,12 +1,12 @@
-/*Durata Simulazione*/
-#define SIM_DURATION 20
+/*Simulation Duration */
+#define SIM_DURATION 10
 
-/* Strutture dati */
+/* Data Structures */
 typedef struct Var {
     int ENERGY_DEMAND;
     int ENERGY_EXPLODE_THRESHOLD;
-    int exitFlag;
-    int atomFork;
+    int exit_flag;
+    int atom_Fork;
     int MIN_N_ATOMICO;
     int N_ATOMI_INIT;
     int N_ATOM_MAX;
@@ -16,56 +16,56 @@ typedef struct Var {
     int STEP_ATTIVATORE;
 } Var;
 
-typedef struct Centrale{
-    int energia;
-    int n_atomi;
-    int scorie;
-}Centrale;
+typedef struct PowerPlant{
+    int energy;
+    int atom_count;
+    int waste_atoms;
+}PowerPlant;
 
-typedef struct Atomo {
-    pid_t pidAtomo;
-    int numero_atomico;
-} Atomo;
+typedef struct Atom {
+    pid_t Atom_pid;
+    int atomic_number;
+} Atom;
 
-typedef struct Inibitore {
-    bool InibitoreSetup;
+typedef struct Inhibitor {
+    bool inhibitor_setup;
     int absorbed_energy;
-    int scissioni_negate;
-}Inibitore;
+    int denied_fission;
+    int done_fission;
+}Inhibitor;
 
 struct msg_buffer {
     long msg_type;
 } message;
 
-/* Coda di messaggi */
-    int semPila;
-    int msgPila;
+/* Message Queue */
+    int sem_stack;
+    int msg_stack;
 
-/* Semafori */
-    int semAttivatore;
-    int semFissione;
-    int semShm;
-    int semProcessi;
-    int semCentrale;
-    int semInibitore;
+/* Semaphores */
+    int sem_activator;
+    int sem_fission;
+    int sem_shm;
+    int sem_processes;
+    int sem_power_plant;
+    int sem_inhibitor;
 
-/* Memorie Codivise*/
-    int shmAtomi;     Atomo* atomi;
-    int shmVar;       Var* var;
-    int shmPila;      int* pila;
-    int shmCentrale;  Centrale* centrale;
-    int shmInibitore; Inibitore* inibitore;
+/* Shared Memory*/
+    int shm_atoms;        Atom* atoms;
+    int shm_vars;         Var* vars;
+    int shm_stack;        int* stack;
+    int shm_power_plant;  PowerPlant* power_plant;
+    int shm_inhibitor;    Inhibitor* inhibitor;
 
-/* Flag Terminazione e controlloSegnali*/
-    int flagTempesta;
-    int exitFlag;
+/* Termination Flags and Signal Control*/
+    int flag_storm;
 
-/* File */
-    FILE* out_progetto;
-    FILE* in_progetto;
+/* Files */
+    FILE* sim_Input;
+    FILE* sim_Output;
 
-/* Variabili Globali */
-    pid_t pidAtomo;
-    pid_t pidAttivatore;
-    pid_t pidAlimentatore;
-    pid_t pidInibitore;
+/* Global Variables */
+    pid_t atom_pid;
+    pid_t Activator_pid;
+    pid_t Powersupply_pid;
+    pid_t Inhibitor_pid;
