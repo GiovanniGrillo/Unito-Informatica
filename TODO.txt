@@ -1,6 +1,7 @@
 ~~IMPORTANTI~~
-modifica nome stampa, attivatore rimane in ascolto con "msgrcv"  manda un messaggio per creazione di novo processo di alimentatore che crea atomi.
-Chidere ad Ale lib_atomo controllo sui numeri atomici e funzione energia guarda lib_atomo(//guarda qui)
+
+stampa ogni n_msg/3 : atom_count, done_fission, energy, qualora InibitoreSetup==true allora denied_fission ecc 
+ricordarsi ti toglietre Power supply created 500 new atoms
 ~~COSE GENERALI~~
 
 ~~Versione "normal" 30~~

@@ -2,7 +2,6 @@
 
 int main() {
     srand(time(NULL));
-    // printf("\n\033[1;34mBenvenuto in Atomo!\033[0m\n \n");
     loadIPCs();
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
@@ -16,13 +15,13 @@ int main() {
                 continue;
             }
 
-            ++numMessaggiRicevuti;
+            ++received_messages;
             attShm();
 
             if (power_plant->atom_count > 0) {
                 int numero_casuale = rand() % (power_plant->atom_count - 1) + 1;
                 Atom a_PADRE = atoms[(numero_casuale)];
-    
+
                 switch (a_PADRE.Atom_pid = newProcess()) {
                     case -1:
                         perror("MELTDOWN");
@@ -35,8 +34,14 @@ int main() {
                     default:
                         break;
                 }
-            } else {
-                printf("Atomo finiti nella power_plant");
+                //ogni received_messages multiplo di N_MSG/2 
+                if(received_messages %((vars->N_MSG)/2) == 0){
+                    printf("\nReceived messages: %d\n", received_messages);
+                    sim_overview();
+                }
+            }
+            else {
+                printf("atoms are transferred to the power plant");
             }
         }
     }

@@ -1,6 +1,6 @@
 #include "lib_header.h"
 
-int numMessaggiRicevuti = 0;
+int received_messages = 0;
 
 int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
@@ -55,9 +55,7 @@ void do_fission(Atom a_PADRE) {
                 // printf("\nTUTTO SALVO CI PENSA INIBITORE\n");
             } else {
                 vars->exit_flag = 1;
-                printf("\ncentrale esplosa, troppa energy liberata\n");
-                printf("il vero valore di ENERGYEXPLODETRESHOLD è: %d", vars->ENERGY_EXPLODE_THRESHOLD);
-
+                printf("\nPower plant exploded, energy: %d > ENERGY_EXPLODE_THRESHOLD: %d\n", power_plant->energy, vars->ENERGY_EXPLODE_THRESHOLD);
 
                 dettShm();
                 deallocIPC();
@@ -77,7 +75,7 @@ void do_fission(Atom a_PADRE) {
         --vars->atom_Fork;
         ++power_plant->atom_count;
         ++inhibitor->done_fission;
-        printf("\033scissioni effettuate dopo %d!\033[0m\n", inhibitor->done_fission);
+        // printf("done_fission: %d \n", inhibitor->done_fission);
 
         atoms[power_plant->atom_count] = figlio;
 

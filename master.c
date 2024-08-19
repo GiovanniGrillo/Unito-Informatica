@@ -20,9 +20,7 @@ int main() {
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
 
-    printf("\n══════════════════════════════════\n");
-    printf("══ PROCESSO ATTIVATORE    -Start ═\n");
-    printf("══════════════════════════════════\n");
+    printf("Attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
         case -1:
             ERROR;
@@ -36,9 +34,8 @@ int main() {
             break;
     }
 
-    printf("══════════════════════════════════\n");
-    printf("══ PROCESSO ALIMENTATORE  -Start ═\n");
-    printf("══════════════════════════════════\n");
+    printf("Alimentatore.c  -run\n");
+
     switch ((Powersupply_pid = fork())) {
         case -1:
             ERROR;
@@ -52,9 +49,7 @@ int main() {
             break;
     }
 
-    printf("══════════════════════════════════\n");
-    printf("══ PROCESSO INIBITORE     -Start ═\n");
-    printf("══════════════════════════════════\n");
+    printf("Inibitore.c  -run\n");
     switch ((Inhibitor_pid = fork())) {
         case -1:
             ERROR;
@@ -68,9 +63,7 @@ int main() {
             break;
     }
 
-    printf("══════════════════════════════════\n");
-    printf("══ PROCESSO ATOMO         -Start ═\n");
-    printf("══════════════════════════════════\n\n");
+    printf("Atomo.c   -run\n");
     switch ((atom_pid = fork())) {
         case -1:
             ERROR;
@@ -86,7 +79,7 @@ int main() {
 
     daily_Log();
 
-    printf("\nSono fuori!\n");
+    printf("\nEnd\n");
     deallocIPC();
     return 0;
 }

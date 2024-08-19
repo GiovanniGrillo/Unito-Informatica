@@ -1,194 +1,172 @@
-╔═════════════════════════════════════════════════════════════╗
-║ Inizio esecuzione progetto di Sistemi Operativi (2023/2024) ║
-║                             di                              ║
-║   GRILLO GIOVANNI , OLIVERO ALESSANDRO , SIVIERO FRANCESCO  ║
-╠═════════════════════════════════════════════════════════════╝
-║SIM_DURATION:             10
-║ENERGY_DEMAND:            100
-║ENERGY_EXPLODE_THRESHOLD: 500
-║exit_flag:                0
-║atomFork:               0
-║MIN_N_ATOMICO:            5
-║N_ATOMI_INIT:            1000
-║N_ATOM_MAX:               40
-║N_MSG:                    300
-║N_NUOVI_ATOMI:            500
-║STEP_ALIMENTAZIONE:       900000000
-║STEP_ATTIVATORE:          900000000
-║
-║InibitoreSetup = true
 
-╔═════════════════════════════╗
-║          GIORNO  1          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 1000
-║ Numero nuovi atoms 1000
-║ Energia prodotta 100
-║ Energia prodotta nuova 100
-║ Numero scorie 0
-║ Numero nuove scorie 0
-║ Numero scissioni effettuate dall'inib 0
-║ Numero energy assorbita dall'inib 0
-║ Numero energy assorbita dall'inib nuova 0
-║ Numero scissioni negate dall'inib 0
-║ Numero scissioni negate dall'inib 0
-║ Prelevo energy per la power_plant
+Starting execution of Operating Systems project
 
-╔═════════════════════════════╗
-║          GIORNO  2          ║
-╠═════════════════════════════╝
+Power plant configuration:
+SIM_DURATION:             10
+ENERGY_DEMAND:            100
+ENERGY_EXPLODE_THRESHOLD: 500000
+exit_flag:         0
+atomFork:               0
+MIN_N_ATOMICO:            5
+N_ATOMI_INIT:            1000
+N_ATOM_MAX:               40
+N_MSG:                    300
+N_NUOVI_ATOMI:            500
+STEP_ALIMENTAZIONE:       900000000
+STEP_ATTIVATORE:          900000000
+STEP_INHIBITOR:       500000000
 ║
-║ Numero atoms 2404
-║ Numero nuovi atoms 1404
-║ Energia prodotta 498
-║ Energia prodotta nuova 498
-║ Numero scorie 243
-║ Numero nuove scorie 243
-║ Numero scissioni effettuate dall'inib 647
-║ Numero energy assorbita dall'inib 75758
-║ Numero energy assorbita dall'inib nuova 75758
-║ Numero scissioni negate dall'inib 163
-║ Numero scissioni negate dall'inib 163
-║ Prelevo energy per la power_plant
+inhibitor_setup= false
 
-╔═════════════════════════════╗
-║          GIORNO  3          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 3635
-║ Numero nuovi atoms 1231
-║ Energia prodotta 500
-║ Energia prodotta nuova 102
-║ Numero scorie 427
-║ Numero nuove scorie 184
-║ Numero scissioni effettuate dall'inib 1062
-║ Numero energy assorbita dall'inib 123357
-║ Numero energy assorbita dall'inib nuova 47599
-║ Numero scissioni negate dall'inib 274
-║ Numero scissioni negate dall'inib 111
-║ Prelevo energy per la power_plant
+*****************************
+*          DAY  1           *
+*****************************
 
-╔═════════════════════════════╗
-║          GIORNO  4          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 4732
-║ Numero nuovi atoms 1097
-║ Energia prodotta 498
-║ Energia prodotta nuova 98
-║ Numero scorie 512
-║ Numero nuove scorie 85
-║ Numero scissioni effettuate dall'inib 1244
-║ Numero energy assorbita dall'inib 145135
-║ Numero energy assorbita dall'inib nuova 21778
-║ Numero scissioni negate dall'inib 328
-║ Numero scissioni negate dall'inib 54
-║ Prelevo energy per la power_plant
+Number of atoms: 1000
+Number of new atoms: 1000
+Energy produced: 100
+New energy produced: 100
+Number of waste atoms: 0
+Number of new waste atoms: 0
+Number of fissions performed by inhibitor: 0
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
 
-╔═════════════════════════════╗
-║          GIORNO  5          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 5832
-║ Numero nuovi atoms 1100
-║ Energia prodotta 500
-║ Energia prodotta nuova 102
-║ Numero scorie 593
-║ Numero nuove scorie 81
-║ Numero scissioni effettuate dall'inib 1425
-║ Numero energy assorbita dall'inib 166254
-║ Numero energy assorbita dall'inib nuova 21119
-║ Numero scissioni negate dall'inib 382
-║ Numero scissioni negate dall'inib 54
-║ Prelevo energy per la power_plant
+*****************************
+*          DAY  2           *
+*****************************
 
-╔═════════════════════════════╗
-║          GIORNO  6          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 6413
-║ Numero nuovi atoms 581
-║ Energia prodotta 500
-║ Energia prodotta nuova 100
-║ Numero scorie 648
-║ Numero nuove scorie 55
-║ Numero scissioni effettuate dall'inib 1561
-║ Numero energy assorbita dall'inib 179240
-║ Numero energy assorbita dall'inib nuova 12986
-║ Numero scissioni negate dall'inib 408
-║ Numero scissioni negate dall'inib 26
-║ Prelevo energy per la power_plant
+Number of atoms: 2232
+Number of new atoms: 1232
+Energy produced: 41896
+New energy produced: 41896
+Number of waste atoms: 34
+Number of new waste atoms: 34
+Number of fissions performed by inhibitor: 266
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
 
-╔═════════════════════════════╗
-║          GIORNO  7          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 8022
-║ Numero nuovi atoms 1609
-║ Energia prodotta 500
-║ Energia prodotta nuova 100
-║ Numero scorie 739
-║ Numero nuove scorie 91
-║ Numero scissioni effettuate dall'inib 1761
-║ Numero energy assorbita dall'inib 206043
-║ Numero energy assorbita dall'inib nuova 26803
-║ Numero scissioni negate dall'inib 468
-║ Numero scissioni negate dall'inib 60
-║ Prelevo energy per la power_plant
+*****************************
+*          DAY  3           *
+*****************************
 
-╔═════════════════════════════╗
-║          GIORNO  8          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 9629
-║ Numero nuovi atoms 1607
-║ Energia prodotta 500
-║ Energia prodotta nuova 100
-║ Numero scorie 832
-║ Numero nuove scorie 93
-║ Numero scissioni effettuate dall'inib 1961
-║ Numero energy assorbita dall'inib 232412
-║ Numero energy assorbita dall'inib nuova 26369
-║ Numero scissioni negate dall'inib 516
-║ Numero scissioni negate dall'inib 48
-║ Prelevo energy per la power_plant
+Number of atoms: 2948
+Number of new atoms: 716
+Energy produced: 77120
+New energy produced: 35324
+Number of waste atoms: 76
+Number of new waste atoms: 42
+Number of fissions performed by inhibitor: 524
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
 
-╔═════════════════════════════╗
-║          GIORNO  9          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 10688
-║ Numero nuovi atoms 1059
-║ Energia prodotta 496
-║ Energia prodotta nuova 96
-║ Numero scorie 903
-║ Numero nuove scorie 71
-║ Numero scissioni effettuate dall'inib 2091
-║ Numero energy assorbita dall'inib 247920
-║ Numero energy assorbita dall'inib nuova 15508
-║ Numero scissioni negate dall'inib 558
-║ Numero scissioni negate dall'inib 42
-║ Prelevo energy per la power_plant
+*****************************
+*          DAY  4           *
+*****************************
 
-╔═════════════════════════════╗
-║          GIORNO 10          ║
-╠═════════════════════════════╝
-║
-║ Numero atoms 12263
-║ Numero nuovi atoms 1575
-║ Energia prodotta 498
-║ Energia prodotta nuova 102
-║ Numero scorie 977
-║ Numero nuove scorie 74
-║ Numero scissioni effettuate dall'inib 2240
-║ Numero energy assorbita dall'inib 265628
-║ Numero energy assorbita dall'inib nuova 17708
-║ Numero scissioni negate dall'inib 596
-║ Numero scissioni negate dall'inib 38
-║ Prelevo energy per la power_plant
+Number of atoms: 3662
+Number of new atoms: 714
+Energy produced: 109324
+New energy produced: 32304
+Number of waste atoms: 119
+Number of new waste atoms: 43
+Number of fissions performed by inhibitor: 781
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
 
-Il valore di exit_flag è 1
-╔═════════════════════════════╗
-║          Terminato          ║
-╠═════════════════════════════╢
+*****************************
+*          DAY  5           *
+*****************************
+
+Number of atoms: 4370
+Number of new atoms: 708
+Energy produced: 138972
+New energy produced: 29748
+Number of waste atoms: 165
+Number of new waste atoms: 46
+Number of fissions performed by inhibitor: 1035
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+*****************************
+*          DAY  6           *
+*****************************
+
+Number of atoms: 5071
+Number of new atoms: 701
+Energy produced: 172404
+New energy produced: 33532
+Number of waste atoms: 214
+Number of new waste atoms: 49
+Number of fissions performed by inhibitor: 1285
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+*****************************
+*          DAY  7           *
+*****************************
+
+Number of atoms: 6301
+Number of new atoms: 1230
+Energy produced: 201624
+New energy produced: 29320
+Number of waste atoms: 249
+Number of new waste atoms: 35
+Number of fissions performed by inhibitor: 1550
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+*****************************
+*          DAY  8           *
+*****************************
+
+Number of atoms: 7516
+Number of new atoms: 1215
+Energy produced: 230580
+New energy produced: 29056
+Number of waste atoms: 288
+Number of new waste atoms: 39
+Number of fissions performed by inhibitor: 1804
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+*****************************
+*          DAY  9           *
+*****************************
+
+Number of atoms: 8721
+Number of new atoms: 1205
+Energy produced: 265240
+New energy produced: 34760
+Number of waste atoms: 339
+Number of new waste atoms: 51
+Number of fissions performed by inhibitor: 2060
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+*****************************
+*          DAY 10           *
+*****************************
+
+Number of atoms: 9943
+Number of new atoms: 1222
+Energy produced: 292820
+New energy produced: 27680
+Number of waste atoms: 378
+Number of new waste atoms: 39
+Number of fissions performed by inhibitor: 2321
+INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
+INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+Fetching energy for the power plant
+
+exit_flag:1, Stop Simulation.
+Made by: Grillo Giovanni, Olivero Alessandro, Corrao Mario

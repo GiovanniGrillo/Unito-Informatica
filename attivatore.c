@@ -1,7 +1,6 @@
 #include "lib_header.h"
 
 int main() {
-    printf("\n\n\033[1;31mBenvenuto in attivatore!\033[0m\n");
     loadIPCs();
 
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
@@ -21,12 +20,12 @@ int main() {
             }
             attShm();
             ++vars->atom_Fork;
-            printf("\033[1;31mMessaggio inviato all'atomo. Messaggio n°%d\033[0m\n", i+1);
+            //printf("[1;31mMessaggio inviato all'atomo. Messaggio n°%d \n", i+1);
             ++i;
             dettShm();
         }
         releaseSem(sem_activator, 0);
-        // nanosleep(&req, NULL);
+        nanosleep(&req, NULL);
     }
     unloadIPCs();
     return 0;

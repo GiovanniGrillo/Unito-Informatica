@@ -14,6 +14,7 @@ typedef struct Var {
     int N_NUOVI_ATOMI;
     int STEP_ALIMENTAZIONE;
     int STEP_ATTIVATORE;
+    int STEP_INHIBITOR;
 } Var;
 
 typedef struct PowerPlant{
