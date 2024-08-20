@@ -58,15 +58,12 @@ struct msg_buffer {
     int shm_power_plant;  PowerPlant* power_plant;
     int shm_inhibitor;    Inhibitor* inhibitor;
 
-/* Termination Flags and Signal Control*/
-    int flag_storm;
-
 /* Files */
     FILE* sim_Input;
     FILE* sim_Output;
 
 /* Global Variables */
-    pid_t atom_pid;
+    pid_t Atom_pid;
     pid_t Activator_pid;
     pid_t Powersupply_pid;
     pid_t Inhibitor_pid;

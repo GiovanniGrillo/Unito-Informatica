@@ -6,7 +6,7 @@ int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
 
-void do_fission(Atom a_PADRE) {
+void do_fission(Atom atom_parent) {
     // printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
     if (inhibitor->inhibitor_setup == true) {
         int random = rand() % 5;
@@ -22,7 +22,7 @@ void do_fission(Atom a_PADRE) {
     }
 
     // Controllo se è minore delle condizioni
-    if (a_PADRE.atomic_number <= vars->MIN_N_ATOMICO) {
+    if (atom_parent.atomic_number <= vars->MIN_N_ATOMICO) {
         ++power_plant->waste_atoms;
         --power_plant->atom_count;
         --vars->atom_Fork;
@@ -31,13 +31,13 @@ void do_fission(Atom a_PADRE) {
         endProcess();
     } else {
        // int numero_casuale = rand() % (a_PADRE.atomic_number - 1) + 1;
-        struct Atom figlio;
+        struct Atom child;
         //GUARDA QUI
-        figlio.atomic_number   = a_PADRE.atomic_number / 2;
-        a_PADRE.atomic_number = a_PADRE.atomic_number - figlio.atomic_number;
+        child.atomic_number   = atom_parent.atomic_number / 2;
+        atom_parent.atomic_number = atom_parent.atomic_number - child.atomic_number;
         int liberata = 0;
-        if(a_PADRE.atomic_number == figlio.atomic_number)
-            liberata = energy(a_PADRE.atomic_number, figlio.atomic_number);
+        if(atom_parent.atomic_number == child.atomic_number)
+            liberata = energy(atom_parent.atomic_number, child.atomic_number);
 
         if (inhibitor->inhibitor_setup == true) {
             float rand_num = (float)rand() / RAND_MAX * 0.5;
@@ -60,7 +60,7 @@ void do_fission(Atom a_PADRE) {
                 dettShm();
                 deallocIPC();
                 kill(Activator_pid,   SIGTERM);
-                kill(atom_pid,        SIGTERM);
+                kill(Atom_pid,        SIGTERM);
                 kill(Powersupply_pid, SIGTERM);
                 endProcess();
             }
@@ -77,7 +77,7 @@ void do_fission(Atom a_PADRE) {
         ++inhibitor->done_fission;
         // printf("done_fission: %d \n", inhibitor->done_fission);
 
-        atoms[power_plant->atom_count] = figlio;
+        atoms[power_plant->atom_count] = child;
 
         // printf("\n\033[1;34m il valore di fork atoms è %d e abbiamo %d atoms nella power_plant \033[0m ", vars->atomFork, power_plant->n_atomi);
         dettShm();

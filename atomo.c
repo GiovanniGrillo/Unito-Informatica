@@ -20,30 +20,34 @@ int main() {
 
             if (power_plant->atom_count > 0) {
                 int numero_casuale = rand() % (power_plant->atom_count - 1) + 1;
-                Atom a_PADRE = atoms[(numero_casuale)];
+                Atom atom_parent = atoms[(numero_casuale)];
 
-                switch (a_PADRE.Atom_pid = newProcess()) {
+                switch (atom_parent.Atom_pid = newProcess()) {
                     case -1:
                         perror("MELTDOWN");
                         exit(1);
                         break;
                     case 0:
-                        do_fission(a_PADRE);
+                        do_fission(atom_parent);
                         endProcess();
                         break;
                     default:
                         break;
                 }
+                
                 //ogni received_messages multiplo di N_MSG/2 
                 if(received_messages %((vars->N_MSG)/2) == 0){
-                    printf("\nReceived messages: %d\n", received_messages);
+                    printf("\n\033[1mREPORT:\033[0m\n");
+                    printf("Received messages: %d\n", received_messages);
                     sim_overview();
                 }
             }
             else {
                 printf("atoms are transferred to the power plant");
             }
+            //dettShm();
         }
+
     }
     unloadIPCs();
     return 0;

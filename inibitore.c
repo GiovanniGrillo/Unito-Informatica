@@ -1,11 +1,11 @@
 #include "lib_header.h"
 
 int main() {
+    loadIPCs();
     attShm();
     struct timespec att = {0, vars->STEP_INHIBITOR};
     dettShm();
 
-    loadIPCs();
 
     if(signal(SIGINT, handle_sig_inhibitor) == SIG_ERR) ERROR;
 

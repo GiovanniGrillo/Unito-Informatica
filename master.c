@@ -4,13 +4,13 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
 
-    createIPCS("Progetto.conf");
+    createIPCS("sim.conf");
 
-    if (set_sem(sem_shm,        0, 1) == -1) ERROR;
+    if (set_sem(sem_shm,       0, 1) == -1) ERROR;
     if (set_sem(sem_activator, 0, 1) == -1) ERROR;
     if (set_sem(sem_fission,   0, 1) == -1) ERROR;
-    if (set_sem(sem_processes,   0, 1) == -1) ERROR;
-    if (set_sem(sem_inhibitor,  0, 1) == -1) ERROR;
+    if (set_sem(sem_processes, 0, 1) == -1) ERROR;
+    if (set_sem(sem_inhibitor, 0, 1) == -1) ERROR;
 
     attShm();
     create_atoms(vars->N_ATOMI_INIT);
@@ -20,21 +20,21 @@ int main() {
     if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
 
 
-    printf("Attivatore.c    -run\n");
+    printf("attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
         case -1:
             ERROR;
 
         case 0:
             execl("./attivatore", "./attivatore", NULL);
-            printf("attivatore non avviato correttamente\n");
+            printf("activator not started correctly\n");
             ERROR;
 
         default:
             break;
     }
 
-    printf("Alimentatore.c  -run\n");
+    printf("alimentatore.c  -run\n");
 
     switch ((Powersupply_pid = fork())) {
         case -1:
@@ -42,35 +42,35 @@ int main() {
 
         case 0:
             execl("./alimentatore", "./alimentatore", NULL);
-            printf("alimentatore non avviato correttamente\n");
+            printf("power supply not started correctly\n");
             ERROR;
 
         default:
             break;
     }
 
-    printf("Inibitore.c  -run\n");
+    printf("inibitore.c     -run\n");
     switch ((Inhibitor_pid = fork())) {
         case -1:
             ERROR;
 
         case 0:
-            execl("./inhibitor", "./inhibitor", NULL);
-            printf("inhibitor non avviato correttamente\n");
+            execl("./inibitore", "./inibitore", NULL);
+            printf("Inhibitor not started correctly\n");
             ERROR;
 
         default:
             break;
     }
 
-    printf("Atomo.c   -run\n");
-    switch ((atom_pid = fork())) {
+    printf("atomo.c         -run\n");
+    switch ((Atom_pid = fork())) {
         case -1:
             ERROR;
 
         case 0:
             execl("./atomo", "./atomo", NULL);
-            printf("atomo non avviato correttamente\n");
+            printf("atom not started correctly\n");
             ERROR;
 
         default:

@@ -14,7 +14,7 @@ int main(){
 
             if (create_atoms(vars->N_NUOVI_ATOMI) == -1) ERROR;
 
-        printf("\n Power supply created %d new atoms. Actual atoms count: %d \n", vars->N_NUOVI_ATOMI, power_plant->atom_count);
+        printf("\nPower supply created %d new atoms. Actual atoms count: %d \n", vars->N_NUOVI_ATOMI, power_plant->atom_count);
 
         dettShm();
         releaseSem(sem_processes, 0);
