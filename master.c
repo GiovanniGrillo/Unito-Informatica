@@ -16,8 +16,7 @@ int main() {
     create_atoms(vars->N_ATOMI_INIT);
     dettShm();
 
-
-    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
+    setup_signal_processes();
 
 
     printf("attivatore.c    -run\n");

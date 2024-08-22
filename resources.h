@@ -1,5 +1,5 @@
 /*Simulation Duration */
-#define SIM_DURATION 10
+#define SIM_DURATION 15
 
 /* Data Structures */
 typedef struct Var {
@@ -57,6 +57,9 @@ struct msg_buffer {
     int shm_stack;        int* stack;
     int shm_power_plant;  PowerPlant* power_plant;
     int shm_inhibitor;    Inhibitor* inhibitor;
+
+/* Signal */
+    
 
 /* Files */
     FILE* sim_Input;

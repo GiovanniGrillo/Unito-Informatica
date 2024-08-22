@@ -3,8 +3,8 @@
 int main() {
     srand(time(NULL));
     loadIPCs();
-    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
-
+    setup_signal_processes();
+    
     while(vars->exit_flag != 1) {
         while ((vars->atom_Fork > 0)) {
             if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;

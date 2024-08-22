@@ -135,6 +135,7 @@ void unloadIPCs() {
     return;
 }
 
+
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;
     s_ops.sem_num = n_sem;
@@ -216,6 +217,28 @@ void handle_sig_inhibitor(int sig) {
     dettShm();
 }
 
+void setup_signal_inhibitor() {
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = handle_sig_inhibitor;
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
+
+    if(sigaction(SIGINT, &sa, NULL) == -1) ERROR;
+}
+
+void setup_signal_processes() {
+   struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    sa.sa_handler = handle_sigint;
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
+
+    if(sigaction(SIGINT, &sa, NULL) == -1) ERROR;
+}
+
 void sim_overview() {
     attShm();
     printf("Atom count: %d\n", power_plant->atom_count);
@@ -223,7 +246,7 @@ void sim_overview() {
     printf("Power plant energy: %d\n", power_plant->energy);
 
     if (inhibitor->inhibitor_setup == true) {
-        printf("\nFissions denied by inhibitor: %d\n", inhibitor->denied_fission);
+        printf("Fissions denied by inhibitor: %d\n", inhibitor->denied_fission);
         printf("Energy absorbed by inhibitor: %d\n", inhibitor->absorbed_energy);
     }
     dettShm();

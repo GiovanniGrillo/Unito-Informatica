@@ -3,7 +3,8 @@
 int main() {
     loadIPCs();
 
-    if(signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
+    setup_signal_processes();
+
     struct timespec req = {0, vars->STEP_ATTIVATORE};
     message.msg_type = 1;
 

@@ -3,7 +3,7 @@
 int main(){
     setbuf(stdout, NULL);
     loadIPCs();
-    if (signal(SIGINT, handle_sigint) == SIG_ERR) ERROR;
+    setup_signal_processes();
 
     struct timespec req = {0, vars->STEP_ALIMENTAZIONE};
 
@@ -12,9 +12,7 @@ int main(){
         reserveSem(sem_processes, 0);
         attShm();
 
-            if (create_atoms(vars->N_NUOVI_ATOMI) == -1) ERROR;
-
-        printf("\nPower supply created %d new atoms. Actual atoms count: %d \n", vars->N_NUOVI_ATOMI, power_plant->atom_count);
+        if (create_atoms(vars->N_NUOVI_ATOMI) == -1) ERROR;
 
         dettShm();
         releaseSem(sem_processes, 0);
