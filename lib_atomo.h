@@ -32,7 +32,6 @@ void do_fission(Atom atom_parent) {
     } else {
        // int numero_casuale = rand() % (a_PADRE.atomic_number - 1) + 1;
         struct Atom child;
-        //GUARDA QUI
         child.atomic_number   = atom_parent.atomic_number / 2;
         atom_parent.atomic_number = atom_parent.atomic_number - child.atomic_number;
         int liberata = 0;

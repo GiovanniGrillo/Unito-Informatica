@@ -2,8 +2,7 @@
 
 int main() {
     loadIPCs();
-
-    setup_signal_processes();
+    setup_signal_handler(NULL);
 
     struct timespec req = {0, vars->STEP_ATTIVATORE};
     message.msg_type = 1;
@@ -21,7 +20,6 @@ int main() {
             }
             attShm();
             ++vars->atom_Fork;
-            //printf("[1;31mMessaggio inviato all'atomo. Messaggio n°%d \n", i+1);
             ++i;
             dettShm();
         }

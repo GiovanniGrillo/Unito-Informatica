@@ -16,7 +16,7 @@ int main() {
     create_atoms(vars->N_ATOMI_INIT);
     dettShm();
 
-    setup_signal_processes();
+    setup_signal_handler(NULL);
 
 
     printf("attivatore.c    -run\n");

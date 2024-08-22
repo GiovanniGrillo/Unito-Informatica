@@ -58,9 +58,6 @@ struct msg_buffer {
     int shm_power_plant;  PowerPlant* power_plant;
     int shm_inhibitor;    Inhibitor* inhibitor;
 
-/* Signal */
-    
-
 /* Files */
     FILE* sim_Input;
     FILE* sim_Output;

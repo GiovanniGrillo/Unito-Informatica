@@ -3,12 +3,11 @@
 int main(){
     setbuf(stdout, NULL);
     loadIPCs();
-    setup_signal_processes();
+    setup_signal_handler(NULL);
 
     struct timespec req = {0, vars->STEP_ALIMENTAZIONE};
 
     while (vars->exit_flag != 1){
-
         reserveSem(sem_processes, 0);
         attShm();
 

@@ -194,7 +194,6 @@ void endProcess() {
 
 int create_atoms(int number_atoms) {
     int i = 0;
-    // printf("ehy power_plant n_atomi è uguale a %d", power_plant->atom_count);
     while (i < number_atoms) {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
         atoms[power_plant->atom_count].Atom_pid = (0);
@@ -204,39 +203,28 @@ int create_atoms(int number_atoms) {
     return 0;
 }
 
-void handle_sigint(int sig) { }
-
 void handle_sig_inhibitor(int sig) {
     attShm();
     if (inhibitor->inhibitor_setup == false) {
         inhibitor->inhibitor_setup = true;
+        printf("inhibitor_setup= %s\n", inhibitor->inhibitor_setup ? "true" : "false");
     } else {
         inhibitor->inhibitor_setup = false;
     }
-    printf("Inhibitor status: %d", inhibitor->inhibitor_setup);
     dettShm();
 }
 
-void setup_signal_inhibitor() {
+void setup_signal_handler(void (*handler)(int)) {
     struct sigaction sa;
     memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = handle_sig_inhibitor;
+
+    sa.sa_handler = (handler == NULL ? SIG_IGN : handler);
+
     sigemptyset(&sa.sa_mask);
     sigaddset(&sa.sa_mask, SIGTERM);
     sa.sa_flags = 0;
 
-    if(sigaction(SIGINT, &sa, NULL) == -1) ERROR;
-}
-
-void setup_signal_processes() {
-   struct sigaction sa;
-    memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = handle_sigint;
-    sigemptyset(&sa.sa_mask);
-    sigaddset(&sa.sa_mask, SIGTERM);
-    sa.sa_flags = 0;
-
-    if(sigaction(SIGINT, &sa, NULL) == -1) ERROR;
+    if (sigaction(SIGINT, &sa, NULL) == -1) ERROR;
 }
 
 void sim_overview() {
