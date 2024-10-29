@@ -9,8 +9,6 @@ int main() {
     dettShm();
 
     while (vars->exit_flag != 1) {
-        reserveSem(sem_inhibitor, 0);
-        releaseSem(sem_inhibitor, 0);
         nanosleep(&att, NULL);
     }
     unloadIPCs();

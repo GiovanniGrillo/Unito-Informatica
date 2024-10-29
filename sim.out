@@ -15,22 +15,24 @@ STEP_ALIMENTAZIONE:       900000000
 STEP_ATTIVATORE:          900000000
 STEP_INHIBITOR:           500000000
 
-inhibitor_setup= false
+inhibitor_setup= true
 
 
 *********************
 *      DAY  1       *
 *********************
 *
-*Number of atoms: 1000
-*Number of new atoms: 1000
-*Energy produced: 100
-*New energy produced: 100
-*Number of waste atoms: 0
-*Number of new waste atoms: 0
-*Number of fissions performed by inhibitor: 0
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+*Number of atoms: 51140
+*Number of new atoms: 51140
+*Energy produced: 23264
+*New energy produced: 23264
+*Number of waste atoms: 75
+*Number of new waste atoms: 75
+*Number of fissions performed by inhibitor: 215
+*Energy absorbed by inhibitor: 3675
+*New energy absorbed by inhibitor: 3675
+*Number of fissions denied by inhibitor: 52
+*New fissions denied by inhibitor: 52
 *Fetching energy for the power plant
 
 
@@ -38,205 +40,15 @@ inhibitor_setup= false
 *      DAY  2       *
 *********************
 *
-*Number of atoms: 101210
-*Number of new atoms: 100210
-*Energy produced: 38924
-*New energy produced: 38924
-*Number of waste atoms: 45
-*Number of new waste atoms: 45
-*Number of fissions performed by inhibitor: 255
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  3       *
-*********************
-*
-*Number of atoms: 151438
-*Number of new atoms: 50228
-*Energy produced: 73124
-*New energy produced: 34300
-*Number of waste atoms: 81
-*Number of new waste atoms: 36
-*Number of fissions performed by inhibitor: 519
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  4       *
-*********************
-*
-*Number of atoms: 201666
-*Number of new atoms: 50228
-*Energy produced: 111268
-*New energy produced: 38244
-*Number of waste atoms: 117
-*Number of new waste atoms: 36
-*Number of fissions performed by inhibitor: 783
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  5       *
-*********************
-*
-*Number of atoms: 251880
-*Number of new atoms: 50214
-*Energy produced: 153260
-*New energy produced: 42092
-*Number of waste atoms: 160
-*Number of new waste atoms: 43
-*Number of fissions performed by inhibitor: 1040
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  6       *
-*********************
-*
-*Number of atoms: 302112
-*Number of new atoms: 50232
-*Energy produced: 193868
-*New energy produced: 40708
-*Number of waste atoms: 193
-*Number of new waste atoms: 33
-*Number of fissions performed by inhibitor: 1305
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  7       *
-*********************
-*
-*Number of atoms: 402310
-*Number of new atoms: 100198
-*Energy produced: 229548
-*New energy produced: 35780
-*Number of waste atoms: 243
-*Number of new waste atoms: 50
-*Number of fissions performed by inhibitor: 1553
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  8       *
-*********************
-*
-*Number of atoms: 502543
-*Number of new atoms: 100233
-*Energy produced: 269596
-*New energy produced: 40148
-*Number of waste atoms: 278
-*Number of new waste atoms: 35
-*Number of fissions performed by inhibitor: 1821
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY  9       *
-*********************
-*
-*Number of atoms: 602752
-*Number of new atoms: 100209
-*Energy produced: 307248
-*New energy produced: 37752
-*Number of waste atoms: 323
-*Number of new waste atoms: 45
-*Number of fissions performed by inhibitor: 2075
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY 10       *
-*********************
-*
-*Number of atoms: 702981
-*Number of new atoms: 100229
-*Energy produced: 348404
-*New energy produced: 41256
-*Number of waste atoms: 353
-*Number of new waste atoms: 30
-*Number of fissions performed by inhibitor: 2334
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY 11       *
-*********************
-*
-*Number of atoms: 803170
-*Number of new atoms: 100189
-*Energy produced: 386120
-*New energy produced: 37816
-*Number of waste atoms: 388
-*Number of new waste atoms: 35
-*Number of fissions performed by inhibitor: 2558
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY 12       *
-*********************
-*
-*Number of atoms: 953426
-*Number of new atoms: 150256
-*Energy produced: 433520
-*New energy produced: 47500
-*Number of waste atoms: 436
-*Number of new waste atoms: 48
-*Number of fissions performed by inhibitor: 2862
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY 13       *
-*********************
-*
-*Number of atoms: 1053650
-*Number of new atoms: 100224
-*Energy produced: 474096
-*New energy produced: 40676
-*Number of waste atoms: 474
-*Number of new waste atoms: 38
-*Number of fissions performed by inhibitor: 3124
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
-*Fetching energy for the power plant
-
-
-*********************
-*      DAY 14       *
-*********************
-*
-*Number of atoms: 1203777
-*Number of new atoms: 150127
-*Energy produced: 500018
-*New energy produced: 26022
-*Number of waste atoms: 504
-*Number of new waste atoms: 30
-*Number of fissions performed by inhibitor: 3281
-*INHIBITOR OFF - Energy absorbed by inhibitor so far: 0
-*INHIBITOR OFF - Fissions denied by inhibitor so far: 0
+*Number of atoms: 101255
+*Number of new atoms: 50115
+*Energy produced: 47650
+*New energy produced: 24486
+*Number of waste atoms: 172
+*Number of new waste atoms: 97
+*Number of fissions performed by inhibitor: 427
+*Energy absorbed by inhibitor: 7919
+*New energy absorbed by inhibitor: 4244
+*Number of fissions denied by inhibitor: 114
+*New fissions denied by inhibitor: 62
 *Fetching energy for the power plant
