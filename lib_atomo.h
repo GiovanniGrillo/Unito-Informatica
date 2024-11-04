@@ -16,7 +16,6 @@ void do_fission(Atom atom_parent) {
             --power_plant->atom_count;
             --vars->atom_Fork;
             dettShm();
-            releaseSem(sem_fission, 0);
             endProcess();
         }
     }
@@ -27,7 +26,6 @@ void do_fission(Atom atom_parent) {
         --power_plant->atom_count;
         --vars->atom_Fork;
         dettShm();
-        releaseSem(sem_fission, 0);
         endProcess();
     } else {
        // int numero_casuale = rand() % (a_PADRE.atomic_number - 1) + 1;
@@ -80,7 +78,6 @@ void do_fission(Atom atom_parent) {
 
         // printf("\n\033[1;34m il valore di fork atoms è %d e abbiamo %d atoms nella power_plant \033[0m ", vars->atomFork, power_plant->n_atomi);
         dettShm();
-        releaseSem(sem_fission, 0);
         endProcess();
     }
 }
