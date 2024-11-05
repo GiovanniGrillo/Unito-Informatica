@@ -3,7 +3,7 @@ Starting execution of Operating Systems project
 Power plant configuration:
 SIM_DURATION:             15
 ENERGY_DEMAND:            100
-ENERGY_EXPLODE_THRESHOLD: 500000
+ENERGY_EXPLODE_THRESHOLD: 5000
 exit_flag:                0
 atomFork:                 0
 MIN_N_ATOMICO:            5
@@ -22,17 +22,17 @@ inhibitor_setup= true
 *      DAY  1       *
 *********************
 *
-*Number of atoms: 51140
-*Number of new atoms: 51140
-*Energy produced: 23264
-*New energy produced: 23264
-*Number of waste atoms: 75
-*Number of new waste atoms: 75
-*Number of fissions performed by inhibitor: 215
-*Energy absorbed by inhibitor: 3675
-*New energy absorbed by inhibitor: 3675
-*Number of fissions denied by inhibitor: 52
-*New fissions denied by inhibitor: 52
+*Number of atoms: 1000
+*Number of new atoms: 1000
+*Energy produced: 100
+*New energy produced: 100
+*Number of waste atoms: 0
+*Number of new waste atoms: 0
+*Number of fissions performed by inhibitor: 0
+*Energy absorbed by inhibitor: 0
+*New energy absorbed by inhibitor: 0
+*Number of fissions denied by inhibitor: 0
+*New fissions denied by inhibitor: 0
 *Fetching energy for the power plant
 
 
@@ -40,15 +40,17 @@ inhibitor_setup= true
 *      DAY  2       *
 *********************
 *
-*Number of atoms: 101255
-*Number of new atoms: 50115
-*Energy produced: 47650
-*New energy produced: 24486
-*Number of waste atoms: 172
-*Number of new waste atoms: 97
-*Number of fissions performed by inhibitor: 427
-*Energy absorbed by inhibitor: 7919
-*New energy absorbed by inhibitor: 4244
-*Number of fissions denied by inhibitor: 114
-*New fissions denied by inhibitor: 62
+*Number of atoms: 1000
+*Number of new atoms: 0
+*Energy produced: 0
+*New energy produced: 0
+*Number of waste atoms: 0
+*Number of new waste atoms: 0
+*Number of fissions performed by inhibitor: 0
+*Energy absorbed by inhibitor: 0
+*New energy absorbed by inhibitor: 0
+*Number of fissions denied by inhibitor: 0
+*New fissions denied by inhibitor: 0
 *Fetching energy for the power plant
+
+*** POWER PLANT BLACKOUT ***

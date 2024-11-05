@@ -4,12 +4,13 @@ int main() {
     srand(time(NULL));
     loadIPCs();
     setup_signal_handler(NULL);
-
+    
+    printf("PROVA");
     while(vars->exit_flag != 1) {
         while ((vars->atom_Fork > 0)) {
-
             if(vars->exit_flag != 0)
                 endProcess();
+                
             if (msgrcv(msg_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1)
                 continue;
 
@@ -32,11 +33,12 @@ int main() {
                     default:
                         break;
                 }
-
+                
                 if(received_messages %((vars->N_MSG)/2) == 0){
                     printf("\n\033[1mREPORT:\033[0m\n");
                     printf("Received messages: %d\n", received_messages);
                     sim_overview();
+                    
                 }
             }
             else

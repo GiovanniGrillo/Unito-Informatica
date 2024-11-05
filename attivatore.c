@@ -1,6 +1,7 @@
 #include "lib_header.h"
 
 int main() {
+    sim_overview();
     loadIPCs();
     setup_signal_handler(NULL);
 
@@ -8,7 +9,6 @@ int main() {
     message.msg_type = 1;
 
     while (vars->exit_flag != 1) {
-        reserveSem(sem_activator, 0);
         int i = 0;
         while (i < vars->N_MSG) {
             if (vars->exit_flag == 1) {
@@ -18,14 +18,12 @@ int main() {
                 ERROR;
                 exit(1);
             }
-            attShm();
             ++vars->atom_Fork;
             ++i;
-            dettShm();
         }
-        releaseSem(sem_activator, 0);
         nanosleep(&req, NULL);
     }
     unloadIPCs();
+    deallocIPC();
     return 0;
 }
