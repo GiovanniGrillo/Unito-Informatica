@@ -7,7 +7,8 @@ int energy(int n1, int n2) {
 }
 
 void do_fission(Atom atom_parent) {
-    // printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRicevuti);
+    //
+    // printf("\n\033[1;34mMessaggio ricevuto, msg n°%d  eseguo scissione\033[0m", numMessaggiRcevuti);
     if (inhibitor->inhibitor_setup == true) {
         int random = rand() % 5;
         if (random == 0) {
@@ -16,7 +17,10 @@ void do_fission(Atom atom_parent) {
             --power_plant->atom_count;
             --vars->atom_Fork;
             dettShm();
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
             endProcess();
         }
     }

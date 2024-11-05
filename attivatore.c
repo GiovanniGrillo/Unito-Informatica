@@ -1,6 +1,7 @@
 #include "lib_header.h"
 
 int main() {
+    sim_overview();
     loadIPCs();
     setup_signal_handler(NULL);
 
@@ -17,13 +18,12 @@ int main() {
                 ERROR;
                 exit(1);
             }
-            attShm();
             ++vars->atom_Fork;
             ++i;
-            dettShm();
         }
         nanosleep(&req, NULL);
     }
     unloadIPCs();
+    deallocIPC();
     return 0;
 }

@@ -3,7 +3,7 @@ Starting execution of Operating Systems project
 Power plant configuration:
 SIM_DURATION:             15
 ENERGY_DEMAND:            100
-ENERGY_EXPLODE_THRESHOLD: 500000
+ENERGY_EXPLODE_THRESHOLD: 5000
 exit_flag:                0
 atomFork:                 0
 MIN_N_ATOMICO:            5
@@ -29,8 +29,13 @@ inhibitor_setup= true
 *Number of waste atoms: 0
 *Number of new waste atoms: 0
 *Number of fissions performed by inhibitor: 0
+<<<<<<< HEAD
 *Energy absorbed by inhibitor: 1000
 *New energy absorbed by inhibitor: 1000
+=======
+*Energy absorbed by inhibitor: 0
+*New energy absorbed by inhibitor: 0
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
 *Number of fissions denied by inhibitor: 0
 *New fissions denied by inhibitor: 0
 *Fetching energy for the power plant
@@ -40,6 +45,7 @@ inhibitor_setup= true
 *      DAY  2       *
 *********************
 *
+<<<<<<< HEAD
 *Number of atoms: 101177
 *Number of new atoms: 100177
 *Energy produced: 37664
@@ -287,3 +293,19 @@ inhibitor_setup= true
 *New fissions denied by inhibitor: 66
 *Fetching energy for the power plant
 Made by: Grillo Giovanni, Olivero Alessandro, Corrao Mario
+=======
+*Number of atoms: 1000
+*Number of new atoms: 0
+*Energy produced: 0
+*New energy produced: 0
+*Number of waste atoms: 0
+*Number of new waste atoms: 0
+*Number of fissions performed by inhibitor: 0
+*Energy absorbed by inhibitor: 0
+*New energy absorbed by inhibitor: 0
+*Number of fissions denied by inhibitor: 0
+*New fissions denied by inhibitor: 0
+*Fetching energy for the power plant
+
+*** POWER PLANT BLACKOUT ***
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc

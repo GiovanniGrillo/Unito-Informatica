@@ -31,17 +31,31 @@ long int convert_to_million(int n) {
     return n * 100000000;
 }
 
+<<<<<<< HEAD
 void createIPCS(char* file);
 void create_atom_init(int n_atoms);
 
+=======
+void createIPCS(char* file); //CREA TUTTE LE RISORSE IPC NECESSARIE ALLA SIMULAZIONE
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
 
 void loadIPCs() {
-    if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
-    if ((vars            = shmat (shm_vars, NULL, 0)) == (void *) -1)                                               ERROR;
+    if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var)*1000000*sizeof(int), PERMISSIONS)) == -1) ERROR;
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
+<<<<<<< HEAD
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                    PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                    PERMISSIONS)) == -1) ERROR;
 
+=======
+
+    if ((vars            = shmat (shm_vars, NULL, 0)) == (void *) -1)                                               ERROR;
+    
+    if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'q'), 1,                                             PERMISSIONS)) == -1) ERROR;
+    if ((sem_atom        = semget(ftok(FTOK_FILE, 'k'), 1,                                             PERMISSIONS)) == -1) ERROR;
+    if ((sem_var         = semget(ftok(FTOK_FILE, 'v'), 1,                                             PERMISSIONS)) == -1) ERROR;
+
+    if ((sem_shm         = semget(ftok(FTOK_FILE, 'c'), 1,                                    PERMISSIONS)) == -1) ERROR;
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                    PERMISSIONS)) == -1) ERROR;
     if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int)*10),    PERMISSIONS)) == -1) ERROR;
@@ -54,9 +68,16 @@ void deallocIPC(){
     if (shmctl(shm_vars,       IPC_RMID, 0) == -1)    ERROR;
     if (shmctl(shm_atoms,     IPC_RMID, 0) == -1)     ERROR;
     if (shmctl(shm_power_plant,  IPC_RMID, 0) == -1)  ERROR;
+<<<<<<< HEAD
     if (msgctl(msg_stack,      IPC_RMID, 0) == -1)    ERROR;
     if (semctl(sem_atom     ,IPC_RMID, 0) == -1)      ERROR;
+=======
+    if (semctl(sem_shm,       IPC_RMID, 0) == -1)     ERROR;
+    if (semctl(sem_var,       IPC_RMID, 0) == -1)     ERROR;
+    if (semctl(sem_atom,       IPC_RMID, 0) == -1)     ERROR;
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
     if (semctl(sem_inhibitor, IPC_RMID, 0) == -1)     ERROR;
+    if (msgctl(msg_stack,      IPC_RMID, 0) == -1)    ERROR;
     if (semctl(sem_power_plant,  IPC_RMID, 0) == -1)  ERROR;
     if (shmctl(shm_inhibitor, IPC_RMID, 0) == -1)     ERROR;
     printf("\n\nAll IPC resources have been successfully deallocated.\n");
@@ -85,19 +106,46 @@ int releaseSem(int id_sem, int n_sem) {
     return semop(id_sem, &s_ops, 1);
 }
 
+
 void attShm() {
+<<<<<<< HEAD
+=======
+   /*reserveSem (sem_shm,0);
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
     if ((inhibitor    = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
+    */
     return;
 }
 
+
+// void attShm(void **shm_segment, int shm_id) {
+//     reserveSem(sem_shm, 0);
+//     if ((*shm_segment = shmat(shm_id, NULL, 0)) == (void*) -1) ERROR;
+//     releaseSem(sem_shm, 0);
+// }
+
+
 void dettShm() {
-    if((shmdt(atoms))       == -1) ERROR;
+   /*if((shmdt(atoms))       == -1) ERROR;
     if((shmdt(power_plant)) == -1) ERROR;
     if((shmdt(inhibitor))   == -1) ERROR;
+<<<<<<< HEAD
+=======
+    releaseSem(sem_shm,0);
+    */
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
     return;
 }
+
+// void dettShm(void *shm_segment) {
+//     reserveSem(sem_shm, 0);
+//     if (shmdt(shm_segment) == -1) ERROR;
+//     releaseSem(sem_shm, 0);
+// }
+
+
 
 union semun {
     int val;
@@ -133,8 +181,12 @@ int create_atoms(int number_atoms) {
     return 0;
 }
 
+<<<<<<< HEAD
 void handle_sig_inhibitor() {
     reserveSem(sem_inhibitor, 0);
+=======
+void handle_sig_inhibitor(int sig) {
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
     attShm();
     if (inhibitor->inhibitor_setup == false) {
         inhibitor->inhibitor_setup = true;
@@ -143,7 +195,6 @@ void handle_sig_inhibitor() {
         inhibitor->inhibitor_setup = false;
     }
     dettShm();
-    releaseSem(sem_inhibitor, 0);
 }
 
 void setup_signal_handler(void (*handler)(int)) {
@@ -173,4 +224,10 @@ void sim_overview() {
 }
 
 
+<<<<<<< HEAD
 void daily_log();
+=======
+void daily_log(); //SIMULAZIONE GIORNALIERA
+
+int create_atom_init(int n_atoms); //CREA n_atoms INIZIALI
+>>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
