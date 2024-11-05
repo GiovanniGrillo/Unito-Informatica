@@ -8,7 +8,6 @@ int main() {
     message.msg_type = 1;
 
     while (vars->exit_flag != 1) {
-        reserveSem(sem_activator, 0);
         int i = 0;
         while (i < vars->N_MSG) {
             if (vars->exit_flag == 1) {
@@ -23,7 +22,6 @@ int main() {
             ++i;
             dettShm();
         }
-        releaseSem(sem_activator, 0);
         nanosleep(&req, NULL);
     }
     unloadIPCs();
