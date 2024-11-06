@@ -41,6 +41,8 @@ void loadIPCs() {
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((sem_var        = semget(ftok(FTOK_FILE, 'z'), 1,                                      PERMISSIONS)) == -1) ERROR;
+
 
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                     PERMISSIONS)) == -1) ERROR;
@@ -54,12 +56,16 @@ void deallocIPC(){
     if (shmctl(shm_vars,       IPC_RMID, 0) == -1)    ERROR;
     if (shmctl(shm_atoms,     IPC_RMID, 0) == -1)     ERROR;
     if (shmctl(shm_power_plant,  IPC_RMID, 0) == -1)  ERROR;
+    if (shmctl(shm_inhibitor, IPC_RMID, 0) == -1)     ERROR;
+
     if (msgctl(msg_stack,      IPC_RMID, 0) == -1)    ERROR;
+
     if (semctl(sem_atom     ,IPC_RMID, 0) == -1)      ERROR;
     if (semctl(sem_inhibitor, IPC_RMID, 0) == -1)     ERROR;
     if (semctl(sem_power_plant,  IPC_RMID, 0) == -1)  ERROR;
-    if (shmctl(shm_inhibitor, IPC_RMID, 0) == -1)     ERROR;
-    printf("\n\nAll IPC resources have been successfully deallocated.\n");
+    if (semctl(sem_var    ,IPC_RMID, 0) == -1)      ERROR;
+
+    printf("\nAll IPC resources have been successfully deallocated.\n");
     return;
 }
 
@@ -67,7 +73,6 @@ void unloadIPCs() {
     if((shmdt(vars)) == -1) ERROR;
     return;
 }
-
 
 int reserveSem(int id_sem, int n_sem) {
     struct sembuf s_ops;

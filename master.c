@@ -9,6 +9,8 @@ int main() {
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
+    if (set_sem(sem_var,         0, 1) == -1) ERROR;
+
 
     //DA VEDERE SE SERVONO
     if ((power_plant = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
@@ -115,11 +117,13 @@ void createIPCS(char* file) {
     vars->STEP_INHIBITOR = convert_to_million(vars->STEP_INHIBITOR);         fprintf(sim_Output, "STEP_INHIBITOR: %19d\n",          vars->STEP_INHIBITOR);
     fscanf(sim_Input, "\n");                                                 fprintf(sim_Output, "\n");
 
-    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                                IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_var         = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),                             IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
