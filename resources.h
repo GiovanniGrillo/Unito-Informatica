@@ -44,18 +44,10 @@ struct msg_buffer {
     int msg_stack;
 
 /* Semaphores */
-<<<<<<< HEAD
     int sem_var;
     int sem_power_plant;
     int sem_inhibitor;
     int sem_atom;
-=======
-    int sem_atom;
-    int sem_inhibitor;
-    int sem_power_plant;
-    int sem_shm;
-    int sem_var;
->>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
 
 /* Shared Memory*/
     int shm_atoms;        Atom* atoms;

@@ -5,7 +5,6 @@ int main() {
     loadIPCs();
     setup_signal_handler(NULL);
     
-    printf("PROVA");
     while(vars->exit_flag != 1) {
         while ((vars->atom_Fork > 0)) {
             if(vars->exit_flag != 0)

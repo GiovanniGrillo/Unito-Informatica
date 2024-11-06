@@ -17,10 +17,6 @@ void do_fission(Atom atom_parent) {
             --power_plant->atom_count;
             --vars->atom_Fork;
             dettShm();
-<<<<<<< HEAD
-
-=======
->>>>>>> ef8af0c9383d666f8a380786c6286765769994bc
             endProcess();
         }
     }
