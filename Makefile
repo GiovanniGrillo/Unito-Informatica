@@ -1,7 +1,7 @@
 all: clear alimentatore attivatore atomo inibitore master
 
 alimentatore: alimentatore.c
-	gcc alimentatore.c -o alimentatore -Wvla -Wextra
+	gcc alimentatore.c -o alimentatore -Wvla -Wextra -Werror
 
 attivatore: attivatore.c
 	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror
