@@ -1,23 +1,20 @@
 #include "lib_header.h"
 
 int main() {
-    printf("Program starting...\n");
-
-    setup_signal_handler(NULL);
     setbuf(stdout, NULL);
     srand(time(NULL));
 
     createIPCS("sim.conf");
-    if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
-    if (set_sem(sem_atom,        0, 1) == -1) ERROR;
+
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
-    if (set_sem(sem_var,         0, 1) == -1) ERROR;
+    if (set_sem(sem_atom,        0, 1) == -1) ERROR;
+    if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
 
     //DA VEDERE SE SERVONO
     if ((power_plant = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,      NULL,0)) == (void*) -1) ERROR;
 
-    create_atom_init(vars->N_ATOMI_INIT);
+    create_atoms_init(vars->N_ATOMI_INIT);
 
     setup_signal_handler(NULL);
 
@@ -82,7 +79,6 @@ int main() {
     daily_log();
 
     printf("\nEnd\n");
-    if ((shmdt(atoms)) == -1) ERROR;
     deallocIPC();
     return 0;
 }
@@ -124,7 +120,6 @@ void createIPCS(char* file) {
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_var         = semget(ftok(FTOK_FILE, 'k'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),                             IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -153,7 +148,7 @@ void createIPCS(char* file) {
     setbuf(sim_Output, NULL);
     return;
 }
-void create_atom_init(int n_atoms) {
+void create_atoms_init(int n_atoms) {
     pid_t pid;
     reserveSem(sem_atom, 0);
     reserveSem(sem_power_plant, 0);

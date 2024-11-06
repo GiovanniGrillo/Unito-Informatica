@@ -32,20 +32,20 @@ long int convert_to_million(int n) {
 }
 
 void createIPCS(char* file);
-void create_atom_init(int n_atoms);
+void create_atoms_init(int n_atoms);
 
 
 void loadIPCs() {
-    if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var)*1000000*sizeof(int), PERMISSIONS)) == -1) ERROR;
+    if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
+    if ((vars            = shmat (shm_vars, NULL, 0)) == (void *) -1)                                               ERROR;
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
-    if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                    PERMISSIONS)) == -1) ERROR;
-    if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                    PERMISSIONS)) == -1) ERROR;
-    if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                    PERMISSIONS)) == -1) ERROR;
-    if ((sem_var         = semget(ftok(FTOK_FILE, 'k'), 1,                                    PERMISSIONS)) == -1) ERROR;
+    if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                     PERMISSIONS)) == -1) ERROR;
 
-    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                       PERMISSIONS)) == -1) ERROR;
-    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int)*10),  PERMISSIONS)) == -1) ERROR;
-    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),   PERMISSIONS)) == -1) ERROR;
+    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
+    if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int)*10),   PERMISSIONS)) == -1) ERROR;
+    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),    PERMISSIONS)) == -1) ERROR;
     return;
 }
 
@@ -57,7 +57,6 @@ void deallocIPC(){
     if (msgctl(msg_stack,      IPC_RMID, 0) == -1)    ERROR;
     if (semctl(sem_atom     ,IPC_RMID, 0) == -1)      ERROR;
     if (semctl(sem_inhibitor, IPC_RMID, 0) == -1)     ERROR;
-    if (msgctl(msg_stack,      IPC_RMID, 0) == -1)    ERROR;
     if (semctl(sem_power_plant,  IPC_RMID, 0) == -1)  ERROR;
     if (shmctl(shm_inhibitor, IPC_RMID, 0) == -1)     ERROR;
     printf("\n\nAll IPC resources have been successfully deallocated.\n");
@@ -86,7 +85,6 @@ int releaseSem(int id_sem, int n_sem) {
     return semop(id_sem, &s_ops, 1);
 }
 
-
 void attShm() {
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
@@ -100,8 +98,6 @@ void dettShm() {
     if((shmdt(inhibitor))   == -1) ERROR;
     return;
 }
-
-
 
 union semun {
     int val;
@@ -147,6 +143,7 @@ void handle_sig_inhibitor() {
         inhibitor->inhibitor_setup = false;
     }
     dettShm();
+    releaseSem(sem_inhibitor, 0);
 }
 
 void setup_signal_handler(void (*handler)(int)) {
