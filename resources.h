@@ -1,5 +1,6 @@
+
 /*Simulation Duration */
-#define SIM_DURATION 15
+#define SIM_DURATION 10
 
 /* Data Structures */
 typedef struct Var {

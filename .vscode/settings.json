@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "lib_header.h": "c",
+        "ipc.h": "c"
+    }
+}

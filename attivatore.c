@@ -1,7 +1,6 @@
-#include "lib_header.h"
+#include "lib_header.c"
 
 int main() {
-    //cccc
     loadIPCs();
     setup_signal_handler(NULL);
 
@@ -18,10 +17,9 @@ int main() {
                 ERROR;
                 exit(1);
             }
-            attShm();
+            
             ++vars->atom_Fork;
             ++i;
-            dettShm();
         }
         nanosleep(&req, NULL);
     }

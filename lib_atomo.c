@@ -1,7 +1,5 @@
 #include "lib_header.h"
 
-int received_messages = 0;
-
 int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
@@ -15,9 +13,7 @@ void do_fission(Atom atom_parent) {
             ++power_plant->waste_atoms;
             --power_plant->atom_count;
             --vars->atom_Fork;
-            dettShm();
-
-            endProcess();
+            exit_handler();
         }
     }
 
@@ -26,8 +22,7 @@ void do_fission(Atom atom_parent) {
         ++power_plant->waste_atoms;
         --power_plant->atom_count;
         --vars->atom_Fork;
-        dettShm();
-        endProcess();
+        exit_handler();
     } else {
        // int numero_casuale = rand() % (a_PADRE.atomic_number - 1) + 1;
         struct Atom child;
@@ -55,12 +50,11 @@ void do_fission(Atom atom_parent) {
                 vars->exit_flag = 1;
                 printf("\nPower plant exploded, energy: %d > ENERGY_EXPLODE_THRESHOLD: %d\n", power_plant->energy, vars->ENERGY_EXPLODE_THRESHOLD);
 
-                dettShm();
                 deallocIPC();
                 kill(Activator_pid,   SIGTERM);
                 kill(Atom_pid,        SIGTERM);
                 kill(Powersupply_pid, SIGTERM);
-                endProcess();
+                exit_handler();
             }
         }
 
@@ -78,7 +72,32 @@ void do_fission(Atom atom_parent) {
         atoms[power_plant->atom_count] = child;
 
         // printf("\n\033[1;34m il valore di fork atoms è %d e abbiamo %d atoms nella power_plant \033[0m ", vars->atomFork, power_plant->n_atomi);
-        dettShm();
-        endProcess();
+        exit_handler();
     }
+}
+
+void sim_overview(int msg_received) {
+    reserveSem(sem_power_plant, 0);
+    reserveSem(sem_inhibitor, 0);
+    
+    printf("\n\033[1mREPORT:\033[0m");
+    printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
+    printf("Received messages: %d\n", msg_received);
+    printf("Atom count: %d\n", power_plant->atom_count);
+    printf("Fissions completed: %d\n", inhibitor->done_fission);
+    printf("Power plant energy: %d\n", power_plant->energy);
+
+    if (inhibitor->inhibitor_setup == true) {
+        printf("Fissions denied by inhibitor: %d\n", inhibitor->denied_fission);
+        printf("Energy absorbed by inhibitor: %d\n", inhibitor->absorbed_energy);
+
+    }
+    releaseSem(sem_power_plant, 0);
+    releaseSem(sem_inhibitor, 0);
+    
+}
+
+void exit_handler(){
+    dettShm();
+    exit(0);
 }

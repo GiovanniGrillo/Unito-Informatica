@@ -1,1 +1,9 @@
-The End!
+Lib_header:
+-pulire le funzioni e lasciare la loro firma(prototipo). Seguire con la implementazione dentro i file.c 
+Make:
+-RIvedere la struttura di compilazione del make. (le deipendenze)
+IPCs:
+-Togliere semafori inutili
+-Inserire semaforo per ogni struttura di memoria condivisa
+Inibitore.c:
+-Trasferire il "funzonamento" di inibitore all'interno di inibitore.c (togliere le varie implementazioni dalle stampe ecc.ecc.)
