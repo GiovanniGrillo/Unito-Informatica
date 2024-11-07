@@ -98,6 +98,8 @@ void sim_overview(int msg_received) {
 }
 
 void exit_handler(){
-    dettShm();
+    if ((shmdt(atoms))       == -1) ERROR;
+    if ((shmdt(power_plant)) == -1) ERROR;
+    if ((shmdt(inhibitor))   == -1) ERROR;
     exit(0);
 }

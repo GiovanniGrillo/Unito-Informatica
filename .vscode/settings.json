@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "lib_header.h": "c",
-        "ipc.h": "c"
+        "ipc.h": "c",
+        "stdio.h": "c",
+        "resources.h": "c",
+        "string.h": "c",
+        "stdlib.h": "c"
     }
 }

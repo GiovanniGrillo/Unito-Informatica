@@ -6,7 +6,7 @@ IPCs: DONE
 -Inserire semaforo per ogni struttura di memoria condivisa                                                                      ✓
 
 Make:
--RIvedere la struttura di compilazione del make. (le deipendenze)                                                               ☐
+-Rivedere la struttura di compilazione del make. (le deipendenze)                                                               ✓
 
 Inibitore.c:
 -Trasferire il "funzonamento" di inibitore all'interno di inibitore.c (togliere le varie implementazioni dalle stampe ecc.ecc.) ☐

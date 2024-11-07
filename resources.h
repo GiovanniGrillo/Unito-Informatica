@@ -1,4 +1,5 @@
-
+#ifndef RESOURCES_H
+#define RESOURCES_H
 /*Simulation Duration */
 #define SIM_DURATION 10
 
@@ -65,3 +66,5 @@ struct msg_buffer {
     pid_t Activator_pid;
     pid_t Powersupply_pid;
     pid_t Inhibitor_pid;
+
+#endif

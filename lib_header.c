@@ -1,5 +1,4 @@
 #include "lib_header.h"
-#include "resources.h"
 
 long int convert_to_million(int n) {
     return n * 100000000;
@@ -8,12 +7,11 @@ long int convert_to_million(int n) {
 void loadIPCs() {
     if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
     if ((vars            = shmat (shm_vars, NULL, 0)) == (void *) -1)                                               ERROR;
-    
+
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_var         = semget(ftok(FTOK_FILE, 'z'), 1,                                     PERMISSIONS)) == -1) ERROR;
-
 
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                     PERMISSIONS)) == -1) ERROR;

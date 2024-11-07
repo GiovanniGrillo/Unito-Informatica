@@ -14,6 +14,8 @@
 #include <errno.h>
 #include <time.h>
 #include <math.h>
+#include "resources.h"
+
 
 #define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
