@@ -10,13 +10,11 @@ int main(){
 
     setup_signal_handler(NULL);
 
-    reserveSem(sem_var, 0);
     struct timespec req = {0, vars->STEP_ALIMENTAZIONE};
 
     while (vars->exit_flag != 1){
-        if (create_atoms(vars->N_NUOVI_ATOMI) == -1) ERROR;
+        create_atoms_init(vars->N_NUOVI_ATOMI);
         nanosleep(&req, NULL);
     }
-    releaseSem(sem_var, 0);
     exit_handler();
 }

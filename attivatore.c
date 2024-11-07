@@ -17,7 +17,6 @@ int main() {
                 ERROR;
                 exit(1);
             }
-            
             ++vars->atom_Fork;
             ++i;
         }

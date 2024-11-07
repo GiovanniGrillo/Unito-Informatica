@@ -82,32 +82,6 @@ void createIPCS(char* file) {
     return;
 }
 
-void create_atoms_init(int n_atoms) {
-    pid_t pid;
-    reserveSem(sem_atom, 0);
-    reserveSem(sem_power_plant, 0);
-
-    for(int i = 0; i < n_atoms; i++) {
-        atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
-
-        switch(pid = fork()) {
-            case -1:
-                perror("MELTDOWN: fork failed");
-                exit(1);
-            case 0:
-                exit(0);
-            default:
-                // printf("Creating atom: atomic_number=%d, power_plant atom_count=%d, process_id=%d\n", atoms[power_plant->atom_count].atomic_number, power_plant->atom_count, pid); UTILEEEEE
-                atoms[power_plant->atom_count].Atom_pid = pid;
-                ++power_plant->atom_count;
-                break;
-        }
-    }
-    printf("Total atoms created: %d\n", n_atoms);
-    releaseSem(sem_power_plant, 0);
-    releaseSem(sem_atom, 0);
-}
-
 void daily_log() {
     int prev_n_atoms = 0, prev_energy = 0, prev_waste = 0, prev_absorbed_energy = 0, prev_denied_fissions = 0;
 

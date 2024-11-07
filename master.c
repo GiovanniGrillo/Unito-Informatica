@@ -5,7 +5,6 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     setup_signal_handler(NULL);
-
     createIPCS("sim.conf");
 
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;

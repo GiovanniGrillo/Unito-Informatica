@@ -1,21 +1,29 @@
-all: clear alimentatore attivatore atomo inibitore master
+CC = gcc
+CFLAGS = -Wvla -Wextra -Werror -D_GNU_SOURCE -g
+PROGRAMS = atomo alimentatore attivatore inibitore master ipcs exe
 
-alimentatore: alimentatore.c
-	gcc alimentatore.c -o alimentatore -Wvla -Wextra -Werror
-
-attivatore: attivatore.c
-	gcc attivatore.c -o attivatore -Wvla -Wextra -Werror
+all: $(PROGRAMS)
 
 atomo: atomo.c
-	gcc atomo.c -o atomo -Wvla -Wextra -Werror
+	$(CC) $(CFLAGS) -o atomo atomo.c
+
+alimentatore: alimentatore.c
+	$(CC) $(CFLAGS) -o alimentatore alimentatore.c
+
+attivatore: attivatore.c
+	$(CC) $(CFLAGS) -o attivatore attivatore.c
 
 inibitore: inibitore.c
-	gcc inibitore.c -o inibitore -Wvla -Wextra
+	$(CC) $(CFLAGS) -o inibitore inibitore.c
 
 master: master.c
-	gcc master.c -o master -Wvla -Wextra -Werror
+	$(CC) $(CFLAGS) -o master master.c
+
+ipcs:
 	ipcrm -a
+
+exe:
 	./master
 
-clear:
-	rm -f alimentatore attivatore atomo inibitore master
+clean:
+	rm -f ./master ./atomo ./alimentatore ./attivatore ./inibitore
