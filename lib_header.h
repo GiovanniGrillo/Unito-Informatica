@@ -30,6 +30,8 @@
 
 long int convert_to_million(int n);
 
+char* get_config_file();
+
 void createIPCS(char* file);
 
 void create_atoms_init(int n_atoms);

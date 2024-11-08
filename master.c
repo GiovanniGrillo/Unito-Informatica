@@ -5,15 +5,14 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     setup_signal_handler(NULL);
-    createIPCS("sim.conf");
+    char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
+    createIPCS(config_file);
 
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
     if (set_sem(sem_var,         0, 1) == -1) ERROR;
 
-
-    //DA VEDERE SE SERVONO
     if ((power_plant = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,      NULL,0)) == (void*) -1) ERROR;
 

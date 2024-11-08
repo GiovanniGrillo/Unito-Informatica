@@ -14,6 +14,45 @@ int set_sem(int sem_id, int sem_num, int val) {
     return semctl(sem_id, sem_num, SETVAL, arg);
 }
 
+char* get_config_file() {
+    static char config_file[20];
+    int valid_choice = 0;
+    int choice;
+
+    while (!valid_choice) {
+        printf("**Select the configuration state:**\n");
+        printf("1. timeout\n");
+        printf("2. meltdown\n");
+        printf("3. explode\n");
+        printf("4. blackout\n");
+        printf("**Enter your choice (1-4):** ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                strcpy(config_file, "timeout.conf");
+                valid_choice = 1;
+                break;
+            case 2:
+                strcpy(config_file, "meltdown.conf");
+                valid_choice = 1;
+                break;
+            case 3:
+                strcpy(config_file, "explode.conf");
+                valid_choice = 1;
+                break;
+            case 4:
+                strcpy(config_file, "blackout.conf");
+                valid_choice = 1;
+                break;
+            default:
+                printf("Scelta non valida. Riprova.\n");
+                break;
+        }
+    }
+    return config_file;
+}
+
 void createIPCS(char* file) {
     char temp[1000]; char boolean[6];
 
