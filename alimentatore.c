@@ -13,7 +13,7 @@ int main(){
     struct timespec req = {0, vars->STEP_ALIMENTAZIONE};
 
     while (vars->exit_flag != 1){
-        create_atoms_init(vars->N_NUOVI_ATOMI);
+        create_atoms(vars->N_NUOVI_ATOMI);
         nanosleep(&req, NULL);
     }
     exit_handler();

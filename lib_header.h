@@ -34,13 +34,11 @@ char* get_config_file();
 
 void createIPCS(char* file);
 
-void create_atoms_init(int n_atoms);
+void create_atoms(int n_atoms);
 
 void loadIPCs();
 
 void deallocIPC();
-
-int create_atoms(int number_atoms);
 
 int reserveSem(int id_sem, int n_sem);
 

@@ -78,7 +78,6 @@ void handle_sig_inhibitor() {
     reserveSem(sem_inhibitor, 0);
     if (inhibitor->inhibitor_setup == false) {
         inhibitor->inhibitor_setup = true;
-        printf("inhibitor_setup= %s\n", inhibitor->inhibitor_setup ? "true" : "false");
     } else {
         inhibitor->inhibitor_setup = false;
     }
@@ -100,24 +99,23 @@ void setup_signal_handler(void (*handler)(int)) {
     if (sigaction(SIGINT, &sa, NULL) == -1) ERROR;
 }
 
-void create_atoms_init(int n_atoms) {
+void create_atoms(int n_atoms) {
     pid_t pid;
     reserveSem(sem_atom, 0);
     reserveSem(sem_power_plant, 0);
 
     for(int i = 0; i < n_atoms; i++) {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
-
         switch(pid = fork()) {
             case -1:
                 perror("MELTDOWN: fork failed");
                 exit(1);
                 break;
             case 0:
-                exit(0);
+                if(execl("./atomo", "./atomo", NULL) == -1) ERROR;
+                exit(1);
                 break;
             default:
-                // printf("Creating atom: atomic_number=%d, power_plant atom_count=%d, process_id=%d\n", atoms[power_plant->atom_count].atomic_number, power_plant->atom_count, pid); UTILEEEEE
                 atoms[power_plant->atom_count].Atom_pid = pid;
                 ++power_plant->atom_count;
                 break;

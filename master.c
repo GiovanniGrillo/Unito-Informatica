@@ -5,18 +5,15 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     setup_signal_handler(NULL);
-    char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
-    createIPCS(config_file);
+    // char *config_file = get_config_file();
+    createIPCS("sim.conf");
 
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
     if (set_sem(sem_var,         0, 1) == -1) ERROR;
 
-    if ((power_plant = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
-    if ((atoms       = shmat(shm_atoms,      NULL,0)) == (void*) -1) ERROR;
-
-    create_atoms_init(vars->N_ATOMI_INIT);
+    create_atoms(vars->N_ATOMI_INIT);
 
     printf("attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
@@ -61,7 +58,7 @@ int main() {
             break;
     }
 
-    printf("atomo.c         -run\n");
+    /*printf("atomo.c         -run\n");
     switch ((Atom_pid = fork())) {
         case -1:
             ERROR;
@@ -73,7 +70,7 @@ int main() {
 
         default:
             break;
-    }
+    } */
 
     daily_log();
 
