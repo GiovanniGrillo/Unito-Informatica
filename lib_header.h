@@ -48,6 +48,8 @@ int set_sem(int sem_id, int sem_num, int val);
 
 void unloadIPCs();
 
+void do_fission(Atom* atom_parent, pid_t child_pid);
+
 void sim_overview(int received_message);
 
 void daily_log();

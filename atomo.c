@@ -42,11 +42,13 @@ int main() {
                     case 0:
                         break;
                     default:
+                        reserve(sem_atom, 0);
                         do_fission(parent, child_pid);
+                        release(sem_atom, 0);
                         break;
                 }
-                if(received_messages %((vars->N_MSG)/2) == 0)
-                    sim_overview(received_messages);
+                /*if(received_messages %((vars->N_MSG)/2) == 0)
+                    sim_overview(received_messages);*/
             }
             else
                 printf("atoms are transferred to the power plant");

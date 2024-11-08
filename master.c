@@ -72,6 +72,9 @@ int main() {
             break;
     } */
 
+   for(;;sleep(2))
+    sim_overview();
+
     daily_log();
 
     printf("\n\t\t\033[1mEND\033[0m\n");

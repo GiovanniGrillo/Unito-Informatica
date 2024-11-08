@@ -120,6 +120,27 @@ void createIPCS(char* file) {
     return;
 }
 
+void sim_overview() {
+    reserveSem(sem_power_plant, 0);
+    reserveSem(sem_inhibitor, 0);
+    
+    printf("\n\033[1mREPORT:\033[0m");
+    printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
+    //printf("Received messages: %d\n", msg_received);
+    printf("Atom count: %d\n", power_plant->atom_count);
+    printf("Fissions completed: %d\n", inhibitor->done_fission);
+    printf("Power plant energy: %d\n", power_plant->energy);
+
+    if (inhibitor->inhibitor_setup == true) {
+        printf("Fissions denied by inhibitor: %d\n", inhibitor->denied_fission);
+        printf("Energy absorbed by inhibitor: %d\n", inhibitor->absorbed_energy);
+
+    }
+    releaseSem(sem_power_plant, 0);
+    releaseSem(sem_inhibitor, 0);
+    
+}
+
 void daily_log() {
     int prev_n_atoms = 0, prev_energy = 0, prev_waste = 0, prev_absorbed_energy = 0, prev_denied_fissions = 0;
 
