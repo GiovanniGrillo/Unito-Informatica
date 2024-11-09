@@ -1,7 +1,8 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
+
 /*Simulation Duration */
-#define SIM_DURATION 10
+#define SIM_DURATION 5
 
 /* Data Structures */
 typedef struct Var {
