@@ -3,7 +3,7 @@
 int energy(int n1, int n2) {
     return n1 * n2 - (n1 > n2 ? n1 : n2);
 }
-
+//ciao
 void do_fission(Atom* atom_parent, pid_t child_pid) {
     if (inhibitor->inhibitor_setup && (rand() % 5) == 0) {
         if (kill(child_pid, SIGKILL) == 0) {
