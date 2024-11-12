@@ -1,5 +1,4 @@
 #include "lib_header.h"
-
 union semun {
     int val;
     struct semid_ds *buf;
@@ -30,19 +29,19 @@ char* get_config_file() {
 
         switch (choice) {
             case 1:
-                strcpy(config_file, "timeout.conf");
+                strcpy(config_file, "conf/timeout.conf");
                 valid_choice = 1;
                 break;
             case 2:
-                strcpy(config_file, "meltdown.conf");
+                strcpy(config_file, "conf/meltdown.conf");
                 valid_choice = 1;
                 break;
             case 3:
-                strcpy(config_file, "explode.conf");
+                strcpy(config_file, "conf/explode.conf");
                 valid_choice = 1;
                 break;
             case 4:
-                strcpy(config_file, "blackout.conf");
+                strcpy(config_file, "conf/blackout.conf");
                 valid_choice = 1;
                 break;
             default:
@@ -84,12 +83,15 @@ void createIPCS(char* file) {
     fscanf(sim_Input, "%s %d\n", temp, &vars->STEP_INHIBITOR);
     vars->STEP_INHIBITOR = convert_to_million(vars->STEP_INHIBITOR);         fprintf(sim_Output, "STEP_INHIBITOR: %19d\n",          vars->STEP_INHIBITOR);
     fscanf(sim_Input, "\n");                                                 fprintf(sim_Output, "\n");
+    vars->sig_master = 0;
 
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'w'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_fission     = semget(ftok(FTOK_FILE, 'y'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_var         = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
 
@@ -125,6 +127,7 @@ void daily_log() {
     int prev_n_atoms = 0, prev_energy = 0, prev_waste = 0, prev_absorbed_energy = 0, prev_denied_fissions = 0;
 
     for (int day = 0; day < SIM_DURATION; day++) {
+        sim_overview();
         reserveSem(sem_power_plant, 0);
         fprintf(sim_Output, "\n\n*********************\n");
         fprintf(sim_Output, "*      DAY %2d       *\n", day + 1);
@@ -166,9 +169,11 @@ void daily_log() {
             else {
                 vars->exit_flag = 1;
                 fprintf(sim_Output, "\n*** POWER PLANT BLACKOUT ***\n");
+                printf("\n*** POWER PLANT BLACKOUT ***\n");
                 releaseSem(sem_inhibitor, 0);
                 releaseSem(sem_power_plant, 0);
                 releaseSem(sem_var, 0);
+                terminate();
                 exit(0);
             }
         } else
@@ -195,8 +200,65 @@ void daily_log() {
     return;
 }
 
+void sim_overview() {
+    reserveSem(sem_power_plant, 0);
+    
+    printf("\n\033[1mREPORT:\033[0m");
+    printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
+    printf("Atom count: %d\n", power_plant->atom_count);
+    printf("Fissions completed: %d\n", inhibitor->done_fission);
+    printf("Power plant energy: %d\n", power_plant->energy);
+
+    if (inhibitor->inhibitor_setup == true) {
+        printf("Fissions denied by inhibitor: %d\n", inhibitor->denied_fission);
+        printf("Energy absorbed by inhibitor: %d\n", inhibitor->absorbed_energy);
+
+    }
+    releaseSem(sem_power_plant, 0);
+}
+void setup_explode_handler(){
+    struct sigaction sa;
+
+    memset(&sa, 0, sizeof(sa));
+
+    sa.sa_handler = explode_handler;
+
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
+
+    if (sigaction(SIGUSR2, &sa, NULL) == -1) ERROR;
+
+}
+
+void explode_handler(){
+    struct sigaction sa;
+    sa.sa_handler = SIG_IGN;
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
+
+    if (sigaction(SIGTERM, &sa, NULL) == -1) {
+        perror("Errore nel ripristinare il comportamento di default del segnale");
+        exit(1);
+    }
+    fprintf(sim_Output, "\nPOWER PLANT EXPLODED!!");
+    printf("\nPOWER PLANT EXPLODED!!");
+    exit_handler();
+}
+
+void terminate(){
+    if(killpg(getpgrp(), SIGTERM) == -1) ERROR;
+    return;
+}
+
 void exit_handler(){
+    pid_t child_pid;
+    while ((child_pid = waitpid(-1, NULL, WNOHANG)) > 0);
     if ((shmdt(atoms))       == -1) ERROR;
     if ((shmdt(power_plant)) == -1) ERROR;
+    if ((shmdt(inhibitor))   == -1) ERROR;
     unloadIPCs();
+    deallocIPC();
+    exit(0);
 }

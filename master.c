@@ -5,18 +5,27 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     setup_signal_handler(NULL);
-    char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
-    createIPCS(config_file);
+    setup_explode_handler(explode_handler);
+    setup_exit_handler(exit_handler);
+    //char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
+    createIPCS("conf/sim.conf");
+
+    vars->master_pid = getpid();
 
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
     if (set_sem(sem_var,         0, 1) == -1) ERROR;
+    if (set_sem(sem_fission,     0, 1) == -1) ERROR;
 
-    if ((power_plant = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
-    if ((atoms       = shmat(shm_atoms,      NULL,0)) == (void*) -1) ERROR;
+    if ((power_plant = shmat(shm_power_plant, NULL,0)) == (void*) -1) ERROR;
+    if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;
+    if ((inhibitor   = shmat(shm_inhibitor,   NULL,0)) == (void*) -1) ERROR;
 
-    create_atoms_init(vars->N_ATOMI_INIT);
+
+    pid_t temp = 0;
+
+    create_atoms(vars->N_ATOMI_INIT);
 
     printf("attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
@@ -46,39 +55,22 @@ int main() {
         default:
             break;
     }
-
+    
     printf("inibitore.c     -run\n");
-    switch ((Inhibitor_pid = fork())) {
+    switch ((temp = fork())) {
         case -1:
             ERROR;
-
         case 0:
             execl("./inibitore", "./inibitore", NULL);
             printf("Inhibitor not started correctly\n");
             ERROR;
-
         default:
-            break;
-    }
-
-    printf("atomo.c         -run\n");
-    switch ((Atom_pid = fork())) {
-        case -1:
-            ERROR;
-
-        case 0:
-            execl("./atomo", "./atomo", NULL);
-            printf("atom not started correctly\n");
-            ERROR;
-
-        default:
+            inhibitor->Inhibitor_pid = temp;
             break;
     }
 
     daily_log();
 
     printf("\n\t\t\033[1mEND\033[0m\n");
-    exit_handler();
-    deallocIPC();
-    return 0;
+    terminate();
 }

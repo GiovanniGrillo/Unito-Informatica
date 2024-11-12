@@ -1,10 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
@@ -14,6 +11,7 @@
 #include <errno.h>
 #include <time.h>
 #include <math.h>
+
 #include "resources.h"
 
 
@@ -34,13 +32,11 @@ char* get_config_file();
 
 void createIPCS(char* file);
 
-void create_atoms_init(int n_atoms);
-
 void loadIPCs();
 
 void deallocIPC();
 
-int create_atoms(int number_atoms);
+void create_atoms(int number_atoms);
 
 int reserveSem(int id_sem, int n_sem);
 
@@ -50,7 +46,7 @@ int set_sem(int sem_id, int sem_num, int val);
 
 void unloadIPCs();
 
-void sim_overview(int received_message);
+void sim_overview();
 
 void daily_log();
 
@@ -59,3 +55,7 @@ void handle_sig_inhibitor();
 void setup_signal_handler(void (*handler)(int));
 
 void exit_handler();
+
+void terminate();
+
+void explode_handler();

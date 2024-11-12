@@ -1,10 +1,15 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
+#include <sys/types.h>
+#include <stdbool.h>
+#include <stdio.h>
 /*Simulation Duration */
-#define SIM_DURATION 10
+#define SIM_DURATION 14
 
 /* Data Structures */
 typedef struct Var {
+    pid_t master_pid;
+    int sig_master;
     int ENERGY_DEMAND;
     int ENERGY_EXPLODE_THRESHOLD;
     int exit_flag;
@@ -31,6 +36,7 @@ typedef struct Atom {
 } Atom;
 
 typedef struct Inhibitor {
+    pid_t Inhibitor_pid;
     bool inhibitor_setup;
     int absorbed_energy;
     int denied_fission;
@@ -39,10 +45,12 @@ typedef struct Inhibitor {
 
 struct msg_buffer {
     long msg_type;
+    int msg_op;
+    int msg_absorb;
 } message;
 
 /* Message Queue */
-    int sem_stack;
+    int inhibitor_stack;
     int msg_stack;
 
 /* Semaphores */
@@ -50,6 +58,7 @@ struct msg_buffer {
     int sem_power_plant;
     int sem_inhibitor;
     int sem_atom;
+    int sem_fission;
 
 /* Shared Memory*/
     int shm_atoms;        Atom* atoms;
@@ -65,6 +74,5 @@ struct msg_buffer {
     pid_t Atom_pid;
     pid_t Activator_pid;
     pid_t Powersupply_pid;
-    pid_t Inhibitor_pid;
 
 #endif

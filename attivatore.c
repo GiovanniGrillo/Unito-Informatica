@@ -1,8 +1,10 @@
 #include "lib_header.c"
+#include "lib_attivatore.c"
 
 int main() {
     loadIPCs();
     setup_signal_handler(NULL);
+    setup_exit_handler(exit_handler);
 
     struct timespec req = {0, vars->STEP_ATTIVATORE};
     message.msg_type = 1;
@@ -22,6 +24,5 @@ int main() {
         }
         nanosleep(&req, NULL);
     }
-    unloadIPCs();
-    return 0;
+    exit_handler();
 }

@@ -12,8 +12,10 @@ void loadIPCs() {
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_var         = semget(ftok(FTOK_FILE, 'z'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((sem_fission     = semget(ftok(FTOK_FILE, 'y'), 1,                                     PERMISSIONS)) == -1) ERROR;
 
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                        PERMISSIONS)) == -1) ERROR;
+    if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'w'),                                        PERMISSIONS)) == -1) ERROR;
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int)*10),   PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),    PERMISSIONS)) == -1) ERROR;
@@ -27,10 +29,12 @@ void deallocIPC(){
     if (shmctl(shm_inhibitor,   IPC_RMID, 0) == -1)  ERROR;
 
     if (msgctl(msg_stack,       IPC_RMID, 0) == -1)  ERROR;
+    if (msgctl(inhibitor_stack, IPC_RMID, 0) == -1)  ERROR;
 
     if (semctl(sem_atom,        IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_inhibitor,   IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_power_plant, IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_fission,     IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_var,         IPC_RMID, 0) == -1)  ERROR;
 
     printf("\nAll IPC resources have been successfully deallocated.\n");
@@ -100,7 +104,7 @@ void setup_signal_handler(void (*handler)(int)) {
     if (sigaction(SIGINT, &sa, NULL) == -1) ERROR;
 }
 
-void create_atoms_init(int n_atoms) {
+void create_atoms(int n_atoms) {
     pid_t pid;
     reserveSem(sem_atom, 0);
     reserveSem(sem_power_plant, 0);
@@ -108,21 +112,36 @@ void create_atoms_init(int n_atoms) {
     for(int i = 0; i < n_atoms; i++) {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
 
-        switch(pid = fork()) {
-            case -1:
-                perror("MELTDOWN: fork failed");
-                exit(1);
-                break;
-            case 0:
-                exit(0);
-                break;
-            default:
-                // printf("Creating atom: atomic_number=%d, power_plant atom_count=%d, process_id=%d\n", atoms[power_plant->atom_count].atomic_number, power_plant->atom_count, pid); UTILEEEEE
-                atoms[power_plant->atom_count].Atom_pid = pid;
-                ++power_plant->atom_count;
-                break;
+        switch (pid = fork()){
+        case -1:
+            perror("MELTDOWN: fork failed");
+            exit(1);
+            break;
+        case 0:
+            execl("./atomo", "./atomo", NULL);
+            exit(1);
+            break;
+        default:
+            atoms[power_plant->atom_count].Atom_pid = pid;
+            ++power_plant->atom_count;
+            break;
         }
     }
     releaseSem(sem_power_plant, 0);
     releaseSem(sem_atom, 0);
+}
+
+void setup_exit_handler(void (*handler)(int)){
+    struct sigaction sa;
+
+    memset(&sa, 0, sizeof(sa));
+
+    sa.sa_handler = handler;
+
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
+
+    if (sigaction(SIGTERM, &sa, NULL) == -1) ERROR;
+
 }
