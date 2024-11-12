@@ -1,12 +1,14 @@
 #include "lib_header.h"
 
-long int convert_to_million(int n) {
+long int convert_to_million(int n)
+{
     return n * 100000000;
 }
 
-void loadIPCs() {
-    if ((shm_vars        = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var),                           PERMISSIONS)) == -1) ERROR;
-    if ((vars            = shmat (shm_vars, NULL, 0)) == (void *) -1)                                               ERROR;
+void loadIPCs()
+{
+    if ((shm_vars = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), PERMISSIONS)) == -1) ERROR;
+    if ((vars     = shmat(shm_vars, NULL, 0)) == (void *)-1)                       ERROR;
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                     PERMISSIONS)) == -1) ERROR;
@@ -41,56 +43,74 @@ void deallocIPC(){
     return;
 }
 
-int reserveSem(int id_sem, int n_sem) {
+int reserveSem(int id_sem, int n_sem)
+{
     struct sembuf s_ops;
     s_ops.sem_num = n_sem;
-    s_ops.sem_op  = -1;
+    s_ops.sem_op = -1;
     s_ops.sem_flg = 0;
     return semop(id_sem, &s_ops, 1);
 }
 
-int releaseSem(int id_sem, int n_sem) {
+int releaseSem(int id_sem, int n_sem)
+{
     struct sembuf s_ops;
     s_ops.sem_num = n_sem;
-    s_ops.sem_op  = 1;
+    s_ops.sem_op = 1;
     s_ops.sem_flg = 0;
     return semop(id_sem, &s_ops, 1);
 }
 
-void attShm() {
-    if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
-    if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
-    if ((inhibitor    = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
+void attShm()
+{
+    if ((atoms = shmat(shm_atoms, NULL, 0)) == (void *)-1)
+        ERROR;
+    if ((power_plant = shmat(shm_power_plant, NULL, 0)) == (void *)-1)
+        ERROR;
+    if ((inhibitor = shmat(shm_inhibitor, NULL, 0)) == (void *)-1)
+        ERROR;
     return;
 }
 
-
- void dettShm() {
-     if ((shmdt(atoms))       == -1) ERROR;
-     if ((shmdt(power_plant)) == -1) ERROR;
-     if ((shmdt(inhibitor))   == -1) ERROR;
-     return;
- }
-
-void unloadIPCs() {
-    if((shmdt(vars)) == -1) ERROR;
+void dettShm()
+{
+    if ((shmdt(atoms)) == -1)
+        ERROR;
+    if ((shmdt(power_plant)) == -1)
+        ERROR;
+    if ((shmdt(inhibitor)) == -1)
+        ERROR;
     return;
 }
 
-void handle_sig_inhibitor() {
-    if ((inhibitor = shmat(shm_inhibitor, NULL, 0)) == (void*) -1) ERROR;
+void unloadIPCs()
+{
+    if ((shmdt(vars)) == -1)
+        ERROR;
+    return;
+}
+
+void handle_sig_inhibitor()
+{
+    if ((inhibitor = shmat(shm_inhibitor, NULL, 0)) == (void *)-1)
+        ERROR;
     reserveSem(sem_inhibitor, 0);
-    if (inhibitor->inhibitor_setup == false) {
+    if (inhibitor->inhibitor_setup == false)
+    {
         inhibitor->inhibitor_setup = true;
         printf("inhibitor_setup= %s\n", inhibitor->inhibitor_setup ? "true" : "false");
-    } else {
+    }
+    else
+    {
         inhibitor->inhibitor_setup = false;
     }
     releaseSem(sem_inhibitor, 0);
-    if((shmdt(inhibitor))   == -1) ERROR;
+    if ((shmdt(inhibitor)) == -1)
+        ERROR;
 }
 
-void setup_signal_handler(void (*handler)(int)) {
+void setup_signal_handler(void (*handler)(int))
+{
     struct sigaction sa;
 
     memset(&sa, 0, sizeof(sa));
@@ -101,7 +121,8 @@ void setup_signal_handler(void (*handler)(int)) {
     sigaddset(&sa.sa_mask, SIGTERM);
     sa.sa_flags = 0;
 
-    if (sigaction(SIGINT, &sa, NULL) == -1) ERROR;
+    if (sigaction(SIGINT, &sa, NULL) == -1)
+        ERROR;
 }
 
 void create_atoms(int n_atoms) {
@@ -109,7 +130,8 @@ void create_atoms(int n_atoms) {
     reserveSem(sem_atom, 0);
     reserveSem(sem_power_plant, 0);
 
-    for(int i = 0; i < n_atoms; i++) {
+    for (int i = 0; i < n_atoms; i++)
+    {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
 
         switch (pid = fork()){
