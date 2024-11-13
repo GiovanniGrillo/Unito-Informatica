@@ -9,12 +9,8 @@
 /* Data Structures */
 typedef struct Var {
     pid_t master_pid;
-    int sig_master;
     int ENERGY_DEMAND;
     int ENERGY_EXPLODE_THRESHOLD;
-    int exit_flag;
-    int atom_Fork;
-    int MIN_N_ATOMICO;
     int N_ATOMI_INIT;
     int N_ATOM_MAX;
     int N_MSG;
@@ -54,11 +50,10 @@ struct msg_buffer {
     int msg_stack;
 
 /* Semaphores */
-    int sem_var;
     int sem_power_plant;
     int sem_inhibitor;
     int sem_atom;
-    int sem_fission;
+    int sem_processes;
 
 /* Shared Memory*/
     int shm_atoms;        Atom* atoms;

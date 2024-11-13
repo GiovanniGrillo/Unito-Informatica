@@ -1,20 +1,21 @@
-#include "lib_header.c"
-#include "lib_atomo.c"
+#include "lib/lib_header.c"
+#include "lib/lib_atomo.c"
 
 
 int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     loadIPCs();
-    setup_signal_handler(NULL);
-    setup_exit_handler(exit_handler);
+    setup_signal_handler(NULL); //SIGINT
+    setup_exit_handler(exit_handler); //SIGTERM
 
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
     if ((inhibitor    = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
 
-   while(vars->exit_flag != 1) {
+    releaseSem(sem_processes,0);
 
+   while(true) {
         if (msgrcv(msg_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1)
             continue;
 

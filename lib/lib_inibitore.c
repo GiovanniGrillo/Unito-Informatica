@@ -12,7 +12,7 @@ void limit_fission_handler(){
 }
 
 int absorb_energy(int energy) {
-    double reduction_factor = (rand() / (double)RAND_MAX);
+    double reduction_factor = (rand() % 51) / 100.0;
     int absorbed = energy * reduction_factor;
     inhibitor->absorbed_energy += absorbed;
     return energy - absorbed;

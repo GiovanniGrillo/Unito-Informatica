@@ -69,9 +69,6 @@ void createIPCS(char* file) {
                                                                              fprintf(sim_Output, "%s %14d\n","SIM_DURATION:",       SIM_DURATION);
     fscanf(sim_Input, "%s %d\n", temp, &vars->ENERGY_DEMAND);                fprintf(sim_Output, "ENERGY_DEMAND: %14d\n",           vars->ENERGY_DEMAND);
     fscanf(sim_Input, "%s %d\n", temp, &vars->ENERGY_EXPLODE_THRESHOLD);     fprintf(sim_Output, "ENERGY_EXPLODE_THRESHOLD: %3d\n", vars->ENERGY_EXPLODE_THRESHOLD);
-    fscanf(sim_Input, "%s %d\n", temp, &vars->exit_flag);                    fprintf(sim_Output, "exit_flag: %16d\n",               vars->exit_flag);
-    fscanf(sim_Input, "%s %d\n", temp, &vars->atom_Fork);                    fprintf(sim_Output, "atomFork: %17d\n",                vars->atom_Fork);
-    fscanf(sim_Input, "%s %d\n", temp, &vars->MIN_N_ATOMICO);                fprintf(sim_Output, "MIN_N_ATOMICO: %12d\n",           vars->MIN_N_ATOMICO);
     fscanf(sim_Input, "%s %d\n", temp, &vars->N_ATOMI_INIT);                 fprintf(sim_Output, "N_ATOMI_INIT: %16d\n",            vars->N_ATOMI_INIT);
     fscanf(sim_Input, "%s %d\n", temp, &vars->N_ATOM_MAX);                   fprintf(sim_Output, "N_ATOM_MAX: %16d\n",              vars->N_ATOM_MAX);
     fscanf(sim_Input, "%s %d\n", temp, &vars->N_MSG);                        fprintf(sim_Output, "N_MSG: %22d\n",                   vars->N_MSG);
@@ -83,24 +80,21 @@ void createIPCS(char* file) {
     fscanf(sim_Input, "%s %d\n", temp, &vars->STEP_INHIBITOR);
     vars->STEP_INHIBITOR = convert_to_million(vars->STEP_INHIBITOR);         fprintf(sim_Output, "STEP_INHIBITOR: %19d\n",          vars->STEP_INHIBITOR);
     fscanf(sim_Input, "\n");                                                 fprintf(sim_Output, "\n");
-    vars->sig_master = 0;
 
-    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'e'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'w'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((msg_stack       = msgget(ftok(FTOK_FILE, 'b'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'c'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
-    if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'i'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_power_plant = semget(ftok(FTOK_FILE, 'h'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_atom        = semget(ftok(FTOK_FILE, 'd'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_fission     = semget(ftok(FTOK_FILE, 'y'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_var         = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_inhibitor   = semget(ftok(FTOK_FILE, 'd'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_power_plant = semget(ftok(FTOK_FILE, 'e'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
+    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor)*(sizeof(int)*10),                                  IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'j'), sizeof(PowerPlant)*(sizeof(int)*10),                                 IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
-    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'b'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'm'), sizeof(Inhibitor)*(sizeof(int)*10),                             IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int)*10),            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-
-    if ((inhibitor       = shmat(shm_inhibitor, NULL, 0)) == (void*) -1)                                                                           ERROR;
-    if ((power_plant     = shmat(shm_power_plant,NULL,0)) == (void*) -1)                                                                           ERROR;
+    if ((inhibitor       = shmat(shm_inhibitor, NULL, 0)) == (void*) -1) ERROR;
+    if ((power_plant     = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
 
     if (fscanf(sim_Input, "%s %s", temp, boolean) != 2) {ERROR;fclose(sim_Input);return;}
 
@@ -158,7 +152,6 @@ void daily_log() {
                 fprintf(sim_Output, "*INHIBITOR OFF - Energy absorbed by inhibitor so far: %d\n", prev_absorbed_energy);
                 fprintf(sim_Output, "*INHIBITOR OFF - Fissions denied by inhibitor so far: %d\n", prev_denied_fissions);
             }
-        reserveSem(sem_var, 0);
         reserveSem(sem_power_plant, 0);
         fprintf(sim_Output, "*Fetching energy for the power plant\n");
         if (vars->ENERGY_DEMAND > power_plant->energy) {
@@ -167,19 +160,14 @@ void daily_log() {
                     fprintf(sim_Output, "\n*** THE INHIBITOR PREVENTED THE POWER PLANT FROM GOING INTO BLACKOUT ***\n");
             }
             else {
-                vars->exit_flag = 1;
                 fprintf(sim_Output, "\n*** POWER PLANT BLACKOUT ***\n");
                 printf("\n*** POWER PLANT BLACKOUT ***\n");
                 releaseSem(sem_inhibitor, 0);
                 releaseSem(sem_power_plant, 0);
-                releaseSem(sem_var, 0);
                 terminate();
-                exit(0);
             }
         } else
             power_plant->energy = power_plant->energy - vars->ENERGY_DEMAND; //prelievo giornaliero dell'energy
-        
-        releaseSem(sem_var, 0);
 
         prev_denied_fissions = inhibitor->denied_fission;
         prev_absorbed_energy = inhibitor->absorbed_energy;
@@ -189,11 +177,8 @@ void daily_log() {
         releaseSem(sem_inhibitor, 0);
         releaseSem(sem_power_plant, 0);
 
-        if (day == SIM_DURATION - 1){
-            reserveSem(sem_var, 0);
-            vars->exit_flag = 1;
-            releaseSem(sem_var, 0);
-        }
+        if (day == SIM_DURATION - 1)
+            terminate();
         sleep(1);
     }
     fprintf(sim_Output,"Made by: Grillo Giovanni, Olivero Alessandro, Corrao Mario");
@@ -202,7 +187,8 @@ void daily_log() {
 
 void sim_overview() {
     reserveSem(sem_power_plant, 0);
-    
+    reserveSem(sem_inhibitor, 0);
+
     printf("\n\033[1mREPORT:\033[0m");
     printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
     printf("Atom count: %d\n", power_plant->atom_count);
@@ -214,37 +200,37 @@ void sim_overview() {
         printf("Energy absorbed by inhibitor: %d\n", inhibitor->absorbed_energy);
 
     }
+    releaseSem(sem_inhibitor, 0);
     releaseSem(sem_power_plant, 0);
 }
-void setup_explode_handler(){
-    struct sigaction sa;
 
-    memset(&sa, 0, sizeof(sa));
+void setup_explode_handler() {
+    struct sigaction sa_sigusr2;
 
-    sa.sa_handler = explode_handler;
+    memset(&sa_sigusr2, 0, sizeof(sa_sigusr2));
 
-    sigemptyset(&sa.sa_mask);
-    sigaddset(&sa.sa_mask, SIGTERM);
-    sa.sa_flags = 0;
+    sa_sigusr2.sa_handler = explode_handler;
 
-    if (sigaction(SIGUSR2, &sa, NULL) == -1) ERROR;
+    sigemptyset(&sa_sigusr2.sa_mask);
+    sigaddset(&sa_sigusr2.sa_mask, SIGTERM);
+    sa_sigusr2.sa_flags = 0;
 
+    if (sigaction(SIGUSR2, &sa_sigusr2, NULL) == -1) ERROR;
 }
 
 void explode_handler(){
-    struct sigaction sa;
-    sa.sa_handler = SIG_IGN;
-    sigemptyset(&sa.sa_mask);
-    sigaddset(&sa.sa_mask, SIGTERM);
-    sa.sa_flags = 0;
+    struct sigaction sa_ign;
+    sa_ign.sa_handler = SIG_IGN;
+    sigemptyset(&sa_ign.sa_mask);
+    sigaddset(&sa_ign.sa_mask, SIGTERM);
+    sa_ign.sa_flags = 0;
 
-    if (sigaction(SIGTERM, &sa, NULL) == -1) {
-        perror("Errore nel ripristinare il comportamento di default del segnale");
+    if (sigaction(SIGUSR2, &sa_ign, NULL) == -1)
         exit(1);
-    }
+
     fprintf(sim_Output, "\nPOWER PLANT EXPLODED!!");
     printf("\nPOWER PLANT EXPLODED!!");
-    exit_handler();
+    terminate();
 }
 
 void terminate(){
@@ -254,11 +240,12 @@ void terminate(){
 
 void exit_handler(){
     pid_t child_pid;
-    while ((child_pid = waitpid(-1, NULL, WNOHANG)) > 0);
+    while ((child_pid = waitpid(-1, NULL, 0)) > 0);
     if ((shmdt(atoms))       == -1) ERROR;
     if ((shmdt(power_plant)) == -1) ERROR;
     if ((shmdt(inhibitor))   == -1) ERROR;
     unloadIPCs();
     deallocIPC();
+    printf("Sto terminando sono il master\n");
     exit(0);
 }

@@ -1,12 +1,12 @@
-#include "lib_header.c"
-#include "lib_master.c"
+#include "lib/lib_header.c"
+#include "lib/lib_master.c"
 
 int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
-    setup_signal_handler(NULL);
-    setup_explode_handler(explode_handler);
-    setup_exit_handler(exit_handler);
+    setup_signal_handler(NULL); //SIGINT
+    setup_explode_handler(explode_handler); //SIGUSR2
+    setup_exit_handler(exit_handler); //SIGTERM
     //char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
     createIPCS("conf/sim.conf");
 
@@ -15,8 +15,7 @@ int main() {
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
-    if (set_sem(sem_var,         0, 1) == -1) ERROR;
-    if (set_sem(sem_fission,     0, 1) == -1) ERROR;
+    if (set_sem(sem_processes,     0, 1) == -1) ERROR;
 
     if ((power_plant = shmat(shm_power_plant, NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;
@@ -24,8 +23,6 @@ int main() {
 
 
     pid_t temp = 0;
-
-    create_atoms(vars->N_ATOMI_INIT);
 
     printf("attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
@@ -38,6 +35,7 @@ int main() {
             ERROR;
 
         default:
+            reserveSem(sem_processes,0);
             break;
     }
 
@@ -53,6 +51,7 @@ int main() {
             ERROR;
 
         default:
+            reserveSem(sem_processes,0);
             break;
     }
     
@@ -66,8 +65,12 @@ int main() {
             ERROR;
         default:
             inhibitor->Inhibitor_pid = temp;
+            reserveSem(sem_processes,0);
             break;
     }
+
+    create_atoms(vars->N_ATOMI_INIT);
+
 
     daily_log();
 

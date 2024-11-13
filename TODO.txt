@@ -9,10 +9,10 @@ Make:
 -Rivedere la struttura di compilazione del make. (le deipendenze)                                                               ✓
 
 Inibitore.c:
--Trasferire il "funzonamento" di inibitore all'interno di inibitore.c (togliere le varie implementazioni dalle stampe ecc.ecc.) ☐
+-Trasferire il "funzonamento" di inibitore all'interno di inibitore.c (togliere le varie implementazioni dalle stampe ecc.ecc.) ✓
 
 Sim.conf:
 -Preparare input per testare tutte le terminazioni                                                                              ✓
 
 Atomo.c:
-Rivedere tutto il file + la sua libreria                                                                                        ☐
+Rivedere tutto il file + la sua libreria                                                                                        ✓
