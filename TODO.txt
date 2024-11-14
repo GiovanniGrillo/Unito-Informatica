@@ -1,18 +1,10 @@
-Lib_header: DONE
--pulire le funzioni e lasciare la loro firma(prototipo). Seguire con la implementazione dentro i file.c                         ✓
-
-IPCs: DONE
--Togliere semafori inutili                                                                                                      ✓
--Inserire semaforo per ogni struttura di memoria condivisa                                                                      ✓
-
 Make:
--Rivedere la struttura di compilazione del make. (le deipendenze)                                                               ✓
+Sistemare makefile
 
-Inibitore.c:
--Trasferire il "funzonamento" di inibitore all'interno di inibitore.c (togliere le varie implementazioni dalle stampe ecc.ecc.) ✓
+Inibitore:
+Controllare energia assorbita e fissioni
 
-Sim.conf:
--Preparare input per testare tutte le terminazioni                                                                              ✓
+Esecuzione:
+Trovare blocco su timeout
 
-Atomo.c:
-Rivedere tutto il file + la sua libreria                                                                                        ✓
+Sistemare relazione

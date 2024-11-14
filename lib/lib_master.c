@@ -139,11 +139,11 @@ int set_sem(int sem_id, int sem_num, int val) {
 void daily_log() {
     int prev_n_atoms = 0, prev_energy = 0, prev_waste = 0, prev_absorbed_energy = 0, prev_denied_fissions = 0;
 
-    for (int day = 0; day < SIM_DURATION; day++) {
-        sim_overview();
+    for (int day = 1; day <= SIM_DURATION; day++) {
+        sim_overview(day);
         reserveSem(sem_power_plant, 0);
         fprintf(sim_Output, "\n\n*********************\n");
-        fprintf(sim_Output, "*      DAY %2d       *\n", day + 1);
+        fprintf(sim_Output, "*      DAY %2d       *\n", day);
         fprintf(sim_Output, "*********************\n");
 
         fprintf(sim_Output, "*\n");
@@ -196,7 +196,7 @@ void daily_log() {
         releaseSem(sem_inhibitor, 0);
         releaseSem(sem_power_plant, 0);
 
-        if (day == SIM_DURATION - 1)
+        if (day == SIM_DURATION)
             terminate();
         sleep(1);
     }
@@ -204,12 +204,10 @@ void daily_log() {
     return;
 }
 
-void sim_overview() {
+void sim_overview(int day) {
     reserveSem(sem_power_plant, 0);
     reserveSem(sem_inhibitor, 0);
-    int process_count = count_active_processes();
-    printf("\nNumero di processi attivi: %d", process_count);
-    printf("\n\033[1mREPORT:\033[0m");
+    printf("\n\033[1mREPORT DAY %d:\033[0m", day);
     printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
     printf("Atom count: %d\n", power_plant->atom_count);
     printf("Fissions completed: %d\n", inhibitor->done_fission);
@@ -267,6 +265,6 @@ void exit_handler(){
     if ((shmdt(inhibitor))   == -1) ERROR;
     unloadIPCs();
     deallocIPC();
-    printf("STO TERMINANDO, SONO IL MASTER");
+    printf("STO TERMINANDO, SONO IL MASTER\n");
     exit(0);
 }

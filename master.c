@@ -13,8 +13,8 @@ int main() {
     setup_signal_handler(meltdown_handler, SIGUSR2);
 
 
-    //char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
-    createIPCS("conf/sim.conf");
+    char *config_file = get_config_file();
+    createIPCS(config_file);
 
     vars->master_pid = getpid();
 
@@ -59,7 +59,7 @@ int main() {
             reserveSem(sem_processes,0);
             break;
     }
-    
+
     printf("inibitore.c     -run\n");
     switch ((temp = fork())) {
         case -1:
@@ -80,6 +80,6 @@ int main() {
 
     daily_log();
     printf("\n\t\t\033[1mEND\033[0m\n");
-    
+
     terminate();
 }

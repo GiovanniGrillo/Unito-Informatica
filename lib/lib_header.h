@@ -26,7 +26,6 @@
         }                                                                                                                                         \
     }
 
-int count_active_processes();
 // *********** lib_header.c
 long int convert_to_million(int n);
 
@@ -50,7 +49,7 @@ void deallocIPC();
 int set_sem(int sem_id, int sem_num, int val);
 
 void daily_log();
-void sim_overview();
+void sim_overview(int day);
 
 void terminate();
 void explode_handler();
