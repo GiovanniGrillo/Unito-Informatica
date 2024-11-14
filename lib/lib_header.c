@@ -1,5 +1,28 @@
 #include "lib_header.h"
 
+
+
+int count_active_processes() {
+    int count = 0;
+    struct dirent *entry;
+    DIR *proc_dir = opendir("/proc");
+
+    if (proc_dir == NULL) {
+        perror("Errore nell'aprire /proc");
+        exit(EXIT_FAILURE);
+    }
+
+    while ((entry = readdir(proc_dir)) != NULL) {
+        // Controlla se il nome della directory è un numero (PID di un processo)
+        if (isdigit(entry->d_name[0])) {
+            count++;
+        }
+    }
+
+    closedir(proc_dir);
+    return count;
+}
+
 long int convert_to_million(int n){
     return n * 100000000;
 }
@@ -88,17 +111,3 @@ void setup_signal_handler(void (*handler)(int), int signum){
     if (sigaction(signum, &sa, NULL) == -1)
         ERROR;
 }
-
-/*void setup_exit_handler(void (*handler)(int)){
-    struct sigaction sa;
-
-    memset(&sa, 0, sizeof(sa));
-
-    sa.sa_handler = handler;
-
-    sigemptyset(&sa.sa_mask);
-    sigaddset(&sa.sa_mask, SIGTERM);
-    sa.sa_flags = 0;
-
-    if (sigaction(SIGTERM, &sa, NULL) == -1) ERROR;
-} */

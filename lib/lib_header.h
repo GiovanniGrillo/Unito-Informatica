@@ -14,7 +14,7 @@
 
 #include "resources.h"
 
-
+#include <dirent.h>
 #define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
 
@@ -26,6 +26,7 @@
         }                                                                                                                                         \
     }
 
+int count_active_processes();
 // *********** lib_header.c
 long int convert_to_million(int n);
 
@@ -37,7 +38,7 @@ int releaseSem(int id_sem, int n_sem);
 
 void create_atoms(int number_atoms);
 
-void setup_signal_handler(void (*handler)(int));
+void setup_signal_handler(void (*handler)(int), int signum);
 void exit_handler();
 // ***********
 

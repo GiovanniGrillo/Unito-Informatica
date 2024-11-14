@@ -206,7 +206,8 @@ void daily_log() {
 void sim_overview() {
     reserveSem(sem_power_plant, 0);
     reserveSem(sem_inhibitor, 0);
-
+    int process_count = count_active_processes();
+    printf("Numero di processi attivi: %d\n", process_count);
     printf("\n\033[1mREPORT:\033[0m");
     printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
     printf("Atom count: %d\n", power_plant->atom_count);
@@ -264,6 +265,6 @@ void exit_handler(){
     if ((shmdt(inhibitor))   == -1) ERROR;
     unloadIPCs();
     deallocIPC();
-    printf("Sto terminando sono il master\n");
+    printf("STO TERMINANDO, SONO IL MASTER");
     exit(0);
 }
