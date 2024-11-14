@@ -3,8 +3,8 @@
 
 int main() {
     loadIPCs();
-    setup_signal_handler(NULL);       //SIGINT
-    setup_exit_handler(exit_handler); //SIGTERM
+    setup_signal_handler(NULL, SIGINT); //SIGINT
+    setup_signal_handler(exit_handler, SIGTERM); //SIGTERM
 
     releaseSem(sem_processes,0);
 

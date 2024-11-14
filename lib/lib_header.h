@@ -26,36 +26,48 @@
         }                                                                                                                                         \
     }
 
+// *********** lib_header.c
 long int convert_to_million(int n);
 
-char* get_config_file();
-
-void createIPCS(char* file);
-
 void loadIPCs();
+void unloadIPCs();
 
-void deallocIPC();
+int reserveSem(int id_sem, int n_sem);
+int releaseSem(int id_sem, int n_sem);
 
 void create_atoms(int number_atoms);
 
-int reserveSem(int id_sem, int n_sem);
+void setup_signal_handler(void (*handler)(int));
+void exit_handler();
+// ***********
 
-int releaseSem(int id_sem, int n_sem);
+// *********** lib_master.c
+char* get_config_file();
 
+void createIPCS(char* file);
+void deallocIPC();
 int set_sem(int sem_id, int sem_num, int val);
 
-void unloadIPCs();
-
+void daily_log();
 void sim_overview();
 
-void daily_log();
-
-void handle_sig_inhibitor();
-
-void setup_signal_handler(void (*handler)(int));
-
-void exit_handler();
-
 void terminate();
-
 void explode_handler();
+// ***********
+
+// *********** lib_inibitore.c
+void limit_fission_handler();
+int absorb_energy(int energy);
+// ***********
+
+// *********** lib_alimentatore.c
+// ***********
+
+// *********** lib_attivatore.c
+// ***********
+
+// *********** lib_atomo.c
+int energy(int n1, int n2);
+void do_fission(Atom* atom_parent, int child_pid);
+// ***********
+

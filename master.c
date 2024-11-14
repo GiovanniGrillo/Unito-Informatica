@@ -4,9 +4,9 @@
 int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
-    setup_signal_handler(NULL); //SIGINT
-    setup_explode_handler(explode_handler); //SIGUSR2
-    setup_exit_handler(exit_handler); //SIGTERM
+    setup_signal_handler(NULL, SIGINT); //SIGINT
+    setup_signal_handler(exit_handler, SIGTERM); //SIGTERM
+    setup_signal_handler(explode_handler, SIGUSR2); //SIGUSR2
     //char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
     createIPCS("conf/sim.conf");
 

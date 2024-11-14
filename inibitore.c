@@ -3,9 +3,9 @@
 
 int main() {
     loadIPCs();
-    setup_signal_handler(handle_sig_inhibitor); //SIGINT
-    setup_exit_handler(exit_handler); //SIGTERM
-    setup_limit_handler(); //SIGUSR1
+    setup_signal_handler(active_inhibitor_handler, SIGINT); //SIGINT
+    setup_signal_handler(exit_handler, SIGTERM); //SIGTERM
+    setup_signal_handler(limit_fission_handler, SIGUSR1); //SIGUSR1
 
     if ((inhibitor = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
 

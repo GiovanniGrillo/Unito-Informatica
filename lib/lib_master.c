@@ -7,12 +7,6 @@ union semun {
     void *__pad;
 };
 
-int set_sem(int sem_id, int sem_num, int val) {
-    union semun arg;
-    arg.val = val;
-    return semctl(sem_id, sem_num, SETVAL, arg);
-}
-
 char* get_config_file() {
     static char config_file[20];
     int valid_choice = 0;
@@ -117,6 +111,30 @@ void createIPCS(char* file) {
     return;
 }
 
+void deallocIPC(){
+    if (shmctl(shm_vars,        IPC_RMID, 0) == -1)  ERROR;
+    if (shmctl(shm_atoms,       IPC_RMID, 0) == -1)  ERROR;
+    if (shmctl(shm_power_plant, IPC_RMID, 0) == -1)  ERROR;
+    if (shmctl(shm_inhibitor,   IPC_RMID, 0) == -1)  ERROR;
+
+    if (msgctl(msg_stack,       IPC_RMID, 0) == -1)  ERROR;
+    if (msgctl(inhibitor_stack, IPC_RMID, 0) == -1)  ERROR;
+
+    if (semctl(sem_atom,        IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_inhibitor,   IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_power_plant, IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_processes,   IPC_RMID, 0) == -1)  ERROR;
+
+    printf("\nAll IPC resources have been successfully deallocated.\n");
+    return;
+}
+
+int set_sem(int sem_id, int sem_num, int val) {
+    union semun arg;
+    arg.val = val;
+    return semctl(sem_id, sem_num, SETVAL, arg);
+}
+
 void daily_log() {
     int prev_n_atoms = 0, prev_energy = 0, prev_waste = 0, prev_absorbed_energy = 0, prev_denied_fissions = 0;
 
@@ -204,28 +222,28 @@ void sim_overview() {
     releaseSem(sem_power_plant, 0);
 }
 
-void setup_explode_handler() {
-    struct sigaction sa_sigusr2;
+/*void setup_explode_handler() {
+    struct sigaction sa;
 
-    memset(&sa_sigusr2, 0, sizeof(sa_sigusr2));
+    memset(&sa, 0, sizeof(sa));
 
-    sa_sigusr2.sa_handler = explode_handler;
+    sa.sa_handler = explode_handler;
 
-    sigemptyset(&sa_sigusr2.sa_mask);
-    sigaddset(&sa_sigusr2.sa_mask, SIGTERM);
-    sa_sigusr2.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
 
-    if (sigaction(SIGUSR2, &sa_sigusr2, NULL) == -1) ERROR;
-}
+    if (sigaction(SIGUSR2, &sa, NULL) == -1) ERROR;
+}*/
 
 void explode_handler(){
-    struct sigaction sa_ign;
-    sa_ign.sa_handler = SIG_IGN;
-    sigemptyset(&sa_ign.sa_mask);
-    sigaddset(&sa_ign.sa_mask, SIGTERM);
-    sa_ign.sa_flags = 0;
+    struct sigaction sa;
+    sa.sa_handler = SIG_IGN;
+    sigemptyset(&sa.sa_mask);
+    sigaddset(&sa.sa_mask, SIGTERM);
+    sa.sa_flags = 0;
 
-    if (sigaction(SIGUSR2, &sa_ign, NULL) == -1)
+    if (sigaction(SIGUSR2, &sa, NULL) == -1)
         exit(1);
 
     fprintf(sim_Output, "\nPOWER PLANT EXPLODED!!");

@@ -18,7 +18,16 @@ int absorb_energy(int energy) {
     return energy - absorbed;
 }
 
-void setup_limit_handler(){
+void active_inhibitor_handler(){
+    reserveSem(sem_inhibitor, 0);
+    if (inhibitor->inhibitor_setup == false)
+        inhibitor->inhibitor_setup = true;
+    else
+        inhibitor->inhibitor_setup = false;
+    releaseSem(sem_inhibitor, 0);
+}
+
+/*void setup_limit_handler(){
     srand(time(NULL));
     
     struct sigaction sa;
@@ -30,8 +39,7 @@ void setup_limit_handler(){
     sa.sa_flags = 0;
 
     if (sigaction(SIGUSR1, &sa, NULL) == -1) ERROR;
-}
-
+} */
 
 void exit_handler(){
     if ((shmdt(inhibitor)) == -1) ERROR;
