@@ -54,6 +54,7 @@ void sim_overview();
 
 void terminate();
 void explode_handler();
+void meltdown_handler();
 // ***********
 
 // *********** lib_inibitore.c

@@ -1,7 +1,5 @@
 #include "lib_header.h"
 
-
-
 int count_active_processes() {
     int count = 0;
     struct dirent *entry;
@@ -77,10 +75,9 @@ void create_atoms(int n_atoms) {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
         switch (pid = fork()){
         case -1:
-            perror("MELTDOWN: fork failed");
             releaseSem(sem_atom, 0);
             releaseSem(sem_power_plant, 0);
-            exit(1);
+            if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
         case 0:
             execl("./atomo", "./atomo", NULL);

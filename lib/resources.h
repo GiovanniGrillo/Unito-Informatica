@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 /*Simulation Duration */
-#define SIM_DURATION 14
+#define SIM_DURATION 15
 
 /* Data Structures */
 typedef struct Var {

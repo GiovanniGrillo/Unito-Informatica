@@ -36,10 +36,7 @@ int main() {
 
         switch (child_pid = fork()) {
             case -1:
-                fprintf(sim_Output, "\n***MELTDOWN***");
-                perror("MELTDOWN");
-                exit_handler();
-                exit(1);
+                if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
                 break;
             case 0:
                 break;

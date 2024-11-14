@@ -4,10 +4,14 @@
 int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
+
     setup_signal_handler(NULL, SIGQUIT);
     setup_signal_handler(exit_handler, SIGTERM);
-    setup_signal_handler(explode_handler, SIGUSR2);
     setup_signal_handler(exit_handler, SIGINT);
+
+    setup_signal_handler(explode_handler, SIGUSR1);
+    setup_signal_handler(meltdown_handler, SIGUSR2);
+
 
     //char *config_file = get_config_file(); //passa in char uno dei 4 file .conf
     createIPCS("conf/sim.conf");
@@ -29,13 +33,12 @@ int main() {
     printf("attivatore.c    -run\n");
     switch ((Activator_pid = fork())) {
         case -1:
-            ERROR;
-
+            if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
         case 0:
             execl("./attivatore", "./attivatore", NULL);
             printf("activator not started correctly\n");
             ERROR;
-
+            break;
         default:
             reserveSem(sem_processes,0);
             break;
@@ -45,13 +48,13 @@ int main() {
 
     switch ((Powersupply_pid = fork())) {
         case -1:
-            ERROR;
-
+            if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
+            break;
         case 0:
             execl("./alimentatore", "./alimentatore", NULL);
             printf("power supply not started correctly\n");
             ERROR;
-
+            break;
         default:
             reserveSem(sem_processes,0);
             break;
@@ -60,11 +63,13 @@ int main() {
     printf("inibitore.c     -run\n");
     switch ((temp = fork())) {
         case -1:
-            ERROR;
+            if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
+            break;
         case 0:
             execl("./inibitore", "./inibitore", NULL);
             printf("Inhibitor not started correctly\n");
             ERROR;
+            break;
         default:
             inhibitor->Inhibitor_pid = temp;
             reserveSem(sem_processes,0);
@@ -73,9 +78,8 @@ int main() {
 
     create_atoms(vars->N_ATOMI_INIT);
 
-
     daily_log();
-
     printf("\n\t\t\033[1mEND\033[0m\n");
+    
     terminate();
 }

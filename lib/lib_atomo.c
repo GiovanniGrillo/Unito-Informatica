@@ -56,10 +56,10 @@ void do_fission(Atom* atom_parent, int child_pid) {
             inhibitor->absorbed_energy += energia_da_assorbire;
             power_plant->energy -= energia_da_assorbire;
         } else {
-            if (kill(vars->master_pid, SIGUSR2) != 0) ERROR;
             releaseSem(sem_inhibitor, 0);
             releaseSem(sem_power_plant, 0);
             releaseSem(sem_processes, 0);
+            if (kill(vars->master_pid, SIGUSR1) != 0) ERROR;
             exit_handler();
         }
     }

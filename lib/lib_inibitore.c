@@ -1,4 +1,5 @@
 #include "lib_header.h"
+
 void limit_fission_handler(){
     int random_number = rand() % 10;
 
@@ -26,20 +27,6 @@ void active_inhibitor_handler(){
         inhibitor->inhibitor_setup = false;
     releaseSem(sem_inhibitor, 0);
 }
-
-/*void setup_limit_handler(){
-    srand(time(NULL));
-    
-    struct sigaction sa;
-
-    memset(&sa, 0, sizeof(sa));
-
-    sigemptyset(&sa.sa_mask);
-    sa.sa_handler = limit_fission_handler;
-    sa.sa_flags = 0;
-
-    if (sigaction(SIGUSR1, &sa, NULL) == -1) ERROR;
-} */
 
 void exit_handler(){
     if ((shmdt(inhibitor)) == -1) ERROR;

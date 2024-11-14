@@ -1,4 +1,5 @@
 #include "lib_header.h"
+
 union semun {
     int val;
     struct semid_ds *buf;
@@ -207,7 +208,7 @@ void sim_overview() {
     reserveSem(sem_power_plant, 0);
     reserveSem(sem_inhibitor, 0);
     int process_count = count_active_processes();
-    printf("Numero di processi attivi: %d\n", process_count);
+    printf("\nNumero di processi attivi: %d", process_count);
     printf("\n\033[1mREPORT:\033[0m");
     printf("\t\t[ Inib: %s ]\n", inhibitor->inhibitor_setup ? "\033[1;32mTRUE\033[0m" : "\033[1;31mFALSE\033[0m");
     printf("Atom count: %d\n", power_plant->atom_count);
@@ -223,21 +224,22 @@ void sim_overview() {
     releaseSem(sem_power_plant, 0);
 }
 
-/*void setup_explode_handler() {
+void explode_handler(){ //SIGUSR1
     struct sigaction sa;
-
-    memset(&sa, 0, sizeof(sa));
-
-    sa.sa_handler = explode_handler;
-
+    sa.sa_handler = SIG_IGN;
     sigemptyset(&sa.sa_mask);
     sigaddset(&sa.sa_mask, SIGTERM);
     sa.sa_flags = 0;
 
-    if (sigaction(SIGUSR2, &sa, NULL) == -1) ERROR;
-}*/
+    if (sigaction(SIGUSR1, &sa, NULL) == -1)
+        exit(1);
 
-void explode_handler(){
+    fprintf(sim_Output, "\nPOWER PLANT EXPLODED!!");
+    printf("\nPOWER PLANT EXPLODED!!");
+    terminate();
+}
+
+void meltdown_handler(){ //SIGUSR2
     struct sigaction sa;
     sa.sa_handler = SIG_IGN;
     sigemptyset(&sa.sa_mask);
@@ -247,8 +249,8 @@ void explode_handler(){
     if (sigaction(SIGUSR2, &sa, NULL) == -1)
         exit(1);
 
-    fprintf(sim_Output, "\nPOWER PLANT EXPLODED!!");
-    printf("\nPOWER PLANT EXPLODED!!");
+    fprintf(sim_Output, "\nMELTDOWN!!");
+    printf("\nMELTDOWN!!");
     terminate();
 }
 
