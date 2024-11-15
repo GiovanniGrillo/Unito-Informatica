@@ -4,7 +4,6 @@
 int main() {
     loadIPCs();
     setup_signal_handler(active_inhibitor_handler, SIGQUIT);
-    setup_signal_handler(limit_fission_handler, SIGUSR1);
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);
 
@@ -16,12 +15,18 @@ int main() {
     struct timespec att = {0, vars->STEP_INHIBITOR};
 
     while (true){
-        if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1)
+        if(inhibitor->inhibitor_setup){
+            if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) continue;
+            if(message.msg_op == 0)
+                message.msg_op = limit_fission();
+            else if (message.msg_op == 1)
+                message.msg_absorb = absorb_energy(message.msg_absorb);
+            else
                 continue;
-            message.msg_absorb = absorb_energy(message.msg_absorb);
-            if(msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0) == -1) ERROR;
 
-        nanosleep(&att, NULL);
+            message.msg_type = 1;
+            if(msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0) == -1) continue;
+        }
     }
     exit_handler();
 }

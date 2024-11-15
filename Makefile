@@ -1,24 +1,25 @@
 CFLAGS = -Wvla -Wextra -Werror -D_GNU_SOURCE
-PROGRAMS = atomo alimentatore attivatore inibitore master ipcs exe
+PROGRAMS = $(BIN)atomo $(BIN)alimentatore $(BIN)attivatore $(BIN)inibitore $(BIN)master exe
 LIB = lib/
+BIN = bin/
 
 all: $(PROGRAMS)
 
 # Programs compilation
-atomo: atomo.c $(LIB)lib_atomo.o $(LIB)lib_header.o
-	gcc atomo.c -o atomo $(CFLAGS)
+$(BIN)atomo: atomo.c $(LIB)lib_atomo.o $(LIB)lib_header.o
+	gcc atomo.c -o $(BIN)atomo $(CFLAGS)
 
-alimentatore: alimentatore.c $(LIB)lib_alimentatore.o $(LIB)lib_header.o
-	gcc alimentatore.c -o alimentatore $(CFLAGS)
+$(BIN)alimentatore: alimentatore.c $(LIB)lib_alimentatore.o $(LIB)lib_header.o
+	gcc alimentatore.c -o $(BIN)alimentatore $(CFLAGS)
 
-attivatore: attivatore.c $(LIB)lib_attivatore.o $(LIB)lib_header.o
-	gcc attivatore.c -o attivatore $(CFLAGS)
+$(BIN)attivatore: attivatore.c $(LIB)lib_attivatore.o $(LIB)lib_header.o
+	gcc attivatore.c -o $(BIN)attivatore $(CFLAGS)
 
-inibitore: inibitore.c $(LIB)lib_inibitore.o $(LIB)lib_header.o
-	gcc inibitore.c -o inibitore $(CFLAGS)
+$(BIN)inibitore: inibitore.c $(LIB)lib_inibitore.o $(LIB)lib_header.o
+	gcc inibitore.c -o $(BIN)inibitore $(CFLAGS)
 
-master: master.c $(LIB)lib_master.o $(LIB)lib_header.o
-	gcc master.c -o master $(CFLAGS)
+$(BIN)master: master.c $(LIB)lib_master.o $(LIB)lib_header.o
+	gcc master.c -o $(BIN)master $(CFLAGS)
 
 #Library compilation
 $(LIB)lib_header.o: $(LIB)lib_header.c $(LIB)resources.h
@@ -41,11 +42,11 @@ $(LIB)lib_attivatore.o: $(LIB)lib_attivatore.c $(LIB)resources.h
 
 ipcs:
 	@ipcrm -a
-	@clear
 
 exe:
-	./master
+	./bin/master
 
 clean:
 	rm -f *.o atomo alimentatore attivatore inibitore master
 	rm -f $(LIB)*.o
+	rm -f $(BIN)* 

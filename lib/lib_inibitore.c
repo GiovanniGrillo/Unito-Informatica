@@ -1,15 +1,7 @@
 #include "lib_header.h"
 
-void limit_fission_handler(){
-    int random_number = rand() % 10;
-
-    message.msg_type = 1;
-    message.msg_op = random_number;
-
-    if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0) == -1) {
-        perror("Errore nell'invio del messaggio");
-        ERROR;
-    }
+int limit_fission(){
+    return (rand() % 10);
 }
 
 int absorb_energy(int energy) {

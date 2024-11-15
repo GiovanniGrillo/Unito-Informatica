@@ -21,7 +21,8 @@ int main() {
     if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
     if (set_sem(sem_atom,        0, 1) == -1) ERROR;
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
-    if (set_sem(sem_processes,     0, 1) == -1) ERROR;
+    if (set_sem(sem_processes,   0, 1) == -1) ERROR;
+    if (set_sem(sem_fission,     0, 1) == -1) ERROR;
 
     if ((power_plant = shmat(shm_power_plant, NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;
@@ -35,7 +36,7 @@ int main() {
         case -1:
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
         case 0:
-            execl("./attivatore", "./attivatore", NULL);
+            execl("bin/attivatore", "bin/attivatore", NULL);
             printf("activator not started correctly\n");
             ERROR;
             break;
@@ -51,7 +52,7 @@ int main() {
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
         case 0:
-            execl("./alimentatore", "./alimentatore", NULL);
+            execl("bin/alimentatore", "bin/alimentatore", NULL);
             printf("power supply not started correctly\n");
             ERROR;
             break;
@@ -66,7 +67,7 @@ int main() {
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
         case 0:
-            execl("./inibitore", "./inibitore", NULL);
+            execl("bin/inibitore", "bin/inibitore", NULL);
             printf("Inhibitor not started correctly\n");
             ERROR;
             break;
@@ -80,6 +81,5 @@ int main() {
 
     daily_log();
     printf("\n\t\t\033[1mEND\033[0m\n");
-
     terminate();
 }

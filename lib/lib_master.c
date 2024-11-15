@@ -12,7 +12,7 @@ char* get_config_file() {
     static char config_file[20];
     int valid_choice = 0;
     int choice;
-
+    
     while (!valid_choice) {
         printf("**Select the configuration state:**\n");
         printf("1. timeout\n");
@@ -54,7 +54,7 @@ void createIPCS(char* file) {
     sim_Output = fopen("sim.out", "w");
     setbuf(sim_Output, NULL);
 
-    if ((shm_vars = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_vars = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var)*sizeof(int)*100, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((vars     = shmat(shm_vars, NULL, 0)) == (void*) -1)                                             ERROR;
 
     fprintf(sim_Output, "Starting execution of Operating Systems project\n");
@@ -83,8 +83,9 @@ void createIPCS(char* file) {
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'e'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_fission   = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
-    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*5*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*20*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor)*(sizeof(int)*10),                                  IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'j'), sizeof(PowerPlant)*(sizeof(int)*10),                                 IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
@@ -125,6 +126,7 @@ void deallocIPC(){
     if (semctl(sem_inhibitor,   IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_power_plant, IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_processes,   IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_fission,     IPC_RMID, 0) == -1)  ERROR;
 
     printf("\nAll IPC resources have been successfully deallocated.\n");
     return;

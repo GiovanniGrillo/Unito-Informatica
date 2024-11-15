@@ -6,10 +6,12 @@ int energy(int n1, int n2) {
 
 void do_fission(Atom* atom_parent, int child_pid) {
     if (inhibitor->inhibitor_setup) {
-        if (kill(inhibitor->Inhibitor_pid, SIGUSR1) != 0) ERROR;
-        
+        message.msg_op = 0;
+        reserveSem(sem_fission, 0);
+        if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0)    == -1) ERROR;
         if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) ERROR;
-        
+        releaseSem(sem_fission,0);
+
         if (message.msg_op == 0) { //scissione negata
             if (kill(child_pid, SIGTERM) != 0) ERROR;
             reserveSem(sem_inhibitor, 0);
@@ -25,7 +27,6 @@ void do_fission(Atom* atom_parent, int child_pid) {
             return;
         }
     }
-
     struct Atom child;
     reserveSem(sem_atom, 0);
     child.Atom_pid = child_pid;
@@ -39,10 +40,13 @@ void do_fission(Atom* atom_parent, int child_pid) {
     if (atom_parent->atomic_number == child.atomic_number) {
         liberata = energy(atom_parent->atomic_number, child.atomic_number);
 
-        if (inhibitor->inhibitor_setup) {
+        if (inhibitor->inhibitor_setup && liberata != 0) {
             message.msg_absorb = liberata;
+            message.msg_op = 1;
+            reserveSem(sem_fission, 0);
             if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0)    == -1) ERROR;
             if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) ERROR;
+            releaseSem(sem_fission,0);
             liberata = message.msg_absorb;
         }
     }

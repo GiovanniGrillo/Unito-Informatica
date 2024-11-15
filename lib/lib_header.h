@@ -57,7 +57,7 @@ void meltdown_handler();
 // ***********
 
 // *********** lib_inibitore.c
-void limit_fission_handler();
+int limit_fission();
 int absorb_energy(int energy);
 // ***********
 

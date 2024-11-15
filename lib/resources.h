@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 /*Simulation Duration */
-#define SIM_DURATION 15
+#define SIM_DURATION 10
 
 /* Data Structures */
 typedef struct Var {
@@ -54,6 +54,7 @@ struct msg_buffer {
     int sem_inhibitor;
     int sem_atom;
     int sem_processes;
+    int sem_fission;
 
 /* Shared Memory*/
     int shm_atoms;        Atom* atoms;
