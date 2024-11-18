@@ -16,7 +16,7 @@ void loadIPCs(){
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'e'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                     PERMISSIONS)) == -1) ERROR;
-    if ((sem_fission   = semget(ftok(FTOK_FILE, 'z'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((sem_fission     = semget(ftok(FTOK_FILE, 'z'), 1,                                     PERMISSIONS)) == -1) ERROR;
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*20*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor)*(sizeof(int)*10),    PERMISSIONS)) == -1) ERROR;
@@ -76,7 +76,7 @@ void create_atoms(int n_atoms) {
 
 void setup_signal_handler(void (*handler)(int), int signum){
     struct sigaction sa;
-        
+
     memset(&sa, 0, sizeof(sa));
 
     sa.sa_handler = (handler == NULL ? SIG_IGN : handler);

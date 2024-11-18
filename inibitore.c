@@ -12,11 +12,9 @@ int main() {
 
     releaseSem(sem_processes,0);
 
-    struct timespec att = {0, vars->STEP_INHIBITOR};
-
     while (true){
         if(inhibitor->inhibitor_setup){
-            if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) continue;
+            if(msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) continue;
             if(message.msg_op == 0)
                 message.msg_op = limit_fission();
             else if (message.msg_op == 1)
@@ -24,7 +22,7 @@ int main() {
             else
                 continue;
 
-            message.msg_type = 1;
+            message.msg_type = 2;
             if(msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0) == -1) continue;
         }
     }

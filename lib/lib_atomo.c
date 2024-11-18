@@ -9,7 +9,7 @@ void do_fission(Atom* atom_parent, int child_pid) {
         message.msg_op = 0;
         reserveSem(sem_fission, 0);
         if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0)    == -1) ERROR;
-        if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) ERROR;
+        if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 2, 0) == -1) ERROR;
         releaseSem(sem_fission,0);
 
         if (message.msg_op == 0) { //scissione negata
@@ -43,9 +43,10 @@ void do_fission(Atom* atom_parent, int child_pid) {
         if (inhibitor->inhibitor_setup && liberata != 0) {
             message.msg_absorb = liberata;
             message.msg_op = 1;
+            message.msg_type = 1;
             reserveSem(sem_fission, 0);
             if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0)    == -1) ERROR;
-            if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1) ERROR;
+            if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 2, 0) == -1) ERROR;
             releaseSem(sem_fission,0);
             liberata = message.msg_absorb;
         }
@@ -70,7 +71,6 @@ void do_fission(Atom* atom_parent, int child_pid) {
 
     power_plant->energy += liberata;
     releaseSem(sem_power_plant, 0);
-
     ++inhibitor->done_fission;
     releaseSem(sem_inhibitor, 0);
 

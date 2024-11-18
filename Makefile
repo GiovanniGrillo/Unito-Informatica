@@ -49,4 +49,4 @@ exe:
 clean:
 	rm -f *.o atomo alimentatore attivatore inibitore master
 	rm -f $(LIB)*.o
-	rm -f $(BIN)* 
+	rm -f $(BIN)*

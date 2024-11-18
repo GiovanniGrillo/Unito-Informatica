@@ -7,7 +7,9 @@ int limit_fission(){
 int absorb_energy(int energy) {
     double reduction_factor = (rand() % 51) / 100.0;
     int absorbed = energy * reduction_factor;
+    reserveSem(sem_inhibitor, 0);
     inhibitor->absorbed_energy += absorbed;
+    releaseSem(sem_inhibitor, 0);
     return energy - absorbed;
 }
 
