@@ -10,6 +10,8 @@ int main() {
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);
 
+    signal(SIGCHLD, SIG_IGN);
+
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
     if ((inhibitor    = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
@@ -36,14 +38,14 @@ int main() {
 
         switch (child_pid = fork()) {
             case -1:
-                if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
+                if (kill(vars->master_pid, SIGUSR2) == -1) ERROR;
                 break;
             case 0:
                 break;
             default:
                 do_fission(atom_parent, child_pid);
                 break;
-        }
     }
+}
     exit_handler();
 }

@@ -7,7 +7,6 @@ int main() {
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);
 
-
     releaseSem(sem_processes,0);
 
     struct timespec req = {0, vars->STEP_ATTIVATORE};

@@ -12,7 +12,6 @@ int main() {
     setup_signal_handler(explode_handler, SIGUSR1);
     setup_signal_handler(meltdown_handler, SIGUSR2);
 
-
     char *config_file = get_config_file();
     createIPCS(config_file);
 
@@ -23,11 +22,11 @@ int main() {
     if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
     if (set_sem(sem_processes,   0, 1) == -1) ERROR;
     if (set_sem(sem_fission,     0, 1) == -1) ERROR;
+    if (set_sem(sem_prova,       0, 1) == -1) ERROR;
 
     if ((power_plant = shmat(shm_power_plant, NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;
     if ((inhibitor   = shmat(shm_inhibitor,   NULL,0)) == (void*) -1) ERROR;
-
 
     pid_t temp = 0;
 
@@ -46,7 +45,6 @@ int main() {
     }
 
     printf("alimentatore.c  -run\n");
-
     switch ((Powersupply_pid = fork())) {
         case -1:
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;

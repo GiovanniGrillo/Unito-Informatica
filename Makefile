@@ -46,6 +46,13 @@ ipcs:
 exe:
 	./bin/master
 
+kill:
+	pkill -9 atomo
+	pkill -9 alimentatore
+	pkill -9 attivatore
+	pkill -9 inibitore
+	pkill -9 master
+
 clean:
 	rm -f *.o atomo alimentatore attivatore inibitore master
 	rm -f $(LIB)*.o

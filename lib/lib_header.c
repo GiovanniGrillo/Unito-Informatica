@@ -17,6 +17,7 @@ void loadIPCs(){
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                     PERMISSIONS)) == -1) ERROR;
     if ((sem_fission     = semget(ftok(FTOK_FILE, 'z'), 1,                                     PERMISSIONS)) == -1) ERROR;
+    if ((sem_prova       = semget(ftok(FTOK_FILE, 'y'), 1,                                     PERMISSIONS)) == -1) ERROR;
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*20*(vars->N_NUOVI_ATOMI), PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor)*(sizeof(int)*10),    PERMISSIONS)) == -1) ERROR;
@@ -50,29 +51,30 @@ void create_atoms(int n_atoms) {
     pid_t pid;
     reserveSem(sem_atom, 0);
     reserveSem(sem_power_plant, 0);
-
-    for (int i = 0; i < n_atoms; i++){
+    for (int i = 0; i < n_atoms; i++) {
         atoms[power_plant->atom_count].atomic_number = (rand() % vars->N_ATOM_MAX) + 1;
-        switch (pid = fork()){
+
+        switch (pid = fork()) {
         case -1:
-            releaseSem(sem_atom, 0);
-            releaseSem(sem_power_plant, 0);
-            if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
+            if (kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
+
         case 0:
-            execl("bin/atomo", "bin/atomo", NULL);
+            if (execl("bin/atomo", "bin/atomo", NULL) == -1) ERROR;
             exit(1);
             break;
         default:
-            reserveSem(sem_processes,0);
             atoms[power_plant->atom_count].Atom_pid = pid;
             ++power_plant->atom_count;
+            reserveSem(sem_processes, 0);
             break;
         }
     }
     releaseSem(sem_power_plant, 0);
     releaseSem(sem_atom, 0);
+    return;
 }
+
 
 void setup_signal_handler(void (*handler)(int), int signum){
     struct sigaction sa;
@@ -87,4 +89,6 @@ void setup_signal_handler(void (*handler)(int), int signum){
 
     if (sigaction(signum, &sa, NULL) == -1)
         ERROR;
+
+    return;
 }

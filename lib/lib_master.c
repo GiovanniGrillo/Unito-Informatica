@@ -73,7 +73,7 @@ void createIPCS(char* file) {
     fscanf(sim_Input, "%s %d\n", temp, &vars->STEP_ATTIVATORE);
     vars->STEP_ATTIVATORE    = convert_to_million(vars->STEP_ATTIVATORE);    fprintf(sim_Output, "STEP_ATTIVATORE: %18d\n",         vars->STEP_ATTIVATORE);
     fscanf(sim_Input, "\n");                                                 fprintf(sim_Output, "\n");
-    vars->i = 0;
+    vars->i =0;
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'b'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'c'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
@@ -82,6 +82,8 @@ void createIPCS(char* file) {
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_fission     = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_prova       = semget(ftok(FTOK_FILE, 'y'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+
 
     if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG)*(SIM_DURATION)*20*(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor)*(sizeof(int)*10),                                   IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
@@ -125,6 +127,7 @@ void deallocIPC(){
     if (semctl(sem_power_plant, IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_processes,   IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_fission,     IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_prova,       IPC_RMID, 0) == -1)  ERROR;
 
     printf("\nAll IPC resources have been successfully deallocated.\n");
     return;
@@ -237,7 +240,7 @@ void explode_handler(){ //SIGUSR1
     terminate();
 }
 
-void meltdown_handler(){ //SIGUSR2
+void meltdown_handler() { // SIGUSR2
     struct sigaction sa;
     sa.sa_handler = SIG_IGN;
     sigemptyset(&sa.sa_mask);
@@ -246,10 +249,28 @@ void meltdown_handler(){ //SIGUSR2
 
     if (sigaction(SIGUSR2, &sa, NULL) == -1)
         exit(1);
-
-    fprintf(sim_Output, "\nMELTDOWN!!");
-    printf("\nMELTDOWN!!");
-    terminate();
+    if(!inhibitor->inhibitor_setup){
+        fprintf(sim_Output, "\nMELTDOWN!!");
+        printf("\nMELTDOWN!!");
+        terminate();
+    } else{
+        signal(SIGCHLD, SIG_IGN);
+        reserveSem(sem_power_plant, 0);
+        reserveSem(sem_atom, 0);
+        for(int i = 0; i < (power_plant->atom_count * 0.5); ++i){
+            if(kill(atoms[i].Atom_pid, SIGTERM) == 0){
+                if(errno == ESRCH)
+                    continue;
+                else
+                    ERROR;
+            }
+        }
+        releaseSem(sem_atom, 0);
+        releaseSem(sem_power_plant, 0);
+        signal(SIGCHLD, SIG_DFL);
+        setup_signal_handler(meltdown_handler, SIGUSR2);
+    }
+    
 }
 
 void terminate(){

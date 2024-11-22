@@ -8,7 +8,7 @@ int main() {
     setup_signal_handler(exit_handler, SIGINT);
 
 
-    if ((inhibitor = shmat(shm_inhibitor,   NULL, 0)) == (void*) -1) ERROR;
+    if ((inhibitor = shmat(shm_inhibitor, NULL, 0)) == (void*) -1) ERROR;
 
     releaseSem(sem_processes,0);
 

@@ -55,6 +55,7 @@ struct msg_buffer {
     int sem_atom;
     int sem_processes;
     int sem_fission;
+    int sem_prova;
 
 /* Shared Memory*/
     int shm_atoms;        Atom* atoms;

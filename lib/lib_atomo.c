@@ -32,8 +32,11 @@ void do_fission(Atom* atom_parent, int child_pid) {
     child.Atom_pid = child_pid;
     child.atomic_number = (atom_parent->atomic_number) / 2;
     atom_parent->atomic_number = atom_parent->atomic_number - child.atomic_number;
-    atoms[power_plant->atom_count] = child;
+    reserveSem(sem_power_plant, 0);
+    atoms[power_plant->atom_count].Atom_pid = child.Atom_pid;
+    atoms[power_plant->atom_count].atomic_number = child.atomic_number;
     ++power_plant->atom_count;
+    releaseSem(sem_power_plant, 0);
     releaseSem(sem_atom, 0);
 
     int liberata = 0;
@@ -57,7 +60,7 @@ void do_fission(Atom* atom_parent, int child_pid) {
 
     if ((power_plant->energy += liberata) > vars->ENERGY_EXPLODE_THRESHOLD) {
         if (inhibitor->inhibitor_setup == true) {
-            int energia_da_assorbire = (power_plant->energy - vars->ENERGY_EXPLODE_THRESHOLD) * 2;
+            int energia_da_assorbire = (power_plant->energy - vars->ENERGY_EXPLODE_THRESHOLD) * 5;
             inhibitor->absorbed_energy += energia_da_assorbire;
             power_plant->energy -= energia_da_assorbire;
         } else {
@@ -65,11 +68,11 @@ void do_fission(Atom* atom_parent, int child_pid) {
             releaseSem(sem_power_plant, 0);
             releaseSem(sem_processes, 0);
             if (kill(vars->master_pid, SIGUSR1) != 0) ERROR;
-            exit_handler();
+            return;
         }
     }
 
-    power_plant->energy += liberata;
+     power_plant->energy += liberata;
     releaseSem(sem_power_plant, 0);
     ++inhibitor->done_fission;
     releaseSem(sem_inhibitor, 0);
@@ -77,12 +80,22 @@ void do_fission(Atom* atom_parent, int child_pid) {
     return;
 }
 
-void exit_handler(){
-    pid_t child_pid;
-    while ((child_pid = waitpid(-1, NULL, 0)) > 0);
+
+void exit_handler() {
+    reserveSem(sem_prova, 0);
+    for (int i = 0; i < power_plant->atom_count; i++) {
+        if (atoms[i].Atom_pid == getpid()) {
+            atoms[i] = atoms[power_plant->atom_count - 1];
+            power_plant->atom_count--;
+            break;
+        }
+    }
+    releaseSem(sem_prova, 0);
+
     if ((shmdt(atoms))       == -1) ERROR;
     if ((shmdt(power_plant)) == -1) ERROR;
     if ((shmdt(inhibitor))   == -1) ERROR;
+
     unloadIPCs();
     exit(0);
 }
