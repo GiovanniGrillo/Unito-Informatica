@@ -17,12 +17,12 @@ int main() {
 
     vars->master_pid = getpid();
 
-    if (set_sem(sem_inhibitor,   0, 1) == -1) ERROR;
-    if (set_sem(sem_atom,        0, 1) == -1) ERROR;
-    if (set_sem(sem_power_plant, 0, 1) == -1) ERROR;
-    if (set_sem(sem_processes,   0, 1) == -1) ERROR;
-    if (set_sem(sem_fission,     0, 1) == -1) ERROR;
-    if (set_sem(sem_prova,       0, 1) == -1) ERROR;
+    if (set_sem(sem_inhibitor,     0, 1) == -1) ERROR;
+    if (set_sem(sem_atom,          0, 1) == -1) ERROR;
+    if (set_sem(sem_power_plant,   0, 1) == -1) ERROR;
+    if (set_sem(sem_processes,     0, 1) == -1) ERROR;
+    if (set_sem(sem_fission,       0, 1) == -1) ERROR;
+    if (set_sem(sem_removal,       0, 1) == -1) ERROR;
 
     if ((power_plant = shmat(shm_power_plant, NULL,0)) == (void*) -1) ERROR;
     if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;

@@ -6,11 +6,10 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     loadIPCs();
+    
     setup_signal_handler(NULL, SIGQUIT);
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);
-
-    signal(SIGCHLD, SIG_IGN);
 
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
@@ -18,7 +17,7 @@ int main() {
 
     releaseSem(sem_processes,0);
 
-   while(true) {
+    while(true) {
         if (msgrcv(msg_stack, &message, sizeof(message) - sizeof(long), 1, 0) == -1)
             continue;
 
@@ -45,7 +44,7 @@ int main() {
             default:
                 do_fission(atom_parent, child_pid);
                 break;
+        }
     }
-}
     exit_handler();
 }

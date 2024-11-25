@@ -4,11 +4,10 @@
 int main(){
     setbuf(stdout, NULL);
     loadIPCs();
+    
     setup_signal_handler(NULL, SIGQUIT);
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);
-
-    signal(SIGCHLD, SIG_IGN);
 
     if ((atoms        = shmat(shm_atoms,       NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant  = shmat(shm_power_plant, NULL, 0)) == (void*) -1) ERROR;
@@ -21,5 +20,6 @@ int main(){
         create_atoms(vars->N_NUOVI_ATOMI);
         nanosleep(&req, NULL);
     }
+
     exit_handler();
 }

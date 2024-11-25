@@ -66,7 +66,6 @@ void do_fission(Atom* atom_parent, int child_pid) {
         } else {
             releaseSem(sem_inhibitor, 0);
             releaseSem(sem_power_plant, 0);
-            releaseSem(sem_processes, 0);
             if (kill(vars->master_pid, SIGUSR1) != 0) ERROR;
             return;
         }
@@ -82,7 +81,7 @@ void do_fission(Atom* atom_parent, int child_pid) {
 
 
 void exit_handler() {
-    reserveSem(sem_prova, 0);
+    reserveSem(sem_removal, 0);
     for (int i = 0; i < power_plant->atom_count; i++) {
         if (atoms[i].Atom_pid == getpid()) {
             atoms[i] = atoms[power_plant->atom_count - 1];
@@ -90,7 +89,7 @@ void exit_handler() {
             break;
         }
     }
-    releaseSem(sem_prova, 0);
+    releaseSem(sem_removal, 0);
 
     if ((shmdt(atoms))       == -1) ERROR;
     if ((shmdt(power_plant)) == -1) ERROR;
