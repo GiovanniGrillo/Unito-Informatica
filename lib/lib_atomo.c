@@ -12,14 +12,14 @@ void do_fission(Atom* atom_parent, int child_pid) {
         if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 2, 0) == -1) ERROR;
         releaseSem(sem_fission,0);
 
-        if (message.msg_op == 0) { //scissione negata
+        if (message.msg_op == 0) { // denied fission
             if (kill(child_pid, SIGTERM) != 0) ERROR;
             reserveSem(sem_inhibitor, 0);
             ++inhibitor->denied_fission;
             releaseSem(sem_inhibitor, 0);
             return;
         }
-        else if (message.msg_op == 1) { // atomo trasformato in scoria
+        else if (message.msg_op == 1) { // wasted atom
             if (kill(child_pid, SIGTERM) != 0) ERROR;
             reserveSem(sem_power_plant, 0);
             ++power_plant->waste_atoms;
@@ -71,7 +71,7 @@ void do_fission(Atom* atom_parent, int child_pid) {
         }
     }
 
-     power_plant->energy += liberata;
+    power_plant->energy += liberata;
     releaseSem(sem_power_plant, 0);
     ++inhibitor->done_fission;
     releaseSem(sem_inhibitor, 0);

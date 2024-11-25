@@ -6,7 +6,9 @@
         "resources.h": "c",
         "string.h": "c",
         "stdlib.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "unistd.h": "c",
+        "*.tcc": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

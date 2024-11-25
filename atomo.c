@@ -6,7 +6,7 @@ int main() {
     setbuf(stdout, NULL);
     srand(time(NULL));
     loadIPCs();
-    
+
     setup_signal_handler(NULL, SIGQUIT);
     setup_signal_handler(exit_handler, SIGTERM);
     setup_signal_handler(exit_handler, SIGINT);

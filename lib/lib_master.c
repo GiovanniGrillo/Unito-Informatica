@@ -12,7 +12,7 @@ char* get_config_file() {
     static char config_file[20];
     int valid_choice = 0;
     int choice;
-    
+
     while (!valid_choice) {
         printf("**Select the configuration state:**\n");
         printf("1. timeout\n");
@@ -55,7 +55,7 @@ void createIPCS(char* file) {
     setbuf(sim_Output, NULL);
 
     if ((shm_vars = shmget(ftok(FTOK_FILE, 'a'), sizeof(Var)*sizeof(int)*100, IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((vars     = shmat(shm_vars, NULL, 0)) == (void*) -1)                                             ERROR;
+    if ((vars     = shmat(shm_vars, NULL, 0)) == (void*) -1)                                                              ERROR;
 
     fprintf(sim_Output, "Starting execution of Operating Systems project\n");
     fprintf(sim_Output, "\nPower plant configuration:\n");
@@ -73,7 +73,7 @@ void createIPCS(char* file) {
     fscanf(sim_Input, "%s %d\n", temp, &vars->STEP_ATTIVATORE);
     vars->STEP_ATTIVATORE    = convert_to_million(vars->STEP_ATTIVATORE);    fprintf(sim_Output, "STEP_ATTIVATORE: %18d\n",         vars->STEP_ATTIVATORE);
     fscanf(sim_Input, "\n");                                                 fprintf(sim_Output, "\n");
-    vars->i =0;
+
     if ((msg_stack       = msgget(ftok(FTOK_FILE, 'b'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((inhibitor_stack = msgget(ftok(FTOK_FILE, 'c'),                                               IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
@@ -81,13 +81,13 @@ void createIPCS(char* file) {
     if ((sem_power_plant = semget(ftok(FTOK_FILE, 'e'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_atom        = semget(ftok(FTOK_FILE, 'f'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
     if ((sem_processes   = semget(ftok(FTOK_FILE, 'g'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_fission     = semget(ftok(FTOK_FILE, 'z'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((sem_removal     = semget(ftok(FTOK_FILE, 'y'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_fission     = semget(ftok(FTOK_FILE, 'h'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((sem_removal     = semget(ftok(FTOK_FILE, 'i'), 1,                                            IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
 
-    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'h'), sizeof(Atom) * (vars->N_MSG) * (SIM_DURATION) *(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'i'), sizeof(Inhibitor),                                   IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
-    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'j'), sizeof(PowerPlant),                                  IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_atoms       = shmget(ftok(FTOK_FILE, 'j'), sizeof(Atom) * (vars->N_MSG) * 20 * (SIM_DURATION) *(vars->N_NUOVI_ATOMI), IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_inhibitor   = shmget(ftok(FTOK_FILE, 'k'), sizeof(Inhibitor)*(sizeof(int) * 10),                                      IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
+    if ((shm_power_plant = shmget(ftok(FTOK_FILE, 'l'), sizeof(PowerPlant)*(sizeof(int) * 10),                                     IPC_CREAT | IPC_EXCL | PERMISSIONS)) == -1) ERROR;
 
     if ((inhibitor       = shmat(shm_inhibitor, NULL, 0)) == (void*) -1) ERROR;
     if ((power_plant     = shmat(shm_power_plant,NULL,0)) == (void*) -1) ERROR;
@@ -127,7 +127,7 @@ void deallocIPC(){
     if (semctl(sem_power_plant, IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_processes,   IPC_RMID, 0) == -1)  ERROR;
     if (semctl(sem_fission,     IPC_RMID, 0) == -1)  ERROR;
-    if (semctl(sem_removal,       IPC_RMID, 0) == -1)  ERROR;
+    if (semctl(sem_removal,     IPC_RMID, 0) == -1)  ERROR;
 
     printf("\nAll IPC resources have been successfully deallocated.\n");
     return;
@@ -189,7 +189,7 @@ void daily_log() {
                 terminate();
             }
         } else
-            power_plant->energy = power_plant->energy - vars->ENERGY_DEMAND; //prelievo giornaliero dell'energy
+            power_plant->energy = power_plant->energy - vars->ENERGY_DEMAND;
 
         prev_denied_fissions = inhibitor->denied_fission;
         prev_absorbed_energy = inhibitor->absorbed_energy;
@@ -203,7 +203,6 @@ void daily_log() {
             terminate();
         sleep(1);
     }
-    fprintf(sim_Output,"Made by: Grillo Giovanni, Olivero Alessandro, Corrao Mario");
     return;
 }
 
@@ -267,6 +266,6 @@ void exit_handler(){
     if ((shmdt(inhibitor))   == -1) ERROR;
     unloadIPCs();
     deallocIPC();
-    printf("STO TERMINANDO, SONO IL MASTER\n");
+    fprintf(sim_Output,"\nMade by: Corrao Mario, Grillo Giovanni, Olivero Alessandro");
     exit(0);
 }

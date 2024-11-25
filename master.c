@@ -28,10 +28,10 @@ int main() {
     if ((atoms       = shmat(shm_atoms,       NULL,0)) == (void*) -1) ERROR;
     if ((inhibitor   = shmat(shm_inhibitor,   NULL,0)) == (void*) -1) ERROR;
 
-    pid_t temp = 0;
+    pid_t temp_pid = 0;
 
     printf("attivatore.c    -run\n");
-    switch ((Activator_pid = fork())) {
+    switch (temp_pid = fork()) {
         case -1:
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
         case 0:
@@ -40,12 +40,13 @@ int main() {
             ERROR;
             break;
         default:
+            vars->Activator_pid = temp_pid;
             reserveSem(sem_processes,0);
             break;
     }
 
     printf("alimentatore.c  -run\n");
-    switch ((Powersupply_pid = fork())) {
+    switch (temp_pid = fork()) {
         case -1:
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
@@ -55,12 +56,13 @@ int main() {
             ERROR;
             break;
         default:
+            vars->Powersupply_pid = temp_pid;
             reserveSem(sem_processes,0);
             break;
     }
 
     printf("inibitore.c     -run\n");
-    switch ((temp = fork())) {
+    switch ((temp_pid = fork())) {
         case -1:
             if(kill(vars->master_pid, SIGUSR2) == -1) ERROR;
             break;
@@ -70,7 +72,7 @@ int main() {
             ERROR;
             break;
         default:
-            inhibitor->Inhibitor_pid = temp;
+            inhibitor->Inhibitor_pid = temp_pid;
             reserveSem(sem_processes,0);
             break;
     }

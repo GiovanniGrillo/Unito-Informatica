@@ -1,22 +1,7 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include <sys/shm.h>
-#include <sys/sem.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <errno.h>
-#include <time.h>
-#include <math.h>
-
 #include "resources.h"
 
-#include <dirent.h>
-#define PERMISSIONS  0666
 #define FTOK_FILE    "attivatore.c"
+#define PERMISSIONS  0666
 
 #define ERROR                                                                                                                                     \
     {                                                                                                                                             \
@@ -26,7 +11,7 @@
         }                                                                                                                                         \
     }
 
-// *********** lib_header.c
+// lib_header.c
 long int convert_to_million(int n);
 
 void loadIPCs();
@@ -38,10 +23,8 @@ int releaseSem(int id_sem, int n_sem);
 void create_atoms(int number_atoms);
 
 void setup_signal_handler(void (*handler)(int), int signum);
-void exit_handler();
-// ***********
 
-// *********** lib_master.c
+// lib_master.c
 char* get_config_file();
 
 void createIPCS(char* file);
@@ -54,21 +37,20 @@ void sim_overview(int day);
 void terminate();
 void explode_handler();
 void meltdown_handler();
-// ***********
+void exit_handler();
 
-// *********** lib_inibitore.c
+// lib_inibitore.c
 int limit_fission();
 int absorb_energy(int energy);
-// ***********
+void exit_handler();
 
-// *********** lib_alimentatore.c
-// ***********
+// lib_alimentatore.c
+void exit_handler();
 
-// *********** lib_attivatore.c
-// ***********
+// lib_attivatore.c
+void exit_handler();
 
-// *********** lib_atomo.c
+// lib_atomo.c
 int energy(int n1, int n2);
 void do_fission(Atom* atom_parent, int child_pid);
-// ***********
-
+void exit_handler();

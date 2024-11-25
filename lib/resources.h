@@ -1,5 +1,18 @@
 #ifndef RESOURCES_H
 #define RESOURCES_H
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <ctype.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/shm.h>
+#include <sys/sem.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <errno.h>
+#include <time.h>
+#include <math.h>
 #include <sys/types.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -9,6 +22,8 @@
 /* Data Structures */
 typedef struct Var {
     pid_t master_pid;
+    pid_t Powersupply_pid;
+    pid_t Activator_pid;
     int ENERGY_DEMAND;
     int ENERGY_EXPLODE_THRESHOLD;
     int N_ATOMI_INIT;
@@ -17,7 +32,6 @@ typedef struct Var {
     int N_NUOVI_ATOMI;
     int STEP_ALIMENTAZIONE;
     int STEP_ATTIVATORE;
-    int i;
 } Var;
 
 typedef struct PowerPlant{
@@ -66,10 +80,5 @@ struct msg_buffer {
 /* Files */
     FILE* sim_Input;
     FILE* sim_Output;
-
-/* Global Variables */
-    pid_t Atom_pid;
-    pid_t Activator_pid;
-    pid_t Powersupply_pid;
 
 #endif

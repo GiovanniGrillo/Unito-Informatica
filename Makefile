@@ -1,9 +1,12 @@
 CFLAGS = -Wvla -Wextra -Werror -D_GNU_SOURCE
-PROGRAMS = $(BIN)atomo $(BIN)alimentatore $(BIN)attivatore $(BIN)inibitore $(BIN)master exe
+PROGRAMS = bin $(BIN)atomo $(BIN)alimentatore $(BIN)attivatore $(BIN)inibitore $(BIN)master exe
 LIB = lib/
 BIN = bin/
 
 all: $(PROGRAMS)
+
+bin:
+	mkdir -p bin
 
 # Programs compilation
 $(BIN)atomo: atomo.c $(LIB)lib_atomo.o $(LIB)lib_header.o
@@ -46,14 +49,6 @@ ipcs:
 exe:
 	./bin/master
 
-kill:
-	pkill -9 atomo
-	pkill -9 alimentatore
-	pkill -9 attivatore
-	pkill -9 inibitore
-	pkill -9 master
-
 clean:
-	rm -f *.o atomo alimentatore attivatore inibitore master
+	rm -rf bin
 	rm -f $(LIB)*.o
-	rm -f $(BIN)*
