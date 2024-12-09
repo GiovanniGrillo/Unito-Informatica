@@ -1,7 +1,7 @@
 #include "lib_header.h"
 
 int limit_fission(){
-    return (rand() % 10);
+    return (rand() % 9);
 }
 
 int absorb_energy(int energy) {

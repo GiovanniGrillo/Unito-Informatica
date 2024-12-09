@@ -7,6 +7,7 @@ int energy(int n1, int n2) {
 void do_fission(Atom* atom_parent, int child_pid) {
     if (inhibitor->inhibitor_setup) {
         message.msg_op = 0;
+        message.msg_type = 1;
         reserveSem(sem_fission, 0);
         if (msgsnd(inhibitor_stack, &message, sizeof(message) - sizeof(long), 0)    == -1) ERROR;
         if (msgrcv(inhibitor_stack, &message, sizeof(message) - sizeof(long), 2, 0) == -1) ERROR;
@@ -75,7 +76,6 @@ void do_fission(Atom* atom_parent, int child_pid) {
     releaseSem(sem_power_plant, 0);
     ++inhibitor->done_fission;
     releaseSem(sem_inhibitor, 0);
-
     return;
 }
 
