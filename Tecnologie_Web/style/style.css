@@ -1,0 +1,193 @@
+html, body {
+    margin: 0;
+    height: 100vh;
+}
+
+body {
+    display: grid;
+    grid-template-rows: minmax(60px, auto) 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "central-area"
+        "footer";
+    max-height: 100vh;
+}
+
+/* HEADER */
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Social a sinistra, titolo al centro, user-nav a destra */
+    padding: 10px 20px;
+    height: 80px; /* Altezza fissa */
+}
+
+/* SOCIAL ICONS (a sinistra) */
+#social-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* TITOLO CENTRATO PERFETTAMENTE */
+
+.header-title {
+    font-family: 'Roboto Serif', serif;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 200;
+    text-align: center;
+    font-size: 24px;
+    white-space: nowrap;
+}
+/* NAVIGAZIONE UTENTE (BOTTONI USER E ESCI) */
+nav.user-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Stili base per i bottoni */
+div.user-nav-item {
+    background-color: #ffffff;
+    border: 2px solid #454d3c;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    min-width: 80px;
+    text-align: center;
+    font-size: 14px;
+}
+
+div.user-nav-item:hover {
+    background-color: #58624d;
+}
+
+.nav-bar {
+    font-family: 'Funnel Sans', sans-serif;
+    position: absolute;
+    top: 50%; /* Sposta la navbar sotto il titolo */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Stile dei link della navbar */
+.nav-item {
+    text-decoration: underline; /* Sottolineato sempre visibile */
+    font-weight: 600; /* Leggermente più spesso per eleganza */
+    color: #333; /* Colore leggermente scuro */
+    font-size: 18px; /* Dimensione ottimale */
+    cursor: pointer;
+    padding: 5px;
+    background: none;
+    border: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+    color: #7d2d4e; /* Cambia colore al passaggio */
+    text-decoration: underline; /* Mantiene la sottolineatura */
+}
+
+
+/* SOCIAL ICONS */
+#social-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#social-icons .social-icon img {
+    width: 24px;  /* Imposta la larghezza */
+    height: 24px; /* Imposta l'altezza */
+    max-width: 100%; /* Assicura che non crescano troppo */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+#social-icons .social-icon:hover img {
+    transform: scale(1.1); /* Leggera animazione al passaggio */
+    opacity: 0.8;
+}
+
+/* SEZIONE CENTRALE - Aggiunto padding superiore */
+section.central-area {
+    width: 100%;
+    grid-area: central-area;
+    background-color: rgba(61, 68, 53, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh; /* Aumenta lo spazio verticale per il carosello */
+}
+
+/* Carosello */
+.carousel {
+    max-width: 1200px;
+    width: 100%;
+    height: 70vh; /* Altezza regolabile */
+}
+
+/* Adatta le immagini */
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px; /* Per un effetto più elegante */
+}
+
+
+/* FOOTER */
+footer {
+    grid-area: footer;
+    background-color: rgba(127, 255, 0, 0.36);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 10px;
+    max-height: 10vh;
+    height: auto;
+}
+
+footer img {
+    max-height: 25vh;
+    width: auto;
+}
+
+/* INFO FOOTER */
+div.project-info {
+    flex: 1;
+}
+
+div.project-info p {
+    margin: 0;
+}
+
+div.copyright {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    text-align: right;
+}
+
+#cr {
+    height: auto;
+}

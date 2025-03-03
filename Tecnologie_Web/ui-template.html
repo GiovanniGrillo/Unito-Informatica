@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hair Salon UI</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+</head>
+<body>
+<header>
+    <div id="social-icons">
+        <a href="https://www.facebook.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="img/facebook.svg" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="img/instagram.svg" alt="Instagram">
+        </a>
+        <a href="https://www.youtube.com" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="img/youtube.svg" alt="YouTube">
+        </a>
+    </div>
+    <h1 class="header-title">GIO &amp; FABIO'S HAIR SALON</h1>
+    <nav class="user-nav">
+        <div class="user-nav-item">User</div>
+        <div class="user-nav-item">Esci</div>
+    </nav>
+    <nav class="nav-bar">
+        <a href="#" class="nav-item">Chi siamo</a>
+        <a href="#" class="nav-item">Servizi</a>
+        <a href="#" class="nav-item">Contatti</a>
+    </nav>
+</header>
+
+<section class="central-area">
+    <div class="carousel">
+        <div><img src="img/carosello_1.webp" alt="Carosello 1"></div>
+        <div><img src="img/carosello_2.webp" alt="Carosello 2"></div>
+        <div><img src="img/carosello_3.webp" alt="Carosello 3"></div>
+    </div>
+</section>
+
+<footer>
+    <div class="project-info">
+        <p>&copy; 2025 Elegance Hair Salon | 📍 Milano, Italia</p>
+        <p>📞 <a href="tel:+391234567890">+39 123 456 7890</a> | 📧 <a href="mailto:info@elegancehairsalon.com">info@elegancehairsalon.com</a></p>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024-2025 Grillo Giovanni, Carturan Fabio</p>
+        <img src="img/hair-salon_cr.png" alt="hair-salon_cr" id="cr">
+    </div>
+</footer>
+
+<script>
+    $(document).ready(function(){
+        $('.carousel').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
+            arrows: true
+        });
+    });
+</script>
+</body>
+</html>
