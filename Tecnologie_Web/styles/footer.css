@@ -1,0 +1,28 @@
+/* footer.css */
+footer img {
+    max-height: 5vh;
+    width: auto;
+}
+p.project-info {
+    color: #000000;
+    flex: 1;
+}
+.copyright {
+    display: flex;
+    flex-direction: column; /* Dispone l'immagine sopra e il testo sotto */
+    align-items: center; /* Centra gli elementi orizzontalmente */
+    text-align: center;
+    margin-top: 10px; /* Aggiunge spazio sopra */
+}
+.copyright img {
+    max-width: 80vh; /* Imposta una dimensione per l'immagine */
+    margin-bottom: 5px; /* Distanza tra immagine e testo */
+}
+
+.copyright-text {
+    position: relative;
+    top: 0;
+    font-size: 0.8rem;
+    color: #000000; /* Colore testo */
+    margin: 0; /* Rimuove margine predefinito */
+}

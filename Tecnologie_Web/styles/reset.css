@@ -1,0 +1,13 @@
+/* reset.css */
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Fa in modo che si espanda */
+    height: 100%;
+}

@@ -1,0 +1,40 @@
+/* layout.css */
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "central-area"
+        "content-area"
+        "footer";
+    margin: 0;
+}
+
+header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Assicura che l'header sia sopra gli altri elementi */
+}
+
+
+section.central-area {
+    grid-area: central-area;
+    background-color: rgba(61, 68, 53, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+footer {
+    align-self: flex-end;
+    grid-area: footer;
+    background-color: rgba(71, 78, 64, 0.68);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 10px;
+    max-height: 10vh;
+    height: auto;
+}

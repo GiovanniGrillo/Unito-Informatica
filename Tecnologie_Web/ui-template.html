@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hair Salon UI</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/carousel.css">
+    <link rel="stylesheet" href="styles/content.css">
+    <link rel="stylesheet" href="styles/footer.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 </head>
 <body>
+
 <header>
     <div id="social-icons">
         <a href="https://www.facebook.com" class="social-icon" target="_blank" rel="noopener noreferrer">
@@ -28,28 +35,71 @@
         <div class="user-nav-item">Esci</div>
     </nav>
     <nav class="nav-bar">
-        <a href="#" class="nav-item">Chi siamo</a>
-        <a href="#" class="nav-item">Servizi</a>
-        <a href="#" class="nav-item">Contatti</a>
+        <a href="#chi-siamo" class="nav-item">Chi siamo</a>
+        <a href="#servizi" class="nav-item">Servizi</a>
+        <a href="#contatti" class="nav-item">Contatti</a>
     </nav>
 </header>
 
-<section class="central-area">
-    <div class="carousel">
-        <div><img src="img/carosello_1.webp" alt="Carosello 1"></div>
-        <div><img src="img/carosello_2.webp" alt="Carosello 2"></div>
-        <div><img src="img/carosello_3.webp" alt="Carosello 3"></div>
-    </div>
-</section>
+<!-- CONTENITORE PRINCIPALE CHE SI ESPANDE -->
+<main>
+
+    <section class="central-area">
+        <div class="carousel">
+            <div><img src="img/carosello_1.webp" alt="Carosello 1"></div>
+            <div><img src="img/carosello_2.webp" alt="Carosello 2"></div>
+            <div><img src="img/carosello_3.webp" alt="Carosello 3"></div>
+        </div>
+    </section>
+
+    <section class="content-area">
+        <!-- Sezione Chi Siamo -->
+        <div class="section" id="chi-siamo">
+            <h2>Chi Siamo</h2>
+            <p>
+                Benvenuti da <strong>Bellezza Naturale</strong>, il salone di bellezza dove l'arte dei capelli incontra la passione per il benessere.
+                Da oltre 10 anni, il nostro team di professionisti altamente qualificati si dedica a creare look unici e su misura per ogni cliente.
+                Crediamo che ogni persona sia unica, ed è per questo che ci impegniamo a offrire un'esperienza personalizzata, utilizzando solo
+                prodotti di alta qualità e rispettosi dell'ambiente.
+            </p>
+        </div>
+
+        <!-- Sezione Servizi -->
+        <div class="section" id="servizi">
+            <h2>Servizi</h2>
+            <p>Presso <strong>Bellezza Naturale</strong>, offriamo una vasta gamma di servizi per soddisfare tutte le tue esigenze di bellezza:</p>
+            <ul>
+                <li><strong>Taglio e Styling</strong>: Dai tagli classici alle tendenze più moderne.</li>
+                <li><strong>Colorazione</strong>: Servizi di tintura, meches, balayage e riflessi.</li>
+                <li><strong>Trattamenti Capelli</strong>: Maschere nutrienti, cheratina e trattamenti specifici.</li>
+                <li><strong>Acconciature per Eventi</strong>: Acconciature eleganti per matrimoni e occasioni speciali.</li>
+                <li><strong>Extension e Ricostruzione Capelli</strong>: Lunghezza e volume extra con risultati naturali.</li>
+                <li><strong>Servizi di Bellezza</strong>: Manicure, pedicure e trucco professionale.</li>
+            </ul>
+        </div>
+
+        <!-- Sezione Contatti -->
+        <div class="section" id="contatti">
+            <h2>Contatti</h2>
+            <ul>
+                <li><strong>Indirizzo</strong>: Via della Bellezza, 123 - 20121 Milano (Italia)</li>
+                <li><strong>Telefono</strong>: +39 06 1234 5678</li>
+                <li><strong>Email</strong>: info@bellezzanaturale.it</li>
+            </ul>
+        </div>
+    </section>
+
+</main> <!-- CHIUSURA MAIN -->
 
 <footer>
-    <div class="project-info">
-        <p>&copy; 2025 Elegance Hair Salon | 📍 Milano, Italia</p>
-        <p>📞 <a href="tel:+391234567890">+39 123 456 7890</a> | 📧 <a href="mailto:info@elegancehairsalon.com">info@elegancehairsalon.com</a></p>
-    </div>
+    <p class="project-info">
+        <span class="highlight">Elegance Hair Salon</span> è un salone di bellezza situato a Milano, Italia.<br>
+        Dedicato alla cura dei capelli con prodotti di alta qualità e servizi personalizzati.
+    </p>
+
     <div class="copyright">
-        <p>&copy; 2024-2025 Grillo Giovanni, Carturan Fabio</p>
-        <img src="img/hair-salon_cr.png" alt="hair-salon_cr" id="cr">
+        <img alt="Creative Commons License" class="cclicense" src="img/hair-salon_cc.png">
+        <p class="copyright-text">&copy; 2024-2025 Grillo Giovanni, Carturan Fabio.</p>
     </div>
 </footer>
 
@@ -67,5 +117,6 @@
         });
     });
 </script>
+
 </body>
 </html>
