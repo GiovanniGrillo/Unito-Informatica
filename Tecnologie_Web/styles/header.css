@@ -35,6 +35,12 @@ header {
     text-align: center;
     font-size: 24px;
     white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+}
+.header-title a {
+    text-decoration: none; /* Forza la rimozione della sottolineatura */
+    color: inherit; /* Mantiene il colore originale */
 }
 
 nav.user-nav {

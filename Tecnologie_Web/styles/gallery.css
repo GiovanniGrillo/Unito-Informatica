@@ -1,0 +1,31 @@
+.container {
+    width: 100vw; /* Occupa tutta la larghezza dello schermo */
+    margin: 0;
+    padding: 0;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonne */
+    grid-template-rows: repeat(2, auto); /* 2 righe */
+    gap: 5px; /* Riduci lo spazio tra le immagini per evitare troppi vuoti */
+    width: 100vw; /* Assicura che occupi l'intera larghezza della finestra */
+    height: auto;
+    background-color: #f8f8f8;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-item img {
+    width: 100%; /* Occupa l'intero spazio della colonna */
+    height: 300px; /* Altezza aumentata per coprire meglio lo spazio */
+    object-fit: cover;/* Assicura che le immagini si adattino senza distorsioni */
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
