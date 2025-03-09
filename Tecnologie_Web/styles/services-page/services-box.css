@@ -1,0 +1,85 @@
+/* services-box.css */
+.service-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.service-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.service-text {
+    flex: 1;
+    max-width: 50%;
+    text-align: left;
+}
+
+.service-category {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #888;
+    font-weight: bold;
+}
+
+.service-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #222;
+}
+
+.service-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.service-button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.service-button:hover {
+    background-color: #444;
+}
+.service-box:last-of-type {
+    margin-bottom: 0;
+}
+
+
+@media (max-width: 768px) {
+    .service-box {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-image, .service-text {
+        max-width: 100%;
+    }
+
+    .service-text {
+        text-align: center;
+    }
+}
