@@ -1,0 +1,16 @@
+Front-end:
+
+Rendere l'app web RESPONSIVE (per tutte le section)
+Implementare Sezione "Prenota Ora"
+Sezione servizi da sistemare:
+    -ridurre di dimensione i box dei tagli
+    -Mettere i riquadri dei tagli più vicini e incolonnati (guardare il sito di riferimento "https://voguevertu.it/servizi/")
+    -Aggiungere carosello di immagini per ogni tipo di taglio
+
+
+Back-end:
+
+Lavorare con typescript e javascript per sistemare la fluidità dei contenuti front-end
+DB da impostare:
+    -Users, Permessi, calendario.. elem. della sezione Prenota Ora.
+
