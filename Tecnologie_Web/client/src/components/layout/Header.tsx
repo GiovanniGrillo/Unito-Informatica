@@ -1,8 +1,9 @@
+// src/components/layout/Header.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
-  // Function to handle smooth scrolling to sections
+  // Funzione per lo scroll smooth alle sezioni
   const scrollToSection = (sectionId: string): void => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -24,7 +25,7 @@ const Header: React.FC = () => {
         </a>
       </div>
       <h1 className="header-title">
-        <Link to="/">GIO & FABIO'S HAIR SALON</Link>
+        <Link to="/">GIO &amp; FABIO'S HAIR SALON</Link>
       </h1>
       <nav className="user-nav">
         <div className="user-nav-item">User</div>
