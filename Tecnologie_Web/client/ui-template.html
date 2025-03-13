@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/layout.css">
     <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/carousel.css">
     <link rel="stylesheet" href="styles/content.css">
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/gallery.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styles/swiper.css">
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
 
@@ -31,7 +31,7 @@
         </a>
     </div>
     <h1 class="header-title">
-        <a href="ui-template.html">GIO &amp; FABIO'S SWISHIONBLANDA</a>
+        <a href="ui-template.html">GIO &amp; FABIO'S HAIR SALON</a>
     </h1>
     <nav class="user-nav">
         <div class="user-nav-item">User</div>
@@ -48,10 +48,27 @@
 <main>
 
     <section class="central-area">
-        <div class="carousel">
-            <div><img src="img/carosello_1.webp" alt="Carosello 1"></div>
-            <div><img src="img/carosello_2.webp" alt="Carosello 2"></div>
-            <div><img src="img/carosello_3.webp" alt="Carosello 3"></div>
+        <!-- Swiper -->
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="img/carosello_1.webp" alt="Carosello 1" loading="lazy" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="img/carosello_2.webp" alt="Carosello 2" loading="lazy" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="img/carosello_3.webp" alt="Carosello 3" loading="lazy" class="swiper-lazy">
+                    <div class="swiper-lazy-preloader"></div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </section>
 
@@ -78,34 +95,35 @@
         </div>
     </section>
 
-</main> <!-- CHIUSURA MAIN -->
-
 <div class="container">
     <section class="gallery">
-        <div class="gallery-item"><img src="img/gallery/gallery_1.png" alt="Gallery Image 1"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_2.png" alt="Gallery Image 2"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_3.png" alt="Gallery Image 3"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_4.png" alt="Gallery Image 4"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_5.png" alt="Gallery Image 5"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_6.png" alt="Gallery Image 6"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_7.png" alt="Gallery Image 7"></div>
-        <div class="gallery-item"><img src="img/gallery/gallery_8.png" alt="Gallery Image 8"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_1.png" alt="Gallery Image 1" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_2.png" alt="Gallery Image 2" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_3.png" alt="Gallery Image 3" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_4.png" alt="Gallery Image 4" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_5.png" alt="Gallery Image 5" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_6.png" alt="Gallery Image 6" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_7.png" alt="Gallery Image 7" loading="lazy"></div>
+        <div class="gallery-item"><img src="img/gallery/gallery_8.png" alt="Gallery Image 8" loading="lazy"></div>
     </section>
 </div>
 
 <footer>
-    <p class="project-info">
-        <span class="highlight">Elegance Hair Salon</span> è un salone di bellezza situato a Milano, Italia.<br>
-        Dedicato alla cura dei capelli con prodotti di alta qualità e servizi personalizzati.
-    </p>
+    <div class="footer-content">
+        <p class="project-info">
+            <span class="highlight">Elegance Hair Salon</span> è un salone di bellezza situato a Milano, Italia.<br>
+            Dedicato alla cura dei capelli con prodotti di alta qualità e servizi personalizzati.
+        </p>
 
-    <div class="copyright">
-        <img alt="Creative Commons License" class="cclicense" src="img/hair-salon_cc.png">
-        <p class="copyright-text">&copy; 2024-2025 Grillo Giovanni, Carturan Fabio.</p>
+        <div class="copyright">
+            <img alt="Creative Commons License" class="cclicense" src="img/hair-salon_cc.png">
+            <p class="copyright-text">&copy; 2024-2025 Grillo Giovanni, Carturan Fabio.</p>
+        </div>
     </div>
 </footer>
 
-<script rel="script" src="scripts/main.js"></script>
+<!-- Custom scripts -->
+<script src="scripts/swiper-init.js"></script>
 
 </body>
 </html>

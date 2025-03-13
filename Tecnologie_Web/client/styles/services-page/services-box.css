@@ -1,85 +1,78 @@
-/* services-box.css */
 .service-box {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 50px auto;
+    gap: 40px;
     padding: 40px;
-    background-color: #fff;
+    margin: 30px auto;
+    max-width: 1200px;
+    background: transparent !important;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .service-image {
     flex: 1;
-    max-width: 50%;
+    max-width: 500px;
 }
 
 .service-image img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
     object-fit: cover;
 }
 
 .service-text {
     flex: 1;
-    max-width: 50%;
-    text-align: left;
+    padding: 20px;
 }
 
 .service-category {
+    color: #666;
     font-size: 14px;
     text-transform: uppercase;
-    color: #888;
-    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
 .service-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 10px 0;
-    color: #222;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
 }
 
 .service-description {
-    font-size: 16px;
     color: #555;
     line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 .service-button {
-    margin-top: 15px;
-    padding: 12px 20px;
-    background-color: black;
-    color: white;
+    background: transparent !important;
+    color: #fff;
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 .service-button:hover {
-    background-color: #444;
+    background: transparent !important;
 }
-.service-box:last-of-type {
-    margin-bottom: 0;
-}
-
 
 @media (max-width: 768px) {
     .service-box {
         flex-direction: column;
-        text-align: center;
+        padding: 20px;
     }
 
-    .service-image, .service-text {
+    .service-image {
         max-width: 100%;
     }
 
     .service-text {
-        text-align: center;
+        padding: 20px 0;
     }
 }
