@@ -1,27 +1,32 @@
-// src/App.tsx
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePage';
-import ServicesPage from './pages/ServicesPage';
+import { Routes, Route } from 'react-router-dom'
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import HomePage from './pages/HomePage'
+import ServicesPage from './pages/ServicesPage'
+
+// Import CSS files from styles/ directory
+import './App.css'
+import './styles/reset.css'
+import './styles/layout.css'
+import './styles/style.css'
+import './styles/header.css'
+import './styles/footer.css'
+import './styles/carousel.css'
+import './styles/gallery.css'
+import './styles/content.css'
+import './styles/services-box.css'
 
 function App() {
-  return (
-    <Router>
-      <div className="hair-salon-app">
-        <Header />
-        
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-        </Routes>
-        
-        <Footer />
-      </div>
-    </Router>
-  );
+    return (
+        <>
+            <Header />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/services" element={<ServicesPage />} />
+            </Routes>
+            <Footer />
+        </>
+    )
 }
 
-export default App;
+export default App
