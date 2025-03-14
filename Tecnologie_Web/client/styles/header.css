@@ -6,7 +6,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 15px 40px;
-    height: 180px; /* Increased height from 150px to 180px to provide more space */
+    height: 150px; /* Increased height from 120px to 150px to provide more space */
 }
 
 #social-icons {
@@ -15,7 +15,7 @@ header {
     align-items: center;
     position: absolute;
     left: 40px;
-    top: 30%; /* Adjusted from 50% to 30% to move social icons higher */
+    top: 50%;
     transform: translateY(-50%);
 }
 #social-icons .social-icon img {
@@ -37,10 +37,10 @@ header {
     transform: translateX(-50%);
     font-weight: 500;
     text-align: center;
-    font-size: 32px; /* Increased from 28px to 32px for better visibility */
+    font-size: 28px;
     color: #2C3E50;
     letter-spacing: 0.5px;
-    top: 25%; /* Adjusted from 20% to 25% for better vertical spacing */
+    top: 20%; /* Adjusted from 25% to 20% to move title higher */
 }
 .header-title a {
     text-decoration: none; /* Remove underline */
@@ -53,7 +53,7 @@ nav.user-nav {
     gap: 20px;
     position: absolute;
     right: 40px;
-    top: 30%; /* Adjusted from 50% to 30% to align with social icons */
+    top: 50%;
     transform: translateY(-50%);
 }
 
@@ -63,19 +63,12 @@ div.user-nav-item {
     border: none;
     font-weight: 500;
     border-radius: 6px;
-    padding: 8px 12px; /* Added padding for better button appearance */
-    cursor: pointer; /* Added cursor pointer for better UX */
-    transition: background-color 0.3s ease; /* Added transition for hover effect */
-}
-
-div.user-nav-item:hover {
-    background-color: #34495E; /* Added hover effect */
 }
 
 .nav-bar {
     font-family: 'Inter', sans-serif;
     position: absolute;
-    bottom: 30px; /* Increased from 20px to 30px to move nav bar lower */
+    bottom: 20px; /* Increased from 15px to 20px to move nav bar lower */
     left: 0;
     right: 0;
     display: flex;
