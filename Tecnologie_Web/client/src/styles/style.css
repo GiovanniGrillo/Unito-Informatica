@@ -1,13 +1,15 @@
 /* Global styles */
 :root {
-    --primary-color: #333;
-    --secondary-color: #666;
-    --background-color: #fff;
+    --primary-color: #4a6fa5;
+    --secondary-color: #6d8cb0;
+    --background-color: #f8f9fa;
     --text-color: #333;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
@@ -23,6 +25,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
     line-height: 1.2;
+    font-weight: 500;
 }
 
 p {
@@ -33,7 +36,7 @@ p {
 a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 a:hover {
@@ -49,9 +52,10 @@ a:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .button:hover {
     background-color: var(--secondary-color);
+    transform: translateY(-1px);
 }

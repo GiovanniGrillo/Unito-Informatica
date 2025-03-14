@@ -1,5 +1,6 @@
 // src/components/features/Gallery.tsx
 import React from 'react';
+import '../../styles/gallery.css';
 
 interface GalleryImage {
   src: string;
@@ -8,7 +9,7 @@ interface GalleryImage {
 
 const Gallery: React.FC = () => {
   const galleryImages: GalleryImage[] = [
-    { src: '/img/gallery/gallery_1.png', alt: 'Gallery Image 1' },
+    { src: '/img/gallery/gallery_1.png', alt: 'Gallery  1' },
     { src: '/img/gallery/gallery_2.png', alt: 'Gallery Image 2' },
     { src: '/img/gallery/gallery_3.png', alt: 'Gallery Image 3' },
     { src: '/img/gallery/gallery_4.png', alt: 'Gallery Image 4' },
@@ -19,11 +20,14 @@ const Gallery: React.FC = () => {
   ];
 
   return (
-    <div className="container">
-      <section className="gallery">
+    <div className="gallery-container">
+      <section className="gallery-grid">
         {galleryImages.map((image, index) => (
           <div className="gallery-item" key={index}>
             <img src={image.src} alt={image.alt} loading="lazy" />
+            <div className="gallery-item-overlay">
+              <p>{image.alt}</p>
+            </div>
           </div>
         ))}
       </section>
