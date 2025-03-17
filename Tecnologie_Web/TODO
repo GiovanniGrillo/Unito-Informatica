@@ -1,16 +1,68 @@
 Front-end:
 
-Rendere l'app web RESPONSIVE (per tutte le section)
 Implementare Sezione "Prenota Ora"
 Sezione servizi da sistemare:
     -ridurre di dimensione i box dei tagli
     -Mettere i riquadri dei tagli più vicini e incolonnati (guardare il sito di riferimento "https://voguevertu.it/servizi/")
     -Aggiungere carosello di immagini per ogni tipo di taglio
 
+Implementare sezione "Prodotti" in dettaglio: 
+    -Aggiungere sezione "Vedi tutti" per ogni sezione prodotto
+    -Aggiungere sezione "Vedi tutti" per ogni sezione taglio
+    -Ampliare i prodotti stessi:
+        Cura dei capelli:
+            - Shampoo idratante
+            - Shampoo purificante
+            - Shampoo volumizzante
+            - Shampoo antigiallo
+            - Shampoo riparatore
+            - Balsamo nutriente
+            - Balsamo rinforzante
+            - Balsamo districante
+            - Maschera ristrutturante
+            - Maschera idratante
+            - Maschera anti-crespo
+            - Siero riparatore per punte
+            - Lozione anticaduta
+            - Fiale rinforzanti per capelli deboli
 
+        Styling e definizione:
+            - Mousse volumizzante
+            - Gel fissativo
+            - Cera modellante
+            - Pasta opaca per styling
+            - Spray texturizzante
+            - Lacca a tenuta forte
+            - Lacca a tenuta leggera
+            - Spray anti-crespo
+            - Olio lucidante per capelli
+            - Crema disciplinante
+            - Spray protettivo termico
+            - Spray effetto beach waves
+
+        Colorazione e trattamenti:
+            - Tintura permanente
+            - Tintura semi-permanente
+            - Ritocco per radici
+            - Maschera colorante
+            - Decolorante in polvere
+            - Ossigeno per colorazione
+            - Tonalizzante per capelli
+            - Shampoo riflessante
+            - Booster di colore
+
+        Accessori per capelli:
+            - Spazzole professionali (piatta, tonda, districante)
+            - Pettini in carbonio
+            - Elastici senza strappo
+            - Fermagli e mollette
+            - Bigodini professionali
+            - Fasce per capelli
+            - Ciotole e pennelli per tintura
+            - Cuffie termiche per trattamenti
 Back-end:
 
-Lavorare con typescript e javascript per sistemare la fluidità dei contenuti front-end
 DB da impostare:
-    -Users, Permessi, calendario.. elem. della sezione Prenota Ora.
+    -Users, Permessi, calendario.. elem. della sezione Prenota Ora. ...carrello della sezione prodotti per ogni utente
+    -
 
