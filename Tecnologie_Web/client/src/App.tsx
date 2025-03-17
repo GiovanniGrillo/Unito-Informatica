@@ -3,6 +3,7 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import HomePage from './pages/HomePage'
 import ServicesPage from './pages/ServicesPage'
+import ProductsPage from './pages/ProductsPage'
 
 // Import CSS files from styles/ directory
 import './App.css'
@@ -15,6 +16,7 @@ import './styles/carousel.css'
 import './styles/gallery.css'
 import './styles/content.css'
 import './styles/services-box.css'
+import './styles/products-box.css'
 
 function App() {
     return (
@@ -23,6 +25,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/services" element={<ServicesPage />} />
+                <Route path="/products" element={<ProductsPage />} />
             </Routes>
             <Footer />
         </>

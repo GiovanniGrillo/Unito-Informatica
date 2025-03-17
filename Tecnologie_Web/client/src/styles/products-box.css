@@ -1,0 +1,15 @@
+/* src/styles/products-box.css */
+
+/* Inherit styles from services-box.css and add product-specific styling */
+.product-box {
+  /* Additional styling specific to products if needed */
+  border-color: #4a90e2; /* Different border color to distinguish from services */
+}
+
+.product-box .service-button {
+  background-color: #4a90e2; /* Different button color for products */
+}
+
+.product-box .service-button:hover {
+  background-color: #3a7bc8;
+}

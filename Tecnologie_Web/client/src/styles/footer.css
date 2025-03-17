@@ -80,6 +80,7 @@ footer {
 
 .copyright {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 0.8rem;
 }
@@ -87,11 +88,13 @@ footer {
 .cclicense {
   height: 30px; /* Control the size of the license image */
   width: auto;
+  order: 2; /* Place the license image after the copyright text */
 }
 
 .copyright-text {
   font-size: 0.8rem; /* Smaller copyright text */
   color: #999;
+  order: 1; /* Place the copyright text before the license image */
 }
 
 @media (max-width: 768px) {
