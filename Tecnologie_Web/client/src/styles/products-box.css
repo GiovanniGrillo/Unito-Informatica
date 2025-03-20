@@ -2,14 +2,59 @@
 
 /* Inherit styles from services-box.css and add product-specific styling */
 .product-box {
-  /* Additional styling specific to products if needed */
   border-color: #4a90e2; /* Different border color to distinguish from services */
+  border-left: 4px solid #4a90e2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-text {
+  flex: 1;
+  padding: 20px;
+}
+
+.product-price {
+  color: #4a90e2;
+  font-weight: bold;
+  margin-left: 10px;
+  font-size: 0.8em;
+}
+
+.product-availability {
+  font-size: 14px;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  background-color: #f8f9fa;
 }
 
 .product-box .service-button {
   background-color: #4a90e2; /* Different button color for products */
+  transition: all 0.3s ease;
 }
 
 .product-box .service-button:hover {
   background-color: #3a7bc8;
+  transform: scale(1.05);
+}
+
+.product-box .service-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .product-box {
+    padding: 15px;
+  }
+  
+  .product-text {
+    padding: 10px;
+  }
 }

@@ -30,10 +30,7 @@ const Carousel: React.FC = () => {
               src={slide.src}
               alt={slide.alt}
             />
-            <BootstrapCarousel.Caption className="d-none d-md-block">
-              <h3>Bellezza Naturale</h3>
-              <p>Il tuo salone di bellezza di fiducia</p>
-            </BootstrapCarousel.Caption>
+
           </BootstrapCarousel.Item>
         ))}
       </BootstrapCarousel>
