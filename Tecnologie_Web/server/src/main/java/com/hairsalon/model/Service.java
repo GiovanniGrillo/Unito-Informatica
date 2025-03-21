@@ -2,13 +2,8 @@
 package com.hairsalon.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-@Data
 @Entity
 @Table(name = "servizi")
 public class Service {
@@ -32,17 +27,93 @@ public class Service {
     @Column(name = "livello_esperienza_richiesto")
     private String requiredExpertiseLevel;
 
-    @ManyToMany
-    @JoinTable(
-        name = "servizio_prodotti",
-        joinColumns = @JoinColumn(name = "servizio_id"),
-        inverseJoinColumns = @JoinColumn(name = "prodotto_id")
-    )
-    private List<Product> requiredProducts = new ArrayList<>();
-
     @Column(name = "categoria")
     private String category;
 
     @Column(name = "url_immagine")
     private String imageUrl;
+    
+    public Service() {}
+    
+    public Service(String name, BigDecimal price, Integer durationMinutes) {
+        this.name = name;
+        this.price = price;
+        this.durationMinutes = durationMinutes;
+    }
+    
+    public Service(String name, String description, BigDecimal price, 
+                  Integer durationMinutes, String requiredExpertiseLevel, 
+                  String category, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.durationMinutes = durationMinutes;
+        this.requiredExpertiseLevel = requiredExpertiseLevel;
+        this.category = category;
+        this.imageUrl = imageUrl;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(Integer durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
+
+    public String getRequiredExpertiseLevel() {
+        return requiredExpertiseLevel;
+    }
+
+    public void setRequiredExpertiseLevel(String requiredExpertiseLevel) {
+        this.requiredExpertiseLevel = requiredExpertiseLevel;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

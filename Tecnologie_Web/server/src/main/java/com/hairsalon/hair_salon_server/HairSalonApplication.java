@@ -7,13 +7,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.hairsalon")
+@ComponentScan(basePackages = {"com.hairsalon"})
 @EntityScan("com.hairsalon.model")
 @EnableJpaRepositories("com.hairsalon.repository")
-public class HairSalonServerApplication {
+public class HairSalonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(HairSalonServerApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(HairSalonApplication.class, args);
+    }
 }
