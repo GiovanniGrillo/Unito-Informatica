@@ -28,7 +28,7 @@ public class ProductService {
         product1.setPrice(new BigDecimal("15.99"));
         product1.setAvailableQuantity(50);
         product1.setCategory("Shampoo");
-        product1.setImageUrl("/images/products/shampoo1.jpg");
+        product1.setImageUrl("/img/products/shampoo_idratante.webp");
         productRepository.save(product1);
         
         Product product2 = new Product();
@@ -37,7 +37,7 @@ public class ProductService {
         product2.setPrice(new BigDecimal("18.50"));
         product2.setAvailableQuantity(40);
         product2.setCategory("Balsamo");
-        product2.setImageUrl("/images/products/balsamo1.jpg");
+        product2.setImageUrl("/img/products/balsamo_riparatore.webp");
         productRepository.save(product2);
         
         Product product3 = new Product();
@@ -46,25 +46,25 @@ public class ProductService {
         product3.setPrice(new BigDecimal("22.99"));
         product3.setAvailableQuantity(30);
         product3.setCategory("Trattamento");
-        product3.setImageUrl("/images/products/maschera1.jpg");
+        product3.setImageUrl("/img/products/maschera_nutriente.webp");
         productRepository.save(product3);
         
         Product product4 = new Product();
-        product4.setName("Olio per Capelli");
-        product4.setDescription("Olio leggero per idratare le punte e aggiungere lucentezza");
+        product4.setName("Gel Modellante");
+        product4.setDescription("Gel modellante per uno styling duraturo e definito");
         product4.setPrice(new BigDecimal("25.00"));
         product4.setAvailableQuantity(25);
-        product4.setCategory("Olio");
-        product4.setImageUrl("/images/products/olio1.jpg");
+        product4.setCategory("Styling");
+        product4.setImageUrl("/img/products/gel_modellante.webp");
         productRepository.save(product4);
         
         Product product5 = new Product();
-        product5.setName("Lozione Anticaduta");
-        product5.setDescription("Trattamento specifico per contrastare la caduta dei capelli");
+        product5.setName("Spray Protettivo");
+        product5.setDescription("Spray protettivo dal calore per prevenire danni durante lo styling");
         product5.setPrice(new BigDecimal("32.50"));
         product5.setAvailableQuantity(20);
-        product5.setCategory("Trattamento");
-        product5.setImageUrl("/images/products/lozione1.jpg");
+        product5.setCategory("Protezione");
+        product5.setImageUrl("/img/products/spray_protettivo.webp");
         productRepository.save(product5);
     }
 
