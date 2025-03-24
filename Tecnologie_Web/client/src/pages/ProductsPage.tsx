@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductFilter from '../components/features/ProductFilter';
+import { useCart } from '../contexts/CartContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface Product {
   id: number;
@@ -20,6 +22,8 @@ const ProductsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -59,6 +63,12 @@ const ProductsPage: React.FC = () => {
   
   const handleCategoryChange = (category: string | null) => {
     setSelectedCategory(category);
+  };
+  
+  const handleAddToCart = (product: Product) => {
+    if (isAuthenticated) {
+      addToCart(product);
+    }
   };
 
   if (loading) {
@@ -104,6 +114,15 @@ const ProductsPage: React.FC = () => {
                       ? `Disponibilità: ${product.availableQuantity} in magazzino` 
                       : "Prodotto esaurito"}
                   </p>
+                  {isAuthenticated && (
+                    <button 
+                      className="buy-button"
+                      onClick={() => handleAddToCart(product)}
+                      disabled={product.availableQuantity <= 0}
+                    >
+                      {product.availableQuantity > 0 ? "Aggiungi al carrello" : "Esaurito"}
+                    </button>
+                  )}
                 </div>
               </div>
           ))}

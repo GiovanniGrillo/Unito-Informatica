@@ -7,6 +7,8 @@ import ServicesPage from './pages/ServicesPage'
 import ProductsPage from './pages/ProductsPage'
 import LoginPage from './pages/LoginPage'
 import { AuthProvider } from './contexts/AuthContext'
+import { CartProvider } from './contexts/CartContext'
+import Cart from './components/features/Cart'
 
 // Import CSS files
 import './App.css'
@@ -20,18 +22,22 @@ import './styles/gallery.css'
 import './styles/content.css'
 import './styles/services-box.css'
 import './styles/products.css'
+import './styles/cart.css'
 
 function App() {
     return (
         <AuthProvider>
-            <Header />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/services" element={<ServicesPage />} />
-                <Route path="/products" element={<ProductsPage />} />
-                <Route path="/login" element={<LoginPage />} />
-            </Routes>
-            <Footer />
+            <CartProvider>
+                <Header />
+                <Cart />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/services" element={<ServicesPage />} />
+                    <Route path="/products" element={<ProductsPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                </Routes>
+                <Footer />
+            </CartProvider>
         </AuthProvider>
     )
 }
