@@ -1,6 +1,7 @@
 // client/src/pages/ProductsPage.tsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import ProductFilter from '../components/features/ProductFilter';
 
 interface Product {
   id: number;
@@ -14,6 +15,9 @@ interface Product {
 
 const ProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,6 +30,12 @@ const ProductsPage: React.FC = () => {
         }
         const data = await response.json();
         setProducts(data);
+        setFilteredProducts(data);
+        
+        // Estrai le categorie uniche dai prodotti
+        const uniqueCategories = [...new Set(data.map((product: Product) => product.category))].sort();
+        setCategories(uniqueCategories as string[]);
+        
         setLoading(false);
       } catch (error) {
         setError('Si è verificato un errore durante il caricamento dei prodotti.');
@@ -36,6 +46,20 @@ const ProductsPage: React.FC = () => {
 
     fetchProducts();
   }, []);
+  
+  // Filtra i prodotti quando cambia la categoria selezionata
+  useEffect(() => {
+    if (selectedCategory) {
+      const filtered = products.filter(product => product.category === selectedCategory);
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedCategory, products]);
+  
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+  };
 
   if (loading) {
     return <div className="loading">Caricamento prodotti...</div>;
@@ -54,11 +78,18 @@ const ProductsPage: React.FC = () => {
               Scopri la nostra selezione di prodotti professionali per la cura dei capelli.
               Utilizziamo e vendiamo solo prodotti di alta qualità, scelti dai nostri esperti.
             </p>
+            
+            {/* Componente di filtro */}
+            <ProductFilter 
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+            />
           </div>
         </section>
 
         <div className="products-grid">
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
               <div className="product-card" key={product.id}>
                 <div className="product-image">
                   <img src={product.imageUrl} alt={product.name} loading="lazy" />

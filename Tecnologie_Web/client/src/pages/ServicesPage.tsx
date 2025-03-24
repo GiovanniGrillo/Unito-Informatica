@@ -1,6 +1,7 @@
 // src/pages/ServicesPage.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ServiceCard from '../components/features/ServiceCard';
+import ServiceFilter from '../components/features/ServiceFilter';
 import { Service } from '../types/Service';
 
 interface AppointmentFormData {
@@ -28,50 +29,73 @@ const ServicesPage: React.FC = () => {
   const [bookingSuccess, setBookingSuccess] = useState<boolean>(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
   
-  // Dati di esempio (verrebbero recuperati da un'API in un'app reale)
-  const services: Service[] = [
-    {
-      id: 1,
-      category: "TAGLI E PIEGHE PER UOMO A MILANO",
-      title: "Taglio Uomo",
-      price: 30,
-      description: "Affidati a degli esperti del taglio per dare nuova vita alla tua chioma: sapranno ascoltarti e capire il tuo stile per tagliare e rasare esattamente come vuoi tu.",
-      imageSrc: "/img/hair_styles/man_cut.webp",
-    },
-    {
-      id: 2,
-      category: "TAGLI E PIEGHE PER DONNA A MILANO",
-      title: "Taglio Donna",
-      price: 40,
-      description: "Affidati ai nostri hairstylist per un look personalizzato e alla moda. Dalla piega al taglio su misura, ci prendiamo cura dei tuoi capelli con prodotti di alta qualità.",
-      imageSrc: "/img/hair_styles/woman_cut.webp",
-    },
-    {
-      id: 3,
-      category: "STYLING E PIEGA A MILANO",
-      title: "Piega",
-      price: 25,
-      description: "Valorizza il tuo look con una piega professionale su misura per te. Che tu voglia capelli lisci, mossi o voluminosi, i nostri esperti sapranno esaltare la tua bellezza naturale.",
-      imageSrc: "/img/hair_styles/blow_dry.webp",
-    },
-    {
-      id: 4,
-      category: "PERMANENTE PROFESSIONALE A MILANO",
-      title: "Permanente",
-      price: 60,
-      description: "Dona ai tuoi capelli volume e onde perfette con la nostra permanente su misura. I nostri specialisti utilizzeranno tecniche avanzate per garantirti un risultato naturale e duraturo.",
-      imageSrc: "/img/hair_styles/hair_perm.webp",
-    },
-    {
-      id: 5,
-      category: "COLORAZIONE PROFESSIONALE A MILANO",
-      title: "Tinta",
-      price: 100,
-      description: "Rinnova il tuo look con una colorazione personalizzata. Dai colori naturali ai toni più audaci, i nostri esperti ti aiuteranno a scegliere la nuance perfetta per il tuo stile.",
-      imageSrc: "/img/hair_styles/hair_dye.webp",
-    }
-  ];
+  // Stato per memorizzare i servizi caricati dal backend
+  const [services, setServices] = useState<Service[]>([]);
+  const [filteredServices, setFilteredServices] = useState<Service[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Caricamento dei servizi dal backend
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:8080/services');
+        
+        if (!response.ok) {
+          throw new Error('Errore nel caricamento dei servizi');
+        }
+        
+        const data = await response.json();
+        
+        // Mappiamo i dati del backend al formato richiesto dal frontend
+        const mappedServices = data.map((service: any) => ({
+          id: service.id,
+          category: service.category,
+          title: service.name,
+          price: parseFloat(service.price),
+          description: service.description,
+          imageSrc: service.imageUrl || '/img/hair_styles/default.webp',
+        }));
+        
+        setServices(mappedServices);
+        setFilteredServices(mappedServices);
+        
+        // Estrai le categorie uniche dai servizi
+        const uniqueCategories = [...new Set(mappedServices.map((service: Service) => service.category))].sort();
+        setCategories(uniqueCategories as string[]);
+        
+        setError(null);
+      } catch (err) {
+        console.error('Errore nel caricamento dei servizi:', err);
+        setError('Impossibile caricare i servizi. Riprova più tardi.');
+        // Carica dati di fallback in caso di errore
+        setServices([]);
+        setFilteredServices([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchServices();
+  }, []);
 
+  // Filtra i servizi quando cambia la categoria selezionata
+  useEffect(() => {
+    if (selectedCategory) {
+      const filtered = services.filter(service => service.category === selectedCategory);
+      setFilteredServices(filtered);
+    } else {
+      setFilteredServices(services);
+    }
+  }, [selectedCategory, services]);
+  
+  const handleCategoryChange = (category: string | null) => {
+    setSelectedCategory(category);
+  };
+  
   // Gestione della prenotazione
   const handleBookService = (serviceId: number) => {
     const service = services.find(s => s.id === serviceId);
@@ -139,14 +163,30 @@ const ServicesPage: React.FC = () => {
           <p>
             Offriamo una gamma di servizi per la cura e lo styling dei capelli, con prodotti di alta qualità e tecniche avanzate.
           </p>
-          <ul>
-            <li>Taglio e styling personalizzato</li>
-            <li>Colore e trattamenti per capelli</li>
-            <li>Trattamenti ristrutturanti</li>
-            <li>Acconciature per eventi</li>
-          </ul>
+          
+          {/* Componente di filtro */}
+          {categories.length > 0 && (
+            <ServiceFilter 
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+            />
+          )}
         </div>
       </section>
+      
+      {loading && (
+        <div className="loading-message">
+          <p>Caricamento dei servizi in corso...</p>
+        </div>
+      )}
+      
+      {error && (
+        <div className="error-message">
+          {error}
+          <button onClick={() => setError(null)}>Chiudi</button>
+        </div>
+      )}
       
       {bookingSuccess && (
         <div className="success-message">
@@ -251,7 +291,7 @@ const ServicesPage: React.FC = () => {
         </div>
       )}
       
-      {services.map(service => (
+      {filteredServices.map(service => (
         <ServiceCard 
           key={service.id}
           service={service}

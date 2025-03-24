@@ -1,0 +1,67 @@
+.filter-container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-option {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.filter-option:hover {
+  background-color: #f0f0f0;
+}
+
+.filter-option.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.filter-clear {
+  background-color: transparent;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 0;
+  text-decoration: underline;
+}
+
+.filter-clear:hover {
+  color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .filter-options {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .filter-option {
+    width: 100%;
+    text-align: center;
+  }
+}
