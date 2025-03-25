@@ -1,5 +1,6 @@
 // src/components/auth/LoginForm.tsx
 import React, { useState } from 'react';
+import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap';
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -16,44 +17,44 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       setError('Please fill in all fields');
       return;
     }
-    
+    setError('');
     onLogin(email, password);
   };
 
   return (
-    <div className="login-form-container">
-      <h2>Accedi al tuo account</h2>
-      
-      {error && <div className="error-message">{error}</div>}
-      
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        
-        <button type="submit" className="login-button">
-          Accedi
-        </button>
-      </form>
-    </div>
+      <Container className="mt-5">
+        <Row className="justify-content-md-center">
+          <Col md={6}>
+            <h2 className="text-center">Accedi al tuo account</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="email" className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="client@example.com / admin@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+              </Form.Group>
+              <Form.Group controlId="password" className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="password / admin"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" className="w-100">
+                Accedi
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
   );
 };
 

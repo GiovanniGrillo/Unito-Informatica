@@ -4,18 +4,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../../contexts/AuthContext';
 import { useCart } from '../../contexts/CartContext';
 
+
 const Header: React.FC = () => {
     const { user, isAuthenticated, logout, isAdmin } = useAuth();
     const { toggleCart, getTotalItems } = useCart();
 
     // Funzione per lo scroll smooth alle sezioni
-    const scrollToSection = (sectionId: string): void => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
     return (
         <header>
             <div id="social-icons">
@@ -57,10 +51,10 @@ const Header: React.FC = () => {
                 )}
             </nav>
             <nav className="nav-bar">
-                <button onClick={() => scrollToSection('chi-siamo')} className="nav-item">Chi siamo</button>
                 <Link to="/services" className="nav-item">Servizi</Link>
                 <Link to="/products" className="nav-item">Prodotti</Link>
-                <button onClick={() => scrollToSection('contatti')} className="nav-item">Contatti</button>
+                <Link to="/contacts" className="nav-item">Contatti</Link>
+
             </nav>
         </header>
     );

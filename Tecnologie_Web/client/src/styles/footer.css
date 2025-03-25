@@ -1,8 +1,23 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* Fa sì che il contenuto occupi lo spazio disponibile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra il contenuto se è poco */
+  padding-bottom: 20px; /* Evita che il contenuto tocchi il footer */
+}
+
 footer {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 1.2rem 0; /* Reduced padding from 2rem to 1.2rem */
-  margin-top: auto;
+  width: 100%;
+  background-color: #111;
+  color: white;
+  padding: 20px 0;
+  margin-top: auto; /* Spinge il footer in fondo */
 }
 
 .footer-content {
@@ -14,23 +29,6 @@ footer {
   align-items: center; /* Changed from flex-start to center for better alignment */
   flex-wrap: wrap;
   gap: 1rem; /* Reduced gap from 2rem to 1rem */
-}
-
-.footer-section {
-  flex: 1;
-  min-width: 250px;
-}
-
-.footer-section h3 {
-  font-size: 1.1rem; /* Reduced from 1.2rem */
-  margin-bottom: 0.8rem; /* Reduced from 1rem */
-  color: #ffffff;
-}
-
-.footer-section p {
-  margin-bottom: 0.4rem; /* Reduced from 0.5rem */
-  color: #cccccc;
-  line-height: 1.5; /* Reduced from 1.6 */
 }
 
 .social-links {
