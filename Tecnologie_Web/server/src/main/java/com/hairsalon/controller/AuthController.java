@@ -33,16 +33,16 @@ public class AuthController {
         }
 
         Optional<User> userOpt = userService.authenticate(email, password);
-        
+
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            // Non inviare la password al client
+            // Non inviare la password al frontend
             Map<String, Object> response = new HashMap<>();
             response.put("id", user.getId());
             response.put("name", user.getName());
             response.put("email", user.getEmail());
             response.put("role", user.getRole().toLowerCase()); // Converti in minuscolo per compatibilità con il frontend
-            
+
             return ResponseEntity.ok(response);
         } else {
             Map<String, String> error = new HashMap<>();

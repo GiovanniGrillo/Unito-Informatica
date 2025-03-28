@@ -32,15 +32,15 @@ public class Service {
 
     @Column(name = "url_immagine")
     private String imageUrl;
-    
+
     public Service() {}
-    
+
     public Service(String name, BigDecimal price, Integer durationMinutes) {
         this.name = name;
         this.price = price;
         this.durationMinutes = durationMinutes;
     }
-    
+
     public Service(String name, String description, BigDecimal price, 
                   Integer durationMinutes, String requiredExpertiseLevel, 
                   String category, String imageUrl) {

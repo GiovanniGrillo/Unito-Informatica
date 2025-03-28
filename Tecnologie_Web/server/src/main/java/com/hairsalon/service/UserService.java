@@ -6,7 +6,6 @@ import com.hairsalon.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -25,20 +24,22 @@ public class UserService {
             // Crea utente admin
             User admin = new User(
                 "admin@example.com",
-                "admin", // In produzione usare password criptate
-                "Admin Demo",
+                "admin",
+                "Admin",
+                "Demo",
                 "ADMIN"
             );
             userRepository.save(admin);
 
-            // Crea utente client
-            User client = new User(
-                "client@example.com",
+            // Crea utente standard
+            User user = new User(
+                "user@example.com",
                 "password", // In produzione usare password criptate
-                "Cliente Demo",
-                "CLIENT"
+                "Utente",
+                "Demo",
+                "USER"
             );
-            userRepository.save(client);
+            userRepository.save(user);
         }
     }
 
@@ -48,18 +49,15 @@ public class UserService {
 
     public Optional<User> authenticate(String email, String password) {
         Optional<User> userOpt = userRepository.findByEmail(email);
-        
+
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             // In produzione, confrontare password criptate
             if (user.getPassword().equals(password)) {
-                // Aggiorna l'ultimo accesso
-                user.setLastLogin(LocalDateTime.now());
-                userRepository.save(user);
+                // Autenticazione riuscita
                 return Optional.of(user);
             }
         }
-        
         return Optional.empty();
     }
 

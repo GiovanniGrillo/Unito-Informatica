@@ -29,14 +29,14 @@ public class Product {
 
     @Column(name = "url_immagine")
     private String imageUrl;
-    
+
     public Product() {}
-    
+
     public Product(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }
-    
+
     public Product(String name, String description, BigDecimal price, 
                   Integer availableQuantity, String category, String imageUrl) {
         this.name = name;

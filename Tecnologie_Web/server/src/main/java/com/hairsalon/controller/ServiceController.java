@@ -14,7 +14,7 @@ import java.util.List;
 public class ServiceController {
 
     private final HairService HairService;
-    
+
     public ServiceController(HairService HairService) {
         this.HairService = HairService;
     }
@@ -34,7 +34,6 @@ public class ServiceController {
         if (maxDuration != null) {
             return ResponseEntity.ok(HairService.getServicesByMaxDuration(maxDuration));
         }
-        
         return ResponseEntity.ok(HairService.getAllServices());
     }
 

@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
             if (success) {
                 navigate('/');
             } else {
-                setError('Credenziali non valide. Prova con client@example.com/password o admin@example.com/admin');
+                setError('Credenziali non valide. Prova con user@example.com/password o admin@example.com/admin');
             }
         } catch (error) {
             setError('Si è verificato un errore durante il login.');

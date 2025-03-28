@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                     type="email"
-                    placeholder="client@example.com / admin@example.com"
+                    placeholder="user@example.com / admin@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
