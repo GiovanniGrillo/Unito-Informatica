@@ -157,7 +157,7 @@
 }
 
 .checkout {
-  background-color: #4caf50;
+  background-color:#2C3E50;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -183,7 +183,7 @@
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: #ff4d4d;
+  background-color: #5783ad;
   color: white;
   border-radius: 50%;
   width: 18px;

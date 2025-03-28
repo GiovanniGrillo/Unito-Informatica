@@ -4,13 +4,8 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Declare module for TypeScript
-declare module 'leaflet';
-
 const Contacts: React.FC = () => {
     const position: [number, number] = [45.09004104958907, 7.659256380902108];
-
-    // Rimosso il fix per l'icona del marker di Leaflet come richiesto
 
     return (
         <Container className="my-5">
