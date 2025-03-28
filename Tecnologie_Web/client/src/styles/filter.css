@@ -1,16 +1,30 @@
 .filter-container {
-  margin-bottom: 2rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border: 1px solid var(--border-color);
 }
 
 .filter-title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  color: var(--text-color);
   font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.filter-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
 }
 
 .filter-options {
@@ -18,26 +32,33 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  justify-content: center;
 }
 
 .filter-option {
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .filter-option:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f4f8;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .filter-option.active {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
-  border-color: #007bff;
+  border-color: var(--primary-color);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .filter-clear {
@@ -45,13 +66,26 @@
   border: none;
   color: var(--primary-color);
   cursor: pointer;
-  font-size: 0.9rem;
-  padding: 0.5rem 0;
-  text-decoration: underline;
+  font-size: 0.95rem;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-clear:before {
+  content: '×';
+  margin-right: 5px;
+  font-size: 1.2rem;
 }
 
 .filter-clear:hover {
-  color: #c82333;
+  color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.1);
 }
 
 @media (max-width: 768px) {

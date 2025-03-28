@@ -1,22 +1,13 @@
 // client/src/pages/ProductsPage.tsx
 import React, {useState, useEffect} from 'react';
+import ProductGrid from '../components/features/ProductGrid';
 import ProductFilter from '../components/features/ProductFilter';
 import {useCart} from '../contexts/CartContext';
 import {useAuth} from '../contexts/AuthContext';
-import {CiShoppingCart} from "react-icons/ci";
-import { CgUnavailable } from "react-icons/cg";
+import '../styles/product-grid.css';
+import '../styles/filter.css';
 
-
-
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    availableQuantity: number;
-    category: string;
-    imageUrl: string;
-}
+import { Product } from '../types/Product';
 
 const ProductsPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -85,12 +76,15 @@ const ProductsPage: React.FC = () => {
     return (
         <main>
             <section className="content-area">
-                <div className="section" id="prodotti">
-                    <h2>I Nostri Prodotti</h2>
-                    <p>
-                        Scopri la nostra selezione di prodotti professionali per la cura dei capelli.
-                        Utilizziamo e vendiamo solo prodotti di alta qualità, scelti dai nostri esperti.
-                    </p>
+                <div className="products-container">
+                    <div className="products-header">
+                        <h2>I Nostri Prodotti</h2>
+                        <div className="header-underline"></div>
+                        <p>
+                            Scopri la nostra selezione di prodotti professionali per la cura dei capelli.
+                            Utilizziamo e vendiamo solo prodotti di alta qualità, scelti dai nostri esperti.
+                        </p>
+                    </div>
 
                     {/* Componente di filtro */}
                     <ProductFilter
@@ -98,47 +92,26 @@ const ProductsPage: React.FC = () => {
                         selectedCategory={selectedCategory}
                         onCategoryChange={handleCategoryChange}
                     />
+                    
+                    {filteredProducts.length === 0 ? (
+                        <div className="no-products">
+                            <p>Nessun prodotto trovato nella categoria selezionata.</p>
+                            <button 
+                                className="button button-accent" 
+                                onClick={() => setSelectedCategory(null)}
+                            >
+                                Mostra tutti i prodotti
+                            </button>
+                        </div>
+                    ) : (
+                        /* Griglia dei prodotti */
+                        <ProductGrid 
+                            products={filteredProducts} 
+                            onAddToCart={handleAddToCart} 
+                        />
+                    )}
                 </div>
             </section>
-
-            <div className="products-grid">
-                {filteredProducts.map((product) => (
-                    <div className="product-card" key={product.id}>
-                        <div className="product-image">
-                            <img src={product.imageUrl} alt={product.name} loading="lazy"/>
-                        </div>
-                        <div className="product-info">
-                            <h3 className="product-name">{product.name}</h3>
-                            <p className="product-category">{product.category}</p>
-                            <p className="product-price">€{product.price.toFixed(2)}</p>
-                            <p className="product-description">{product.description}</p>
-                            <p className="product-availability">
-                                {product.availableQuantity > 0
-                                    ? `Disponibilità: ${product.availableQuantity} in magazzino`
-                                    : "Prodotto esaurito"}
-                            </p>
-                            {isAuthenticated && (
-                                <button
-                                    className="buy-button"
-                                    onClick={() => handleAddToCart(product)}
-                                    disabled={product.availableQuantity <= 0}
-                                >
-                                    {product.availableQuantity > 0 ? (
-                                        <div>
-                                            Aggiungi al carrello <CiShoppingCart color={"red"}/>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            Esaurito <CgUnavailable/>
-                                        </div>
-                                    )
-                                    }
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
         </main>
     );
 };

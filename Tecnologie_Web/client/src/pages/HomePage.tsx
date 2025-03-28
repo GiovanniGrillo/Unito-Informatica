@@ -24,8 +24,8 @@ const HomePage: React.FC = () => {
         <div className="section" id="contatti">
           <h2>Contatti</h2>
           <ul>
-            <li><strong>Indirizzo</strong>: Via della Bellezza, 123 - 20121 Milano (Italia)</li>
-            <li><strong>Telefono</strong>: +39 06 1234 5678</li>
+            <li><strong>Indirizzo</strong>: Via pessinetto, 12, 10149 Torino (TO), Italia</li>
+            <li><strong>Telefono</strong>: +39 011 234567</li>
             <li><strong>Email</strong>: info@bellezzanaturale.it</li>
           </ul>
         </div>

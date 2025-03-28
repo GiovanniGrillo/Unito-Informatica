@@ -12,6 +12,7 @@ import Contacts from "./pages/Contacts.tsx";
 import Cart from './components/features/Cart';
 // Import CSS files
 import './App.css';
+import './styles/fonts.css';
 import './styles/reset.css';
 import './styles/layout.css';
 import './styles/style.css';

@@ -1,0 +1,42 @@
+/* src/styles/services.css */
+
+/* Stile per l'header dei servizi */
+.services-header {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin-bottom: 2rem;
+  background-color: transparent;
+}
+
+.services-header h2 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.services-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Stile per l'area contenuto dei servizi */
+.services-content-area {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .services-header h2 {
+    font-size: 2rem;
+  }
+  
+  .services-header p {
+    font-size: 1rem;
+  }
+}

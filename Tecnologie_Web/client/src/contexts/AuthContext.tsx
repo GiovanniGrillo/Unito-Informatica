@@ -1,5 +1,5 @@
 // src/contexts/AuthContext.tsx
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 type UserRole = 'client' | 'admin' | null;
 
@@ -35,28 +35,30 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  // Funzione di login semplificata
+  // Carica l'utente dal localStorage all'avvio
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // Funzione di login che comunica con il backend
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // In un'app reale, qui ci sarebbe una chiamata API
-      // Per semplicità, simuliamo una risposta
-      
-      // Simulazione di credenziali per client e admin
-      if (email === 'client@example.com' && password === 'password') {
-        setUser({
-          id: 1,
-          name: 'Cliente Demo',
-          email: 'client@example.com',
-          role: 'client'
-        });
-        return true;
-      } else if (email === 'admin@example.com' && password === 'admin') {
-        setUser({
-          id: 2,
-          name: 'Admin Demo',
-          email: 'admin@example.com',
-          role: 'admin'
-        });
+      // Chiamata API al backend per l'autenticazione
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
         return true;
       }
       return false;
@@ -68,6 +70,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('user');
   };
 
   const isAdmin = () => {

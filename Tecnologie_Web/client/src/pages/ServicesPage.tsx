@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ServiceCard from '../components/features/ServiceCard';
 import ServiceFilter from '../components/features/ServiceFilter';
 import { Service } from '../types/Service';
+import '../styles/services.css';
 
 interface AppointmentFormData {
   serviceId: number;
@@ -157,13 +158,14 @@ const ServicesPage: React.FC = () => {
 
   return (
     <main>
+      <section className="services-header">
+        <h2>Servizi</h2>
+        <p>
+          Offriamo una gamma di servizi per la cura e lo styling dei capelli, con prodotti di alta qualità e tecniche avanzate.
+        </p>
+      </section>
+      
       <section className="services-content-area">
-        <div className="section" id="servizi">
-          <h2>Servizi</h2>
-          <p>
-            Offriamo una gamma di servizi per la cura e lo styling dei capelli, con prodotti di alta qualità e tecniche avanzate.
-          </p>
-          
           {/* Componente di filtro */}
           {categories.length > 0 && (
             <ServiceFilter 
@@ -172,7 +174,6 @@ const ServicesPage: React.FC = () => {
               onCategoryChange={handleCategoryChange}
             />
           )}
-        </div>
       </section>
       
       {loading && (

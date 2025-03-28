@@ -1,14 +1,24 @@
 // client/src/pages/Contacts.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 const Contacts: React.FC = () => {
-    const position: [number, number] = [45.09004104958907, 7.659256380902108]; // Coordinate per Torino, Cuneo
+    const position: [number, number] = [45.09004104958907, 7.659256380902108];
 
-    // @ts-ignore
-    // @ts-ignore
+    // Fix per l'icona del marker di Leaflet
+    useEffect(() => {
+        // Risolve il problema dell'icona mancante
+        delete L.Icon.Default.prototype._getIconUrl;
+        L.Icon.Default.mergeOptions({
+            iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        });
+    }, []);
+
     return (
         <Container className="my-5">
             <Row className="justify-content-center">
@@ -17,10 +27,10 @@ const Contacts: React.FC = () => {
                         <Card.Body>
                             <Card.Title className="text-center fw-bold fs-3">Contatti</Card.Title>
                             <Card.Text className="mt-3">
-                                <strong>Email:</strong> info@efabegio_hs.com
+                                <strong>Email:</strong> info@bellezzanaturale.it
                             </Card.Text>
                             <Card.Text>
-                                <strong>Indirizzo:</strong> Via Roma 15, 10100 Torino (TO), Italia
+                                <strong>Indirizzo:</strong> Via pessinetto, 12, 10149 Torino (TO), Italia
                             </Card.Text>
                             <Card.Text>
                                 <strong>Telefono:</strong> +39 011 234567
@@ -35,7 +45,7 @@ const Contacts: React.FC = () => {
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         />
                         <Marker position={position}>
-                            <Popup>Elegance Hair Salon - Saluzzo, Cuneo</Popup>
+                            <Popup>Elegance Hair Salon- Gio & Fabio</Popup>
                         </Marker>
                     </MapContainer>
                 </Col>

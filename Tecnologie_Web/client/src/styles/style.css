@@ -1,18 +1,27 @@
 /* Global styles */
 :root {
-    --primary-color: #4a6fa5;
-    --secondary-color: #6d8cb0;
-    --background-color: #f8f9fa;
-    --text-color: #333;
-    --border-color: #e0e0e0;
+    --primary-color: #3a5a8c;
+    --secondary-color: #5d7ca0;
+    --accent-color: #e67e22;
+    --background-color: #f9f9fb;
+    --card-background: #ffffff;
+    --text-color: #2c3e50;
+    --text-light: #6c7a89;
+    --border-color: #e6e9f0;
     --shadow-color: rgba(0, 0, 0, 0.08);
+    --hover-shadow: rgba(0, 0, 0, 0.15);
+    --success-color: #27ae60;
+    --error-color: #e74c3c;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
 }
 
 body {
-    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Poppins', 'Roboto', 'Segoe UI', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    letter-spacing: 0.2px;
 }
 
 .container {
@@ -25,7 +34,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
     line-height: 1.2;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 p {
@@ -50,12 +60,43 @@ a:hover {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all var(--transition-speed) ease;
 }
 
 .button:hover {
     background-color: var(--secondary-color);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--hover-shadow);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.button-accent {
+    background-color: var(--accent-color);
+}
+
+.button-accent:hover {
+    background-color: #d35400;
+}
+
+/* Card styles */
+.card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--hover-shadow);
 }
