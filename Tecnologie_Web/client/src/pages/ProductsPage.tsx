@@ -24,7 +24,7 @@ const ProductsPage: React.FC = () => {
             try {
                 const response = await fetch('http://localhost:8080/products');
                 if (!response.ok) {
-                    throw new Error('Errore nel caricamento dei prodotti');
+                    console.error();
                 }
                 const data = await response.json();
                 setProducts(data);
@@ -42,7 +42,7 @@ const ProductsPage: React.FC = () => {
             }
         };
 
-        fetchProducts();
+        fetchProducts().then();
     }, []);
 
     // Filtra i prodotti quando cambia la categoria selezionata
