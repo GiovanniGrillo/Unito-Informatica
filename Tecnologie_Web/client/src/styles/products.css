@@ -63,8 +63,9 @@
 }
 
 .product-name {
+  font-family: var(--font-secondary);
   font-size: 18px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--text-color);
   margin-bottom: 10px;
   transition: color var(--transition-speed) ease;
@@ -75,22 +76,25 @@
 }
 
 .product-category {
+  font-family: var(--font-primary);
   color: var(--text-light);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 12px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .product-price {
+  font-family: var(--font-primary);
   font-size: 22px;
-  font-weight: 700;
-  color: rgb(63, 57, 57);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-color);
   margin-bottom: 14px;
 }
 
 .product-description {
+  font-family: var(--font-primary);
   color: var(--text-light);
   line-height: 1.6;
   margin-bottom: 24px;
