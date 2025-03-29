@@ -1,4 +1,4 @@
-package com.hairsalon.hair_salon_server;
+package com.hairsalon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.hairsalon"})
 @EntityScan("com.hairsalon.model")
 @EnableJpaRepositories("com.hairsalon.repository")
-public class HairSalonApplication {
+public class HairSalon {
 
     public static void main(String[] args) {
-        SpringApplication.run(HairSalonApplication.class, args);
+        SpringApplication.run(HairSalon.class, args);
     }
 }

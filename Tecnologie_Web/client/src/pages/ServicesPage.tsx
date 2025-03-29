@@ -184,8 +184,7 @@ const ServicesPage: React.FC = () => {
       
       {error && (
         <div className="error-message">
-          {error}
-          <button onClick={() => setError(null)}>Chiudi</button>
+          <p style={{ color: 'red' }}>Non è possibile caricare la pagina</p>
         </div>
       )}
       
@@ -198,8 +197,7 @@ const ServicesPage: React.FC = () => {
 
       {bookingError && (
         <div className="error-message">
-          {bookingError}
-          <button onClick={() => setBookingError(null)}>Chiudi</button>
+          <p style={{ color: 'red' }}>{bookingError}</p>
         </div>
       )}
       

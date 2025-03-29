@@ -24,7 +24,7 @@ const ProductsPage: React.FC = () => {
             try {
                 const response = await fetch('http://localhost:8080/products');
                 if (!response.ok) {
-                    console.error();
+                    throw new Error('Errore nel caricamento dei prodotti');
                 }
                 const data = await response.json();
                 setProducts(data);
@@ -33,12 +33,16 @@ const ProductsPage: React.FC = () => {
                 // Estrai le categorie uniche dai prodotti
                 const uniqueCategories = [...new Set(data.map((product: Product) => product.category))].sort();
                 setCategories(uniqueCategories as string[]);
-
-                setLoading(false);
+                
+                setError(null);
             } catch (error) {
                 setError('Si è verificato un errore durante il caricamento dei prodotti.');
-                setLoading(false);
+                // Imposta prodotti vuoti in caso di errore
+                setProducts([]);
+                setFilteredProducts([]);
                 console.error('Errore:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -65,18 +69,14 @@ const ProductsPage: React.FC = () => {
         }
     };
 
-    if (loading) {
-        return <div className="loading">Caricamento prodotti...</div>;
-    }
-
-    if (error) {
-        return <div className="error">{error}</div>;
-    }
+    // Mostriamo sempre il titolo e la descrizione, anche durante il caricamento o in caso di errore
+    // come avviene nella pagina servizi
 
     return (
         <main>
             <section className="content-area">
                 <div className="products-container">
+                    {/* Intestazione sempre visibile, anche in caso di errore o caricamento */}
                     <div className="products-header">
                         <h2>I Nostri Prodotti</h2>
                         <div className="header-underline"></div>
@@ -86,29 +86,48 @@ const ProductsPage: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* Componente di filtro */}
-                    <ProductFilter
-                        categories={categories}
-                        selectedCategory={selectedCategory}
-                        onCategoryChange={handleCategoryChange}
-                    />
-                    
-                    {filteredProducts.length === 0 ? (
-                        <div className="no-products">
-                            <p>Nessun prodotto trovato nella categoria selezionata.</p>
-                            <button 
-                                className="button button-accent" 
-                                onClick={() => setSelectedCategory(null)}
-                            >
-                                Mostra tutti i prodotti
-                            </button>
+                    {/* Mostra messaggio di caricamento se necessario */}
+                    {loading && (
+                        <div className="loading-message">
+                            <p>Caricamento dei prodotti in corso...</p>
                         </div>
-                    ) : (
-                        /* Griglia dei prodotti */
-                        <ProductGrid 
-                            products={filteredProducts} 
-                            onAddToCart={handleAddToCart} 
+                    )}
+
+                    {/* Mostra messaggio di errore se presente, ma mantiene l'intestazione */}
+                    {error && (
+                        <div className="error-message">
+                            <p style={{ color: 'red' }}>Non è possibile caricare la pagina</p>
+                        </div>
+                    )}
+
+                    {/* Mostra il filtro solo se ci sono categorie disponibili */}
+                    {categories.length > 0 && (
+                        <ProductFilter
+                            categories={categories}
+                            selectedCategory={selectedCategory}
+                            onCategoryChange={handleCategoryChange}
                         />
+                    )}
+                    
+                    {/* Mostra i prodotti o un messaggio appropriato */}
+                    {!loading && !error && (
+                        filteredProducts.length === 0 ? (
+                            <div className="no-products">
+                                <p>Nessun prodotto trovato nella categoria selezionata.</p>
+                                <button 
+                                    className="button button-accent" 
+                                    onClick={() => setSelectedCategory(null)}
+                                >
+                                    Mostra tutti i prodotti
+                                </button>
+                            </div>
+                        ) : (
+                            /* Griglia dei prodotti */
+                            <ProductGrid 
+                                products={filteredProducts} 
+                                onAddToCart={handleAddToCart} 
+                            />
+                        )
                     )}
                 </div>
             </section>
