@@ -1,0 +1,102 @@
+/* Stili personalizzati per le finestre modali */
+
+/* Overlay della modale con effetto di sfocatura */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+/* Contenitore della modale */
+.modal-content {
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Intestazione della modale */
+.modal-header {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.modal-title {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Corpo della modale */
+.modal-body {
+  padding: 1.5rem;
+}
+
+/* Footer della modale */
+.modal-footer {
+  border-top: 1px solid #eee;
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Pulsante di chiusura nell'header */
+.modal-header .close {
+  padding: 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
+
+/* Stili per i form all'interno delle modali */
+.modal-body .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal-body label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.modal-body input,
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.modal-body textarea {
+  min-height: 100px;
+}
+
+/* Stili per i pulsanti nelle modali */
+.modal-footer .button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-footer .button-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.modal-footer .button-primary:hover {
+  background-color: #0069d9;
+}
+
+.modal-footer .button-accent {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.modal-footer .button-accent:hover {
+  background-color: #5a6268;
+}
