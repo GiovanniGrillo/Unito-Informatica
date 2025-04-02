@@ -123,24 +123,68 @@
 
 /* Buy Button */
 .buy-button {
-  padding: 8px 16px;
-  background-color: #4a90e2;
+  padding: 10px 16px;
+  background-color: #2C3E50;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .buy-button:hover:not(:disabled) {
-  background-color: #3a7bc8;
-  transform: scale(1.02);
+  transform: scale(1.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .buy-button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Admin Actions Buttons */
+.admin-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.admin-actions .button {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 6px;
+  font-weight: 500;
+  background-color: #2C3E50;
+  color: #FFFFFF;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-actions .button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.admin-actions .button-accent:hover {
+  background-color: #e74c3c;
+}
+
+.admin-actions .button svg {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .admin-actions .button {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
 }
 
 /* Responsive Adjustments */

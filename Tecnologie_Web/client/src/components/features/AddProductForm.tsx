@@ -1,22 +1,37 @@
 // src/components/features/AddProductForm.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Product } from '../../types/Product';
 
 interface AddProductFormProps {
   categories: string[];
   onSubmit: (product: Omit<Product, 'id'>) => void;
   onCancel: () => void;
+  initialData?: Omit<Product, 'id'>;
 }
 
-const AddProductForm: React.FC<AddProductFormProps> = ({ categories, onSubmit, onCancel }) => {
+const AddProductForm: React.FC<AddProductFormProps> = ({ categories, onSubmit, onCancel, initialData }) => {
   const [formData, setFormData] = useState<Omit<Product, 'id'>>({ 
-    name: '',
-    category: categories.length > 0 ? categories[0] : '',
-    price: 0,
-    description: '',
-    imageUrl: '',
-    availableQuantity: 0
+    name: initialData?.name || '',
+    category: initialData?.category || (categories.length > 0 ? categories[0] : ''),
+    price: initialData?.price || 0,
+    description: initialData?.description || '',
+    imageUrl: initialData?.imageUrl || '',
+    availableQuantity: initialData?.availableQuantity || 0
   });
+  
+  // Aggiorna il form quando cambiano i dati iniziali
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        name: initialData.name,
+        category: initialData.category,
+        price: initialData.price,
+        description: initialData.description,
+        imageUrl: initialData.imageUrl,
+        availableQuantity: initialData.availableQuantity || 0
+      });
+    }
+  }, [initialData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import ProductGrid from '../components/features/ProductGrid';
 import ProductFilter from '../components/features/ProductFilter';
 import Popup from '../components/features/Popup';
+import AddProductForm from '../components/features/AddProductForm';
 import {useCart} from '../contexts/CartContext';
 import {useAuth} from '../contexts/AuthContext';
 import '../styles/product-grid.css';
@@ -20,8 +21,10 @@ const ProductsPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [showAddModal, setShowAddModal] = useState<boolean>(false);
+    const [showEditModal, setShowEditModal] = useState<boolean>(false);
     const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
     const [newProduct, setNewProduct] = useState<Partial<Product>>({});
+    const [editingProduct, setEditingProduct] = useState<Product | null>(null);
     const {addToCart} = useCart();
     const {isAuthenticated, isAdmin} = useAuth();
 
@@ -88,22 +91,21 @@ const ProductsPage: React.FC = () => {
     };
 
     // Funzione per aggiungere un nuovo prodotto
-    const handleAddProduct = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleAddProduct = async (product: Omit<Product, 'id'>) => {
         try {
             const response = await fetch('http://localhost:8080/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newProduct),
+                body: JSON.stringify(product),
             });
 
             if (response.ok) {
                 // Aggiorna la lista dei prodotti dopo l'aggiunta
-                const updatedProducts = await response.json();
-                setProducts(prevProducts => [...prevProducts, updatedProducts]);
-                setFilteredProducts(prevProducts => [...prevProducts, updatedProducts]);
+                const updatedProduct = await response.json();
+                setProducts(prevProducts => [...prevProducts, updatedProduct]);
+                setFilteredProducts(prevProducts => [...prevProducts, updatedProduct]);
                 setShowAddModal(false);
                 setNewProduct({});
             } else {
@@ -111,6 +113,69 @@ const ProductsPage: React.FC = () => {
             }
         } catch (error) {
             console.error('Errore:', error);
+        }
+    };
+    
+    // Funzione per modificare un prodotto esistente
+    const handleEditProduct = async (product: Product) => {
+        setEditingProduct(product);
+        setShowEditModal(true);
+    };
+    
+    // Funzione per salvare le modifiche a un prodotto
+    const handleUpdateProduct = async (updatedProduct: Omit<Product, 'id'>) => {
+        if (!editingProduct) return;
+        
+        try {
+            const response = await fetch(`http://localhost:8080/products/${editingProduct.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...updatedProduct, id: editingProduct.id}),
+            });
+
+            if (response.ok) {
+                const updated = await response.json();
+                // Aggiorna la lista dei prodotti dopo la modifica
+                setProducts(prevProducts => 
+                    prevProducts.map(p => p.id === updated.id ? updated : p)
+                );
+                setFilteredProducts(prevProducts => 
+                    prevProducts.map(p => p.id === updated.id ? updated : p)
+                );
+                setShowEditModal(false);
+                setEditingProduct(null);
+            } else {
+                console.error('Errore durante l\'aggiornamento del prodotto');
+            }
+        } catch (error) {
+            console.error('Errore:', error);
+        }
+    };
+    
+    // Funzione per eliminare un prodotto
+    const handleDeleteProduct = async (product: Product) => {
+        if (window.confirm(`Sei sicuro di voler eliminare il prodotto "${product.name}"?`)) {
+            try {
+                const response = await fetch(`http://localhost:8080/products/${product.id}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    // Rimuovi il prodotto dalla lista
+                    setProducts(prevProducts => 
+                        prevProducts.filter(p => p.id !== product.id)
+                    );
+                    setFilteredProducts(prevProducts => 
+                        prevProducts.filter(p => p.id !== product.id)
+                    );
+                } else {
+                    console.error('Errore durante l\'eliminazione del prodotto');
+                }
+            } catch (error) {
+                console.error('Errore:', error);
+            }
         }
     };
 
@@ -185,7 +250,9 @@ const ProductsPage: React.FC = () => {
                             /* Griglia dei prodotti */
                             <ProductGrid 
                                 products={filteredProducts} 
-                                onAddToCart={handleAddToCart} 
+                                onAddToCart={handleAddToCart}
+                                onEditProduct={handleEditProduct}
+                                onDeleteProduct={handleDeleteProduct}
                             />
                         )
                     )}
@@ -199,79 +266,52 @@ const ProductsPage: React.FC = () => {
                 title="Aggiungi Nuovo Prodotto"
                 footer={
                     <div className="form-actions">
-                        <button type="submit" className="button button-primary" form="addProductForm">Salva</button>
                         <button type="button" className="button button-accent" onClick={() => setShowAddModal(false)}>Annulla</button>
                     </div>
                 }
             >
-                <form id="addProductForm" onSubmit={handleAddProduct}>
-                    <div className="form-group">
-                        <label htmlFor="name">Nome Prodotto</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            value={newProduct.name || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
+                <AddProductForm 
+                    categories={categories}
+                    onSubmit={handleAddProduct}
+                    onCancel={() => setShowAddModal(false)}
+                />
+            </Popup>
+            
+            {/* Modale per modificare un prodotto esistente */}
+            <Popup 
+                isOpen={showEditModal} 
+                onClose={() => {
+                    setShowEditModal(false);
+                    setEditingProduct(null);
+                }} 
+                title="Modifica Prodotto"
+                footer={
+                    <div className="form-actions">
+                        <button type="button" className="button button-accent" onClick={() => {
+                            setShowEditModal(false);
+                            setEditingProduct(null);
+                        }}>Annulla</button>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="category">Categoria</label>
-                        <input 
-                            type="text" 
-                            id="category" 
-                            name="category" 
-                            value={newProduct.category || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="price">Prezzo (€)</label>
-                        <input 
-                            type="number" 
-                            id="price" 
-                            name="price" 
-                            step="0.01" 
-                            value={newProduct.price || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Descrizione</label>
-                        <textarea 
-                            id="description" 
-                            name="description" 
-                            value={newProduct.description || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="imageUrl">URL Immagine</label>
-                        <input 
-                            type="text" 
-                            id="imageUrl" 
-                            name="imageUrl" 
-                            value={newProduct.imageUrl || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="availableQuantity">Quantità Disponibile</label>
-                        <input 
-                            type="number" 
-                            id="availableQuantity" 
-                            name="availableQuantity" 
-                            value={newProduct.availableQuantity || ''} 
-                            onChange={handleInputChange} 
-                            required 
-                        />
-                    </div>
-                </form>
+                }
+            >
+                {editingProduct && (
+                    <AddProductForm 
+                        categories={categories}
+                        onSubmit={handleUpdateProduct}
+                        onCancel={() => {
+                            setShowEditModal(false);
+                            setEditingProduct(null);
+                        }}
+                        initialData={{
+                            name: editingProduct.name,
+                            category: editingProduct.category,
+                            price: editingProduct.price,
+                            description: editingProduct.description,
+                            imageUrl: editingProduct.imageUrl,
+                            availableQuantity: editingProduct.availableQuantity || 0
+                        }}
+                    />
+                )}
             </Popup>
             
             {/* Modale per le informazioni */}

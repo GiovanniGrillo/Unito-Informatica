@@ -3,14 +3,17 @@ import React from 'react';
 import { Product } from '../../types/Product';
 import { useAuth } from '../../contexts/AuthContext';
 import '../../styles/product-grid.css';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 interface ProductGridProps {
   products: Product[];
   onAddToCart: (product: Product) => void;
+  onEditProduct?: (product: Product) => void;
+  onDeleteProduct?: (product: Product) => void;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
-  const { isAuthenticated } = useAuth();
+const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart, onEditProduct, onDeleteProduct }) => {
+  const { isAuthenticated, isAdmin } = useAuth();
 
   return (
     <div className="products-container">
@@ -47,6 +50,25 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, onAddToCart }) => {
                     ? "Esaurito" 
                     : "Aggiungi al carrello"}
               </button>
+              
+              {isAuthenticated && isAdmin() && (
+                <div className="admin-actions">
+                  <button 
+                    className="button button-primary"
+                    onClick={() => onEditProduct && onEditProduct(product)}
+                    title="Modifica prodotto"
+                  >
+                    <FaEdit /> Modifica
+                  </button>
+                  <button 
+                    className="button button-accent"
+                    onClick={() => onDeleteProduct && onDeleteProduct(product)}
+                    title="Elimina prodotto"
+                  >
+                    <FaTrash /> Elimina
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}
