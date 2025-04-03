@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Long> {
+public interface ServiceRepository extends JpaRepository<Service, Integer> {
     List<Service> findByCategory(String category);
     List<Service> findByRequiredExpertiseLevel(String expertiseLevel);
     List<Service> findByDurationMinutesLessThanEqual(Integer maxDuration);

@@ -9,8 +9,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT(20) NOT NULL AUTO_INCREMENT")
-    private Long id;
+    @Column(columnDefinition = "INT NOT NULL AUTO_INCREMENT")
+    private Integer id;
 
     @Column(name = "name", columnDefinition = "VARCHAR(255)")
     private String name;
@@ -39,10 +39,10 @@ public class User {
         this.role = role;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

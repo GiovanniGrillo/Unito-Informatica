@@ -38,7 +38,7 @@ public class ServiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Service> getService(@PathVariable Long id) {
+    public ResponseEntity<Service> getService(@PathVariable Integer id) {
         return HairService.getServiceById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -50,7 +50,7 @@ public class ServiceController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Service> updateService(@PathVariable Long id, @RequestBody Service service) {
+    public ResponseEntity<Service> updateService(@PathVariable Integer id, @RequestBody Service service) {
         return HairService.getServiceById(id)
                 .map(existingService -> {
                     service.setId(id);
@@ -60,7 +60,7 @@ public class ServiceController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteService(@PathVariable Integer id) {
         return HairService.getServiceById(id)
                 .map(service -> {
                     HairService.deleteService(id);

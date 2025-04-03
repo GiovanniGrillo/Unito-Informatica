@@ -97,7 +97,7 @@ public class HairService {
         return serviceRepository.findAll();
     }
     
-    public Optional<Service> getServiceById(Long id) {
+    public Optional<Service> getServiceById(Integer id) {
         return serviceRepository.findById(id);
     }
     
@@ -120,7 +120,7 @@ public class HairService {
         return serviceRepository.save(service);
     }
     
-    public void deleteService(Long id) {
+    public void deleteService(Integer id) {
         serviceRepository.deleteById(id);
     }
 }
