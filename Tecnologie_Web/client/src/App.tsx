@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import Contacts from "./pages/Contacts.tsx";
+import NotFoundPage from './pages/NotFoundPage';
 
 import Cart from './components/features/Cart';
 // Import CSS files
@@ -24,6 +25,7 @@ import './styles/content.css';
 import './styles/services-box.css';
 import './styles/products.css';
 import './styles/cart.css';
+import './styles/not-found.css';
 
 function App() {
     return (
@@ -39,6 +41,7 @@ function App() {
                             <Route path="/products" element={<ProductsPage />} />
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/contacts" element={<Contacts/>} />
+                            <Route path="*" element={<NotFoundPage />} />
                         </Routes>
                     </div>
                     <Footer />
