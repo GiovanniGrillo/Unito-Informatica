@@ -127,11 +127,11 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ categories, onSubmit, o
         />
       </div>
 
-      <div className="form-actions">
-        <button type="button" className="button button-secondary" onClick={onCancel}>
+      <div className="form-actions" style={{ justifyContent: 'flex-start' }}>
+        <button type="button" className="button button-secondary cancel-button" onClick={onCancel}>
           Annulla
         </button>
-        <button type="submit" className="button button-primary">
+        <button type="submit" className="button button-primary confirm-button">
           Conferma
         </button>
       </div>

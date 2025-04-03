@@ -9,21 +9,22 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "BIGINT(20) NOT NULL AUTO_INCREMENT FIRST")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "VARCHAR(255) AFTER id")
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", columnDefinition = "VARCHAR(255) AFTER name")
     private String surname;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false, columnDefinition = "VARCHAR(255) AFTER surname")
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(255) AFTER email")
     private String password;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, columnDefinition = "VARCHAR(255) AFTER password")
     private String role; // ADMIN, USER
 
 

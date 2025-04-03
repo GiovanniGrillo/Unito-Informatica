@@ -1,0 +1,22 @@
+/* Stili per i pulsanti del form */
+
+/* Stile base per i pulsanti nel form */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Stile per il pulsante Conferma */
+.confirm-button:hover {
+  background-color: var(--success-color, #27ae60) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color, rgba(0, 0, 0, 0.08));
+}
+
+/* Stile per il pulsante Annulla */
+.cancel-button:hover {
+  background-color: var(--error-color, #e74c3c) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--shadow-color, rgba(0, 0, 0, 0.08));
+}

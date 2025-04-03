@@ -176,6 +176,11 @@
   background-color: #e74c3c;
 }
 
+/* Stile specifico per il pulsante Informazioni */
+.button-info:hover {
+  background-color: #3498db !important;
+}
+
 .admin-actions .button svg {
   font-size: 0.9rem;
 }

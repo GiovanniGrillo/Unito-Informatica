@@ -29,6 +29,16 @@ const HomePage: React.FC = () => {
             <li><strong>Email</strong>: info@bellezzanaturale.it</li>
           </ul>
         </div>
+
+        {/* Sezione Orari */}
+        <div className="section" id="orari">
+          <h2>Orari di Apertura</h2>
+          <ul>
+            <li><strong>Lunedì - Venerdì</strong>: 9:00 - 19:00</li>
+            <li><strong>Sabato</strong>: 9:00 - 17:00</li>
+            <li><strong>Domenica</strong>: Chiuso</li>
+          </ul>
+        </div>
       </section>
       
       <Gallery />

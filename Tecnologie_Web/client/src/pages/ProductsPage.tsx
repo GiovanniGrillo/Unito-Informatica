@@ -10,6 +10,7 @@ import '../styles/product-grid.css';
 import '../styles/filter.css';
 import '../styles/popup.css';
 import '../styles/products-actions.css';
+import '../styles/form-buttons.css';
 
 import { Product } from '../types/Product';
 
@@ -203,7 +204,7 @@ const ProductsPage: React.FC = () => {
                                 Aggiungi Prodotto
                             </button>
                             <button 
-                                className="button button-accent" 
+                                className="button button-info" 
                                 onClick={() => setShowInfoModal(true)}
                             >
                                 Informazioni
@@ -264,11 +265,6 @@ const ProductsPage: React.FC = () => {
                 isOpen={showAddModal} 
                 onClose={() => setShowAddModal(false)} 
                 title="Aggiungi Nuovo Prodotto"
-                footer={
-                    <div className="form-actions">
-                        <button type="button" className="button button-accent" onClick={() => setShowAddModal(false)}>Annulla</button>
-                    </div>
-                }
             >
                 <AddProductForm 
                     categories={categories}
@@ -285,14 +281,6 @@ const ProductsPage: React.FC = () => {
                     setEditingProduct(null);
                 }} 
                 title="Modifica Prodotto"
-                footer={
-                    <div className="form-actions">
-                        <button type="button" className="button button-accent" onClick={() => {
-                            setShowEditModal(false);
-                            setEditingProduct(null);
-                        }}>Annulla</button>
-                    </div>
-                }
             >
                 {editingProduct && (
                     <AddProductForm 
