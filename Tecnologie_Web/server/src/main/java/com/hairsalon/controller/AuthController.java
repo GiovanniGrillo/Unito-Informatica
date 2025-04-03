@@ -41,7 +41,7 @@ public class AuthController {
             response.put("id", user.getId());
             response.put("name", user.getName());
             response.put("email", user.getEmail());
-            response.put("role", user.getRole().toLowerCase()); // Converti in minuscolo per compatibilità con il frontend
+            response.put("role", user.getRole().toLowerCase());
 
             return ResponseEntity.ok(response);
         } else {
