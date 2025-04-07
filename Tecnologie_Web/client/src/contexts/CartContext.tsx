@@ -1,6 +1,6 @@
 // src/contexts/CartContext.tsx
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { Product } from '../types/Product';
+import { Product } from '../components/features/ProductGrid';
 import { useAuth } from './AuthContext';
 
 interface CartItem extends Product {

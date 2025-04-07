@@ -1,9 +1,20 @@
 // src/components/features/ProductGrid.tsx
 import React from 'react';
-import { Product } from '../../types/Product';
+// import { Product } from '../../types/Product'; // Rimosso perché ora definiamo il tipo qui
 import { useAuth } from '../../contexts/AuthContext';
 import '../../styles/product-grid.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+
+// Definizione del tipo Product spostata qui dalla cartella types
+export interface Product {
+  id: number;
+  category: string;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  availableQuantity?: number;
+}
 
 interface ProductGridProps {
   products: Product[];

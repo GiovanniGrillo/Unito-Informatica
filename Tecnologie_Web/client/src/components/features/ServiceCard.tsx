@@ -1,6 +1,15 @@
-    // src/components/features/ServiceCard.tsx
+// src/components/features/ServiceCard.tsx
 import React from 'react';
-import { Service } from '../../types/Service';
+
+// Definizione del tipo Service spostata qui dalla cartella types
+export interface Service {
+  id: number;
+  category: string;
+  title: string;
+  price: number;
+  description: string;
+  imageSrc: string;
+}
 
 interface ServiceCardProps {
   service: Service;
@@ -21,7 +30,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, onBook }) => {
           className="service-button"
           onClick={() => onBook(service.id)}
         >
-          Prenota Online
+          Prenota Ora
         </button>
       </div>
     </section>

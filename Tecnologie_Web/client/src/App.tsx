@@ -12,11 +12,7 @@ import NotFoundPage from './pages/NotFoundPage';
 
 import Cart from './components/features/Cart';
 // Import CSS files
-import './App.css';
-import './styles/fonts.css';
-import './styles/reset.css';
-import './styles/layout.css';
-import './styles/style.css';
+import './styles/global.css';
 import './styles/header.css';
 import './styles/footer.css';
 import './styles/carousel.css';
@@ -25,7 +21,6 @@ import './styles/content.css';
 import './styles/services-box.css';
 import './styles/products.css';
 import './styles/cart.css';
-import './styles/not-found.css';
 
 function App() {
     return (
