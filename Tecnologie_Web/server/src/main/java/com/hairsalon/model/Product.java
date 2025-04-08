@@ -5,29 +5,29 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "prodotti")
+@Table(name = "products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "descrizione", length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
-    @Column(name = "prezzo", nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @Column(name = "quantita_disponibile")
+    @Column(name = "available_quantity")
     private Integer availableQuantity;
 
-    @Column(name = "categoria")
+    @Column(name = "category")
     private String category;
 
-    @Column(name = "url_immagine")
+    @Column(name = "image_url")
     private String imageUrl;
 
     public Product() {}

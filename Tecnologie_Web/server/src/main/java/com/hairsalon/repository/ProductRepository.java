@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+// Repository for the Product entity, mapped to the "products" table
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByCategory(String category);

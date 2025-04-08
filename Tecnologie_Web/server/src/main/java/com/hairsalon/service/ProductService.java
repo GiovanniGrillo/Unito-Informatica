@@ -21,10 +21,10 @@ public class ProductService {
     
     @PostConstruct
     public void init() {
-        // Inizializzazione dati prodotti
+        // Initialization of product data
         Product product1 = new Product();
-        product1.setName("Shampoo Idratante");
-        product1.setDescription("Shampoo delicato per uso quotidiano con estratti naturali");
+        product1.setName("Moisturizing Shampoo");
+        product1.setDescription("Gentle shampoo for daily use with natural extracts");
         product1.setPrice(new BigDecimal("15.99"));
         product1.setAvailableQuantity(50);
         product1.setCategory("Shampoo Donna");
@@ -32,8 +32,8 @@ public class ProductService {
         productRepository.save(product1);
         
         Product product2 = new Product();
-        product2.setName("Balsamo Riparatore");
-        product2.setDescription("Balsamo intensivo per capelli secchi e danneggiati");
+        product2.setName("Repairing Conditioner");
+        product2.setDescription("Intensive conditioner for dry and damaged hair");
         product2.setPrice(new BigDecimal("18.50"));
         product2.setAvailableQuantity(40);
         product2.setCategory("Balsamo Donna");
@@ -41,8 +41,8 @@ public class ProductService {
         productRepository.save(product2);
         
         Product product3 = new Product();
-        product3.setName("Maschera Nutriente");
-        product3.setDescription("Trattamento profondo per capelli danneggiati");
+        product3.setName("Nourishing Mask");
+        product3.setDescription("Deep treatment for damaged hair");
         product3.setPrice(new BigDecimal("22.99"));
         product3.setAvailableQuantity(30);
         product3.setCategory("Cura Capelli Donna");
@@ -50,8 +50,8 @@ public class ProductService {
         productRepository.save(product3);
         
         Product product4 = new Product();
-        product4.setName("Gel Modellante");
-        product4.setDescription("Gel modellante per uno styling duraturo e definito");
+        product4.setName("Styling Gel");
+        product4.setDescription("Modeling gel for long-lasting and defined styling");
         product4.setPrice(new BigDecimal("25.00"));
         product4.setAvailableQuantity(25);
         product4.setCategory("Gel/Cera Uomo");
@@ -59,18 +59,18 @@ public class ProductService {
         productRepository.save(product4);
         
         Product product5 = new Product();
-        product5.setName("Spray Protettivo");
-        product5.setDescription("Spray protettivo dal calore per prevenire danni durante lo styling");
+        product5.setName("Protective Spray");
+        product5.setDescription("Heat protective spray to prevent damage during styling");
         product5.setPrice(new BigDecimal("32.50"));
         product5.setAvailableQuantity(20);
         product5.setCategory("Cura Capelli Unisex");
         product5.setImageUrl("/img/products/spray_protettivo.webp");
         productRepository.save(product5);
         
-        // Nuovi prodotti aggiunti
+        // Additional products
         Product product6 = new Product();
-        product6.setName("Olio di Argan");
-        product6.setDescription("Olio nutriente per capelli secchi e crespi, ricco di vitamina E e antiossidanti");
+        product6.setName("Argan Oil");
+        product6.setDescription("Nourishing oil for dry and frizzy hair, rich in vitamin E and antioxidants");
         product6.setPrice(new BigDecimal("28.99"));
         product6.setAvailableQuantity(15);
         product6.setCategory("Cura Capelli Donna");
@@ -78,8 +78,8 @@ public class ProductService {
         productRepository.save(product6);
         
         Product product7 = new Product();
-        product7.setName("Siero Anticrespo");
-        product7.setDescription("Siero leggero che elimina l'effetto crespo e dona lucentezza ai capelli");
+        product7.setName("Anti-Frizz Serum");
+        product7.setDescription("Lightweight serum that eliminates frizz and adds shine to hair");
         product7.setPrice(new BigDecimal("24.50"));
         product7.setAvailableQuantity(22);
         product7.setCategory("Creme Donna");
@@ -87,8 +87,8 @@ public class ProductService {
         productRepository.save(product7);
         
         Product product8 = new Product();
-        product8.setName("Shampoo Volumizzante");
-        product8.setDescription("Shampoo specifico per capelli fini, dona volume e corpo alla chioma");
+        product8.setName("Volumizing Shampoo");
+        product8.setDescription("Specific shampoo for fine hair, adds volume and body to hair");
         product8.setPrice(new BigDecimal("16.99"));
         product8.setAvailableQuantity(35);
         product8.setCategory("Shampoo Uomo");
@@ -96,8 +96,8 @@ public class ProductService {
         productRepository.save(product8);
         
         Product product9 = new Product();
-        product9.setName("Crema Modellante");
-        product9.setDescription("Crema leggera per definire i ricci e controllare i capelli ribelli");
+        product9.setName("Styling Cream");
+        product9.setDescription("Light cream to define curls and control rebellious hair");
         product9.setPrice(new BigDecimal("19.99"));
         product9.setAvailableQuantity(18);
         product9.setCategory("Creme Unisex");
@@ -105,8 +105,8 @@ public class ProductService {
         productRepository.save(product9);
         
         Product product10 = new Product();
-        product10.setName("Balsamo Senza Risciacquo");
-        product10.setDescription("Balsamo leave-in per idratare e districare i capelli senza appesantirli");
+        product10.setName("Leave-in Conditioner");
+        product10.setDescription("Leave-in conditioner to moisturize and detangle hair without weighing it down");
         product10.setPrice(new BigDecimal("21.50"));
         product10.setAvailableQuantity(25);
         product10.setCategory("Balsamo Unisex");
