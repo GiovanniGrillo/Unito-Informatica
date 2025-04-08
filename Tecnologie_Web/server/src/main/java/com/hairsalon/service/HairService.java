@@ -105,13 +105,7 @@ public class HairService {
         return serviceRepository.findByCategory(category);
     }
     
-    public List<Service> getServicesByExpertiseLevel(String expertiseLevel) {
-        return serviceRepository.findByRequiredExpertiseLevel(expertiseLevel);
-    }
-    
-    public List<Service> getServicesByMaxDuration(Integer maxDuration) {
-        return serviceRepository.findByDurationMinutesLessThanEqual(maxDuration);
-    }
+    // Il metodo getServicesByExpertiseLevel è stato rimosso come richiesto
     
     // I metodi per la gestione della relazione tra servizi e prodotti sono stati rimossi
     // poiché ora la tabella servizi è indipendente dalla tabella prodotti

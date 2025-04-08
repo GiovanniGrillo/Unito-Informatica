@@ -21,18 +21,10 @@ public class ServiceController {
 
     @GetMapping("")
     public ResponseEntity<List<Service>> services(
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String expertiseLevel,
-            @RequestParam(required = false) Integer maxDuration) {
+            @RequestParam(required = false) String category) {
         
         if (category != null) {
             return ResponseEntity.ok(HairService.getServicesByCategory(category));
-        }
-        if (expertiseLevel != null) {
-            return ResponseEntity.ok(HairService.getServicesByExpertiseLevel(expertiseLevel));
-        }
-        if (maxDuration != null) {
-            return ResponseEntity.ok(HairService.getServicesByMaxDuration(maxDuration));
         }
         return ResponseEntity.ok(HairService.getAllServices());
     }
@@ -49,23 +41,5 @@ public class ServiceController {
         return ResponseEntity.ok(HairService.saveService(service));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Service> updateService(@PathVariable Integer id, @RequestBody Service service) {
-        return HairService.getServiceById(id)
-                .map(existingService -> {
-                    service.setId(id);
-                    return ResponseEntity.ok(HairService.saveService(service));
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteService(@PathVariable Integer id) {
-        return HairService.getServiceById(id)
-                .map(service -> {
-                    HairService.deleteService(id);
-                    return ResponseEntity.ok().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
+    // I metodi PUT e DELETE sono stati rimossi come richiesto
 }

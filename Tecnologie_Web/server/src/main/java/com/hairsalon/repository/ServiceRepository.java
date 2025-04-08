@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Integer> {
     List<Service> findByCategory(String category);
-    List<Service> findByRequiredExpertiseLevel(String expertiseLevel);
-    List<Service> findByDurationMinutesLessThanEqual(Integer maxDuration);
 }

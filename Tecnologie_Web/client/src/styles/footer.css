@@ -21,20 +21,20 @@ footer {
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1400px; /* Aumentato da 1200px a 1400px per estendere verso i margini */
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem; /* Aumentato da 1rem a 2rem per dare più spazio ai lati */
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Changed from flex-start to center for better alignment */
+  align-items: center;
   flex-wrap: wrap;
-  gap: 1rem; /* Reduced gap from 2rem to 1rem */
+  gap: 2rem; /* Aumentato da 1rem a 2rem per dare più spazio tra gli elementi */
 }
 
 .social-links {
   display: flex;
-  gap: 0.8rem; /* Reduced from 1rem */
-  margin-top: 0.8rem; /* Reduced from 1rem */
+  gap: 1rem; /* Aumentato da 0.8rem a 1rem per dare più spazio tra le icone */
+  margin-top: 1rem; /* Aumentato da 0.8rem a 1rem */
 }
 
 .social-links a {
@@ -67,8 +67,8 @@ footer {
 /* Add specific styling for the project-info and copyright sections */
 .project-info {
   font-size: 0.9rem; /* Smaller font size */
-  max-width: 60%; /* Limit width */
-  line-height: 1.4;
+  max-width: 65%; /* Aumentato da 60% a 65% per utilizzare più spazio */
+  line-height: 1.5; /* Aumentato leggermente per migliorare la leggibilità */
 }
 
 .highlight {
@@ -80,17 +80,18 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.2rem; /* Aumentato da 0.8rem a 1.2rem per dare più spazio verticale */
+  min-width: 30%; /* Assegna una larghezza minima per bilanciare meglio con il testo */
 }
 
 .cclicense {
-  height: 30px; /* Control the size of the license image */
+  height: 40px; /* Aumentato da 30px a 40px per migliorare la visibilità */
   width: auto;
   order: 2; /* Place the license image after the copyright text */
 }
 
 .copyright-text {
-  font-size: 0.8rem; /* Smaller copyright text */
+  font-size: 0.9rem; /* Aumentato da 0.8rem a 0.9rem per migliorare la leggibilità */
   color: #999;
   order: 1; /* Place the copyright text before the license image */
 }
@@ -100,7 +101,8 @@ footer {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.8rem; /* Reduced gap in mobile view */
+    gap: 1.5rem; /* Aumentato da 0.8rem a 1.5rem per dare più spazio verticale */
+    padding: 0 1.5rem; /* Aumentato il padding laterale */
   }
 
   .footer-section {
