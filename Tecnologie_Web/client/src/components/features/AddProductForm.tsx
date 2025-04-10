@@ -1,4 +1,3 @@
-// src/components/features/AddProductForm.tsx
 import React, { useState, useEffect } from 'react';
 import { Product } from './ProductGrid';
 

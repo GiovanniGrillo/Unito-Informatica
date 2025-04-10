@@ -1,4 +1,3 @@
-// src/components/auth/LoginForm.tsx
 import React, { useState } from 'react';
 import { Form, Button, Alert, Container, Row, Col } from 'react-bootstrap';
 

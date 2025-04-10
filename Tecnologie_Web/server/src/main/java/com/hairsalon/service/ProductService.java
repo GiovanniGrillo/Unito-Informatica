@@ -1,4 +1,3 @@
-// server/src/main/java/com/hairsalon/service/ProductService.java
 package com.hairsalon.service;
 
 import com.hairsalon.model.Product;

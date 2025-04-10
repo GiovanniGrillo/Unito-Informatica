@@ -1,4 +1,3 @@
-// server/src/main/java/com/hairsalon/model/User.java
 package com.hairsalon.model;
 
 import jakarta.persistence.*;

@@ -1,7 +1,5 @@
-// src/components/features/ServiceCard.tsx
 import React from 'react';
 
-// Definizione del tipo Service spostata qui dalla cartella types
 export interface Service {
   id: number;
   category: string;

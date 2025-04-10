@@ -1,4 +1,3 @@
-// client/src/pages/ProductsPage.tsx
 import React, {useState, useEffect} from 'react';
 import ProductGrid, { Product } from '../components/features/ProductGrid';
 import ProductFilter from '../components/features/ProductFilter';
@@ -12,7 +11,6 @@ import '../styles/popup.css';
 import '../styles/products-actions.css';
 import '../styles/form-buttons.css';
 
-// import { Product } from '../types/Product'; // Rimosso perché ora importiamo da ProductGrid
 
 const ProductsPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);

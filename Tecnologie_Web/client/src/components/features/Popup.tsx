@@ -1,4 +1,3 @@
-// src/components/features/Popup.tsx
 import React, { ReactNode } from 'react';
 import { Modal as BootstrapModal, Button } from 'react-bootstrap';
 

@@ -1,4 +1,3 @@
-// server/src/main/java/com/hairsalon/service/UserService.java
 package com.hairsalon.service;
 
 import com.hairsalon.model.User;

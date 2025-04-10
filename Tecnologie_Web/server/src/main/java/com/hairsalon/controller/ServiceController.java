@@ -1,4 +1,3 @@
-// server/src/main/java/com/hairsalon/controller/ServiceController.java
 package com.hairsalon.controller;
 
 import com.hairsalon.model.Service;

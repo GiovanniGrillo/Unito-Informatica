@@ -1,4 +1,3 @@
-// src/components/features/ProductFilter.tsx
 import React from 'react';
 import '../../styles/filter.css';
 

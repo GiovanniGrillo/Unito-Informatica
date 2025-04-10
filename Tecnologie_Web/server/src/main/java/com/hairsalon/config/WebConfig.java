@@ -1,4 +1,3 @@
-// server/src/main/java/com/hairsalon/config/WebConfig.java
 package com.hairsalon.config;
 
 import org.springframework.context.annotation.Configuration;

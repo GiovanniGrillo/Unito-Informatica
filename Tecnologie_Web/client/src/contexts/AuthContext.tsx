@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.tsx
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 type UserRole = 'client' | 'admin' | null;

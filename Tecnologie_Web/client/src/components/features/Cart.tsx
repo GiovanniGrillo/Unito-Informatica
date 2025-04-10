@@ -1,4 +1,3 @@
-// src/components/features/Cart.tsx
 import React, { useEffect } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';

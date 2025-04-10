@@ -1,4 +1,3 @@
-// src/components/features/Gallery.tsx
 import React from 'react';
 import '../../styles/gallery.css';
 

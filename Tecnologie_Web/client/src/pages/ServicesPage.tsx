@@ -1,12 +1,10 @@
-// src/pages/ServicesPage.tsx
 import React, { useState, useEffect } from 'react';
 import ServiceCard, { Service } from '../components/features/ServiceCard';
 import ServiceFilter from '../components/features/ServiceFilter';
-// import { Service } from '../types/Service'; // Rimosso perché ora importiamo da ServiceCard
 import '../styles/services.css';
 
 const ServicesPage: React.FC = () => {
-  
+
   // Stato per memorizzare i servizi caricati dal backend
   const [services, setServices] = useState<Service[]>([]);
   const [filteredServices, setFilteredServices] = useState<Service[]>([]);
