@@ -1,6 +1,4 @@
 /* Stili per i pulsanti del form */
-
-/* Stile base per i pulsanti nel form */
 .form-actions {
   display: flex;
   gap: 10px;

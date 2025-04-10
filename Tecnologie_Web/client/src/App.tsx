@@ -11,7 +11,6 @@ import Contacts from "./pages/Contacts.tsx";
 import NotFoundPage from './pages/NotFoundPage';
 
 import Cart from './components/features/Cart';
-// Import CSS files
 import './styles/global.css';
 import './styles/header.css';
 import './styles/footer.css';

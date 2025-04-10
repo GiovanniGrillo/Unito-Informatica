@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import '../../styles/product-grid.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-wexport interface Product {
+export interface Product {
   id: number;
   category: string;
   name: string;
