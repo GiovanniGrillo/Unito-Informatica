@@ -2,7 +2,6 @@
 package com.hairsalon.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
@@ -19,7 +18,7 @@ public class Product {
     private String description;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    private float price;
 
     @Column(name = "available_quantity")
     private Integer availableQuantity;
@@ -32,12 +31,12 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, BigDecimal price) {
+    public Product(String name, float price) {
         this.name = name;
         this.price = price;
     }
 
-    public Product(String name, String description, BigDecimal price, 
+    public Product(String name, String description, float price, 
                   Integer availableQuantity, String category, String imageUrl) {
         this.name = name;
         this.description = description;
@@ -50,55 +49,54 @@ public class Product {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
+
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+
+    public float getPrice() {
         return price;
     }
-
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
+
 
     public Integer getAvailableQuantity() {
         return availableQuantity;
     }
-
     public void setAvailableQuantity(Integer availableQuantity) {
         this.availableQuantity = availableQuantity;
     }
+ 
 
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
 
+
     public String getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }

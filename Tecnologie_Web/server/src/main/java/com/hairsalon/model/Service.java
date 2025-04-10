@@ -2,53 +2,49 @@
 package com.hairsalon.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "servizi")
+@Table(name = "services")
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "descrizione", length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
-    @Column(name = "prezzo", nullable = false)
-    private BigDecimal price;
+    @Column(name = "price", nullable = false)
+    private float price;
 
-    @Column(name = "durata_minuti", nullable = false)
+    @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
-    @Column(name = "livello_esperienza_richiesto")
-    private String requiredExpertiseLevel;
 
-    @Column(name = "categoria")
+
+    @Column(name = "category")
     private String category;
 
-    @Column(name = "url_immagine")
+    @Column(name = "image_url")
     private String imageUrl;
 
     public Service() {}
 
-    public Service(String name, BigDecimal price, Integer durationMinutes) {
+    public Service(String name, float price, Integer durationMinutes) {
         this.name = name;
         this.price = price;
         this.durationMinutes = durationMinutes;
     }
 
-    public Service(String name, String description, BigDecimal price, 
-                  Integer durationMinutes, String requiredExpertiseLevel, 
-                  String category, String imageUrl) {
+    public Service(String name, String description, float price, 
+                  Integer durationMinutes, String category, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.durationMinutes = durationMinutes;
-        this.requiredExpertiseLevel = requiredExpertiseLevel;
         this.category = category;
         this.imageUrl = imageUrl;
     }
@@ -56,63 +52,54 @@ public class Service {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
+
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+
+    public float getPrice() {
         return price;
     }
-
-    public void setPrice(BigDecimal price) {
+    public void setPrice(float price) {
         this.price = price;
     }
+
 
     public Integer getDurationMinutes() {
         return durationMinutes;
     }
-
     public void setDurationMinutes(Integer durationMinutes) {
         this.durationMinutes = durationMinutes;
     }
 
-    public String getRequiredExpertiseLevel() {
-        return requiredExpertiseLevel;
-    }
-
-    public void setRequiredExpertiseLevel(String requiredExpertiseLevel) {
-        this.requiredExpertiseLevel = requiredExpertiseLevel;
-    }
 
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
 
+
     public String getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
