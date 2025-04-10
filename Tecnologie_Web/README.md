@@ -8,15 +8,17 @@ This project is a modern, responsive website for a hair salon called "Bellezza N
 ### Frontend (Implemented)
 - **Home Page**: Fully implemented with carousel, "Chi Siamo" section, contact information, and image gallery
 - **Services Page**: Implemented with service categories, descriptions, and pricing
-- **Products Page**: Basic implementation with product listings and categories
-- **Authentication**: Basic login functionality with user roles (client/admin)
+- **Products Page**: Implemented with product listings, categories, and cart functionality
+- **Authentication**: Login functionality with user roles (client/admin)
+- **Cart Context**: Shopping cart functionality implemented with React Context API
 
-### Backend (In Progress)
+### Backend (Implemented)
 - Spring Boot project structure set up
 - Database configuration with JPA
-- Security configuration initialized
-- API endpoints planned but not fully implemented
-
+- REST API endpoints for authentication, products, and services
+- Repository and service layers implemented
+- Data models defined with JPA annotations
+- Default data initialization for testing
 
 ## Technologies Used
 
@@ -27,6 +29,7 @@ This project is a modern, responsive website for a hair salon called "Bellezza N
 - **React Router 7**: For client-side routing
 - **React Bootstrap 2**: UI component library based on Bootstrap 5
 - **CSS**: Custom styling with modular CSS files
+- **Context API**: For state management (auth, cart)
 
 ### Backend
 - **Spring Boot 3.4**: Java-based framework for building web applications
@@ -66,7 +69,7 @@ This project is a modern, responsive website for a hair salon called "Bellezza N
   - Styling products
   - Heat protection products
 - Product cards with images, descriptions, and pricing
-- Shopping cart functionality (UI implemented, backend pending)
+- Shopping cart functionality
   - Add to cart functionality
   - Quantity selection
   - Cart display
@@ -76,6 +79,233 @@ This project is a modern, responsive website for a hair salon called "Bellezza N
 - Role-based access (client/admin)
 - Protected routes
 - Context-based state management
+
+## API Flow Examples
+
+### Authentication Flow
+
+1. **Frontend Request (Login):**
+```typescript
+// From AuthContext.tsx
+const login = async (email: string, password: string): Promise<boolean> => {
+  try {
+    const response = await fetch('http://localhost:8080/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const userData = await response.json();
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Errore durante il login:', error);
+    return false;
+  }
+};
+```
+
+2. **Backend Controller (AuthController.java):**
+```java
+@PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+    String email = credentials.get("email");
+    String password = credentials.get("password");
+
+    if (email == null || password == null) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", "Email e password sono richiesti");
+        return ResponseEntity.badRequest().body(error);
+    }
+
+    Optional<User> userOpt = userService.authenticate(email, password);
+
+    if (userOpt.isPresent()) {
+        User user = userOpt.get();
+        // Non inviare la password al frontend
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("name", user.getName());
+        response.put("email", user.getEmail());
+        response.put("role", user.getRole().toLowerCase());
+
+        return ResponseEntity.ok(response);
+    } else {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", "Credenziali non valide");
+        return ResponseEntity.status(401).body(error);
+    }
+}
+```
+
+3. **Service Layer (UserService.java):**
+```java
+public Optional<User> authenticate(String email, String password) {
+    Optional<User> userOpt = userRepository.findByEmail(email);
+
+    if (userOpt.isPresent()) {
+        User user = userOpt.get();
+        // In produzione, confrontare password criptate
+        if (user.getPassword().equals(password)) {
+            // Autenticazione riuscita
+            return Optional.of(user);
+        }
+    }
+    return Optional.empty();
+}
+```
+
+4. **Repository Layer (UserRepository.java):**
+```java
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByEmail(String email);
+}
+```
+
+### Products Flow
+
+1. **Frontend Request (Fetch Products):**
+```typescript
+// From ProductsPage.tsx
+const fetchProducts = async () => {
+  try {
+    const response = await fetch('http://localhost:8080/products');
+    if (!response.ok) {
+      throw new Error('Errore nel caricamento dei prodotti');
+    }
+    const data = await response.json();
+    setProducts(data);
+    setFilteredProducts(data);
+
+    // Estrai le categorie uniche dai prodotti
+    const uniqueCategories = [...new Set(data.map((product: Product) => product.category))].sort();
+    setCategories(uniqueCategories as string[]);
+    
+    setError(null);
+  } catch (error) {
+    setError('Si è verificato un errore durante il caricamento dei prodotti.');
+    setProducts([]);
+    setFilteredProducts([]);
+    console.error('Errore:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+2. **Backend Controller (ProductController.java):**
+```java
+@GetMapping("")
+public ResponseEntity<List<Product>> products(@RequestParam(required = false) String category) {
+    if (category != null) {
+        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    }
+    return ResponseEntity.ok(productService.getAllProducts());
+}
+```
+
+3. **Service Layer (ProductService.java):**
+```java
+public List<Product> getAllProducts() {
+    return productRepository.findAll();
+}
+
+public List<Product> getProductsByCategory(String category) {
+    return productRepository.findByCategory(category);
+}
+```
+
+4. **Repository Layer (ProductRepository.java):**
+```java
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    List<Product> findByCategory(String category);
+}
+```
+
+### Services Flow
+
+1. **Frontend Request (Fetch Services):**
+```typescript
+// From ServicesPage.tsx
+const fetchServices = async () => {
+  try {
+    setLoading(true);
+    const response = await fetch('http://localhost:8080/services');
+    
+    if (!response.ok) {
+      throw new Error('Errore nel caricamento dei servizi');
+    }
+    
+    const data = await response.json();
+    
+    // Mappiamo i dati del backend al formato richiesto dal frontend
+    const mappedServices = data.map((service: any) => ({
+      id: service.id,
+      category: service.category,
+      title: service.name,
+      price: parseFloat(service.price),
+      description: service.description,
+      imageSrc: service.imageUrl || '/img/hair_styles/default.webp',
+    }));
+    
+    setServices(mappedServices);
+    setFilteredServices(mappedServices);
+    
+    // Estrai le categorie uniche dai servizi
+    const uniqueCategories = [...new Set(mappedServices.map((service: Service) => service.category))].sort();
+    setCategories(uniqueCategories as string[]);
+    
+    setError(null);
+  } catch (err) {
+    console.error('Errore nel caricamento dei servizi:', err);
+    setError('Impossibile caricare i servizi. Riprova più tardi.');
+    setServices([]);
+    setFilteredServices([]);
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+2. **Backend Controller (ServiceController.java):**
+```java
+@GetMapping("")
+public ResponseEntity<List<Service>> services(
+        @RequestParam(required = false) String category) {
+    
+    if (category != null) {
+        return ResponseEntity.ok(HairService.getServicesByCategory(category));
+    }
+    return ResponseEntity.ok(HairService.getAllServices());
+}
+```
+
+3. **Service Layer (HairService.java):**
+```java
+public List<Service> getAllServices() {
+    return serviceRepository.findAll();
+}
+
+public List<Service> getServicesByCategory(String category) {
+    return serviceRepository.findByCategory(category);
+}
+```
+
+4. **Repository Layer (ServiceRepository.java):**
+```java
+@Repository
+public interface ServiceRepository extends JpaRepository<Service, Integer> {
+    List<Service> findByCategory(String category);
+}
+```
 
 ## Setup and Installation
 

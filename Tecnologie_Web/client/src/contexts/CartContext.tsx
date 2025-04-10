@@ -45,7 +45,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         setCartItems(JSON.parse(savedCart));
       }
     } else {
-      // Se l'utente non è autenticato, svuota il carrello
       setCartItems([]);
     }
   }, [isAuthenticated]);
