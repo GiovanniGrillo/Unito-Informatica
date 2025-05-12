@@ -4,144 +4,140 @@ public class Valutatore {
     private Lexer lex;
     private BufferedReader pbr;
     private Token look;
-
-    public Valutatore(Lexer l, BufferedReader br) {
-        lex = l;
+    
+    public Valutatore(Lexer l, BufferedReader br) { 
+        lex = l; 
         pbr = br;
-        move();
+        move(); 
     }
-
-    void move() {
+   
+    void move() { 
         look = lex.lexical_scan(pbr);
         System.out.println("token = " + look);
     }
-
-    void error(String s) {
+    
+    void error(String s) { 
         throw new Error("near line " + lex.line + ": " + s);
     }
-
+    
     void match(int t) {
         if (look.tag == t) {
             if (look.tag != Tag.EOF) move();
-        } else {
-            error("syntax error");
-        }
+        } else error("syntax error");
     }
-
-    public void start() {
-        // <start> ::= <expr> EOF {print(expr.val)}
+    
+    public void start() { 
         int expr_val;
         expr_val = expr();
         match(Tag.EOF);
-        System.out.println("Risultato: " + expr_val);
+        System.out.println(expr_val);
     }
-
-    private int expr() {
-        // <expr> ::= <term> {exprp.i = term.val} <exprp> {expr.val = exprp.val}
+    
+    private int expr() { 
         int term_val, exprp_val;
         term_val = term();
         exprp_val = exprp(term_val);
         return exprp_val;
     }
-
+    
     private int exprp(int exprp_i) {
-        // <exprp> ::= + <term> {exprp1.i = exprp.i + term.val} <exprp1> {exprp.val = exprp1.val}
-        //          | - <term> {exprp1.i = exprp.i - term.val} <exprp1> {exprp.val = exprp1.val}
-        //          | ε {exprp.val = exprp.i}
-        int term_val, exprp_val = 0;
+        int term_val, exprp_val;
         switch (look.tag) {
             case '+':
                 match('+');
                 term_val = term();
                 exprp_val = exprp(exprp_i + term_val);
                 break;
-
+                
             case '-':
                 match('-');
                 term_val = term();
                 exprp_val = exprp(exprp_i - term_val);
                 break;
-
+                
             case ')':
             case Tag.EOF:
+                // Produzione ε - quando raggiungiamo la fine dell'espressione o una parentesi chiusa
                 exprp_val = exprp_i;
                 break;
-
-            default:
-                error("syntax error in exprp");
+                
+            default: 
+                exprp_val = exprp_i; // Default value to avoid compiler error
+                error("Errore in exprp: token inatteso " + look);
         }
         return exprp_val;
     }
-
-    private int term() {
-        // <term> ::= <fact> {termp.i = fact.val} <termp> {term.val = termp.val}
+    
+    private int term() { 
         int fact_val, termp_val;
         fact_val = fact();
         termp_val = termp(fact_val);
         return termp_val;
     }
-
-    private int termp(int termp_i) {
-        // <termp> ::= * <fact> {termp1.i = termp.i * fact.val} <termp1> {termp.val = termp1.val}
-        //          | / <fact> {termp1.i = termp.i / fact.val} <termp1> {termp.val = termp1.val}
-        //          | ε {termp.val = termp.i}
-        int fact_val, termp_val = 0;
+    
+    private int termp(int termp_i) { 
+        int fact_val, termp_val;
         switch (look.tag) {
             case '*':
                 match('*');
                 fact_val = fact();
                 termp_val = termp(termp_i * fact_val);
                 break;
-
+                
             case '/':
                 match('/');
                 fact_val = fact();
                 if (fact_val == 0) {
-                    error("division by zero");
+                    error("Divisione per zero");
                 }
                 termp_val = termp(termp_i / fact_val);
                 break;
-
+                
             case '+':
             case '-':
             case ')':
             case Tag.EOF:
+                // Produzione ε - quando raggiungiamo un operatore di addizione o fine espressione
                 termp_val = termp_i;
                 break;
-
-            default:
-                error("syntax error in termp");
+                
+            default: 
+                termp_val = termp_i; // Default value to avoid compiler error
+                error("Errore in termp: token inatteso " + look);
         }
         return termp_val;
     }
-
-    private int fact() {
-        // <fact> ::= (<expr>) {fact.val = expr.val} | NUM {fact.val = NUM.value}
-        int fact_val = 0;
-        switch (look.tag) {
+    
+    private int fact() { 
+        int fact_val;
+        switch(look.tag) {
+            case Tag.NUM:
+                // Assumiamo che NumberTok abbia un campo 'num' per il valore numerico
+                if (look instanceof NumberTok) {
+                    fact_val = ((NumberTok) look).num;
+                } else {
+                    error("Token numerico non valido");
+                    fact_val = 0; // Default value to avoid compiler error
+                }
+                match(Tag.NUM);
+                break;
+                
             case '(':
                 match('(');
                 fact_val = expr();
                 match(')');
                 break;
-
-            case Tag.NUM:
-                // Ottieni il valore dal token numerico
-                if (look instanceof NumberTok) {
-                    fact_val = ((NumberTok)look).num;
-                }
-                match(Tag.NUM);
-                break;
-
-            default:
-                error("syntax error in fact");
+                
+            default: 
+                fact_val = 0; // Default value to avoid compiler error
+                error("Errore in fact: atteso NUM o '(', trovato " + look);
         }
         return fact_val;
     }
-
+    
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt";
+        String path = "file.txt"; // il percorso del file da leggere
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Valutatore valutatore = new Valutatore(lex, br);

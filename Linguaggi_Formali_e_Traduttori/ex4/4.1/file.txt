@@ -1,16 +1,1 @@
-// Esempio di utilizzo del ciclo FOR e altre istruzioni
-begin
-  read(x); // Legge un valore per x
-  print(x); // Stampa il valore di x
-
-  for (i := 0; i < x) do
-    print(i);
-  end
-
-  assign 10 to y;
-  if (y > 5) then
-    print(y);
-  else
-    print(0);
-  end;
-end
+(9-3)/3+4*10/9*100 /* es */
