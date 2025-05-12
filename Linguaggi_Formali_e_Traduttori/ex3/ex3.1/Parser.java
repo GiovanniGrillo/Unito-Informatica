@@ -17,128 +17,111 @@ public class Parser {
     }
 
     void error(String s) {
-	     throw new Error("near line " + lex.line + ": " + s);
+        throw new Error("near line " + lex.line + ": " + s);
     }
 
     void match(int t) {
-    	if (look.tag == t) {
-    	    if (look.tag != Tag.EOF) move();
-    	} else
-          error("syntax error");
+        if (look.tag == t) {
+            if (look.tag != Tag.EOF) move();
+        } else {
+            error("syntax error");
+        }
     }
 
     public void start() {
-      //start -> expr EOF     guida {(, num}
-      if(look==Token.lpt||look.tag==Tag.NUM){
-  	     expr();
-  	     match(Tag.EOF);
-      }else{
-        error("Error in start");
-      }
+        // <start> ::= <expr> EOF
+        expr();
+        match(Tag.EOF);
     }
 
     private void expr() {
-      //expr -> term exprp   guida {(,num}
-      if (look == Token.lpt || look.tag == Tag.NUM){
+        // <expr> ::= <term> <exprp>
         term();
         exprp();
-      }else{
-        error("Error in Expr");
-      }
     }
 
     private void exprp() {
-      //exprp -> + term exprp     guida {+}
-      //exprp -> - term exprp     guida {-}
-      //exprp -> epsilon          guida {EOF,)}
-      switch (look.tag) {
-        case '+':
-          match(Token.plus.tag);
-          term();
-          exprp();
-          break;
+        switch (look.tag) {
+            case '+':
+                // <exprp> ::= + <term> <exprp>
+                match('+');
+                term();
+                exprp();
+                break;
 
-        case '-':
-          match(Token.minus.tag);
-          term();
-          exprp();
-          break;
+            case '-':
+                // <exprp> ::= - <term> <exprp>
+                match('-');
+                term();
+                exprp();
+                break;
 
-        case Tag.EOF:
-          break;
+            case ')':  // Follow set di exprp include ')'
+            case Tag.EOF:  // Follow set di exprp include EOF
+                // <exprp> ::= ε
+                break;
 
-        case ')':
-          break;
-
-        default:
-          error("Error in Exprp");
-	     }
+            default:
+                error("Error in exprp");
+        }
     }
 
     private void term() {
-      //term -> fact termp    guida {(, num}
-      if (look == Token.lpt || look.tag == Tag.NUM){
+        // <term> ::= <fact> <termp>
         fact();
         termp();
-      }else{
-        error("Error in Term");
-      }
     }
 
     private void termp() {
-      //termp -> * fact termp      guida {*}
-      //termp -> - fact termp      guida {/}
-      //termp -> epsilon           guida {+,-,EOF,)}
-      switch (look.tag){
-        case '*':
-          match(Token.mult.tag);
-          fact();
-          termp();
-          break;
+        switch (look.tag) {
+            case '*':
+                // <termp> ::= * <fact> <termp>
+                match('*');
+                fact();
+                termp();
+                break;
 
-        case '/':
-          match(Token.div.tag);
-          fact();
-          termp();
-          break;
+            case '/':
+                // <termp> ::= / <fact> <termp>
+                match('/');
+                fact();
+                termp();
+                break;
 
-        case '+':
+            case '+':  // Follow set di termp include '+' e '-'
+            case '-':
+            case ')':  // Follow set di termp include ')'
+            case Tag.EOF:  // Follow set di termp include EOF
+                // <termp> ::= ε
+                break;
 
-        case '-':
-
-        case ')':
-
-        case Tag.EOF:
-
-        break;
-
-        default:
-          error("Error in Termp");
-      }
+            default:
+                error("Error in termp");
+        }
     }
 
     private void fact() {
-      //fact -> ( <expr> ) guida {(}
-      //fact -> num    giuda {num}
-      switch (look.tag) {
-        case '(':
-          match(Token.lpt.tag);
-          expr();
-          match(Token.rpt.tag);
-          break;
+        switch (look.tag) {
+            case '(':
+                // <fact> ::= ( <expr> )
+                match('(');
+                expr();
+                match(')');
+                break;
 
-        case Tag.NUM:
-            match(Tag.NUM);
-            break;
+            case Tag.NUM:
+                // <fact> ::= NUM
+                match(Tag.NUM);
+                break;
 
-        default:
-            error ("error in Fact");
-      }
+            default:
+                error("Error in fact");
+        }
     }
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt" ; // il percorso del file da leggere
+        String path = "file.txt"; // il percorso del file da leggere
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Parser parser = new Parser(lex, br);
@@ -147,6 +130,6 @@ public class Parser {
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
-          }
+        }
     }
 }

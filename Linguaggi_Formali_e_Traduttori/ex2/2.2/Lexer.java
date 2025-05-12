@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Lexer2_2 {
+public class Lexer {
     public static int line = 1;
     private char peek = ' ';
 
