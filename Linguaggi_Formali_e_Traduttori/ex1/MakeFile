@@ -1,0 +1,50 @@
+
+# Lista dei file sorgente
+SOURCES = ex1_1.java \
+          ex1_2.java \
+          ex1_3.java \
+          ex1_4.java \
+          ex1_5.java \
+          ex1_6.java
+
+# Lista dei file class generati
+CLASSES = $(SOURCES:.java=.class)
+
+# Target predefinito
+all: $(CLASSES)
+
+# Regola per compilare i file Java
+%.class: %.java
+	javac $(JFLAGS) $
+
+# Target per pulire i file generati
+clean:
+	rm -f *.class
+
+# Target per eseguire ogni esercizio
+run1_1: ex1_1.class
+	java ex1_1
+
+run1_2: ex1_2.class
+	java ex1_2
+
+run1_3: ex1_3.class
+	java ex1_3
+
+run1_4: ex1_4.class
+	java ex1_4
+
+run1_5: ex1_5.class
+	java ex1_5
+
+run1_6: ex1_6.class
+	java ex1_6
+
+# Target per eseguire tutti gli esercizi
+runall: run1_1 run1_2 run1_3 run1_4 run1_5 run1_6
+
+# Target per compilare e poi eseguire tutti gli esercizi
+test: all runall
+
+# Indica che 'all' e 'clean' non sono file
+.PHONY: all clean runall test run1_1 run1_2 run1_3 run1_4 run1_5 run1_6
