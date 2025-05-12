@@ -1,0 +1,5 @@
+assign _var to x;
+_multiple_underscore := 100;
+assign __leading to value;
+assign normal_id to _trailing_;
+assign ___ to error;

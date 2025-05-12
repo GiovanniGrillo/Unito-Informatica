@@ -1,0 +1,8 @@
+/* commento iniziale */
+assign x to 10; // commento fine riga
+/* commento
+   multilinea */
+assign y to x;
+/* commento1 *//* commento2 */
+x*/y;
+/* commento non chiuso
