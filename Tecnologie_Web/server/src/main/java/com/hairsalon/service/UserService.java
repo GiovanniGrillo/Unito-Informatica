@@ -51,7 +51,6 @@ public class UserService {
 
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            // In produzione, confrontare password criptate
             if (user.getPassword().equals(password)) {
                 // Autenticazione riuscita
                 return Optional.of(user);

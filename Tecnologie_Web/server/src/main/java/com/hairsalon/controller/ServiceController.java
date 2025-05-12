@@ -39,6 +39,4 @@ public class ServiceController {
     public ResponseEntity<Service> createService(@RequestBody Service service) {
         return ResponseEntity.ok(HairService.saveService(service));
     }
-
-    // I metodi PUT e DELETE sono stati rimossi come richiesto
 }

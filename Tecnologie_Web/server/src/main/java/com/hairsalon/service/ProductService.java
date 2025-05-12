@@ -18,7 +18,6 @@ public class ProductService {
     
     @PostConstruct
     public void init() {
-        // Inizializzazione dati prodotti
         Product product1 = new Product();
         product1.setName("Shampoo Idratante");
         product1.setDescription("Shampoo delicato per uso quotidiano con estratti naturali");

@@ -22,7 +22,7 @@ public class HairService {
         Service service1 = new Service();
         service1.setName("Taglio Donna");
         service1.setDescription("Taglio e piega per donna, personalizzato in base alla forma del viso");
-        service1.setPrice(35.0f);
+        service1.setPrice(35.0);
         service1.setDurationMinutes(45);
         service1.setCategory("Taglio");
         service1.setImageUrl("/img/hair_styles/woman_cut.webp");
@@ -96,10 +96,6 @@ public class HairService {
         return serviceRepository.findByCategory(category);
     }
     
-    // Il metodo getServicesByExpertiseLevel è stato rimosso come richiesto
-    
-    // I metodi per la gestione della relazione tra servizi e prodotti sono stati rimossi
-    // poiché ora la tabella servizi è indipendente dalla tabella prodotti
     
     public Service saveService(Service service) {
         return serviceRepository.save(service);
