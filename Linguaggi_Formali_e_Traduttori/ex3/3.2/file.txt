@@ -1,5 +1,4 @@
-(do
-		(read y)
-		(read z)
-
-)
+{
+    read(y);
+    read(z)
+}
