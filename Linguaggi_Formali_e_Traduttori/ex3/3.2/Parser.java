@@ -17,354 +17,279 @@ public class Parser {
     }
 
     void error(String s) {
-	     throw new Error("near line " + lex.line + ": " + s);
+        throw new Error("near line " + lex.line + ": " + s);
     }
 
     void match(int t) {
-    	if (look.tag == t) {
-    	    if (look.tag != Tag.EOF) move();
-    	} else
-          error("syntax error");
+        if (look.tag == t) {
+            if (look.tag != Tag.EOF) move();
+        } else {
+            error("syntax error");
+        }
     }
 
     public void prog() {
-      //prog -> statlist EOF     guida {assign,print,read,while,if,{ }
-      switch (look.tag){
-        case Tag.ASSIGN:
-  	       statlist();
-  	       match(Tag.EOF);
-           break;
-
-        case Tag.PRINT:
-          statlist();
-          match(Tag.EOF);
-          break;
-
-        case Tag.READ:
-          statlist();
-          match(Tag.EOF);
-          break;
-
-        case Tag.FOR:
-          statlist();
-          match(Tag.EOF);
-          break;
-
-        case Tag.IF:
-          statlist();
-          match(Tag.EOF);
-          break;
-
-        case '{':
-          statlist();
-          match(Tag.EOF);
-          break;
-
-      default:
-        error("Error in prog");
-      }
+        // <prog> ::= <statlist> EOF
+        statlist();
+        match(Tag.EOF);
     }
 
     private void statlist() {
-      //statlist -> stat statlistp   guida {assign,print,read,while,if,{ }
-      switch (look.tag) {
-        case Tag.ASSIGN :
-          stat();
-          statlistp();
-          break;
-
-        case Tag.PRINT :
-          stat();
-          statlistp();
-          break;
-
-        case Tag.READ :
-          stat();
-          statlistp();
-          break;
-
-        case Tag.FOR:
-          stat();
-          statlistp();
-          break;
-
-        case Tag.IF :
-          stat();
-          statlistp();
-          break;
-
-        case '{' :
-          stat();
-          statlistp();
-          break;
-
-        default:
-          error("Error in statlist");
-	     }
+        // <statlist> ::= <stat> <statlistp>
+        stat();
+        statlistp();
     }
 
     private void statlistp() {
-      //statlistp -> ; stat statlistp   guida {;}
-      //statlistp -> epsilon            guida {eof, } }
-      switch (look.tag){
-        case ';':
-          match(Token.semicolon.tag);
-          stat();
-          statlistp();
-          break;
+        // <statlistp> ::= ; <stat> <statlistp> | ε
+        switch (look.tag) {
+            case ';':
+                match(';');
+                stat();
+                statlistp();
+                break;
 
-        case Tag.EOF:
-          break;
+            case Tag.EOF:
+            case '}':
+                // ε - produzione vuota
+                break;
 
-        case '}':
-          break;
-
-        default:
-          error("Error in statlistp");
-       }
+            default:
+                error("Error in statlistp");
+        }
     }
 
     private void stat() {
-      //stat -> assign expr to idlist     guida {assign}
-      //stat -> print (exprlist)     guida {print}
-      //stat -> read (idlist)       guida {read}
-      //stat -> assign ID := expr to expr do stat end guida {assign} - Updated for FOR
-      //stat -> print (exprlist)     guida {print}
-      //stat -> read (idlist)       guida {read}
-      //stat -> for ID assign expr to expr do stat end guida {for}
-      //stat -> if (bexpr) stat [else stat] end  guida{if}
-      //stat -> {statlist} guida {}}
-      switch (look.tag) {
-        case Tag.ASSIGN:
-          match(Tag.ASSIGN);
-          expr();
-          match(Tag.TO);
-          idlist();
-          break;
+        // <stat> ::= assign <assignlist>
+        //         | print (<exprlist>)
+        //         | read (<idlist>)
+        //         | for ( <forstat>
+        //         | if ( <bexpr> ) <stat> <ifp>
+        //         | { <statlist> }
+        switch (look.tag) {
+            case Tag.ASSIGN:
+                match(Tag.ASSIGN);
+                assignlist();
+                break;
 
-        case Tag.PRINT:
-          match(Tag.PRINT);
-          match ('(');
-          exprlist();
-          match (')');
-          break;
+            case Tag.PRINT:
+                match(Tag.PRINT);
+                match('(');
+                exprlist();
+                match(')');
+                break;
 
-        case Tag.READ:
-          match(Tag.READ);
-          match ('(');
-          idlist();
-          match (')');
-          break;
+            case Tag.READ:
+                match(Tag.READ);
+                match('(');
+                idlist();
+                match(')');
+                break;
 
-        case Tag.FOR:
-          match(Tag.FOR);
-          match('(');
-          match(Tag.ID);
-          match(Tag.INIT); // := 
-          expr(); // Valore iniziale
-          match(';');
-          bexpr(); // Condizione
-          match(')');
-          match(Tag.DO);
-          stat();
-          // NESSUN match(Tag.END) qui, gestito da statp o non necessario per FOR
-          break;
+            case Tag.FOR:
+                match(Tag.FOR);
+                match('(');
+                forstat();
+                break;
 
-        case Tag.IF:
-          match(Tag.IF);
-          match ('(');
-          bexpr();
-          match (')');
-          stat();
-          statp();
-          break;
+            case Tag.IF:
+                match(Tag.IF);
+                match('(');
+                bexpr();
+                match(')');
+                stat();
+                ifp();
+                break;
 
-        case '{':
-          match ('{');
-          statlist();
-          match ('}');
-          break;
+            case '{':
+                match('{');
+                statlist();
+                match('}');
+                break;
 
-        default:
-          error("Error in stat");
-	     }
+            default:
+                error("Error in stat");
+        }
     }
 
-    private void statp() { // Gestisce la parte opzionale 'else stat end' o solo 'end' per l'IF
-      //statp -> else stat end     guida {else}
-      //statp -> end               guida {end}
-      switch (look.tag) {
-        case Tag.ELSE:
-          match(Tag.ELSE);
-          stat();
-          match(Tag.END);
-          break;
+    private void forstat() {
+        // <forstat> ::= ID := <expr> ; <bexpr> ) do <stat>
+        //             | <bexpr> ) do <stat>
+        if (look.tag == Tag.ID) {
+            match(Tag.ID);
+            match(Tag.INIT); // :=
+            expr();
+            match(';');
+            bexpr();
+            match(')');
+            match(Tag.DO);
+            stat();
+        } else {
+            bexpr();
+            match(')');
+            match(Tag.DO);
+            stat();
+        }
+    }
 
-        case Tag.END:
-          match(Tag.END);
-          break;
+    private void ifp() {
+        // <ifp> ::= else <stat> end | end
+        switch (look.tag) {
+            case Tag.ELSE:
+                match(Tag.ELSE);
+                stat();
+                match(Tag.END);
+                break;
 
-        default:
-          error("Error in statp");
-	     }
+            case Tag.END:
+                match(Tag.END);
+                break;
+
+            default:
+                error("Error in ifp");
+        }
+    }
+
+    private void assignlist() {
+        // <assignlist> ::= [ <expr> to <idlist> ] <assignlistp>
+        match('[');
+        expr();
+        match(Tag.TO);
+        idlist();
+        match(']');
+        assignlistp();
+    }
+
+    private void assignlistp() {
+        // <assignlistp> ::= [ <expr> to <idlist> ] <assignlistp> | ε
+        if (look.tag == '[') {
+            match('[');
+            expr();
+            match(Tag.TO);
+            idlist();
+            match(']');
+            assignlistp();
+        }
+        // else ε - produzione vuota
     }
 
     private void idlist() {
-      //idlist -> ID idlistp   guida {ID}
-      if (look.tag == Tag.ID){
-        match(Tag.ID);
-        idlistp();
-      }else{
-        error("Error in idlist");
-      }
+        // <idlist> ::= ID <idlistp>
+        if (look.tag == Tag.ID) {
+            match(Tag.ID);
+            idlistp();
+        } else {
+            error("Error in idlist");
+        }
     }
 
     private void idlistp() {
-      //idlist -> , ID idlistp   guida {,}
-      //idlistp -> epsilon      guida {) ; eof, end, else, } }
-      switch (look.tag){
-        case ',':
-          match(Token.comma.tag);
-          match(Tag.ID);
-          idlistp();
-          break;
+        // <idlistp> ::= , ID <idlistp> | ε
+        switch (look.tag) {
+            case ',':
+                match(',');
+                match(Tag.ID);
+                idlistp();
+                break;
 
-        case ')' :
-          break;
+            case ')':
+            case ';':
+            case Tag.EOF:
+            case ']':  // Aggiunto per gestire la fine di assignlist
+            case '}':
+                // ε - produzione vuota
+                break;
 
-        case ';':
-          break;
-
-        case Tag.EOF:
-          break;
-
-
-
-        case '}':
-          break;
-
-        default:
-          error("Error in idlistp");
-	     }
+            default:
+                error("Error in idlistp");
+        }
     }
 
     private void bexpr() {
-      //idlist -> relop expr expr  guida {RELOP}
-      if (look.tag == Tag.RELOP){
-        match(Tag.RELOP);
-        expr();
-        expr();
-      }else{
-        error("Error in bexpr");
-      }
+        // <bexpr> ::= RELOP <expr> <expr>
+        if (look.tag == Tag.RELOP) {
+            match(Tag.RELOP);
+            expr();
+            expr();
+        } else {
+            error("Error in bexpr");
+        }
     }
 
     private void expr() {
-      //expr -> + (exprlist)      guida {+}
-      //expr -> - expr expr       guida {-}
-      //expr -> * (exprlist)      guida {*}
-      //expr -> / expr expr       guida {/}
-      //expr -> NUM               guida {NUM}
-      //expr -> ID                guida {ID}
-      switch (look.tag){
-        case '+':
-          match(Token.plus.tag);
-          match ('(');
-          exprlist();
-          match (')');
-          break;
+        // <expr> ::= + ( <exprlist> )
+        //          | - <expr> <expr>
+        //          | * ( <exprlist> )
+        //          | / <expr> <expr>
+        //          | NUM
+        //          | ID
+        switch (look.tag) {
+            case '+':
+                match('+');
+                match('(');
+                exprlist();
+                match(')');
+                break;
 
-        case '-':
-          match(Token.minus.tag);
-          expr();
-          expr();
-          break;
+            case '-':
+                match('-');
+                expr();
+                expr();
+                break;
 
-        case '*':
-          match(Token.mult.tag);
-          match ('(');
-          exprlist();
-          match (')');
-          break;
+            case '*':
+                match('*');
+                match('(');
+                exprlist();
+                match(')');
+                break;
 
-        case '/':
-          match(Token.div.tag);
-          expr();
-          expr();
-          break;
+            case '/':
+                match('/');
+                expr();
+                expr();
+                break;
 
-        case Tag.NUM:
-          match(Tag.NUM);
-          break;
+            case Tag.NUM:
+                match(Tag.NUM);
+                break;
 
-        case Tag.ID:
-          match(Tag.ID);
-          break;
+            case Tag.ID:
+                match(Tag.ID);
+                break;
 
-        default:
-          error("Error in expr");
-      }
+            default:
+                error("Error in expr");
+        }
     }
 
     private void exprlist() {
-      //exprlist -> expr exprlistp  guida {+,-,*,/,num,id}
-      switch (look.tag){
-        case '+' :
-          expr();
-          exprlistp();
-          break;
-
-        case '-' :
-          expr();
-          exprlistp();
-          break;
-
-        case '*' :
-          expr();
-          exprlistp();
-          break;
-
-        case '/' :
-          expr();
-          exprlistp();
-          break;
-
-        case Tag.NUM:
-          expr();
-          exprlistp();
-          break;
-
-        case Tag.ID :
-          expr();
-          exprlistp();
-          break;
-
-        default:
-          error("Error in expr");
-      }
+        // <exprlist> ::= <expr> <exprlistp>
+        expr();
+        exprlistp();
     }
 
     private void exprlistp() {
-      //exprlistp -> , expr esprlistp   guida {,}
-      //exprlistp -> epsilon            guida {)}
-      switch (look.tag) {
-        case ',':
-          match(Token.comma.tag);
-          expr();
-          exprlistp();
-          break;
+        // <exprlistp> ::= , <expr> <exprlistp> | ε
+        switch (look.tag) {
+            case ',':
+                match(',');
+                expr();
+                exprlistp();
+                break;
 
-        case ')':
-          break;
+            case ')':
+                // ε - produzione vuota
+                break;
 
-        default:
-            error ("error in exprlisp");
-      }
+            default:
+                error("Error in exprlistp");
+        }
     }
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "factorial.lft"; // il percorso del file da leggere
+        String path = "factorial.lft";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Parser parser = new Parser(lex, br);
@@ -373,6 +298,6 @@ public class Parser {
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
-          }
+        }
     }
 }

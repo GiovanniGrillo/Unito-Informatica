@@ -1,8 +1,6 @@
 read(n);
-assign 2 to i;
-assign 1 to f;
-while (<= i n){
-	assign *(f,i) to f;
-	assign +(i,1) to i
+assign [2 to i] [1 to f];
+for (<= i n) do {
+    assign [*(f,i) to f] [+(i,1) to i]
 };
 print(f)
