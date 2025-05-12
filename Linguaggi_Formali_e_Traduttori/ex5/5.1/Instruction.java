@@ -37,8 +37,9 @@ public class Instruction {
             case if_icmpgt : temp = " if_icmpgt L" + operand + "\n"; break;
             case ifne : temp = " ifne L" + operand + "\n"; break;
             case GOto : temp = " goto L" + operand + "\n" ; break;
+            case dup : temp = " dup" + "\n" ; break;
+            case pop : temp = " pop" + "\n" ; break;
             case label : temp = "L" + operand + ":\n"; break;
-            case dup : temp = "dup" + "\n"; break;
         }
     return temp;
     }
