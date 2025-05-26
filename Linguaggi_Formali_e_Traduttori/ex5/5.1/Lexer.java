@@ -61,7 +61,6 @@ public class Lexer {
                 return Token.mult;
 
             case '/':
-                // ESTENSIONE ESERCIZIO 2.3: Gestione dei commenti
                 readch(br);
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
@@ -76,6 +75,7 @@ public class Lexer {
                                 readch(br);
                             }
                         } else {
+                            if (peek == '\n') line++;
                             readch(br);
                         }
                     }
@@ -85,7 +85,6 @@ public class Lexer {
                         return null;
                     }
                     
-                    // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else if (peek == '/') {
                     // Commento di linea // ...
@@ -93,7 +92,6 @@ public class Lexer {
                         readch(br);
                     } while (peek != '\n' && peek != (char)-1);
                     
-                    // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else {
                     // È un normale operatore di divisione
@@ -173,13 +171,14 @@ public class Lexer {
                 return new Token(Tag.EOF);
 
             default:
-                if (Character.isLetter(peek)) {
-                    // Identificatore che inizia con lettera
+                // CORREZIONE: Gestisce identificatori che iniziano con lettera o underscore
+                if (Character.isLetter(peek) || peek == '_') {
                     String lexeme = "";
                     lexeme += peek;
                     readch(br);
 
-                    while (Character.isLetterOrDigit(peek)) {
+                    // Continua a leggere lettere, cifre o underscore
+                    while (Character.isLetterOrDigit(peek) || peek == '_') {
                         lexeme += peek;
                         readch(br);
                     }
@@ -231,15 +230,17 @@ public class Lexer {
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt";
+        String path = "test.lft";
         
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Token tok;
             do {
                 tok = lex.lexical_scan(br);
-                if (tok == null)
+                if (tok == null) {
+                    System.err.println("Lexical error encountered");
                     break;
+                }
                 System.out.println("Scan: " + tok);
             } while (tok.tag != Tag.EOF);
             br.close();
