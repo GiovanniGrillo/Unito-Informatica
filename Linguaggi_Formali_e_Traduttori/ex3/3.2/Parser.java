@@ -49,8 +49,8 @@ public class Parser {
                 statlistp();
                 break;
 
-            case Tag.EOF:
-            case '}':
+            case Tag.EOF:  // FOLLOW(<statlistp>) include EOF (da <prog>)
+            case '}':      // FOLLOW(<statlistp>) include } (da { <statlist> })
                 // ε - produzione vuota
                 break;
 
@@ -61,8 +61,8 @@ public class Parser {
 
     private void stat() {
         // <stat> ::= assign <assignlist>
-        //         | print (<exprlist>)
-        //         | read (<idlist>)
+        //         | print ( <exprlist> )
+        //         | read ( <idlist> )
         //         | for ( <forstat>
         //         | if ( <bexpr> ) <stat> <ifp>
         //         | { <statlist> }
@@ -124,11 +124,14 @@ public class Parser {
             match(')');
             match(Tag.DO);
             stat();
-        } else {
+        } else if (look.tag == Tag.RELOP) {
+            // La seconda alternativa inizia con RELOP (da <bexpr>)
             bexpr();
             match(')');
             match(Tag.DO);
             stat();
+        } else {
+            error("Error in forstat");
         }
     }
 
@@ -170,7 +173,7 @@ public class Parser {
             match(']');
             assignlistp();
         }
-        // else ε - produzione vuota
+        // else ε - FOLLOW(<assignlistp>) = FOLLOW(<assignlist>) = {;, EOF, }}
     }
 
     private void idlist() {
@@ -179,7 +182,7 @@ public class Parser {
             match(Tag.ID);
             idlistp();
         } else {
-            error("Error in idlist");
+            error("Error in idlist: expected ID");
         }
     }
 
@@ -192,11 +195,8 @@ public class Parser {
                 idlistp();
                 break;
 
-            case ')':
-            case ';':
-            case Tag.EOF:
-            case ']':  // Aggiunto per gestire la fine di assignlist
-            case '}':
+            case ')':  // FOLLOW da read(<idlist>) e print(<exprlist>)
+            case ']':  // FOLLOW da assign [<expr> to <idlist>]
                 // ε - produzione vuota
                 break;
 
@@ -212,7 +212,7 @@ public class Parser {
             expr();
             expr();
         } else {
-            error("Error in bexpr");
+            error("Error in bexpr: expected RELOP");
         }
     }
 
@@ -278,7 +278,7 @@ public class Parser {
                 exprlistp();
                 break;
 
-            case ')':
+            case ')':  // FOLLOW da +(<exprlist>) e *(<exprlist>)
                 // ε - produzione vuota
                 break;
 
@@ -289,7 +289,7 @@ public class Parser {
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "factorial.lft";
+        String path = "file.txt"; // il percorso del file da leggere
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Parser parser = new Parser(lex, br);

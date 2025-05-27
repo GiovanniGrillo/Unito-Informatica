@@ -76,6 +76,7 @@ public class Lexer {
                                 readch(br);
                             }
                         } else {
+                            if (peek == '\n') line++;  // Conta le linee nei commenti
                             readch(br);
                         }
                     }
@@ -174,12 +175,13 @@ public class Lexer {
 
             default:
                 if (Character.isLetter(peek)) {
-                    // Identificatore che inizia con lettera
+                    // ESERCIZIO 2.1 + 2.2: Identificatore che inizia con lettera
                     String lexeme = "";
                     lexeme += peek;
                     readch(br);
 
-                    while (Character.isLetterOrDigit(peek)) {
+                    // Accetta anche underscore all'interno degli identificatori
+                    while (Character.isLetterOrDigit(peek) || peek == '_') {
                         lexeme += peek;
                         readch(br);
                     }
@@ -206,10 +208,48 @@ public class Lexer {
                         case "read":
                             return Word.read;
                         default:
-                            return new Word(Tag.ID, lexeme);
+                            // Verifica se la parola è composta solo da underscore
+                            boolean soloUnderscore = true;
+                            for (int i = 0; i < lexeme.length(); i++) {
+                                if (lexeme.charAt(i) != '_') {
+                                    soloUnderscore = false;
+                                    break;
+                                }
+                            }
+                            
+                            if (soloUnderscore) {
+                                System.err.println("Error: identificatore composto solo da underscore");
+                                return null;
+                            } else {
+                                return new Word(Tag.ID, lexeme);
+                            }
+                    }
+                } else if (peek == '_') {
+                    // ESTENSIONE ESERCIZIO 2.2: Identificatore che inizia con underscore
+                    String lexeme = "";
+                    
+                    // Leggi tutti gli underscore iniziali
+                    do {
+                        lexeme += peek;
+                        readch(br);
+                    } while (peek == '_');
+                    
+                    // Verifica che ci sia almeno una lettera o cifra dopo gli underscore
+                    if (Character.isLetterOrDigit(peek)) {
+                        // Continua a leggere il resto dell'identificatore
+                        do {
+                            lexeme += peek;
+                            readch(br);
+                        } while (Character.isLetterOrDigit(peek) || peek == '_');
+                        
+                        return new Word(Tag.ID, lexeme);
+                    } else {
+                        // Identificatore composto solo da underscore - non valido
+                        System.err.println("Error: identificatore composto solo da underscore");
+                        return null;
                     }
                 } else if (Character.isDigit(peek)) {
-                    // Gestione numeri
+                    // ESERCIZIO 2.1: Gestione numeri
                     if (peek == '0') {
                         readch(br);
                         return new NumberTok(Tag.NUM, 0);

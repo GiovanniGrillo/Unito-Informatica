@@ -60,8 +60,8 @@ public class Lexer {
                 peek = ' ';
                 return Token.mult;
 
+            // MODIFICATO PER ESERCIZIO 2.3
             case '/':
-                // ESTENSIONE ESERCIZIO 2.3: Gestione dei commenti
                 readch(br);
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
@@ -76,6 +76,7 @@ public class Lexer {
                                 readch(br);
                             }
                         } else {
+                            if (peek == '\n') line++;  // IMPORTANTE: conta le linee
                             readch(br);
                         }
                     }
@@ -85,7 +86,7 @@ public class Lexer {
                         return null;
                     }
                     
-                    // Ritorna il prossimo token dopo aver saltato il commento
+                    // Dopo aver consumato il commento, richiama lexical_scan
                     return lexical_scan(br);
                 } else if (peek == '/') {
                     // Commento di linea // ...
@@ -93,7 +94,7 @@ public class Lexer {
                         readch(br);
                     } while (peek != '\n' && peek != (char)-1);
                     
-                    // Ritorna il prossimo token dopo aver saltato il commento
+                    // Richiama lexical_scan per il prossimo token
                     return lexical_scan(br);
                 } else {
                     // È un normale operatore di divisione
@@ -179,7 +180,7 @@ public class Lexer {
                     lexeme += peek;
                     readch(br);
 
-                    while (Character.isLetterOrDigit(peek)) {
+                    while (Character.isLetter(peek) || Character.isDigit(peek) || peek == '_') {
                         lexeme += peek;
                         readch(br);
                     }
@@ -207,6 +208,30 @@ public class Lexer {
                             return Word.read;
                         default:
                             return new Word(Tag.ID, lexeme);
+                    }
+                } else if (peek == '_') {
+                    // Identificatore che inizia con underscore
+                    String lexeme = "";
+                    
+                    // Leggi tutti gli underscore iniziali
+                    do {
+                        lexeme += peek;
+                        readch(br);
+                    } while (peek == '_');
+                    
+                    // Verifica che ci sia almeno una lettera o cifra dopo gli underscore
+                    if (Character.isLetterOrDigit(peek)) {
+                        // Continua a leggere il resto dell'identificatore
+                        do {
+                            lexeme += peek;
+                            readch(br);
+                        } while (Character.isLetterOrDigit(peek) || peek == '_');
+                        
+                        return new Word(Tag.ID, lexeme);
+                    } else {
+                        // Identificatore composto solo da underscore - non valido
+                        System.err.println("Error: identificatore composto solo da underscore");
+                        return null;
                     }
                 } else if (Character.isDigit(peek)) {
                     // Gestione numeri
