@@ -1,17 +1,21 @@
-# Makefile per l'esercizio 3.1
+all: parser
 
-# Compilazione
-all: Lexer.class
+parser: Parser.class
 
-Lexer.class: Lexer.java
-	javac Lexer.java
+%.class: %.java
+	javac $<
 
-# Esecuzione
-run: Lexer.class
-	java Lexer
+Parser.class: Parser.java Lexer.class Tag.class Token.class Word.class NumberTok.class
 
-# Pulizia
+Lexer.class: Lexer.java Tag.class Token.class Word.class NumberTok.class
+
+run: Parser.class
+	java Parser
+
+test: Parser.class
+	java Parser
+
 clean:
 	rm -f *.class
 
-.PHONY: all run clean
+.PHONY: all parser run test clean
