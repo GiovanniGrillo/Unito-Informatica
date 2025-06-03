@@ -1,23 +1,16 @@
-# Makefile for ex4/4.1
+all: valutatore
 
-# Compiler and flags
-JAVAC = javac
-JAVA = java
-RM = rm -f
+valutatore: Valutatore.class
 
-# Source files
-SOURCES = Lexer.java NumberTok.java Parser.java Tag.java Token.java Valutatore.java Word.java
-
-# Class files
-CLASSES = $(SOURCES:.java=.class)
-
-# Default target
-all: $(CLASSES)
-
-# Rule to compile .java files to .class files
 %.class: %.java
-	$(JAVAC) $<
+	javac $<
 
-# Clean target
+Valutatore.class: Valutatore.java Lexer.class Tag.class Token.class Word.class NumberTok.class Parser.class
+
+run: Valutatore.class
+	java Valutatore
+
 clean:
-	$(RM) $(CLASSES)
+	rm -f *.class
+
+.PHONY: all valutatore run clean

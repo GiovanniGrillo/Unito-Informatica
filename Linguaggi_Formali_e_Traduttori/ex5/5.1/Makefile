@@ -1,23 +1,16 @@
-# Makefile for ex5/5.1
+all: translator
 
-# Compiler and flags
-JAVAC = javac
-JAVA = java
-RM = rm -f
+translator: Translator.class
 
-# Source files
-SOURCES = CodeGenerator.java Instruction.java Lexer.java NumberTok.java OpCode.java Parser.java SymbolTable.java Tag.java Token.java Translator.java Word.java
-
-# Class files
-CLASSES = $(SOURCES:.java=.class)
-
-# Default target
-all: $(CLASSES)
-
-# Rule to compile .java files to .class files
 %.class: %.java
-	$(JAVAC) $<
+	javac $<
 
-# Clean target
+Translator.class: Translator.java Lexer.class Tag.class Token.class Word.class NumberTok.class Parser.class SymbolTable.class CodeGenerator.class Instruction.class OpCode.class
+
+run: Translator.class
+	java Translator
+
 clean:
-	$(RM) $(CLASSES)
+	rm -f *.class Output.j
+
+.PHONY: all translator run clean
