@@ -1,4 +1,4 @@
-public class Esercizio1_4 {
+public class ex1_4 {
     public static boolean scan(String s) {
         int state = 0;
         int i = 0;
