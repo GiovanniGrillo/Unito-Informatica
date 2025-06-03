@@ -2,14 +2,11 @@ all: lexer
 
 lexer: Lexer.class
 
-# Compilazione dei file .class a partire dai .java
 %.class: %.java
 	javac $<
 
-# Dipendenze esplicite
 Lexer.class: Lexer.java Tag.class Token.class Word.class
 
-# Esecuzione del lexer
 run: Lexer.class
 	java Lexer
 
