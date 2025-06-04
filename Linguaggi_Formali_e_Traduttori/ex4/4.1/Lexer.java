@@ -61,7 +61,7 @@ public class Lexer {
                 return Token.mult;
 
             case '/':
-                // ESTENSIONE ESERCIZIO 2.3: Gestione dei commenti
+                //Gestione dei commenti
                 readch(br);
                 if (peek == '*') {
                     // Commento multi-riga /* ... */

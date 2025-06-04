@@ -195,7 +195,7 @@ public class Parser {
             case ')':
             case ';':
             case Tag.EOF:
-            case ']':  // Aggiunto per gestire la fine di assignlist
+            case ']':
             case '}':
                 // ε - produzione vuota
                 break;

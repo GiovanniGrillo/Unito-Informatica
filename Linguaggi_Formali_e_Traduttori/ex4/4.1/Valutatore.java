@@ -62,7 +62,7 @@ public class Valutatore {
                 break;
                 
             default: 
-                exprp_val = exprp_i; // Default value to avoid compiler error
+                exprp_val = exprp_i;
                 error("Errore in exprp: token inatteso " + look);
         }
         return exprp_val;
@@ -97,12 +97,11 @@ public class Valutatore {
             case '-':
             case ')':
             case Tag.EOF:
-                // Produzione ε - quando raggiungiamo un operatore di addizione o fine espressione
                 termp_val = termp_i;
                 break;
                 
             default: 
-                termp_val = termp_i; // Default value to avoid compiler error
+                termp_val = termp_i;
                 error("Errore in termp: token inatteso " + look);
         }
         return termp_val;
@@ -117,7 +116,7 @@ public class Valutatore {
                     fact_val = ((NumberTok) look).num;
                 } else {
                     error("Token numerico non valido");
-                    fact_val = 0; // Default value to avoid compiler error
+                    fact_val = 0;
                 }
                 match(Tag.NUM);
                 break;
@@ -129,7 +128,7 @@ public class Valutatore {
                 break;
                 
             default: 
-                fact_val = 0; // Default value to avoid compiler error
+                fact_val = 0;
                 error("Errore in fact: atteso NUM o '(', trovato " + look);
         }
         return fact_val;

@@ -171,7 +171,7 @@ public class Lexer {
                 return new Token(Tag.EOF);
 
             default:
-                // CORREZIONE: Gestisce identificatori che iniziano con lettera o underscore
+                //Gestisce identificatori che iniziano con lettera o underscore
                 if (Character.isLetter(peek) || peek == '_') {
                     String lexeme = "";
                     lexeme += peek;
