@@ -84,7 +84,7 @@ public class Instruction {
                 temp = "L" + operand + ":\n";
                 break;
             default:
-                throw new IllegalArgumentException("Unknown opcode: " + opCode);
+                throw new IllegalArgumentException("Opcode sconosciuto: " + opCode);
         }
         return temp;
     }

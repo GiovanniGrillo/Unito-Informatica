@@ -112,7 +112,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.and;
                 } else {
-                    System.err.println("Erroneous character after & : " + peek);
+                    System.err.println("Carattere errato dopo & : " + peek);
                     return null;
                 }
 
@@ -122,7 +122,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.or;
                 } else {
-                    System.err.println("Erroneous character after | : " + peek);
+                    System.err.println("Carattere errato dopo | : " + peek);
                     return null;
                 }
 
@@ -153,7 +153,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.eq;
                 } else {
-                    System.err.println("Erroneous character after = : " + peek);
+                    System.err.println("Carattere errato dopo = : " + peek);
                     return null;
                 }
 
@@ -163,7 +163,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.init;
                 } else {
-                    System.err.println("Erroneous character after : : " + peek);
+                    System.err.println("Carattere errato dopo : : " + peek);
                     return null;
                 }
 
@@ -222,7 +222,7 @@ public class Lexer {
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
-                    System.err.println("Erroneous character: " + peek);
+                    System.err.println("Carattere errato: " + peek);
                     return null;
                 }
         }
@@ -238,10 +238,10 @@ public class Lexer {
             do {
                 tok = lex.lexical_scan(br);
                 if (tok == null) {
-                    System.err.println("Lexical error encountered");
+                    System.err.println("Errore lessicale rilevato");
                     break;
                 }
-                System.out.println("Scan: " + tok);
+                System.out.println("Scansione: " + tok);
             } while (tok.tag != Tag.EOF);
             br.close();
         } catch (IOException e) {

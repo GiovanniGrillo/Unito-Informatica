@@ -20,20 +20,20 @@ public class Translator {
     void move() {
         look = lex.lexical_scan(pbr);
         if (look == null) {
-            error("Lexical error: invalid token");
+            error("Errore lessicale: token non valido");
         }
         System.out.println("token = " + look);
     }
 
     void error(String s) {
-        throw new Error("Near line " + lex.line + ": " + s);
+        throw new Error("Vicino alla linea " + lex.line + ": " + s);
     }
 
     void match(int t) {
         if (look.tag == t) {
             if (look.tag != Tag.EOF) move();
         } else {
-            error("syntax error");
+            error("errore di sintassi");
         }
     }
 
@@ -43,7 +43,7 @@ public class Translator {
         try {
             code.toJasmin();
         } catch (java.io.IOException e) {
-            System.out.println("IO error\n");
+            System.out.println("Errore IO\n");
         }
     }
 
@@ -63,7 +63,7 @@ public class Translator {
             case '}':
                 break;
             default:
-                error("Error in statlistp");
+                error("Errore in statlistp");
         }
     }
 
@@ -169,7 +169,7 @@ public class Translator {
                         match(Tag.END);
                         break;
                     default:
-                        error("Error in if statement");
+                        error("Errore nell'istruzione if");
                 }
                 code.emitLabel(lnext_end);
                 break;
@@ -181,7 +181,7 @@ public class Translator {
                 break;
 
             default:
-                error("Error in stat");
+                error("Errore in stat");
         }
     }
 
@@ -240,7 +240,7 @@ public class Translator {
             match(Tag.ID);
             idlistp(ids);
         } else {
-            error("Expected identifier in idlist");
+            error("Identificatore atteso in idlist");
         }
         return ids;
     }
@@ -253,7 +253,7 @@ public class Translator {
                 match(Tag.ID);
                 idlistp(ids);
             } else {
-                error("Expected identifier after comma");
+                error("Identificatore atteso dopo la virgola");
             }
         }
         // else ε - produzione vuota
@@ -261,7 +261,7 @@ public class Translator {
 
     private void bexpr(int lnext, boolean jump_if_true) {
         if (look.tag != Tag.RELOP) {
-            error("Expected relational operator");
+            error("Operatore relazionale atteso");
         }
         
         Token relop = look;
@@ -279,7 +279,7 @@ public class Translator {
                 case "<=": code.emit(OpCode.if_icmple, lnext); break;
                 case ">":  code.emit(OpCode.if_icmpgt, lnext); break;
                 case ">=": code.emit(OpCode.if_icmpge, lnext); break;
-                default: error("Unknown relational operator: " + op);
+                default: error("Operatore relazionale sconosciuto: " + op);
             }
         } else {
             // Salta a lnext se la condizione è falsa (negata)
@@ -290,7 +290,7 @@ public class Translator {
                 case "<=": code.emit(OpCode.if_icmpgt, lnext); break;
                 case ">":  code.emit(OpCode.if_icmple, lnext); break;
                 case ">=": code.emit(OpCode.if_icmplt, lnext); break;
-                default: error("Unknown relational operator: " + op);
+                default: error("Operatore relazionale sconosciuto: " + op);
             }
         }
     }
@@ -341,14 +341,14 @@ public class Translator {
             case Tag.ID:
                 int read_id_addr = st.lookupAddress(((Word)look).lexeme);
                 if (read_id_addr == -1) {
-                    error("Variable '" + ((Word)look).lexeme + "' not declared");
+                    error("Variabile '" + ((Word)look).lexeme + "' non dichiarata");
                 }
                 code.emit(OpCode.iload, read_id_addr);
                 match(Tag.ID);
                 break;
                 
             default:
-                error("Error in expr");
+                error("Errore in expr");
         }
     }
 
@@ -395,12 +395,12 @@ public class Translator {
             Translator translator = new Translator(lex, br);
             translator.prog();
             br.close();
-            System.out.println("Translation completed successfully.");
-            System.out.println("Output written to Output.j");
+            System.out.println("Traduzione completata con successo.");
+            System.out.println("Output scritto in Output.j");
         } catch (IOException e) {
-            System.err.println("IO error: " + e.getMessage());
+            System.err.println("Errore IO: " + e.getMessage());
         } catch (Error e) {
-            System.err.println("Translation error: " + e.getMessage());
+            System.err.println("Errore di traduzione: " + e.getMessage());
         }
     }
 }

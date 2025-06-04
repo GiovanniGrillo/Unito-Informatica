@@ -17,14 +17,14 @@ public class Parser {
     }
 
     void error(String s) {
-        throw new Error("near line " + lex.line + ": " + s);
+        throw new Error("vicino alla linea " + lex.line + ": " + s);
     }
 
     void match(int t) {
         if (look.tag == t) {
             if (look.tag != Tag.EOF) move();
         } else {
-            error("syntax error");
+            error("errore di sintassi");
         }
     }
 
@@ -55,7 +55,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in statlistp");
+                error("Errore in statlistp");
         }
     }
 
@@ -108,7 +108,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in stat");
+                error("Errore in stat");
         }
     }
 
@@ -146,7 +146,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in ifp");
+                error("Errore in ifp");
         }
     }
 
@@ -179,7 +179,7 @@ public class Parser {
             match(Tag.ID);
             idlistp();
         } else {
-            error("Error in idlist");
+            error("Errore in idlist");
         }
     }
 
@@ -201,7 +201,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in idlistp");
+                error("Errore in idlistp");
         }
     }
 
@@ -212,7 +212,7 @@ public class Parser {
             expr();
             expr();
         } else {
-            error("Error in bexpr");
+            error("Errore in bexpr");
         }
     }
 
@@ -259,7 +259,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in expr");
+                error("Errore in expr");
         }
     }
 
@@ -283,7 +283,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in exprlistp");
+                error("Errore in exprlistp");
         }
     }
 
