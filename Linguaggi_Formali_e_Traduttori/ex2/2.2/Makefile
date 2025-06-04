@@ -3,7 +3,7 @@ all: lexer
 lexer: Lexer.class
 
 %.class: %.java
-	javac $
+	javac $<
 
 Lexer.class: Lexer.java Tag.class Token.class Word.class NumberTok.class
 

@@ -115,7 +115,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.and;
                 } else {
-                    System.err.println("Erroneous character after & : " + peek);
+                    System.err.println("Carattere errato dopo & : " + peek);
                     return null;
                 }
 
@@ -125,7 +125,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.or;
                 } else {
-                    System.err.println("Erroneous character after | : " + peek);
+                    System.err.println("Carattere errato dopo | : " + peek);
                     return null;
                 }
 
@@ -156,7 +156,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.eq;
                 } else {
-                    System.err.println("Erroneous character after = : " + peek);
+                    System.err.println("Carattere errato dopo = : " + peek);
                     return null;
                 }
 
@@ -166,7 +166,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.init;
                 } else {
-                    System.err.println("Erroneous character after : : " + peek);
+                    System.err.println("Carattere errato dopo : : " + peek);
                     return null;
                 }
 
@@ -216,9 +216,9 @@ public class Lexer {
                                     break;
                                 }
                             }
-                            
+
                             if (soloUnderscore) {
-                                System.err.println("Error: identificatore composto solo da underscore");
+                                System.err.println("Errore: identificatore composto solo da underscore");
                                 return null;
                             } else {
                                 return new Word(Tag.ID, lexeme);
@@ -245,7 +245,7 @@ public class Lexer {
                         return new Word(Tag.ID, lexeme);
                     } else {
                         // Identificatore composto solo da underscore - non valido
-                        System.err.println("Error: identificatore composto solo da underscore");
+                        System.err.println("Errore: identificatore composto solo da underscore");
                         return null;
                     }
                 } else if (Character.isDigit(peek)) {
@@ -259,11 +259,11 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
-                    System.err.println("Erroneous character: " + peek);
+                    System.err.println("Carattere errato: " + peek);
                     return null;
                 }
         }
@@ -272,7 +272,7 @@ public class Lexer {
     public static void main(String[] args) {
         Lexer lex = new Lexer();
         String path = "file.txt";
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Token tok;

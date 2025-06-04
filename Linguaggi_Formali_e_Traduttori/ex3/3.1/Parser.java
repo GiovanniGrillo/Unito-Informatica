@@ -17,14 +17,14 @@ public class Parser {
     }
 
     void error(String s) {
-        throw new Error("near line " + lex.line + ": " + s);
+        throw new Error("vicino alla linea " + lex.line + ": " + s);
     }
 
     void match(int t) {
         if (look.tag == t) {
             if (look.tag != Tag.EOF) move();
         } else {
-            error("syntax error");
+            error("errore di sintassi");
         }
     }
 
@@ -62,7 +62,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in exprp");
+                error("Errore in exprp");
         }
     }
 
@@ -96,7 +96,7 @@ public class Parser {
                 break;
 
             default:
-                error("Error in termp");
+                error("Errore in termp");
         }
     }
 
@@ -115,13 +115,13 @@ public class Parser {
                 break;
 
             default:
-                error("Error in fact");
+                error("Errore in fact");
         }
     }
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt"; // il percorso del file da leggere
+        String path = "file.txt";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Parser parser = new Parser(lex, br);
