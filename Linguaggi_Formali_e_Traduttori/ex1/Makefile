@@ -1,4 +1,3 @@
-# Lista dei file sorgente
 SOURCES = ex1_1.java \
           ex1_2.java \
           ex1_3.java \

@@ -55,15 +55,15 @@ public class ex1_5 {
 
     public static void main(String[] args) {
         System.out.println("Stringhe accettate");
-        System.out.println(scan("/**/") ? "OK" : "NOPE");       // OK
-        System.out.println(scan("/****/") ? "OK" : "NOPE");     // OK
-        System.out.println(scan("/*a*a*/") ? "OK" : "NOPE");    // OK
-        System.out.println(scan("/*a/**/") ? "OK" : "NOPE");    // OK
-        System.out.println(scan("/**a///a/a**/") ? "OK" : "NOPE"); // OK
-        System.out.println(scan("/*/*/") ? "OK" : "NOPE");      // OK
+        System.out.println(scan("/**/") ? "OK" : "NOPE");           // OK
+        System.out.println(scan("/****/") ? "OK" : "NOPE");         // OK
+        System.out.println(scan("/*a*a*/") ? "OK" : "NOPE");        // OK
+        System.out.println(scan("/*a/**/") ? "OK" : "NOPE");        // OK
+        System.out.println(scan("/**a///a/a**/") ? "OK" : "NOPE");  // OK
+        System.out.println(scan("/*/*/") ? "OK" : "NOPE");          // OK
         
         System.out.println("\nStringhe non accettate");
-        System.out.println(scan("/*/") ? "OK" : "NOPE");        // NOPE
-        System.out.println(scan("/**/***/") ? "OK" : "NOPE");   // NOPE
+        System.out.println(scan("/*/") ? "OK" : "NOPE");            // NOPE
+        System.out.println(scan("/**/***/") ? "OK" : "NOPE");       // NOPE
     }
 }
