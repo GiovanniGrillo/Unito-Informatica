@@ -17,16 +17,17 @@ public class Valutatore {
     }
     
     void error(String s) { 
-        throw new Error("near line " + lex.line + ": " + s);
+        throw new Error("vicino alla linea " + lex.line + ": " + s);
     }
     
     void match(int t) {
         if (look.tag == t) {
             if (look.tag != Tag.EOF) move();
-        } else error("syntax error");
+        } else error("errore di sintassi");
     }
     
     public void start() { 
+        // <start> ::= <expr> EOF
         int expr_val;
         expr_val = expr();
         match(Tag.EOF);
@@ -34,6 +35,7 @@ public class Valutatore {
     }
     
     private int expr() { 
+        // <expr> ::= <term> <exprp>
         int term_val, exprp_val;
         term_val = term();
         exprp_val = exprp(term_val);
@@ -41,6 +43,7 @@ public class Valutatore {
     }
     
     private int exprp(int exprp_i) {
+        // <exprp> ::= + <term> <exprp> | - <term> <exprp> | ε
         int term_val, exprp_val;
         switch (look.tag) {
             case '+':
@@ -57,7 +60,7 @@ public class Valutatore {
                 
             case ')':
             case Tag.EOF:
-                // Produzione ε - quando raggiungiamo la fine dell'espressione o una parentesi chiusa
+                // <exprp> ::= ε - produzione vuota
                 exprp_val = exprp_i;
                 break;
                 
@@ -69,6 +72,7 @@ public class Valutatore {
     }
     
     private int term() { 
+        // <term> ::= <fact> <termp>
         int fact_val, termp_val;
         fact_val = fact();
         termp_val = termp(fact_val);
@@ -76,6 +80,7 @@ public class Valutatore {
     }
     
     private int termp(int termp_i) { 
+        // <termp> ::= * <fact> <termp> | / <fact> <termp> | ε
         int fact_val, termp_val;
         switch (look.tag) {
             case '*':
@@ -97,6 +102,7 @@ public class Valutatore {
             case '-':
             case ')':
             case Tag.EOF:
+                // <termp> ::= ε - produzione vuota
                 termp_val = termp_i;
                 break;
                 
@@ -108,10 +114,10 @@ public class Valutatore {
     }
     
     private int fact() { 
+        // <fact> ::= NUM | ( <expr> )
         int fact_val;
         switch(look.tag) {
             case Tag.NUM:
-                // Assumiamo che NumberTok abbia un campo 'num' per il valore numerico
                 if (look instanceof NumberTok) {
                     fact_val = ((NumberTok) look).num;
                 } else {
@@ -136,7 +142,7 @@ public class Valutatore {
     
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt"; // il percorso del file da leggere
+        String path = "file.txt";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Valutatore valutatore = new Valutatore(lex, br);

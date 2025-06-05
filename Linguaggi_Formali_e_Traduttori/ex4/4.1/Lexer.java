@@ -114,7 +114,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.and;
                 } else {
-                    System.err.println("Erroneous character after & : " + peek);
+                    System.err.println("Carattere errato dopo & : " + peek);
                     return null;
                 }
 
@@ -124,7 +124,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.or;
                 } else {
-                    System.err.println("Erroneous character after | : " + peek);
+                    System.err.println("Carattere errato dopo | : " + peek);
                     return null;
                 }
 
@@ -155,7 +155,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.eq;
                 } else {
-                    System.err.println("Erroneous character after = : " + peek);
+                    System.err.println("Carattere errato dopo = : " + peek);
                     return null;
                 }
 
@@ -165,7 +165,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.init;
                 } else {
-                    System.err.println("Erroneous character after : : " + peek);
+                    System.err.println("Carattere errato dopo : : " + peek);
                     return null;
                 }
 
@@ -223,7 +223,7 @@ public class Lexer {
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
-                    System.err.println("Erroneous character: " + peek);
+                    System.err.println("Carattere errato: " + peek);
                     return null;
                 }
         }
