@@ -9,7 +9,7 @@ public class Lexer {
         try {
             peek = (char) br.read();
         } catch (IOException exc) {
-            peek = (char) -1; // ERROR
+            peek = (char) -1;
         }
     }
 
@@ -61,18 +61,18 @@ public class Lexer {
                 return Token.mult;
 
             case '/':
-                // ESTENSIONE ESERCIZIO 2.3: Gestione dei commenti
+                // Gestione dei commenti
                 readch(br);
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
                     readch(br);
-                    boolean commentoTerminato = false;
-                    
-                    while (!commentoTerminato && peek != (char)-1) {
+                    boolean commento_terminato = false;
+
+                    while (!commento_terminato && peek != (char)-1) {
                         if (peek == '*') {
                             readch(br);
                             if (peek == '/') {
-                                commentoTerminato = true;
+                                commento_terminato = true;
                                 readch(br);
                             }
                         } else {
@@ -80,12 +80,12 @@ public class Lexer {
                             readch(br);
                         }
                     }
-                    
-                    if (!commentoTerminato) {
+
+                    if (!commento_terminato) {
                         System.err.println("Errore: commento non chiuso");
                         return null;
                     }
-                    
+
                     // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else if (peek == '/') {
@@ -93,7 +93,7 @@ public class Lexer {
                     do {
                         readch(br);
                     } while (peek != '\n' && peek != (char)-1);
-                    
+
                     // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else {
@@ -209,15 +209,15 @@ public class Lexer {
                             return Word.read;
                         default:
                             // Verifica se la parola è composta solo da underscore
-                            boolean soloUnderscore = true;
+                            boolean solo_underscore = true;
                             for (int i = 0; i < lexeme.length(); i++) {
                                 if (lexeme.charAt(i) != '_') {
-                                    soloUnderscore = false;
+                                    solo_underscore = false;
                                     break;
                                 }
                             }
-                            
-                            if (soloUnderscore) {
+
+                            if (solo_underscore) {
                                 System.err.println("Errore: identificatore composto solo da underscore");
                                 return null;
                             } else {
@@ -225,15 +225,15 @@ public class Lexer {
                             }
                     }
                 } else if (peek == '_') {
-                    // ESTENSIONE ESERCIZIO 2.2: Identificatore che inizia con underscore
+                    // Identificatore che inizia con underscore
                     String lexeme = "";
-                    
+
                     // Leggi tutti gli underscore iniziali
                     do {
                         lexeme += peek;
                         readch(br);
                     } while (peek == '_');
-                    
+
                     // Verifica che ci sia almeno una lettera o cifra dopo gli underscore
                     if (Character.isLetterOrDigit(peek)) {
                         // Continua a leggere il resto dell'identificatore
@@ -241,7 +241,7 @@ public class Lexer {
                             lexeme += peek;
                             readch(br);
                         } while (Character.isLetterOrDigit(peek) || peek == '_');
-                        
+
                         return new Word(Tag.ID, lexeme);
                     } else {
                         // Identificatore composto solo da underscore - non valido
@@ -249,7 +249,7 @@ public class Lexer {
                         return null;
                     }
                 } else if (Character.isDigit(peek)) {
-                    // ESERCIZIO 2.1: Gestione numeri
+                    // Gestione numeri
                     if (peek == '0') {
                         readch(br);
                         return new NumberTok(Tag.NUM, 0);
@@ -259,7 +259,7 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {

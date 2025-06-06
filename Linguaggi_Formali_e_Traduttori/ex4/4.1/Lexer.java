@@ -9,7 +9,7 @@ public class Lexer {
         try {
             peek = (char) br.read();
         } catch (IOException exc) {
-            peek = (char) -1; // ERROR
+            peek = (char) -1;
         }
     }
 
@@ -66,25 +66,25 @@ public class Lexer {
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
                     readch(br);
-                    boolean commentoTerminato = false;
-                    
-                    while (!commentoTerminato && peek != (char)-1) {
+                    boolean commento_terminato = false;
+
+                    while (!commento_terminato && peek != (char)-1) {
                         if (peek == '*') {
                             readch(br);
                             if (peek == '/') {
-                                commentoTerminato = true;
+                                commento_terminato = true;
                                 readch(br);
                             }
                         } else {
                             readch(br);
                         }
                     }
-                    
-                    if (!commentoTerminato) {
+
+                    if (!commento_terminato) {
                         System.err.println("Errore: commento non chiuso");
                         return null;
                     }
-                    
+
                     // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else if (peek == '/') {
@@ -92,7 +92,7 @@ public class Lexer {
                     do {
                         readch(br);
                     } while (peek != '\n' && peek != (char)-1);
-                    
+
                     // Ritorna il prossimo token dopo aver saltato il commento
                     return lexical_scan(br);
                 } else {
@@ -219,7 +219,7 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
@@ -232,7 +232,7 @@ public class Lexer {
     public static void main(String[] args) {
         Lexer lex = new Lexer();
         String path = "file.txt";
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Token tok;

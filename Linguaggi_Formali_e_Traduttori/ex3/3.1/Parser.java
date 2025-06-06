@@ -56,7 +56,7 @@ public class Parser {
                 exprp();
                 break;
 
-            case ')':  // Follow set di exprp include ')'
+            case ')':      // Follow set di exprp include ')'
             case Tag.EOF:  // Follow set di exprp include EOF
                 // <exprp> ::= ε
                 break;
@@ -88,9 +88,9 @@ public class Parser {
                 termp();
                 break;
 
-            case '+':  // Follow set di termp include '+' e '-'
+            case '+':      // Follow set di termp include '+' e '-'
             case '-':
-            case ')':  // Follow set di termp include ')'
+            case ')':      // Follow set di termp include ')'
             case Tag.EOF:  // Follow set di termp include EOF
                 // <termp> ::= ε
                 break;

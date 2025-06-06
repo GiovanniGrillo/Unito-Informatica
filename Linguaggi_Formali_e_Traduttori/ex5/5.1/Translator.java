@@ -106,11 +106,11 @@ public class Translator {
             case Tag.FOR:
                 match(Tag.FOR);
                 match('(');
-                
+
                 int condition_label = code.newLabel();
                 int body_label = code.newLabel();
                 int end_label = code.newLabel();
-                
+
                 // Controlla se c'è inizializzazione (for con := )
                 if (look.tag == Tag.ID) {
                     // Caso: for (ID := expr; bexpr) do stat
@@ -119,7 +119,7 @@ public class Translator {
                     String varName = ((Word)id_token).lexeme;
                     match(Tag.INIT); // :=
                     expr(); // valuta l'espressione di inizializzazione
-                    
+
                     // Memorizza il valore nella variabile
                     int id_addr = st.lookupAddress(varName);
                     if (id_addr == -1) {
@@ -127,24 +127,24 @@ public class Translator {
                         st.insert(varName, count++);
                     }
                     code.emit(OpCode.istore, id_addr);
-                    
+
                     match(';');
                 }
                 // else: caso for (bexpr) do stat senza inizializzazione
-                
+
                 // Etichetta per la condizione del ciclo
                 code.emitLabel(condition_label);
                 bexpr(body_label, true);  // Salta al body se condizione vera
-                code.emit(OpCode.GOto, end_label); // Altrimenti esce dal ciclo
-                
+                code.emit(OpCode.GOto, end_label);     // Altrimenti esce dal ciclo
+
                 match(')');
                 match(Tag.DO);
-                
+
                 // Corpo del ciclo
                 code.emitLabel(body_label);
                 stat();
                 code.emit(OpCode.GOto, condition_label); // Torna alla condizione
-                
+
                 // Fine del ciclo
                 code.emitLabel(end_label);
                 break;
@@ -153,18 +153,18 @@ public class Translator {
                 int lnext_true = code.newLabel();
                 int lnext_false = code.newLabel();
                 int lnext_end = code.newLabel();
-                
+
                 match(Tag.IF);
                 match('(');
                 bexpr(lnext_true, true);  // Salta a lnext_true se condizione vera
                 code.emit(OpCode.GOto, lnext_false); // Altrimenti va al ramo false
                 match(')');
-                
+
                 // Ramo true
                 code.emitLabel(lnext_true);
                 stat();
                 code.emit(OpCode.GOto, lnext_end);
-                
+
                 // Gestisci else opzionale
                 switch (look.tag) {
                     case Tag.ELSE:
@@ -199,7 +199,7 @@ public class Translator {
         expr(); // Valuta l'espressione
         match(Tag.TO);
         List<String> ids = idlist();
-        
+
         // Duplica il valore per ogni assegnazione (tranne l'ultima)
         for (int i = 0; i < ids.size(); i++) {
             if (i < ids.size() - 1) {
@@ -213,7 +213,7 @@ public class Translator {
             }
             code.emit(OpCode.istore, id_addr);
         }
-        
+
         match(']');
         assignlistp();
     }
@@ -225,7 +225,7 @@ public class Translator {
             expr();
             match(Tag.TO);
             List<String> ids = idlist();
-            
+
             // Duplica e assegna come sopra
             for (int i = 0; i < ids.size(); i++) {
                 if (i < ids.size() - 1) {
@@ -238,7 +238,6 @@ public class Translator {
                 }
                 code.emit(OpCode.istore, id_addr);
             }
-            
             match(']');
             assignlistp();
         }
@@ -275,12 +274,12 @@ public class Translator {
         if (look.tag != Tag.RELOP) {
             error("Operatore relazionale atteso in bexpr");
         }
-        
+
         Token relop = look;
         match(Tag.RELOP);
         expr();  // primo operando nello stack
         expr();  // secondo operando nello stack
-        
+
         // Genera l'istruzione di confronto appropriata
         String op = ((Word)relop).lexeme;
         if (jump_if_true) {
@@ -320,14 +319,14 @@ public class Translator {
                 }
                 match(')');
                 break;
-                
+
             case '-':
                 match('-');
                 expr(); // primo operando
                 expr(); // secondo operando
                 code.emit(OpCode.isub); // sottrazione: primo - secondo
                 break;
-                
+
             case '*':
                 match('*');
                 match('(');
@@ -338,20 +337,20 @@ public class Translator {
                 }
                 match(')');
                 break;
-                
+
             case '/':
                 match('/');
                 expr(); // dividendo
                 expr(); // divisore
                 code.emit(OpCode.idiv); // divisione: dividendo / divisore
                 break;
-                
+
             case Tag.NUM:
                 // Carica la costante numerica
                 code.emit(OpCode.ldc, ((NumberTok) look).lexeme);
                 match(Tag.NUM);
                 break;
-                
+
             case Tag.ID:
                 // Carica il valore della variabile
                 String varName = ((Word)look).lexeme;
@@ -362,7 +361,7 @@ public class Translator {
                 code.emit(OpCode.iload, read_id_addr);
                 match(Tag.ID);
                 break;
-                
+
             default:
                 error("Errore in expr: espressione non valida");
         }
@@ -400,12 +399,8 @@ public class Translator {
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "test.lft"; // Nome del file predefinito
-        
-        if (args.length > 0) {
-            path = args[0];
-        }
-        
+        String path = "test.lft";
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Translator translator = new Translator(lex, br);
