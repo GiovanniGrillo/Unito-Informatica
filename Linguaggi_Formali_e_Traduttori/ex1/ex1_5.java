@@ -1,13 +1,12 @@
 public class ex1_5 {
     public static boolean scan(String s) {
-        int state = 0;
-        int i = 0;
+        int state = 0, i = 0;
 
         while (state >= 0 && i < s.length()) {
             final char ch = s.charAt(i++);
 
             switch (state) {
-                case 0:
+                case 0: // Stato iniziale - attende '/'
                     if (ch == '/') {
                         state = 1;
                     } else {
@@ -15,7 +14,7 @@ public class ex1_5 {
                     }
                     break;
 
-                case 1:
+                case 1: // Dopo il primo '/', attende '*'
                     if (ch == '*') {
                         state = 2;
                     } else {
@@ -23,7 +22,7 @@ public class ex1_5 {
                     }
                     break;
 
-                case 2:
+                case 2: // Dopo il commento aperto '/*'
                     if (ch == '*') {
                         state = 3;
                     } else if (ch == 'a' || ch == '/') {
@@ -33,7 +32,7 @@ public class ex1_5 {
                     }
                     break;
 
-                case 3:
+                case 3: // Dopo il secondo '*', attende '/'
                     if (ch == '*') {
                         state = 3;
                     } else if (ch == '/') {
@@ -45,7 +44,7 @@ public class ex1_5 {
                     }
                     break;
 
-                case 4:
+                case 4: // Commento chiuso '*/'
                     state = -1;
                     break;
             }
@@ -55,15 +54,15 @@ public class ex1_5 {
 
     public static void main(String[] args) {
         System.out.println("Stringhe accettate");
-        System.out.println(scan("/**/") ? "OK" : "NOPE");           // OK
-        System.out.println(scan("/****/") ? "OK" : "NOPE");         // OK
-        System.out.println(scan("/*a*a*/") ? "OK" : "NOPE");        // OK
-        System.out.println(scan("/*a/**/") ? "OK" : "NOPE");        // OK
-        System.out.println(scan("/**a///a/a**/") ? "OK" : "NOPE");  // OK
-        System.out.println(scan("/*/*/") ? "OK" : "NOPE");          // OK
-        
+        System.out.println(scan("/**/")          ? "OK" : "NOPE"); // OK
+        System.out.println(scan("/****/")        ? "OK" : "NOPE"); // OK
+        System.out.println(scan("/*a*a*/")       ? "OK" : "NOPE"); // OK
+        System.out.println(scan("/*a/**/")       ? "OK" : "NOPE"); // OK
+        System.out.println(scan("/**a///a/a**/") ? "OK" : "NOPE"); // OK
+        System.out.println(scan("/*/*/")         ? "OK" : "NOPE"); // OK
+
         System.out.println("\nStringhe non accettate");
-        System.out.println(scan("/*/") ? "OK" : "NOPE");            // NOPE
-        System.out.println(scan("/**/***/") ? "OK" : "NOPE");       // NOPE
+        System.out.println(scan("/*/")           ? "OK" : "NOPE"); // NOPE
+        System.out.println(scan("/**/***/")      ? "OK" : "NOPE"); // NOPE
     }
 }

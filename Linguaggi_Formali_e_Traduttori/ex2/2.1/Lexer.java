@@ -4,7 +4,7 @@ import java.util.*;
 public class Lexer {
     public static int line = 1;
     private char peek = ' ';
-    
+
     private void readch(BufferedReader br) {
         try {
             peek = (char) br.read();
@@ -12,67 +12,67 @@ public class Lexer {
             peek = (char) -1; // ERROR
         }
     }
-    
+
     public Token lexical_scan(BufferedReader br) {
         while (peek == ' ' || peek == '\t' || peek == '\n' || peek == '\r') {
             if (peek == '\n') line++;
             readch(br);
         }
-        
+
         switch (peek) {
             case '!':
                 peek = ' ';
                 return Token.not;
-                
+
             // Gestione caratteri singoli
             case '(':
                 peek = ' ';
                 return Token.lpt;
-                
+
             case ')':
                 peek = ' ';
                 return Token.rpt;
-                
+
             case '[':
                 peek = ' ';
                 return Token.lpq;
-                
+
             case ']':
                 peek = ' ';
                 return Token.rpq;
-                
+
             case '{':
                 peek = ' ';
                 return Token.lpg;
-                
+
             case '}':
                 peek = ' ';
                 return Token.rpg;
-                
+
             case '+':
                 peek = ' ';
                 return Token.plus;
-                
+
             case '-':
                 peek = ' ';
                 return Token.minus;
-                
+
             case '*':
                 peek = ' ';
                 return Token.mult;
-                
+
             case '/':
                 peek = ' ';
                 return Token.div;
-                
+
             case ';':
                 peek = ' ';
                 return Token.semicolon;
-                
+
             case ',':
                 peek = ' ';
                 return Token.comma;
-                
+
             // Gestione operatori composti
             case '&':
                 readch(br);
@@ -83,7 +83,7 @@ public class Lexer {
                     System.err.println("Carattere errato dopo & : " + peek);
                     return null;
                 }
-                
+
             case '|':
                 readch(br);
                 if (peek == '|') {
@@ -93,7 +93,7 @@ public class Lexer {
                     System.err.println("Carattere errato dopo | : " + peek);
                     return null;
                 }
-                
+
             case '<':
                 readch(br);
                 if (peek == '=') {
@@ -105,7 +105,7 @@ public class Lexer {
                 } else {
                     return Word.lt;
                 }
-                
+
             case '>':
                 readch(br);
                 if (peek == '=') {
@@ -114,7 +114,7 @@ public class Lexer {
                 } else {
                     return Word.gt;
                 }
-                
+
             case '=':
                 readch(br);
                 if (peek == '=') {
@@ -124,7 +124,7 @@ public class Lexer {
                     System.err.println("Carattere errato dopo = : " + peek);
                     return null;
                 }
-                
+
             case ':':
                 readch(br);
                 if (peek == '=') {
@@ -134,10 +134,10 @@ public class Lexer {
                     System.err.println("Carattere errato dopo : : " + peek);
                     return null;
                 }
-                
+
             case (char)-1:
                 return new Token(Tag.EOF);
-                
+
             default:
                 // Gestione identificatori e parole chiave
                 if (Character.isLetter(peek)) {
@@ -146,9 +146,9 @@ public class Lexer {
                         buffer.append(peek);
                         readch(br);
                     } while (Character.isLetterOrDigit(peek));
-                    
+
                     String s = buffer.toString();
-                    
+
                     switch (s) {
                         case "assign":
                             return Word.assign;
@@ -173,7 +173,7 @@ public class Lexer {
                         default:
                             return new Word(Tag.ID, s);
                     }
-                    
+
                 // Gestione numeri
                 } else if (Character.isDigit(peek)) {
                     // Se inizia con 0, può essere solo 0
@@ -186,21 +186,21 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
-                    
+
                 } else {
                     System.err.println("Carattere errato: " + peek);
                     return null;
                 }
         }
     }
-    
+
     public static void main(String[] args) {
         Lexer lex = new Lexer();
         String path = "file.txt";
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Token tok;
