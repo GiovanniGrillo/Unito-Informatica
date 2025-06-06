@@ -9,7 +9,7 @@ public class Lexer {
         try {
             peek = (char) br.read();
         } catch (IOException exc) {
-            peek = (char) -1; // ERROR
+            peek = (char) -1;
         }
     }
 
@@ -133,7 +133,7 @@ public class Lexer {
                     return null;
                 }
 
-            case (char)-1:
+            case (char) -1:
                 return new Token(Tag.EOF);
 
             default:
@@ -178,7 +178,7 @@ public class Lexer {
                                     break;
                                 }
                             }
-                            
+
                             if (soloUnderscore) {
                                 System.err.println("Errore: identificatore composto solo da underscore");
                                 return null;
@@ -187,15 +187,15 @@ public class Lexer {
                             }
                     }
                 } else if (peek == '_') {
-                    // ESTENSIONE ESERCIZIO 2.2: Identificatore che inizia con underscore
+                    // Modifica per ex2.2: Identificatore che inizia con underscore
                     String lexeme = "";
-                    
+
                     // Leggi tutti gli underscore iniziali
                     do {
                         lexeme += peek;
                         readch(br);
                     } while (peek == '_');
-                    
+
                     // Verifica che ci sia almeno una lettera o cifra dopo gli underscore
                     if (Character.isLetterOrDigit(peek)) {
                         // Continua a leggere il resto dell'identificatore
@@ -203,7 +203,7 @@ public class Lexer {
                             lexeme += peek;
                             readch(br);
                         } while (Character.isLetterOrDigit(peek) || peek == '_');
-                        
+
                         return new Word(Tag.ID, lexeme);
                     } else {
                         // Identificatore composto solo da underscore - non valido
@@ -221,7 +221,7 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
@@ -234,7 +234,7 @@ public class Lexer {
     public static void main(String[] args) {
         Lexer lex = new Lexer();
         String path = "file.txt";
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Token tok;

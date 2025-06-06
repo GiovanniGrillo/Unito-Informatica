@@ -9,7 +9,7 @@ public class Lexer {
         try {
             peek = (char) br.read();
         } catch (IOException exc) {
-            peek = (char) -1; // ERROR
+            peek = (char) -1;
         }
     }
 
@@ -60,14 +60,14 @@ public class Lexer {
                 peek = ' ';
                 return Token.mult;
 
-            // MODIFICATO PER ESERCIZIO 2.3
+            // Modifica per ex2.3
             case '/':
                 readch(br);
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
                     readch(br);
                     boolean commentoTerminato = false;
-                    
+
                     while (!commentoTerminato && peek != (char)-1) {
                         if (peek == '*') {
                             readch(br);
@@ -76,16 +76,16 @@ public class Lexer {
                                 readch(br);
                             }
                         } else {
-                            if (peek == '\n') line++;  // IMPORTANTE: conta le linee
+                            if (peek == '\n') line++;  // conta le linee
                             readch(br);
                         }
                     }
-                    
+
                     if (!commentoTerminato) {
                         System.err.println("Errore: commento non chiuso");
                         return null;
                     }
-                    
+
                     // Dopo aver consumato il commento, richiama lexical_scan
                     return lexical_scan(br);
                 } else if (peek == '/') {
@@ -93,7 +93,7 @@ public class Lexer {
                     do {
                         readch(br);
                     } while (peek != '\n' && peek != (char)-1);
-                    
+
                     // Richiama lexical_scan per il prossimo token
                     return lexical_scan(br);
                 } else {
@@ -212,13 +212,13 @@ public class Lexer {
                 } else if (peek == '_') {
                     // Identificatore che inizia con underscore
                     String lexeme = "";
-                    
+
                     // Leggi tutti gli underscore iniziali
                     do {
                         lexeme += peek;
                         readch(br);
                     } while (peek == '_');
-                    
+
                     // Verifica che ci sia almeno una lettera o cifra dopo gli underscore
                     if (Character.isLetterOrDigit(peek)) {
                         // Continua a leggere il resto dell'identificatore
@@ -226,7 +226,7 @@ public class Lexer {
                             lexeme += peek;
                             readch(br);
                         } while (Character.isLetterOrDigit(peek) || peek == '_');
-                        
+
                         return new Word(Tag.ID, lexeme);
                     } else {
                         // Identificatore composto solo da underscore - non valido
@@ -244,7 +244,7 @@ public class Lexer {
                             num = num * 10 + Character.digit(peek, 10);
                             readch(br);
                         } while (Character.isDigit(peek));
-                        
+
                         return new NumberTok(Tag.NUM, num);
                     }
                 } else {
