@@ -66,13 +66,13 @@ public class Lexer {
                 if (peek == '*') {
                     // Commento multi-riga /* ... */
                     readch(br);
-                    boolean commentoTerminato = false;
+                    boolean commento_terminato = false;
 
-                    while (!commentoTerminato && peek != (char)-1) {
+                    while (!commento_terminato && peek != (char)-1) {
                         if (peek == '*') {
                             readch(br);
                             if (peek == '/') {
-                                commentoTerminato = true;
+                                commento_terminato = true;
                                 readch(br);
                             }
                         } else {
@@ -81,7 +81,7 @@ public class Lexer {
                         }
                     }
 
-                    if (!commentoTerminato) {
+                    if (!commento_terminato) {
                         System.err.println("Errore: commento non chiuso");
                         return null;
                     }

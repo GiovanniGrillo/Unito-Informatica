@@ -171,15 +171,15 @@ public class Lexer {
                             return Word.read;
                         default:
                             // Verifica se la parola è composta solo da underscore
-                            boolean soloUnderscore = true;
+                            boolean solo_underscore = true;
                             for (int i = 0; i < lexeme.length(); i++) {
                                 if (lexeme.charAt(i) != '_') {
-                                    soloUnderscore = false;
+                                    solo_underscore = false;
                                     break;
                                 }
                             }
 
-                            if (soloUnderscore) {
+                            if (solo_underscore) {
                                 System.err.println("Errore: identificatore composto solo da underscore");
                                 return null;
                             } else {
