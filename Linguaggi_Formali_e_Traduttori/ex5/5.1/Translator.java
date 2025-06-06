@@ -26,7 +26,7 @@ public class Translator {
     }
 
     void error(String s) {
-        throw new Error("Vicino alla linea " + lex.line + ": " + s);
+        throw new Error("vicino alla linea " + lex.line + ": " + s);
     }
 
     void match(int t) {
@@ -61,6 +61,7 @@ public class Translator {
                 break;
             case Tag.EOF:
             case '}':
+                // ε - produzione vuota
                 break;
             default:
                 error("Errore in statlistp");
@@ -78,8 +79,9 @@ public class Translator {
                 match(Tag.PRINT);
                 match('(');
                 int printCount = exprlist_print();
+                // Genera invokestatic per ogni espressione da stampare
                 for (int i = 0; i < printCount; i++) {
-                    code.emit(OpCode.invokestatic, 1);
+                    code.emit(OpCode.invokestatic, 1); // print(I)V
                 }
                 match(')');
                 break;
@@ -87,10 +89,11 @@ public class Translator {
             case Tag.READ:
                 match(Tag.READ);
                 match('(');
-                List<String> ids = idlist();
+                List<String> readIds = idlist();
                 match(')');
-                for (String id : ids) {
-                    code.emit(OpCode.invokestatic, 0); // read()
+                // Genera read() e store per ogni identificatore
+                for (String id : readIds) {
+                    code.emit(OpCode.invokestatic, 0); // read()I
                     int id_addr = st.lookupAddress(id);
                     if (id_addr == -1) {
                         id_addr = count;
@@ -108,15 +111,16 @@ public class Translator {
                 int body_label = code.newLabel();
                 int end_label = code.newLabel();
                 
-                // Controlla se c'è inizializzazione
+                // Controlla se c'è inizializzazione (for con := )
                 if (look.tag == Tag.ID) {
                     // Caso: for (ID := expr; bexpr) do stat
                     Token id_token = look;
                     match(Tag.ID);
                     String varName = ((Word)id_token).lexeme;
-                    match(Tag.INIT);
-                    expr();
+                    match(Tag.INIT); // :=
+                    expr(); // valuta l'espressione di inizializzazione
                     
+                    // Memorizza il valore nella variabile
                     int id_addr = st.lookupAddress(varName);
                     if (id_addr == -1) {
                         id_addr = count;
@@ -126,19 +130,22 @@ public class Translator {
                     
                     match(';');
                 }
-                // else: caso for (bexpr) do stat
+                // else: caso for (bexpr) do stat senza inizializzazione
                 
+                // Etichetta per la condizione del ciclo
                 code.emitLabel(condition_label);
                 bexpr(body_label, true);  // Salta al body se condizione vera
-                code.emit(OpCode.GOto, end_label);
+                code.emit(OpCode.GOto, end_label); // Altrimenti esce dal ciclo
                 
                 match(')');
                 match(Tag.DO);
                 
+                // Corpo del ciclo
                 code.emitLabel(body_label);
                 stat();
-                code.emit(OpCode.GOto, condition_label);
+                code.emit(OpCode.GOto, condition_label); // Torna alla condizione
                 
+                // Fine del ciclo
                 code.emitLabel(end_label);
                 break;
 
@@ -149,19 +156,21 @@ public class Translator {
                 
                 match(Tag.IF);
                 match('(');
-                bexpr(lnext_true, true);  // Salta se vero
-                code.emit(OpCode.GOto, lnext_false);
+                bexpr(lnext_true, true);  // Salta a lnext_true se condizione vera
+                code.emit(OpCode.GOto, lnext_false); // Altrimenti va al ramo false
                 match(')');
                 
+                // Ramo true
                 code.emitLabel(lnext_true);
                 stat();
                 code.emit(OpCode.GOto, lnext_end);
                 
+                // Gestisci else opzionale
                 switch (look.tag) {
                     case Tag.ELSE:
                         code.emitLabel(lnext_false);
                         match(Tag.ELSE);
-                        stat();
+                        stat(); // Ramo else
                         match(Tag.END);
                         break;
                     case Tag.END:
@@ -169,7 +178,7 @@ public class Translator {
                         match(Tag.END);
                         break;
                     default:
-                        error("Errore nell'istruzione if");
+                        error("Errore nell'istruzione if: atteso 'else' o 'end'");
                 }
                 code.emitLabel(lnext_end);
                 break;
@@ -181,21 +190,22 @@ public class Translator {
                 break;
 
             default:
-                error("Errore in stat");
+                error("Errore in stat: istruzione non riconosciuta");
         }
     }
 
     private void assignlist() {
         match('[');
-        expr();
+        expr(); // Valuta l'espressione
         match(Tag.TO);
         List<String> ids = idlist();
         
-        // Genera il codice per assegnare il valore a tutti gli ID
+        // Duplica il valore per ogni assegnazione (tranne l'ultima)
         for (int i = 0; i < ids.size(); i++) {
             if (i < ids.size() - 1) {
                 code.emit(OpCode.dup);
             }
+            // Assegna alla variabile
             int id_addr = st.lookupAddress(ids.get(i));
             if (id_addr == -1) {
                 id_addr = count;
@@ -210,11 +220,13 @@ public class Translator {
 
     private void assignlistp() {
         if (look.tag == '[') {
+            // Altra assegnazione
             match('[');
             expr();
             match(Tag.TO);
             List<String> ids = idlist();
             
+            // Duplica e assegna come sopra
             for (int i = 0; i < ids.size(); i++) {
                 if (i < ids.size() - 1) {
                     code.emit(OpCode.dup);
@@ -261,14 +273,15 @@ public class Translator {
 
     private void bexpr(int lnext, boolean jump_if_true) {
         if (look.tag != Tag.RELOP) {
-            error("Operatore relazionale atteso");
+            error("Operatore relazionale atteso in bexpr");
         }
         
         Token relop = look;
         match(Tag.RELOP);
-        expr();  // primo operando
-        expr();  // secondo operando
+        expr();  // primo operando nello stack
+        expr();  // secondo operando nello stack
         
+        // Genera l'istruzione di confronto appropriata
         String op = ((Word)relop).lexeme;
         if (jump_if_true) {
             // Salta a lnext se la condizione è vera
@@ -282,7 +295,7 @@ public class Translator {
                 default: error("Operatore relazionale sconosciuto: " + op);
             }
         } else {
-            // Salta a lnext se la condizione è falsa (negata)
+            // Salta a lnext se la condizione è falsa (condizione negata)
             switch(op) {
                 case "==": code.emit(OpCode.if_icmpne, lnext); break;
                 case "<>": code.emit(OpCode.if_icmpeq, lnext); break;
@@ -301,7 +314,7 @@ public class Translator {
                 match('+');
                 match('(');
                 int addCount = exprlist_op();
-                // Emetti iadd per ogni coppia (n-1 volte per n operandi)
+                // Emetti iadd per ogni coppia: n operandi = n-1 addizioni
                 for (int i = 1; i < addCount; i++) {
                     code.emit(OpCode.iadd);
                 }
@@ -310,16 +323,16 @@ public class Translator {
                 
             case '-':
                 match('-');
-                expr();
-                expr();
-                code.emit(OpCode.isub);
+                expr(); // primo operando
+                expr(); // secondo operando
+                code.emit(OpCode.isub); // sottrazione: primo - secondo
                 break;
                 
             case '*':
                 match('*');
                 match('(');
                 int mulCount = exprlist_op();
-                // Emetti imul per ogni coppia (n-1 volte per n operandi)
+                // Emetti imul per ogni coppia: n operandi = n-1 moltiplicazioni
                 for (int i = 1; i < mulCount; i++) {
                     code.emit(OpCode.imul);
                 }
@@ -328,63 +341,66 @@ public class Translator {
                 
             case '/':
                 match('/');
-                expr();
-                expr();
-                code.emit(OpCode.idiv);
+                expr(); // dividendo
+                expr(); // divisore
+                code.emit(OpCode.idiv); // divisione: dividendo / divisore
                 break;
                 
             case Tag.NUM:
+                // Carica la costante numerica
                 code.emit(OpCode.ldc, ((NumberTok) look).lexeme);
                 match(Tag.NUM);
                 break;
                 
             case Tag.ID:
-                int read_id_addr = st.lookupAddress(((Word)look).lexeme);
+                // Carica il valore della variabile
+                String varName = ((Word)look).lexeme;
+                int read_id_addr = st.lookupAddress(varName);
                 if (read_id_addr == -1) {
-                    error("Variabile '" + ((Word)look).lexeme + "' non dichiarata");
+                    error("Variabile '" + varName + "' non dichiarata");
                 }
                 code.emit(OpCode.iload, read_id_addr);
                 match(Tag.ID);
                 break;
                 
             default:
-                error("Errore in expr");
+                error("Errore in expr: espressione non valida");
         }
     }
 
-    // Metodo exprlist per PRINT
+    // Metodo exprlist per PRINT - conta e genera codice per stampa
     private int exprlist_print() {
-        expr();
+        expr(); // Genera codice per la prima espressione
         return 1 + exprlistp_print();
     }
 
     private int exprlistp_print() {
         if (look.tag == ',') {
             match(',');
-            expr();
+            expr(); // Genera codice per l'espressione successiva
             return 1 + exprlistp_print();
         }
-        return 0;
+        return 0; // Fine della lista
     }
 
-    // Metodo exprlist per operazioni n-arie
+    // Metodo exprlist per operazioni n-arie (+ e *)
     private int exprlist_op() {
-        expr();
+        expr(); // Genera codice per la prima espressione
         return 1 + exprlistp_op();
     }
 
     private int exprlistp_op() {
         if (look.tag == ',') {
             match(',');
-            expr();
+            expr(); // Genera codice per l'espressione successiva
             return 1 + exprlistp_op();
         }
-        return 0;
+        return 0; // Fine della lista
     }
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "test.lft"; // Nome del file da tradurre
+        String path = "test.lft"; // Nome del file predefinito
         
         if (args.length > 0) {
             path = args[0];
@@ -396,9 +412,11 @@ public class Translator {
             translator.prog();
             br.close();
             System.out.println("Traduzione completata con successo.");
-            System.out.println("Output scritto in Output.j");
+            System.out.println("File di output generato: Output.j");
+            System.out.println("Per generare il file .class eseguire: java -jar jasmin.jar Output.j");
+            System.out.println("Per eseguire il programma: java Output");
         } catch (IOException e) {
-            System.err.println("Errore IO: " + e.getMessage());
+            System.err.println("Errore di I/O: " + e.getMessage());
         } catch (Error e) {
             System.err.println("Errore di traduzione: " + e.getMessage());
         }

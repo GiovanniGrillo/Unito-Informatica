@@ -1,9 +1,64 @@
-assign [10 to a,b];
-print(a,b);
-read(x,y);
-print(1,+(2,3,4));
-if (> x y) print(x) else print(y) end;
-for (_dummy_while := 0; > x 0) do { 
-    assign [- x 1 to x]; 
+// Test 6: Programma complesso - Gioco Indovina Numero
+print(1000, 2000, 3000);
+
+// Numero segreto
+assign [42 to segreto];
+
+// Numero tentativi
+assign [3 to tentativi];
+
+print(9999);
+read(tentativo);
+
+// Ciclo principale del gioco
+for (> tentativi 0) do {
+    if (== tentativo segreto) {
+        print(8888);
+        assign [0 to tentativi]
+    } else {
+        if (< tentativo segreto) {
+            print(1111)
+        } else {
+            print(2222)  
+        } end;
+        
+        assign [- tentativi 1 to tentativi];
+        
+        if (> tentativi 0) {
+            print(tentativi);
+            read(tentativo)
+        } end
+    } end
+};
+
+// Messaggio finale
+if (== tentativo segreto) {
+    print(9000)
+} else {
+    print(9001);
+    print(segreto)
+} end;
+
+// Test assegnazioni multiple
+assign [10 to a, b, c];
+assign [+(a, b, c) to totale];
+print(totale);
+
+// Test espressioni complesse annidate
+assign [/ 200 4 to divisione];
+assign [+(*(2, 3, 4), - 100 divisione, 7) to risultato_complesso];
+print(risultato_complesso);
+
+// Test blocchi annidati
+{
+    assign [1 to x];
+    {
+        assign [2 to y];
+        {
+            assign [+(x, y) to z];
+            print(z)
+        };
+        print(y)
+    };
     print(x)
 }

@@ -55,7 +55,7 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in statlistp");
+                error("Errore nella lista di istruzioni: atteso ';' o fine blocco");
         }
     }
 
@@ -108,7 +108,7 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in stat");
+                error("Istruzione non riconosciuta: atteso 'assign', 'print', 'read', 'for', 'if' o '{'");
         }
     }
 
@@ -146,7 +146,7 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in ifp");
+                error("Errore nell'istruzione if: atteso 'else' o 'end'");
         }
     }
 
@@ -179,7 +179,7 @@ public class Parser {
             match(Tag.ID);
             idlistp();
         } else {
-            error("Errore in idlist");
+            error("Errore nella lista identificatori: atteso identificatore");
         }
     }
 
@@ -188,8 +188,12 @@ public class Parser {
         switch (look.tag) {
             case ',':
                 match(',');
-                match(Tag.ID);
-                idlistp();
+                if (look.tag == Tag.ID) {
+                    match(Tag.ID);
+                    idlistp();
+                } else {
+                    error("Errore nella lista identificatori: atteso identificatore dopo la virgola");
+                }
                 break;
 
             case ')':
@@ -201,7 +205,7 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in idlistp");
+                error("Errore nella lista identificatori: atteso ',' o simbolo di chiusura");
         }
     }
 
@@ -212,7 +216,7 @@ public class Parser {
             expr();
             expr();
         } else {
-            error("Errore in bexpr");
+            error("Errore nell'espressione booleana: atteso operatore relazionale");
         }
     }
 
@@ -259,7 +263,7 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in expr");
+                error("Errore nell'espressione: atteso operatore (+, -, *, /), numero o identificatore");
         }
     }
 
@@ -283,21 +287,24 @@ public class Parser {
                 break;
 
             default:
-                error("Errore in exprlistp");
+                error("Errore nella lista espressioni: atteso ',' o ')'");
         }
     }
 
     public static void main(String[] args) {
         Lexer lex = new Lexer();
-        String path = "file.txt";
+        String path = "test.lft";
         try {
             BufferedReader br = new BufferedReader(new FileReader(path));
             Parser parser = new Parser(lex, br);
             parser.prog();
-            System.out.println("Input OK");
+            System.out.println("Analisi sintattica completata con successo!");
             br.close();
         } catch (IOException e) {
+            System.err.println("Errore di I/O: " + e.getMessage());
             e.printStackTrace();
+        } catch (Error e) {
+            System.err.println("Errore di analisi sintattica: " + e.getMessage());
         }
     }
 }

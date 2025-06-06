@@ -112,7 +112,7 @@ public class Lexer {
                     peek = ' ';
                     return Word.and;
                 } else {
-                    System.err.println("Carattere errato dopo & : " + peek);
+                    System.err.println("Carattere errato dopo '&': " + peek);  
                     return null;
                 }
 
