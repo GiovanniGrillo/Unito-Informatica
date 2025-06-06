@@ -2,14 +2,14 @@ import java.io.*;
 import java.util.*;
 
 public class Lexer {
-    public static int line = 1;
-    private char peek = ' ';
+    public static int line = 1; // Numero di riga corrente
+    private char peek = ' ';    // Carattere corrente in lettura
 
     private void readch(BufferedReader br) {
         try {
             peek = (char) br.read();
         } catch (IOException exc) {
-            peek = (char) -1; // ERROR
+            peek = (char) -1;   // ERROR
         }
     }
 
