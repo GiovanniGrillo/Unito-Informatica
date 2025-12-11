@@ -6,6 +6,10 @@
 - Implementazione lexer e parser in Java
 - Esercizi di analisi lessicale e generazione codice
 
+### Sistemi Operativi
+- Implementazione "Centrale Atomica"  ogni atomo -> pid in Linux
+- Esercizi su semafori, memorie condivise, operazioni tra processi
+
 ### Tecnologie Web
 - Client: Frontend TypeScript/JavaScript con npm e Vite
 - Server: Backend Java Spring Boot con Maven
