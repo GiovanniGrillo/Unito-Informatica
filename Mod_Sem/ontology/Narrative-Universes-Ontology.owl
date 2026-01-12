@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/aless/ontologies/2026/0/untitled-ontology-3/"
+     xml:base="http://www.semanticweb.org/aless/ontologies/2026/0/untitled-ontology-3/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:vann="http://purl.org/vocab/vann/">
+    <owl:Ontology rdf:about="http://www.narrative-universes.org/ontology">
+        <owl:versionIRI rdf:resource="http://www.narrative-universes.org/ontology/1.0"/>
+        <dc:creator>&quot;Alessandro Olivero&quot;</dc:creator>
+        <dc:creator>&quot;Giovanni Grillo&quot;</dc:creator>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-01-10T00:00:00</dc:date>
+        <dc:description>&quot;An ontology for representing crossmedia narrative universes including characters, locations, objects, works, and narrative roles&quot;@en</dc:description>
+        <dc:title>&quot;Narrative Universes Ontology&quot;@en</dc:title>
+        <vann:preferredNamespacePrefix>&quot;nuo&quot;</vann:preferredNamespacePrefix>
+        <vann:preferredNamespaceUri>&quot;http://www.narrative-universes.org/ontology#&quot;</vann:preferredNamespaceUri>
+        <rdfs:label>&quot;Narrative Universes Ontology&quot;@en</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/creator -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/date -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/title -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+    
+
+
+    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Ally -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Ally">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Amico o compagno che aiuta il protagonista</rdfs:comment>
+        <rdfs:label xml:lang="it">Alleato</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Antagonist -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Antagonist">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Villain principale o forza oppositrice</rdfs:comment>
+        <rdfs:label xml:lang="it">Antagonista</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Book -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Book">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Un&apos;opera letteraria scritta, tipicamente un romanzo o una serie di libri</rdfs:comment>
+        <rdfs:label xml:lang="it">Libro</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Character -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Character">
+        <rdfs:comment xml:lang="it">Un personaggio fittizio che appare in una o più opere narrative</rdfs:comment>
+        <rdfs:label xml:lang="it">Personaggio</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#DangerZone -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#DangerZone">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Un luogo pericoloso o ostile</rdfs:comment>
+        <rdfs:label xml:lang="it">Zona Pericolosa</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#HumanCharacter -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#HumanCharacter">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Un personaggio completamente umano</rdfs:comment>
+        <rdfs:label xml:lang="it">Personaggio Umano</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#HybridCharacter -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#HybridCharacter">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Un personaggio di eredità mista (semidio, mezzo gigante, ecc.)</rdfs:comment>
+        <rdfs:label xml:lang="it">Personaggio Ibrido</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#LiminalSpace -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#LiminalSpace">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Una soglia o passaggio tra mondi o dimensioni</rdfs:comment>
+        <rdfs:label xml:lang="it">Spazio Liminale</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Location -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Location">
+        <rdfs:comment xml:lang="it">Un luogo o location all&apos;interno di un universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Luogo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#MagicalCreature -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MagicalCreature">
+        <rdfs:comment xml:lang="it">Una creatura non umana o soprannaturale in un universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Creatura Magica</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Mentor -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Mentor">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Guida saggia che insegna e supporta il protagonista</rdfs:comment>
+        <rdfs:label xml:lang="it">Mentore</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Movie -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Movie">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Un film cinematografico</rdfs:comment>
+        <rdfs:label xml:lang="it">Film</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#NarrativeEvent -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeEvent">
+        <rdfs:comment xml:lang="it">Un&apos;opera letteraria scritta, tipicamente un romanzo o una serie di libri</rdfs:comment>
+        <rdfs:label xml:lang="it">Evento Narrativo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#NarrativeRole -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeRole">
+        <rdfs:comment xml:lang="it">Una funzione o ruolo narrativo che un personaggio ricopre (protagonista, antagonista, mentore, ecc.)</rdfs:comment>
+        <rdfs:label xml:lang="it">Ruolo Narrativo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#NarrativeUniverse -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeUniverse">
+        <rdfs:comment xml:lang="it">Un universo fittizio che si estende attraverso molteplici opere narrative su diversi media (libri, film, serie TV, videogiochi, teatro)</rdfs:comment>
+        <rdfs:label xml:lang="it">Universo Narrativo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#NarrativeWork -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeWork">
+        <rdfs:comment xml:lang="it">Una singola opera creativa (libro, film, episodio) che fa parte di un universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Opera Narrativa</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#NonHumanCharacter -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NonHumanCharacter">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Un personaggio non umano (elfo, nano, satiro, ecc.)</rdfs:comment>
+        <rdfs:label xml:lang="it">Personaggio Non Umano</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Object -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Object">
+        <rdfs:comment xml:lang="it">Un oggetto fisico o magico all&apos;interno di un universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Oggetto</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Organization -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Organization">
+        <rdfs:comment xml:lang="it">Un gruppo, istituzione o fazione all&apos;interno di un universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Organizzazione</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#PowerArtifact -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PowerArtifact">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:comment xml:lang="it">Un oggetto con potere magico o speciale che influenza la narrativa</rdfs:comment>
+        <rdfs:label xml:lang="it">Artefatto di Potere</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Protagonist -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Protagonist">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Eroe principale o personaggio centrale della narrazione</rdfs:comment>
+        <rdfs:label xml:lang="it">Protagonista</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#SafePlace -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#SafePlace">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Un luogo considerato sicuro, un rifugio o santuario</rdfs:comment>
+        <rdfs:label xml:lang="it">Luogo Sicuro</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#School -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#School">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#TVSeries -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TVSeries">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Una serie televisiva con episodi multipli</rdfs:comment>
+        <rdfs:label xml:lang="it">Serie TV</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#TheatricalPlay -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TheatricalPlay">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Un&apos;opera rappresentata a teatro</rdfs:comment>
+        <rdfs:label xml:lang="it">Opera Teatrale</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#VideoGame -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#VideoGame">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Un videogioco interattivo</rdfs:comment>
+        <rdfs:label xml:lang="it">VideoGioco</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Weapon -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Weapon">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:comment xml:lang="it">Un&apos;arma usata dai personaggi</rdfs:comment>
+        <rdfs:label xml:lang="it">Arma</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
