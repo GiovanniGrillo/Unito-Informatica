@@ -72,11 +72,108 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#grantedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#grantedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#grantsAbility -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#grantsAbility">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+        <rdfs:comment xml:lang="it">Collega un artefatto di potere all&apos;abilità che concede</rdfs:comment>
+        <rdfs:label xml:lang="it">concede abilità</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasOriginType -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasOriginType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#originTypeOf"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#HybridCharacter"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio ibrido ai suoi tipi di origine (es: umano + divino)</rdfs:comment>
+        <rdfs:label xml:lang="it">ha tipo di origine</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#originTypeOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#originTypeOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasOriginType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasNarrativeFunction -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#hasNarrativeFunction">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">La funzione narrativa di un elemento (es: Transizione, Rifugio, Conflitto)</rdfs:comment>
+        <rdfs:label xml:lang="it">ha funzione narrativa</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasPowerType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#hasPowerType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)</rdfs:comment>
+        <rdfs:label xml:lang="it">ha tipo di potere</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Ability -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Ability">
+        <rdfs:comment xml:lang="it">Un&apos;abilità o potere che può essere concesso da un artefatto o posseduto da un personaggio</rdfs:comment>
+        <rdfs:label xml:lang="it">Abilità</rdfs:label>
+    </owl:Class>
     
 
 
@@ -129,6 +226,52 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#Divine -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Divine">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:label xml:lang="it">Divino</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#DivineAbility -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#DivineAbility">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+        <rdfs:comment xml:lang="it">Un&apos;abilità di origine divina</rdfs:comment>
+        <rdfs:label xml:lang="it">Abilità Divina</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Elven -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Elven">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:label xml:lang="it">Elfico</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Giant -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Giant">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:label xml:lang="it">Gigante</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Human -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Human">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:label xml:lang="it">Umano</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#HumanCharacter -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#HumanCharacter">
@@ -164,6 +307,16 @@
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Location">
         <rdfs:comment xml:lang="it">Un luogo o location all&apos;interno di un universo narrativo</rdfs:comment>
         <rdfs:label xml:lang="it">Luogo</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#MagicalAbility -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MagicalAbility">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+        <rdfs:comment xml:lang="it">Un&apos;abilità di natura magica</rdfs:comment>
+        <rdfs:label xml:lang="it">Abilità Magica</rdfs:label>
     </owl:Class>
     
 
@@ -261,6 +414,25 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#OriginType -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#OriginType">
+        <rdfs:label xml:lang="it">Il tipo di origine di un personaggio ibrido (umano, divino, gigante, spirito)</rdfs:label>
+        <rdfs:label xml:lang="it">Tipo di Origine</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#PhysicalAbility -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PhysicalAbility">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+        <rdfs:comment xml:lang="it">Un&apos;abilità fisica (forza, velocità, resistenza)</rdfs:comment>
+        <rdfs:label xml:lang="it">Abilità Fisica</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#PowerArtifact -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PowerArtifact">
@@ -295,6 +467,15 @@
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#School">
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Spirit -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Spirit">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
+        <rdfs:label xml:lang="it">Spirito</rdfs:label>
     </owl:Class>
     
 
