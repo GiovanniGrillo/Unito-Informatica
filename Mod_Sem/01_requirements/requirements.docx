@@ -50,6 +50,13 @@ COSA DEVE FARE IL REASONER:
 - Riconoscere oggetti come "PowerArtifact"
 - Classificare opere come "TransmediaWork"
 
+REQUISITI SODDISFATTI: (UPDATE 13/01/2026)
+- Definizione di una gerarchia concettuale multi-livello
+- Modellazione di ruoli narrativi come entità riusabili
+- Supporto a inferenze automatiche tramite restrizioni OWL
+- Supporto alla descrizione di universi transmediali
+- Interoperabilità con Linked Open Data
+
 
 3. UTENTI TARGET
 ═══════════════════════════════════════════════════════════

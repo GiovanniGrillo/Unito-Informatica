@@ -11,7 +11,7 @@ CATEGORIA 1: PERSONAGGI E RUOLI
 CQ1: Quali personaggi hanno il ruolo di "mentore"?
 Risposta attesa: Dumbledore (HP), Gandalf (LOTR), Chirone (Percy Jackson)
 
-CQ2: Quali personaggi sono protagonisti con poteri soprannaturali?
+CQ2: Quali protagonisti possiedono abilità soprannaturali o capacità narrative eccezionali?
 Risposta attesa: Harry Potter (magia), Percy Jackson (poteri divini), 
                  Frodo (resistenza corruzione anello)
 
@@ -27,7 +27,7 @@ Risposta attesa: [tabella con conteggi]
 
 CATEGORIA 2: LUOGHI E SPAZI
 ═══════════════════════════════════════════════════════════
-
+Nota: la presenza di spazi liminali non è obbligatoria per ogni universo narrativo.
 CQ6: Quali universi contengono "spazi liminali" (passaggi tra mondi)?
 Risposta attesa: 
 - HP: Binario 9¾, Pensatoio
@@ -79,7 +79,7 @@ Risposta attesa:
 - LOTR: Elfi, Nani, Hobbit, Ent, Orchi
 - Percy: Ciclopi, Centauri, Satiri, Ninfe
 
-CQ15: Quali creature sono "pericolose" vs "alleate"?
+CQ15: Quali creature svolgono un ruolo ostile o collaborativo rispetto ai protagonisti?
 
 
 CATEGORIA 6: CONFRONTI CROSS-UNIVERSO

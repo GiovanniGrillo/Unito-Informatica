@@ -10,5 +10,4 @@ Un universo narrativo è caratterizzato da:
 - oggetti o artefatti significativi
 - ruoli narrativi assunti dai personaggi
 
-L’ontologia non modella eventi narrativi in modo esaustivo, ma si concentra
-sugli elementi strutturali comuni a diversi universi narrativi.
+L’ontologia non modella eventi narrativi in modo esaustivo, ma introduce ruoli narrativi, relazioni e classificazioni funzionali a supportare inferenze automatiche.
