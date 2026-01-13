@@ -7,7 +7,8 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:vann="http://purl.org/vocab/vann/">
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:ontology="http://www.narrative-universes.org/ontology#">
     <owl:Ontology rdf:about="http://www.narrative-universes.org/ontology">
         <owl:versionIRI rdf:resource="http://www.narrative-universes.org/ontology/1.0"/>
         <dc:creator>&quot;Alessandro Olivero&quot;</dc:creator>
@@ -773,6 +774,17 @@
     <!-- http://www.narrative-universes.org/ontology#ContentRating -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#ContentRating">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_14"/>
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_G"/>
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_MA"/>
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_PG"/>
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_Y"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:comment xml:lang="it">La classificazione per età del contenuto di un&apos;opera narrativa</rdfs:comment>
         <rdfs:label xml:lang="it">Classificazione Contenuti</rdfs:label>
     </owl:Class>
@@ -1168,6 +1180,27 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#HarryPotter -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HarryPotter">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <rdfs:comment xml:lang="it">Il protagonista della saga, il ragazzo che è sopravvissuto</rdfs:comment>
+        <rdfs:label xml:lang="it">Harry Potter</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#HarryPotterUniverse -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HarryPotterUniverse">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
+        <rdfs:comment xml:lang="it">L&apos;universo narrativo fantasy creato da J.K. Rowling</rdfs:comment>
+        <rdfs:label xml:lang="it">Universo di Harry Potter</rdfs:label>
+    </owl:NamedIndividual>
     
 
 
