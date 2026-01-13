@@ -1040,6 +1040,27 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#TransmediaWork -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TransmediaWork">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Un&apos;opera narrativa che esiste su almeno due media diversi</rdfs:comment>
+        <rdfs:label xml:lang="it">Opera Transmediale</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#Trickster -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Trickster">
