@@ -839,6 +839,17 @@
     <!-- http://www.narrative-universes.org/ontology#Mentor -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Mentor">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#Character"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
+                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
         <rdfs:comment xml:lang="it">Guida saggia che insegna e supporta il protagonista</rdfs:comment>
         <rdfs:label xml:lang="it">Mentore</rdfs:label>
@@ -952,6 +963,17 @@
     <!-- http://www.narrative-universes.org/ontology#PowerArtifact -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PowerArtifact">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#Object"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
+                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
         <rdfs:comment xml:lang="it">Un oggetto con potere magico o speciale che influenza la narrativa</rdfs:comment>
         <rdfs:label xml:lang="it">Artefatto di Potere</rdfs:label>
