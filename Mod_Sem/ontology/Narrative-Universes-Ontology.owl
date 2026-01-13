@@ -80,6 +80,149 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#abilityOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#abilityOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasAbility"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#adaptationOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#adaptationOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Collega un&apos;opera (tipicamente film) all&apos;opera originale (libro) da cui è adattata</rdfs:comment>
+        <rdfs:label xml:lang="it">adattamento di</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#adaptedInto -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#adaptedInto">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#alliedWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#alliedWith">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega due personaggi che sono alleati o compagni</rdfs:comment>
+        <rdfs:label xml:lang="it">alleato con</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#appearsIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#appearsIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#appearsIn"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;opera narrativa in cui appare</rdfs:comment>
+        <rdfs:label xml:lang="it">appare in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#belongsToUniverse -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#belongsToUniverse">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#belongsToUniverse"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#MagicalCreature"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
+        <rdfs:comment xml:lang="it">Collega un&apos;entità (personaggio, luogo, oggetto, creatura) all&apos;universo narrativo a cui appartiene</rdfs:comment>
+        <rdfs:label xml:lang="it">appartiene all&apos;universo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#contains -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#contains">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#belongsToUniverse"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#created -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#created">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#createdBy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#createdBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#createdBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#createdBy"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega un oggetto o organizzazione al personaggio che lo ha creato</rdfs:comment>
+        <rdfs:label xml:lang="it">creato da</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#destroyed -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#destroyed">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#destroyedBy"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#destroyedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#destroyedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#destroyedBy"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega un oggetto al personaggio che lo ha distrutto</rdfs:comment>
+        <rdfs:label xml:lang="it">distrutto da</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#enemyOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#enemyOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega due personaggi che sono nemici dichiarati</rdfs:comment>
+        <rdfs:label xml:lang="it">nemico di</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#features -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#features">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#appearsIn"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#grantedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#grantedBy">
@@ -101,6 +244,27 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#hasAbility -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasAbility">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#hasAbility"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;abilità che possiede naturalmente (senza artefatti)</rdfs:comment>
+        <rdfs:label xml:lang="it">ha abilità</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasMember -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasMember">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#memberOf"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#hasOriginType -->
 
     <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasOriginType">
@@ -114,10 +278,229 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasPart">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#partOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasParticipant -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasParticipant">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#participatesIn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#hasRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#hasRole"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio al suo ruolo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">ha ruolo</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#influencedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#influencedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#influences"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#influences -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#influences">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#influences"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeEvent"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio, oggetto o organizzazione a un evento narrativo che influenza significativamente</rdfs:comment>
+        <rdfs:label xml:lang="it">influenza</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#locatedAt -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#locatedAt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#locatedAt"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Collega un&apos;organizzazione al luogo fisico dove si trova</rdfs:comment>
+        <rdfs:label xml:lang="it">situato in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#locationOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#locationOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#locatedAt"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#memberOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#memberOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#memberOf"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;organizzazione di cui fa parte</rdfs:comment>
+        <rdfs:label xml:lang="it">membro di</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#mentoredBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#mentoredBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#mentors -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#mentors">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio mentore al personaggio che guida e insegna</rdfs:comment>
+        <rdfs:label xml:lang="it">fa da mentore a</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#opposes -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#opposes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:comment xml:lang="it">Collega due personaggi che si oppongono in un conflitto o antagonismo</rdfs:comment>
+        <rdfs:label xml:lang="it">si oppone a</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#originTypeOf -->
 
     <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#originTypeOf">
         <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasOriginType"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#partOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#partOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#partOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Collega un luogo a un luogo più grande che lo contiene</rdfs:comment>
+        <rdfs:label xml:lang="it">parte di</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#participatesIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#participatesIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#participatesIn"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeEvent"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio a un evento narrativo a cui partecipa</rdfs:comment>
+        <rdfs:label xml:lang="it">partecipa a</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#possessedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#possessedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#possesses"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#possesses -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#possesses">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#possesses"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
+        <rdfs:comment xml:lang="it">Collega un personaggio a un oggetto che possiede o controlla</rdfs:comment>
+        <rdfs:label xml:lang="it">possiede</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#prequelOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#prequelOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#sequelOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#roleOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#roleOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasRole"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#sequelOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#sequelOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#sequelOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:comment xml:lang="it">Collega un&apos;opera all&apos;opera precedente di cui è il seguito</rdfs:comment>
+        <rdfs:label xml:lang="it">seguito di</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#setIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#setIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#setIn"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:comment xml:lang="it">Collega un&apos;opera narrativa al luogo in cui è ambientata</rdfs:comment>
+        <rdfs:label xml:lang="it">ambientato in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#settingFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#settingFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#setIn"/>
     </owl:ObjectProperty>
     
 
@@ -130,6 +513,44 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#canBeDestroyed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#canBeDestroyed">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment xml:lang="it">Indica se un artefatto può essere distrutto</rdfs:comment>
+        <rdfs:label xml:lang="it">può essere distrutto</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#dangerLevel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#dangerLevel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#MagicalCreature"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">Il livello di pericolo dell&apos;entità: Low, Medium, High</rdfs:comment>
+        <rdfs:label xml:lang="it">livello di pericolo</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#description">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">Una descrizione testuale dell&apos;entità</rdfs:comment>
+        <rdfs:label xml:lang="it">descrizione</rdfs:label>
+    </owl:DatatypeProperty>
     
 
 
@@ -153,6 +574,91 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment xml:lang="it">Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)</rdfs:comment>
         <rdfs:label xml:lang="it">ha tipo di potere</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#isOngoing -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#isOngoing">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#TVSeries"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment xml:lang="it">Indica se una serie TV è ancora in produzione</rdfs:comment>
+        <rdfs:label xml:lang="it">in corso</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#numberOfPages -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#numberOfPages">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="it">Il numero di pagine di un libro</rdfs:comment>
+        <rdfs:label xml:lang="it">numero di pagine</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#publicationDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#publicationDate">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment xml:lang="it">La data esatta di pubblicazione di un&apos;opera</rdfs:comment>
+        <rdfs:label xml:lang="it">data di pubblicazione</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#publicationYear -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#publicationYear">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="it">L&apos;anno in cui un&apos;opera è stata pubblicata</rdfs:comment>
+        <rdfs:label xml:lang="it">anno di pubblicazione</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#rating -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#rating">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment xml:lang="it">La valutazione media di un&apos;opera su scala 0-10</rdfs:comment>
+        <rdfs:label xml:lang="it">valutazione</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#runtime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#runtime">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#TVSeries"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="it">La durata in minuti di un film o episodio</rdfs:comment>
+        <rdfs:label xml:lang="it">durata</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#title -->
+
+    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#title">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="it">Il titolo di un&apos;opera narrativa</rdfs:comment>
+        <rdfs:label xml:lang="it">titolo</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -340,6 +846,16 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#MilitaryFaction -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MilitaryFaction">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:comment xml:lang="it">Un&apos;organizzazione militare, esercito o gruppo armato</rdfs:comment>
+        <rdfs:label xml:lang="it">Fazione Militare</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#Movie -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Movie">
@@ -467,6 +983,8 @@
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#School">
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+        <rdfs:comment xml:lang="it">Un&apos;istituzione educativa all&apos;interno dell&apos;universo narrativo</rdfs:comment>
+        <rdfs:label xml:lang="it">Scuola</rdfs:label>
     </owl:Class>
     
 
@@ -496,6 +1014,16 @@
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
         <rdfs:comment xml:lang="it">Un&apos;opera rappresentata a teatro</rdfs:comment>
         <rdfs:label xml:lang="it">Opera Teatrale</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Trickster -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Trickster">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
+        <rdfs:comment xml:lang="it">Personaggio che usa astuzia, inganni e comportamenti imprevedibili</rdfs:comment>
+        <rdfs:label xml:lang="it">Imbroglione</rdfs:label>
     </owl:Class>
     
 
