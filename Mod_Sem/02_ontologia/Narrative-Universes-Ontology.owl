@@ -1,1674 +1,1367 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/aless/ontologies/2026/0/untitled-ontology-3/"
-     xml:base="http://www.semanticweb.org/aless/ontologies/2026/0/untitled-ontology-3/"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:vann="http://purl.org/vocab/vann/"
-     xmlns:ontology="http://www.narrative-universes.org/ontology#">
-    <owl:Ontology rdf:about="http://www.narrative-universes.org/ontology">
-        <owl:versionIRI rdf:resource="http://www.narrative-universes.org/ontology/1.0"/>
-        <dc:creator>&quot;Alessandro Olivero&quot;</dc:creator>
-        <dc:creator>&quot;Giovanni Grillo&quot;</dc:creator>
-        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-01-10T00:00:00</dc:date>
-        <dc:description>&quot;An ontology for representing crossmedia narrative universes including characters, locations, objects, works, and narrative roles&quot;@en</dc:description>
-        <dc:title>&quot;Narrative Universes Ontology&quot;@en</dc:title>
-        <vann:preferredNamespacePrefix>&quot;nuo&quot;</vann:preferredNamespacePrefix>
-        <vann:preferredNamespaceUri>&quot;http://www.narrative-universes.org/ontology#&quot;</vann:preferredNamespaceUri>
-        <rdfs:label>&quot;Narrative Universes Ontology&quot;@en</rdfs:label>
-    </owl:Ontology>
-    
+Prefix(:=<http://www.semanticweb.org/aless/ontologies/2026/0/untitled-ontology-3/>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(vann:=<http://purl.org/vocab/vann/>)
+Prefix(ontology:=<http://www.narrative-universes.org/ontology#>)
+
+
+Ontology(<http://www.narrative-universes.org/ontology>
+<http://www.narrative-universes.org/ontology/1.0>
+Annotation(dc:creator "\"Alessandro Olivero\"")
+Annotation(dc:creator "\"Giovanni Grillo\"")
+Annotation(dc:date "2026-01-10T00:00:00"^^xsd:dateTime)
+Annotation(dc:description "\"An ontology for representing crossmedia narrative universes including characters, locations, objects, works, and narrative roles\"@en")
+Annotation(dc:title "\"Narrative Universes Ontology\"@en")
+Annotation(vann:preferredNamespacePrefix "\"nuo\"")
+Annotation(vann:preferredNamespaceUri "\"http://www.narrative-universes.org/ontology#\"")
+Annotation(rdfs:label "\"Narrative Universes Ontology\"@en")
+
+Declaration(Class(ontology:Ability))
+Declaration(Class(ontology:Ally))
+Declaration(Class(ontology:Antagonist))
+Declaration(Class(ontology:Book))
+Declaration(Class(ontology:Character))
+Declaration(Class(ontology:ContentRating))
+Declaration(Class(ontology:DangerZone))
+Declaration(Class(ontology:Divine))
+Declaration(Class(ontology:DivineAbility))
+Declaration(Class(ontology:Elven))
+Declaration(Class(ontology:Giant))
+Declaration(Class(ontology:Human))
+Declaration(Class(ontology:HumanCharacter))
+Declaration(Class(ontology:HybridCharacter))
+Declaration(Class(ontology:LiminalSpace))
+Declaration(Class(ontology:Location))
+Declaration(Class(ontology:MagicalAbility))
+Declaration(Class(ontology:MagicalCreature))
+Declaration(Class(ontology:Mentor))
+Declaration(Class(ontology:MilitaryFaction))
+Declaration(Class(ontology:MissionBasedOrganization))
+Declaration(Class(ontology:Movie))
+Declaration(Class(ontology:NarrativeEvent))
+Declaration(Class(ontology:NarrativeRole))
+Declaration(Class(ontology:NarrativeUniverse))
+Declaration(Class(ontology:NarrativeWork))
+Declaration(Class(ontology:NonHumanCharacter))
+Declaration(Class(ontology:Object))
+Declaration(Class(ontology:Organization))
+Declaration(Class(ontology:OriginType))
+Declaration(Class(ontology:PhysicalAbility))
+Declaration(Class(ontology:PowerArtifact))
+Declaration(Class(ontology:Protagonist))
+Declaration(Class(ontology:SafePlace))
+Declaration(Class(ontology:School))
+Declaration(Class(ontology:Spirit))
+Declaration(Class(ontology:TVSeries))
+Declaration(Class(ontology:TheatricalPlay))
+Declaration(Class(ontology:TransmediaWork))
+Declaration(Class(ontology:Trickster))
+Declaration(Class(ontology:VideoGame))
+Declaration(Class(ontology:Weapon))
+Declaration(ObjectProperty(ontology:abilityOf))
+Declaration(ObjectProperty(ontology:adaptationOf))
+Declaration(ObjectProperty(ontology:adaptedInto))
+Declaration(ObjectProperty(ontology:alliedWith))
+Declaration(ObjectProperty(ontology:appearsIn))
+Declaration(ObjectProperty(ontology:belongsToUniverse))
+Declaration(ObjectProperty(ontology:contains))
+Declaration(ObjectProperty(ontology:created))
+Declaration(ObjectProperty(ontology:createdBy))
+Declaration(ObjectProperty(ontology:destroyed))
+Declaration(ObjectProperty(ontology:destroyedBy))
+Declaration(ObjectProperty(ontology:enemyOf))
+Declaration(ObjectProperty(ontology:features))
+Declaration(ObjectProperty(ontology:grantedBy))
+Declaration(ObjectProperty(ontology:grantsAbility))
+Declaration(ObjectProperty(ontology:hasAbility))
+Declaration(ObjectProperty(ontology:hasMember))
+Declaration(ObjectProperty(ontology:hasOriginType))
+Declaration(ObjectProperty(ontology:hasPart))
+Declaration(ObjectProperty(ontology:hasParticipant))
+Declaration(ObjectProperty(ontology:hasRole))
+Declaration(ObjectProperty(ontology:indirectlyMentoredBy))
+Declaration(ObjectProperty(ontology:indirectlyMentors))
+Declaration(ObjectProperty(ontology:indirectlySetIn))
+Declaration(ObjectProperty(ontology:influencedBy))
+Declaration(ObjectProperty(ontology:influences))
+Declaration(ObjectProperty(ontology:locatedAt))
+Declaration(ObjectProperty(ontology:locationOf))
+Declaration(ObjectProperty(ontology:memberOf))
+Declaration(ObjectProperty(ontology:mentoredBy))
+Declaration(ObjectProperty(ontology:mentors))
+Declaration(ObjectProperty(ontology:opposes))
+Declaration(ObjectProperty(ontology:originTypeOf))
+Declaration(ObjectProperty(ontology:partOf))
+Declaration(ObjectProperty(ontology:participatesIn))
+Declaration(ObjectProperty(ontology:possessedBy))
+Declaration(ObjectProperty(ontology:possesses))
+Declaration(ObjectProperty(ontology:prequelOf))
+Declaration(ObjectProperty(ontology:roleOf))
+Declaration(ObjectProperty(ontology:sequelOf))
+Declaration(ObjectProperty(ontology:setIn))
+Declaration(ObjectProperty(ontology:settingFor))
+Declaration(DataProperty(ontology:canBeDestroyed))
+Declaration(DataProperty(ontology:dangerLevel))
+Declaration(DataProperty(ontology:description))
+Declaration(DataProperty(ontology:hasNarrativeFunction))
+Declaration(DataProperty(ontology:hasPowerType))
+Declaration(DataProperty(ontology:isOngoing))
+Declaration(DataProperty(ontology:numberOfPages))
+Declaration(DataProperty(ontology:publicationDate))
+Declaration(DataProperty(ontology:publicationYear))
+Declaration(DataProperty(ontology:rating))
+Declaration(DataProperty(ontology:runtime))
+Declaration(DataProperty(ontology:title))
+Declaration(NamedIndividual(ontology:AlbusDumbledore))
+Declaration(NamedIndividual(ontology:Anduril))
+Declaration(NamedIndividual(ontology:AnnabethChase))
+Declaration(NamedIndividual(ontology:Aragorn))
+Declaration(NamedIndividual(ontology:CampHalfBlood))
+Declaration(NamedIndividual(ontology:CampHalfBloodOrganization))
+Declaration(NamedIndividual(ontology:CelestialBronzePower))
+Declaration(NamedIndividual(ontology:ChamberOfSecrets_Book))
+Declaration(NamedIndividual(ontology:Chiron))
+Declaration(NamedIndividual(ontology:DiagonAlley))
+Declaration(NamedIndividual(ontology:DivineOrigin))
+Declaration(NamedIndividual(ontology:DominationPower))
+Declaration(NamedIndividual(ontology:ElderWand))
+Declaration(NamedIndividual(ontology:FellowshipOfTheRing))
+Declaration(NamedIndividual(ontology:FellowshipOfTheRing_Book))
+Declaration(NamedIndividual(ontology:FellowshipOfTheRing_Movie))
+Declaration(NamedIndividual(ontology:ForbiddenForest))
+Declaration(NamedIndividual(ontology:FrodoBaggins))
+Declaration(NamedIndividual(ontology:Gandalf))
+Declaration(NamedIndividual(ontology:GroverUnderwood))
+Declaration(NamedIndividual(ontology:HarryPotter))
+Declaration(NamedIndividual(ontology:HarryPotterUniverse))
+Declaration(NamedIndividual(ontology:Hogwarts))
+Declaration(NamedIndividual(ontology:HogwartsSchool))
+Declaration(NamedIndividual(ontology:HumanOrigin))
+Declaration(NamedIndividual(ontology:InvisibilityCloak))
+Declaration(NamedIndividual(ontology:KinglyAuthority))
+Declaration(NamedIndividual(ontology:Legolas))
+Declaration(NamedIndividual(ontology:LightningThief_Book))
+Declaration(NamedIndividual(ontology:LightningThief_Movie))
+Declaration(NamedIndividual(ontology:LukeCastellan))
+Declaration(NamedIndividual(ontology:MagicalInvisibility))
+Declaration(NamedIndividual(ontology:MiddleEarthUniverse))
+Declaration(NamedIndividual(ontology:Mordor))
+Declaration(NamedIndividual(ontology:MountDoom))
+Declaration(NamedIndividual(ontology:MountOlympus))
+Declaration(NamedIndividual(ontology:OneRing))
+Declaration(NamedIndividual(ontology:Parseltongue))
+Declaration(NamedIndividual(ontology:PercyJackson))
+Declaration(NamedIndividual(ontology:PercyJacksonUniverse))
+Declaration(NamedIndividual(ontology:PhilosophersStone_Book))
+Declaration(NamedIndividual(ontology:PhilosophersStone_Movie))
+Declaration(NamedIndividual(ontology:Riptide))
+Declaration(NamedIndividual(ontology:Rivendell))
+Declaration(NamedIndividual(ontology:Sauron))
+Declaration(NamedIndividual(ontology:SeaOfMonsters_Book))
+Declaration(NamedIndividual(ontology:TV_14))
+Declaration(NamedIndividual(ontology:TV_G))
+Declaration(NamedIndividual(ontology:TV_MA))
+Declaration(NamedIndividual(ontology:TV_PG))
+Declaration(NamedIndividual(ontology:TV_Y))
+Declaration(NamedIndividual(ontology:Tartarus))
+Declaration(NamedIndividual(ontology:TheShire))
+Declaration(NamedIndividual(ontology:TheUnderworld))
+Declaration(NamedIndividual(ontology:TrueInvisibility))
+Declaration(NamedIndividual(ontology:UnbeatableMagic))
+Declaration(NamedIndividual(ontology:WaterControl))
+Declaration(NamedIndividual(ontology:YankeeCap))
+Declaration(AnnotationProperty(dc:creator))
+Declaration(AnnotationProperty(dc:date))
+Declaration(AnnotationProperty(dc:description))
+Declaration(AnnotationProperty(dc:title))
+Declaration(AnnotationProperty(vann:preferredNamespacePrefix))
+Declaration(AnnotationProperty(vann:preferredNamespaceUri))
+
+############################
+#   Object Properties
+############################
+
+# Object Property: ontology:abilityOf (ontology:abilityOf)
+
+SubObjectPropertyOf(ontology:abilityOf ontology:hasAbility)
+
+# Object Property: ontology:adaptationOf (adattamento di)
+
+AnnotationAssertion(rdfs:comment ontology:adaptationOf "Collega un'opera (tipicamente film) all'opera originale (libro) da cui è adattata"@it)
+AnnotationAssertion(rdfs:label ontology:adaptationOf "adattamento di"@it)
+SubObjectPropertyOf(ontology:adaptationOf owl:topObjectProperty)
+InverseObjectProperties(ontology:adaptationOf ontology:adaptationOf)
+ObjectPropertyDomain(ontology:adaptationOf ontology:NarrativeWork)
+ObjectPropertyRange(ontology:adaptationOf ontology:NarrativeWork)
+
+# Object Property: ontology:adaptedInto (ontology:adaptedInto)
+
+SubObjectPropertyOf(ontology:adaptedInto ontology:adaptationOf)
+
+# Object Property: ontology:alliedWith (alleato con)
+
+AnnotationAssertion(rdfs:comment ontology:alliedWith "Collega due personaggi che sono alleati o compagni"@it)
+AnnotationAssertion(rdfs:label ontology:alliedWith "alleato con"@it)
+SubObjectPropertyOf(ontology:alliedWith owl:topObjectProperty)
+SymmetricObjectProperty(ontology:alliedWith)
+ObjectPropertyDomain(ontology:alliedWith ontology:Character)
+ObjectPropertyRange(ontology:alliedWith ontology:Character)
+
+# Object Property: ontology:appearsIn (appare in)
+
+AnnotationAssertion(rdfs:comment ontology:appearsIn "Collega un personaggio a un'opera narrativa in cui appare"@it)
+AnnotationAssertion(rdfs:label ontology:appearsIn "appare in"@it)
+SubObjectPropertyOf(ontology:appearsIn owl:topObjectProperty)
+InverseObjectProperties(ontology:appearsIn ontology:appearsIn)
+ObjectPropertyDomain(ontology:appearsIn ontology:Character)
+ObjectPropertyRange(ontology:appearsIn ontology:NarrativeWork)
+
+# Object Property: ontology:belongsToUniverse (appartiene all'universo)
+
+AnnotationAssertion(rdfs:comment ontology:belongsToUniverse "Collega un'entità (personaggio, luogo, oggetto, creatura) all'universo narrativo a cui appartiene"@it)
+AnnotationAssertion(rdfs:label ontology:belongsToUniverse "appartiene all'universo"@it)
+SubObjectPropertyOf(ontology:belongsToUniverse owl:topObjectProperty)
+InverseObjectProperties(ontology:belongsToUniverse ontology:belongsToUniverse)
+ObjectPropertyDomain(ontology:belongsToUniverse ontology:Character)
+ObjectPropertyDomain(ontology:belongsToUniverse ontology:Location)
+ObjectPropertyDomain(ontology:belongsToUniverse ontology:MagicalCreature)
+ObjectPropertyDomain(ontology:belongsToUniverse ontology:Object)
+ObjectPropertyRange(ontology:belongsToUniverse ontology:NarrativeUniverse)
+
+# Object Property: ontology:contains (ontology:contains)
+
+SubObjectPropertyOf(ontology:contains ontology:belongsToUniverse)
+
+# Object Property: ontology:created (ontology:created)
+
+SubObjectPropertyOf(ontology:created ontology:createdBy)
+
+# Object Property: ontology:createdBy (creato da)
+
+AnnotationAssertion(rdfs:comment ontology:createdBy "Collega un oggetto o organizzazione al personaggio che lo ha creato"@it)
+AnnotationAssertion(rdfs:label ontology:createdBy "creato da"@it)
+SubObjectPropertyOf(ontology:createdBy owl:topObjectProperty)
+InverseObjectProperties(ontology:createdBy ontology:createdBy)
+ObjectPropertyDomain(ontology:createdBy ontology:Object)
+ObjectPropertyDomain(ontology:createdBy ontology:Organization)
+ObjectPropertyRange(ontology:createdBy ontology:Character)
+
+# Object Property: ontology:destroyed (ontology:destroyed)
+
+SubObjectPropertyOf(ontology:destroyed ontology:destroyedBy)
+
+# Object Property: ontology:destroyedBy (distrutto da)
+
+AnnotationAssertion(rdfs:comment ontology:destroyedBy "Collega un oggetto al personaggio che lo ha distrutto"@it)
+AnnotationAssertion(rdfs:label ontology:destroyedBy "distrutto da"@it)
+SubObjectPropertyOf(ontology:destroyedBy owl:topObjectProperty)
+InverseObjectProperties(ontology:destroyedBy ontology:destroyedBy)
+ObjectPropertyDomain(ontology:destroyedBy ontology:Object)
+ObjectPropertyRange(ontology:destroyedBy ontology:Character)
+
+# Object Property: ontology:enemyOf (nemico di)
+
+AnnotationAssertion(rdfs:comment ontology:enemyOf "Collega due personaggi che sono nemici dichiarati"@it)
+AnnotationAssertion(rdfs:label ontology:enemyOf "nemico di"@it)
+SubObjectPropertyOf(ontology:enemyOf owl:topObjectProperty)
+SymmetricObjectProperty(ontology:enemyOf)
+ObjectPropertyDomain(ontology:enemyOf ontology:Character)
+ObjectPropertyRange(ontology:enemyOf ontology:Character)
+
+# Object Property: ontology:features (ontology:features)
+
+SubObjectPropertyOf(ontology:features ontology:appearsIn)
+
+# Object Property: ontology:grantedBy (ontology:grantedBy)
+
+SubObjectPropertyOf(ontology:grantedBy ontology:grantsAbility)
+InverseObjectProperties(ontology:grantedBy ontology:grantsAbility)
+
+# Object Property: ontology:grantsAbility (concede abilità)
+
+AnnotationAssertion(rdfs:comment ontology:grantsAbility "Collega un artefatto di potere all'abilità che concede"@it)
+AnnotationAssertion(rdfs:label ontology:grantsAbility "concede abilità"@it)
+SubObjectPropertyOf(ontology:grantsAbility owl:topObjectProperty)
+ObjectPropertyDomain(ontology:grantsAbility ontology:PowerArtifact)
+ObjectPropertyRange(ontology:grantsAbility ontology:Ability)
+
+# Object Property: ontology:hasAbility (ha abilità)
+
+AnnotationAssertion(rdfs:comment ontology:hasAbility "Collega un personaggio a un'abilità che possiede naturalmente (senza artefatti)"@it)
+AnnotationAssertion(rdfs:label ontology:hasAbility "ha abilità"@it)
+SubObjectPropertyOf(ontology:hasAbility owl:topObjectProperty)
+InverseObjectProperties(ontology:hasAbility ontology:hasAbility)
+ObjectPropertyDomain(ontology:hasAbility ontology:Character)
+ObjectPropertyRange(ontology:hasAbility ontology:Ability)
+
+# Object Property: ontology:hasMember (ontology:hasMember)
+
+SubObjectPropertyOf(ontology:hasMember ontology:memberOf)
+
+# Object Property: ontology:hasOriginType (ha tipo di origine)
+
+AnnotationAssertion(rdfs:comment ontology:hasOriginType "Collega un personaggio ibrido ai suoi tipi di origine (es: umano + divino)"@it)
+AnnotationAssertion(rdfs:label ontology:hasOriginType "ha tipo di origine"@it)
+SubObjectPropertyOf(ontology:hasOriginType owl:topObjectProperty)
+InverseObjectProperties(ontology:hasOriginType ontology:originTypeOf)
+ObjectPropertyDomain(ontology:hasOriginType ontology:HybridCharacter)
+ObjectPropertyRange(ontology:hasOriginType ontology:OriginType)
+
+# Object Property: ontology:hasPart (ontology:hasPart)
+
+SubObjectPropertyOf(ontology:hasPart ontology:partOf)
+
+# Object Property: ontology:hasParticipant (ontology:hasParticipant)
+
+SubObjectPropertyOf(ontology:hasParticipant ontology:participatesIn)
+
+# Object Property: ontology:hasRole (ha ruolo)
+
+AnnotationAssertion(rdfs:comment ontology:hasRole "Collega un personaggio al suo ruolo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:hasRole "ha ruolo"@it)
+SubObjectPropertyOf(ontology:hasRole owl:topObjectProperty)
+InverseObjectProperties(ontology:hasRole ontology:hasRole)
+ObjectPropertyDomain(ontology:hasRole ontology:Character)
+ObjectPropertyRange(ontology:hasRole ontology:NarrativeRole)
+
+# Object Property: ontology:indirectlyMentoredBy (ontology:indirectlyMentoredBy)
+
+SubObjectPropertyOf(ontology:indirectlyMentoredBy ontology:indirectlyMentors)
+
+# Object Property: ontology:indirectlyMentors (fa da mentore indirettamente)
+
+AnnotationAssertion(rdfs:comment ontology:indirectlyMentors "Indica una relazione di mentoring indiretta attraverso alleanze"@it)
+AnnotationAssertion(rdfs:label ontology:indirectlyMentors "fa da mentore indirettamente"@it)
+SubObjectPropertyOf(ontology:indirectlyMentors owl:topObjectProperty)
+InverseObjectProperties(ontology:indirectlyMentors ontology:indirectlyMentors)
+ObjectPropertyDomain(ontology:indirectlyMentors ontology:Character)
+ObjectPropertyRange(ontology:indirectlyMentors ontology:Character)
+
+# Object Property: ontology:indirectlySetIn (ontology:indirectlySetIn)
+
+SubObjectPropertyOf(ontology:indirectlySetIn owl:topObjectProperty)
+
+# Object Property: ontology:influencedBy (ontology:influencedBy)
+
+SubObjectPropertyOf(ontology:influencedBy ontology:influences)
+
+# Object Property: ontology:influences (influenza)
+
+AnnotationAssertion(rdfs:comment ontology:influences "Collega un personaggio, oggetto o organizzazione a un evento narrativo che influenza significativamente"@it)
+AnnotationAssertion(rdfs:label ontology:influences "influenza"@it)
+SubObjectPropertyOf(ontology:influences owl:topObjectProperty)
+InverseObjectProperties(ontology:influences ontology:influences)
+ObjectPropertyDomain(ontology:influences ontology:Character)
+ObjectPropertyDomain(ontology:influences ontology:Object)
+ObjectPropertyDomain(ontology:influences ontology:Organization)
+ObjectPropertyRange(ontology:influences ontology:NarrativeEvent)
+
+# Object Property: ontology:locatedAt (situato in)
+
+AnnotationAssertion(rdfs:comment ontology:locatedAt "Collega un'organizzazione al luogo fisico dove si trova"@it)
+AnnotationAssertion(rdfs:label ontology:locatedAt "situato in"@it)
+SubObjectPropertyOf(ontology:locatedAt owl:topObjectProperty)
+InverseObjectProperties(ontology:locatedAt ontology:locatedAt)
+ObjectPropertyDomain(ontology:locatedAt ontology:Organization)
+ObjectPropertyRange(ontology:locatedAt ontology:Location)
+
+# Object Property: ontology:locationOf (ontology:locationOf)
+
+SubObjectPropertyOf(ontology:locationOf ontology:locatedAt)
+
+# Object Property: ontology:memberOf (membro di)
+
+AnnotationAssertion(rdfs:comment ontology:memberOf "Collega un personaggio a un'organizzazione di cui fa parte"@it)
+AnnotationAssertion(rdfs:label ontology:memberOf "membro di"@it)
+SubObjectPropertyOf(ontology:memberOf owl:topObjectProperty)
+InverseObjectProperties(ontology:memberOf ontology:memberOf)
+ObjectPropertyDomain(ontology:memberOf ontology:Character)
+ObjectPropertyRange(ontology:memberOf ontology:Organization)
+
+# Object Property: ontology:mentoredBy (ontology:mentoredBy)
+
+SubObjectPropertyOf(ontology:mentoredBy ontology:mentors)
+
+# Object Property: ontology:mentors (fa da mentore a)
+
+AnnotationAssertion(rdfs:comment ontology:mentors "Collega un personaggio mentore al personaggio che guida e insegna"@it)
+AnnotationAssertion(rdfs:label ontology:mentors "fa da mentore a"@it)
+SubObjectPropertyOf(ontology:mentors owl:topObjectProperty)
+InverseObjectProperties(ontology:mentors ontology:mentors)
+ObjectPropertyDomain(ontology:mentors ontology:Character)
+ObjectPropertyRange(ontology:mentors ontology:Character)
+
+# Object Property: ontology:opposes (si oppone a)
+
+AnnotationAssertion(rdfs:comment ontology:opposes "Collega due personaggi che si oppongono in un conflitto o antagonismo"@it)
+AnnotationAssertion(rdfs:label ontology:opposes "si oppone a"@it)
+SubObjectPropertyOf(ontology:opposes owl:topObjectProperty)
+SymmetricObjectProperty(ontology:opposes)
+ObjectPropertyDomain(ontology:opposes ontology:Character)
+ObjectPropertyRange(ontology:opposes ontology:Character)
+
+# Object Property: ontology:originTypeOf (ontology:originTypeOf)
+
+SubObjectPropertyOf(ontology:originTypeOf ontology:hasOriginType)
+
+# Object Property: ontology:partOf (parte di)
+
+AnnotationAssertion(rdfs:comment ontology:partOf "Collega un luogo a un luogo più grande che lo contiene"@it)
+AnnotationAssertion(rdfs:label ontology:partOf "parte di"@it)
+SubObjectPropertyOf(ontology:partOf owl:topObjectProperty)
+InverseObjectProperties(ontology:partOf ontology:partOf)
+TransitiveObjectProperty(ontology:partOf)
+ObjectPropertyDomain(ontology:partOf ontology:Location)
+ObjectPropertyRange(ontology:partOf ontology:Location)
+
+# Object Property: ontology:participatesIn (partecipa a)
+
+AnnotationAssertion(rdfs:comment ontology:participatesIn "Collega un personaggio a un evento narrativo a cui partecipa"@it)
+AnnotationAssertion(rdfs:label ontology:participatesIn "partecipa a"@it)
+SubObjectPropertyOf(ontology:participatesIn owl:topObjectProperty)
+InverseObjectProperties(ontology:participatesIn ontology:participatesIn)
+ObjectPropertyDomain(ontology:participatesIn ontology:Character)
+ObjectPropertyRange(ontology:participatesIn ontology:NarrativeEvent)
+
+# Object Property: ontology:possessedBy (ontology:possessedBy)
+
+SubObjectPropertyOf(ontology:possessedBy ontology:possesses)
+
+# Object Property: ontology:possesses (possiede)
+
+AnnotationAssertion(rdfs:comment ontology:possesses "Collega un personaggio a un oggetto che possiede o controlla"@it)
+AnnotationAssertion(rdfs:label ontology:possesses "possiede"@it)
+SubObjectPropertyOf(ontology:possesses owl:topObjectProperty)
+InverseObjectProperties(ontology:possesses ontology:possesses)
+ObjectPropertyDomain(ontology:possesses ontology:Location)
+ObjectPropertyRange(ontology:possesses ontology:Object)
+
+# Object Property: ontology:prequelOf (ontology:prequelOf)
+
+SubObjectPropertyOf(ontology:prequelOf ontology:sequelOf)
+
+# Object Property: ontology:roleOf (ontology:roleOf)
+
+SubObjectPropertyOf(ontology:roleOf ontology:hasRole)
+
+# Object Property: ontology:sequelOf (seguito di)
+
+AnnotationAssertion(rdfs:comment ontology:sequelOf "Collega un'opera all'opera precedente di cui è il seguito"@it)
+AnnotationAssertion(rdfs:label ontology:sequelOf "seguito di"@it)
+SubObjectPropertyOf(ontology:sequelOf owl:topObjectProperty)
+InverseObjectProperties(ontology:sequelOf ontology:sequelOf)
+TransitiveObjectProperty(ontology:sequelOf)
+ObjectPropertyDomain(ontology:sequelOf ontology:NarrativeWork)
+ObjectPropertyRange(ontology:sequelOf ontology:NarrativeWork)
+
+# Object Property: ontology:setIn (ambientato in)
+
+AnnotationAssertion(rdfs:comment ontology:setIn "Collega un'opera narrativa al luogo in cui è ambientata"@it)
+AnnotationAssertion(rdfs:label ontology:setIn "ambientato in"@it)
+SubObjectPropertyOf(ontology:setIn owl:topObjectProperty)
+InverseObjectProperties(ontology:setIn ontology:setIn)
+ObjectPropertyDomain(ontology:setIn ontology:NarrativeWork)
+ObjectPropertyRange(ontology:setIn ontology:Location)
+
+# Object Property: ontology:settingFor (ontology:settingFor)
+
+SubObjectPropertyOf(ontology:settingFor ontology:setIn)
+
+# Object Property: owl:topObjectProperty (indirettamente ambientato in)
+
+AnnotationAssertion(rdfs:comment owl:topObjectProperty "Indica che un'opera è ambientata indirettamente in un luogo che contiene il luogo principale"@it)
+AnnotationAssertion(rdfs:label owl:topObjectProperty "indirettamente ambientato in"@it)
+ObjectPropertyDomain(owl:topObjectProperty ontology:NarrativeWork)
+ObjectPropertyRange(owl:topObjectProperty ontology:Location)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: ontology:canBeDestroyed (può essere distrutto)
+
+AnnotationAssertion(rdfs:comment ontology:canBeDestroyed "Indica se un artefatto può essere distrutto"@it)
+AnnotationAssertion(rdfs:label ontology:canBeDestroyed "può essere distrutto"@it)
+SubDataPropertyOf(ontology:canBeDestroyed owl:topDataProperty)
+DataPropertyDomain(ontology:canBeDestroyed ontology:PowerArtifact)
+DataPropertyRange(ontology:canBeDestroyed xsd:boolean)
+
+# Data Property: ontology:dangerLevel (livello di pericolo)
+
+AnnotationAssertion(rdfs:comment ontology:dangerLevel "Il livello di pericolo dell'entità: Low, Medium, High"@it)
+AnnotationAssertion(rdfs:label ontology:dangerLevel "livello di pericolo"@it)
+SubDataPropertyOf(ontology:dangerLevel owl:topDataProperty)
+DataPropertyDomain(ontology:dangerLevel ontology:MagicalCreature)
+DataPropertyRange(ontology:dangerLevel xsd:string)
+
+# Data Property: ontology:description (descrizione)
+
+AnnotationAssertion(rdfs:comment ontology:description "Una descrizione testuale dell'entità"@it)
+AnnotationAssertion(rdfs:label ontology:description "descrizione"@it)
+SubDataPropertyOf(ontology:description owl:topDataProperty)
+DataPropertyDomain(ontology:description ontology:Character)
+DataPropertyDomain(ontology:description ontology:Location)
+DataPropertyDomain(ontology:description ontology:NarrativeWork)
+DataPropertyRange(ontology:description xsd:string)
+
+# Data Property: ontology:hasNarrativeFunction (ha funzione narrativa)
+
+AnnotationAssertion(rdfs:comment ontology:hasNarrativeFunction "La funzione narrativa di un elemento (es: Transizione, Rifugio, Conflitto)"@it)
+AnnotationAssertion(rdfs:label ontology:hasNarrativeFunction "ha funzione narrativa"@it)
+SubDataPropertyOf(ontology:hasNarrativeFunction owl:topDataProperty)
+DataPropertyDomain(ontology:hasNarrativeFunction ontology:Location)
+DataPropertyRange(ontology:hasNarrativeFunction xsd:string)
+
+# Data Property: ontology:hasPowerType (ha tipo di potere)
+
+AnnotationAssertion(rdfs:comment ontology:hasPowerType "Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)"@it)
+AnnotationAssertion(rdfs:label ontology:hasPowerType "ha tipo di potere"@it)
+SubDataPropertyOf(ontology:hasPowerType owl:topDataProperty)
+DataPropertyDomain(ontology:hasPowerType ontology:PowerArtifact)
+DataPropertyRange(ontology:hasPowerType xsd:string)
+
+# Data Property: ontology:isOngoing (in corso)
+
+AnnotationAssertion(rdfs:comment ontology:isOngoing "Indica se una serie TV è ancora in produzione"@it)
+AnnotationAssertion(rdfs:label ontology:isOngoing "in corso"@it)
+SubDataPropertyOf(ontology:isOngoing owl:topDataProperty)
+DataPropertyDomain(ontology:isOngoing ontology:TVSeries)
+DataPropertyRange(ontology:isOngoing xsd:boolean)
+
+# Data Property: ontology:numberOfPages (numero di pagine)
+
+AnnotationAssertion(rdfs:comment ontology:numberOfPages "Il numero di pagine di un libro"@it)
+AnnotationAssertion(rdfs:label ontology:numberOfPages "numero di pagine"@it)
+SubDataPropertyOf(ontology:numberOfPages owl:topDataProperty)
+DataPropertyDomain(ontology:numberOfPages ontology:Book)
+DataPropertyRange(ontology:numberOfPages xsd:integer)
+
+# Data Property: ontology:publicationDate (data di pubblicazione)
 
+AnnotationAssertion(rdfs:comment ontology:publicationDate "La data esatta di pubblicazione di un'opera"@it)
+AnnotationAssertion(rdfs:label ontology:publicationDate "data di pubblicazione"@it)
+SubDataPropertyOf(ontology:publicationDate owl:topDataProperty)
+DataPropertyDomain(ontology:publicationDate ontology:NarrativeWork)
+DataPropertyRange(ontology:publicationDate xsd:dateTime)
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+# Data Property: ontology:publicationYear (anno di pubblicazione)
 
-    
+AnnotationAssertion(rdfs:comment ontology:publicationYear "L'anno in cui un'opera è stata pubblicata"@it)
+AnnotationAssertion(rdfs:label ontology:publicationYear "anno di pubblicazione"@it)
+SubDataPropertyOf(ontology:publicationYear owl:topDataProperty)
+DataPropertyDomain(ontology:publicationYear ontology:NarrativeWork)
+DataPropertyRange(ontology:publicationYear xsd:integer)
 
+# Data Property: ontology:rating (valutazione)
 
-    <!-- http://purl.org/dc/elements/1.1/creator -->
+AnnotationAssertion(rdfs:comment ontology:rating "La valutazione media di un'opera su scala 0-10"@it)
+AnnotationAssertion(rdfs:label ontology:rating "valutazione"@it)
+SubDataPropertyOf(ontology:rating owl:topDataProperty)
+DataPropertyDomain(ontology:rating ontology:NarrativeWork)
+DataPropertyRange(ontology:rating xsd:float)
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
-    
+# Data Property: ontology:runtime (durata)
 
+AnnotationAssertion(rdfs:comment ontology:runtime "La durata in minuti di un film o episodio"@it)
+AnnotationAssertion(rdfs:label ontology:runtime "durata"@it)
+SubDataPropertyOf(ontology:runtime owl:topDataProperty)
+DataPropertyDomain(ontology:runtime ontology:Movie)
+DataPropertyDomain(ontology:runtime ontology:TVSeries)
+DataPropertyRange(ontology:runtime xsd:integer)
 
-    <!-- http://purl.org/dc/elements/1.1/date -->
+# Data Property: ontology:title (titolo)
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/date"/>
-    
+AnnotationAssertion(rdfs:comment ontology:title "Il titolo di un'opera narrativa"@it)
+AnnotationAssertion(rdfs:label ontology:title "titolo"@it)
+SubDataPropertyOf(ontology:title owl:topDataProperty)
+DataPropertyDomain(ontology:title ontology:NarrativeWork)
+DataPropertyRange(ontology:title xsd:string)
 
 
-    <!-- http://purl.org/dc/elements/1.1/description -->
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
-    
+############################
+#   Classes
+############################
 
+# Class: ontology:Ability (Abilità)
 
-    <!-- http://purl.org/dc/elements/1.1/title -->
+AnnotationAssertion(rdfs:comment ontology:Ability "Un'abilità o potere che può essere concesso da un artefatto o posseduto da un personaggio"@it)
+AnnotationAssertion(rdfs:label ontology:Ability "Abilità"@it)
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
-    
+# Class: ontology:Ally (Alleato)
 
+AnnotationAssertion(rdfs:comment ontology:Ally "Amico o compagno che aiuta il protagonista"@it)
+AnnotationAssertion(rdfs:label ontology:Ally "Alleato"@it)
+SubClassOf(ontology:Ally ontology:NarrativeRole)
 
-    <!-- http://purl.org/vocab/vann/preferredNamespacePrefix -->
+# Class: ontology:Antagonist (Antagonista)
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
-    
+AnnotationAssertion(rdfs:comment ontology:Antagonist "Villain principale o forza oppositrice"@it)
+AnnotationAssertion(rdfs:label ontology:Antagonist "Antagonista"@it)
+SubClassOf(ontology:Antagonist ontology:NarrativeRole)
 
+# Class: ontology:Book (Libro)
 
-    <!-- http://purl.org/vocab/vann/preferredNamespaceUri -->
+AnnotationAssertion(rdfs:comment ontology:Book "Un'opera letteraria scritta, tipicamente un romanzo o una serie di libri"@it)
+AnnotationAssertion(rdfs:label ontology:Book "Libro"@it)
+SubClassOf(ontology:Book ontology:NarrativeWork)
 
-    <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
-    
+# Class: ontology:Character (Personaggio)
 
+AnnotationAssertion(rdfs:comment ontology:Character "Un personaggio fittizio che appare in una o più opere narrative"@it)
+AnnotationAssertion(rdfs:label ontology:Character "Personaggio"@it)
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+# Class: ontology:ContentRating (Classificazione Contenuti)
 
-    
+AnnotationAssertion(rdfs:comment ontology:ContentRating "La classificazione per età del contenuto di un'opera narrativa"@it)
+AnnotationAssertion(rdfs:label ontology:ContentRating "Classificazione Contenuti"@it)
+EquivalentClasses(ontology:ContentRating ObjectOneOf(ontology:TV_14 ontology:TV_G ontology:TV_MA ontology:TV_PG ontology:TV_Y))
 
+# Class: ontology:DangerZone (Zona Pericolosa)
 
-    <!-- http://www.narrative-universes.org/ontology#abilityOf -->
+AnnotationAssertion(rdfs:comment ontology:DangerZone "Un luogo pericoloso o ostile"@it)
+AnnotationAssertion(rdfs:label ontology:DangerZone "Zona Pericolosa"@it)
+SubClassOf(ontology:DangerZone ontology:Location)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#abilityOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasAbility"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:Divine (Divino)
 
+AnnotationAssertion(rdfs:label ontology:Divine "Divino"@it)
+SubClassOf(ontology:Divine ontology:OriginType)
 
-    <!-- http://www.narrative-universes.org/ontology#adaptationOf -->
+# Class: ontology:DivineAbility (Abilità Divina)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#adaptationOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Collega un&apos;opera (tipicamente film) all&apos;opera originale (libro) da cui è adattata</rdfs:comment>
-        <rdfs:label xml:lang="it">adattamento di</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:DivineAbility "Un'abilità di origine divina"@it)
+AnnotationAssertion(rdfs:label ontology:DivineAbility "Abilità Divina"@it)
+SubClassOf(ontology:DivineAbility ontology:Ability)
 
+# Class: ontology:Elven (Elfico)
 
-    <!-- http://www.narrative-universes.org/ontology#adaptedInto -->
+AnnotationAssertion(rdfs:label ontology:Elven "Elfico"@it)
+SubClassOf(ontology:Elven ontology:OriginType)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#adaptedInto">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:Giant (Gigante)
 
+AnnotationAssertion(rdfs:label ontology:Giant "Gigante"@it)
+SubClassOf(ontology:Giant ontology:OriginType)
 
-    <!-- http://www.narrative-universes.org/ontology#alliedWith -->
+# Class: ontology:Human (Umano)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#alliedWith">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega due personaggi che sono alleati o compagni</rdfs:comment>
-        <rdfs:label xml:lang="it">alleato con</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:label ontology:Human "Umano"@it)
+SubClassOf(ontology:Human ontology:OriginType)
 
+# Class: ontology:HumanCharacter (Personaggio Umano)
 
-    <!-- http://www.narrative-universes.org/ontology#appearsIn -->
+AnnotationAssertion(rdfs:comment ontology:HumanCharacter "Un personaggio completamente umano"@it)
+AnnotationAssertion(rdfs:label ontology:HumanCharacter "Personaggio Umano"@it)
+SubClassOf(ontology:HumanCharacter ontology:Character)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#appearsIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#appearsIn"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;opera narrativa in cui appare</rdfs:comment>
-        <rdfs:label xml:lang="it">appare in</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:HybridCharacter (Personaggio Ibrido)
 
+AnnotationAssertion(rdfs:comment ontology:HybridCharacter "Un personaggio di eredità mista (semidio, mezzo gigante, ecc.)"@it)
+AnnotationAssertion(rdfs:label ontology:HybridCharacter "Personaggio Ibrido"@it)
+SubClassOf(ontology:HybridCharacter ontology:Character)
 
-    <!-- http://www.narrative-universes.org/ontology#belongsToUniverse -->
+# Class: ontology:LiminalSpace (Spazio Liminale)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#belongsToUniverse">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#belongsToUniverse"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#MagicalCreature"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
-        <rdfs:comment xml:lang="it">Collega un&apos;entità (personaggio, luogo, oggetto, creatura) all&apos;universo narrativo a cui appartiene</rdfs:comment>
-        <rdfs:label xml:lang="it">appartiene all&apos;universo</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:LiminalSpace "Una soglia o passaggio tra mondi o dimensioni"@it)
+AnnotationAssertion(rdfs:label ontology:LiminalSpace "Spazio Liminale"@it)
+SubClassOf(ontology:LiminalSpace ontology:Location)
 
+# Class: ontology:Location (Luogo)
 
-    <!-- http://www.narrative-universes.org/ontology#contains -->
+AnnotationAssertion(rdfs:comment ontology:Location "Un luogo o location all'interno di un universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:Location "Luogo"@it)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#contains">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#belongsToUniverse"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:MagicalAbility (Abilità Magica)
 
+AnnotationAssertion(rdfs:comment ontology:MagicalAbility "Un'abilità di natura magica"@it)
+AnnotationAssertion(rdfs:label ontology:MagicalAbility "Abilità Magica"@it)
+SubClassOf(ontology:MagicalAbility ontology:Ability)
 
-    <!-- http://www.narrative-universes.org/ontology#created -->
+# Class: ontology:MagicalCreature (Creatura Magica)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#created">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#createdBy"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:MagicalCreature "Una creatura non umana o soprannaturale in un universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:MagicalCreature "Creatura Magica"@it)
 
+# Class: ontology:Mentor (Mentore)
 
-    <!-- http://www.narrative-universes.org/ontology#createdBy -->
+AnnotationAssertion(rdfs:comment ontology:Mentor "Guida saggia che insegna e supporta il protagonista"@it)
+AnnotationAssertion(rdfs:label ontology:Mentor "Mentore"@it)
+EquivalentClasses(ontology:Mentor ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:mentors ontology:Character)))
+SubClassOf(ontology:Mentor ontology:NarrativeRole)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#createdBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#createdBy"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega un oggetto o organizzazione al personaggio che lo ha creato</rdfs:comment>
-        <rdfs:label xml:lang="it">creato da</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:MilitaryFaction (Fazione Militare)
 
+AnnotationAssertion(rdfs:comment ontology:MilitaryFaction "Un'organizzazione militare, esercito o gruppo armato"@it)
+AnnotationAssertion(rdfs:label ontology:MilitaryFaction "Fazione Militare"@it)
+SubClassOf(ontology:MilitaryFaction ontology:Organization)
 
-    <!-- http://www.narrative-universes.org/ontology#destroyed -->
+# Class: ontology:MissionBasedOrganization (ontology:MissionBasedOrganization)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#destroyed">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#destroyedBy"/>
-    </owl:ObjectProperty>
-    
+SubClassOf(ontology:MissionBasedOrganization ontology:Organization)
 
+# Class: ontology:Movie (Film)
 
-    <!-- http://www.narrative-universes.org/ontology#destroyedBy -->
+AnnotationAssertion(rdfs:comment ontology:Movie "Un film cinematografico"@it)
+AnnotationAssertion(rdfs:label ontology:Movie "Film"@it)
+SubClassOf(ontology:Movie ontology:NarrativeWork)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#destroyedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#destroyedBy"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega un oggetto al personaggio che lo ha distrutto</rdfs:comment>
-        <rdfs:label xml:lang="it">distrutto da</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:NarrativeEvent (Evento Narrativo)
 
+AnnotationAssertion(rdfs:comment ontology:NarrativeEvent "Un'opera letteraria scritta, tipicamente un romanzo o una serie di libri"@it)
+AnnotationAssertion(rdfs:label ontology:NarrativeEvent "Evento Narrativo"@it)
 
-    <!-- http://www.narrative-universes.org/ontology#enemyOf -->
+# Class: ontology:NarrativeRole (Ruolo Narrativo)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#enemyOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega due personaggi che sono nemici dichiarati</rdfs:comment>
-        <rdfs:label xml:lang="it">nemico di</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:NarrativeRole "Una funzione o ruolo narrativo che un personaggio ricopre (protagonista, antagonista, mentore, ecc.)"@it)
+AnnotationAssertion(rdfs:label ontology:NarrativeRole "Ruolo Narrativo"@it)
 
+# Class: ontology:NarrativeUniverse (Universo Narrativo)
 
-    <!-- http://www.narrative-universes.org/ontology#features -->
+AnnotationAssertion(rdfs:comment ontology:NarrativeUniverse "Un universo fittizio che si estende attraverso molteplici opere narrative su diversi media (libri, film, serie TV, videogiochi, teatro)"@it)
+AnnotationAssertion(rdfs:label ontology:NarrativeUniverse "Universo Narrativo"@it)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#features">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#appearsIn"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:NarrativeWork (Opera Narrativa)
 
+AnnotationAssertion(rdfs:comment ontology:NarrativeWork "Una singola opera creativa (libro, film, episodio) che fa parte di un universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:NarrativeWork "Opera Narrativa"@it)
 
-    <!-- http://www.narrative-universes.org/ontology#grantedBy -->
+# Class: ontology:NonHumanCharacter (Personaggio Non Umano)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#grantedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:NonHumanCharacter "Un personaggio non umano (elfo, nano, satiro, ecc.)"@it)
+AnnotationAssertion(rdfs:label ontology:NonHumanCharacter "Personaggio Non Umano"@it)
+SubClassOf(ontology:NonHumanCharacter ontology:Character)
 
+# Class: ontology:Object (Oggetto)
 
-    <!-- http://www.narrative-universes.org/ontology#grantsAbility -->
+AnnotationAssertion(rdfs:comment ontology:Object "Un oggetto fisico o magico all'interno di un universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:Object "Oggetto"@it)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#grantsAbility">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-        <rdfs:comment xml:lang="it">Collega un artefatto di potere all&apos;abilità che concede</rdfs:comment>
-        <rdfs:label xml:lang="it">concede abilità</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:Organization (Organizzazione)
 
+AnnotationAssertion(rdfs:comment ontology:Organization "Un gruppo, istituzione o fazione all'interno di un universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:Organization "Organizzazione"@it)
 
-    <!-- http://www.narrative-universes.org/ontology#hasAbility -->
+# Class: ontology:OriginType (Tipo di Origine)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasAbility">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#hasAbility"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;abilità che possiede naturalmente (senza artefatti)</rdfs:comment>
-        <rdfs:label xml:lang="it">ha abilità</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:label ontology:OriginType "Il tipo di origine di un personaggio ibrido (umano, divino, gigante, spirito)"@it)
+AnnotationAssertion(rdfs:label ontology:OriginType "Tipo di Origine"@it)
 
+# Class: ontology:PhysicalAbility (Abilità Fisica)
 
-    <!-- http://www.narrative-universes.org/ontology#hasMember -->
+AnnotationAssertion(rdfs:comment ontology:PhysicalAbility "Un'abilità fisica (forza, velocità, resistenza)"@it)
+AnnotationAssertion(rdfs:label ontology:PhysicalAbility "Abilità Fisica"@it)
+SubClassOf(ontology:PhysicalAbility ontology:Ability)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasMember">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#memberOf"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:PowerArtifact (Artefatto di Potere)
 
+AnnotationAssertion(rdfs:comment ontology:PowerArtifact "Un oggetto con potere magico o speciale che influenza la narrativa"@it)
+AnnotationAssertion(rdfs:label ontology:PowerArtifact "Artefatto di Potere"@it)
+EquivalentClasses(ontology:PowerArtifact ObjectIntersectionOf(ontology:Object ObjectSomeValuesFrom(ontology:grantsAbility ontology:Ability)))
+SubClassOf(ontology:PowerArtifact ontology:Object)
 
-    <!-- http://www.narrative-universes.org/ontology#hasOriginType -->
+# Class: ontology:Protagonist (Protagonista)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasOriginType">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#originTypeOf"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#HybridCharacter"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio ibrido ai suoi tipi di origine (es: umano + divino)</rdfs:comment>
-        <rdfs:label xml:lang="it">ha tipo di origine</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:Protagonist "Eroe principale o personaggio centrale della narrazione"@it)
+AnnotationAssertion(rdfs:label ontology:Protagonist "Protagonista"@it)
+EquivalentClasses(ontology:Protagonist ObjectIntersectionOf(ontology:Character ObjectMinCardinality(3 ontology:appearsIn ontology:NarrativeWork)))
+SubClassOf(ontology:Protagonist ontology:NarrativeRole)
 
+# Class: ontology:SafePlace (Luogo Sicuro)
 
-    <!-- http://www.narrative-universes.org/ontology#hasPart -->
+AnnotationAssertion(rdfs:comment ontology:SafePlace "Un luogo considerato sicuro, un rifugio o santuario"@it)
+AnnotationAssertion(rdfs:label ontology:SafePlace "Luogo Sicuro"@it)
+SubClassOf(ontology:SafePlace ontology:Location)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasPart">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#partOf"/>
-    </owl:ObjectProperty>
-    
+# Class: ontology:School (Scuola)
 
+AnnotationAssertion(rdfs:comment ontology:School "Un'istituzione educativa all'interno dell'universo narrativo"@it)
+AnnotationAssertion(rdfs:label ontology:School "Scuola"@it)
+SubClassOf(ontology:School ontology:Organization)
 
-    <!-- http://www.narrative-universes.org/ontology#hasParticipant -->
+# Class: ontology:Spirit (Spirito)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasParticipant">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#participatesIn"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:label ontology:Spirit "Spirito"@it)
+SubClassOf(ontology:Spirit ontology:OriginType)
 
+# Class: ontology:TVSeries (Serie TV)
 
-    <!-- http://www.narrative-universes.org/ontology#hasRole -->
+AnnotationAssertion(rdfs:comment ontology:TVSeries "Una serie televisiva con episodi multipli"@it)
+AnnotationAssertion(rdfs:label ontology:TVSeries "Serie TV"@it)
+SubClassOf(ontology:TVSeries ontology:NarrativeWork)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#hasRole">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#hasRole"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio al suo ruolo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">ha ruolo</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:TheatricalPlay (Opera Teatrale)
 
+AnnotationAssertion(rdfs:comment ontology:TheatricalPlay "Un'opera rappresentata a teatro"@it)
+AnnotationAssertion(rdfs:label ontology:TheatricalPlay "Opera Teatrale"@it)
+SubClassOf(ontology:TheatricalPlay ontology:NarrativeWork)
 
-    <!-- http://www.narrative-universes.org/ontology#indirectlyMentoredBy -->
+# Class: ontology:TransmediaWork (Opera Transmediale)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#indirectlyMentoredBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#indirectlyMentors"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:TransmediaWork "Un'opera narrativa che esiste su almeno due media diversi"@it)
+AnnotationAssertion(rdfs:label ontology:TransmediaWork "Opera Transmediale"@it)
+EquivalentClasses(ontology:TransmediaWork ObjectIntersectionOf(ontology:NarrativeWork ObjectSomeValuesFrom(ontology:adaptationOf ontology:NarrativeWork)))
+SubClassOf(ontology:TransmediaWork ontology:NarrativeWork)
 
+# Class: ontology:Trickster (Imbroglione)
 
-    <!-- http://www.narrative-universes.org/ontology#indirectlyMentors -->
+AnnotationAssertion(rdfs:comment ontology:Trickster "Personaggio che usa astuzia, inganni e comportamenti imprevedibili"@it)
+AnnotationAssertion(rdfs:label ontology:Trickster "Imbroglione"@it)
+SubClassOf(ontology:Trickster ontology:NarrativeRole)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#indirectlyMentors">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#indirectlyMentors"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#mentors"/>
-            <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#alliedWith"/>
-        </owl:propertyChainAxiom>
-        <rdfs:comment xml:lang="it">Indica una relazione di mentoring indiretta attraverso alleanze</rdfs:comment>
-        <rdfs:label xml:lang="it">fa da mentore indirettamente</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Class: ontology:VideoGame (VideoGioco)
 
+AnnotationAssertion(rdfs:comment ontology:VideoGame "Un videogioco interattivo"@it)
+AnnotationAssertion(rdfs:label ontology:VideoGame "VideoGioco"@it)
+SubClassOf(ontology:VideoGame ontology:NarrativeWork)
 
-    <!-- http://www.narrative-universes.org/ontology#indirectlySetIn -->
+# Class: ontology:Weapon (Arma)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#indirectlySetIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:Weapon "Un'arma usata dai personaggi"@it)
+AnnotationAssertion(rdfs:label ontology:Weapon "Arma"@it)
+SubClassOf(ontology:Weapon ontology:Object)
 
 
-    <!-- http://www.narrative-universes.org/ontology#influencedBy -->
+############################
+#   Named Individuals
+############################
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#influencedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#influences"/>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:AlbusDumbledore (Albus Silente)
 
+AnnotationAssertion(rdfs:comment ontology:AlbusDumbledore "Preside di Hogwarts e mentore di Harry"@it)
+AnnotationAssertion(rdfs:label ontology:AlbusDumbledore "Albus Silente"@it)
+ClassAssertion(ontology:HumanCharacter ontology:AlbusDumbledore)
+ObjectPropertyAssertion(ontology:appearsIn ontology:AlbusDumbledore ontology:PhilosophersStone_Book)
+ObjectPropertyAssertion(ontology:appearsIn ontology:AlbusDumbledore ontology:PhilosophersStone_Movie)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:AlbusDumbledore ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:AlbusDumbledore ontology:HogwartsSchool)
+ObjectPropertyAssertion(ontology:mentors ontology:AlbusDumbledore ontology:HarryPotter)
+ObjectPropertyAssertion(ontology:possesses ontology:AlbusDumbledore ontology:ElderWand)
+DataPropertyAssertion(ontology:description ontology:AlbusDumbledore "Preside di Hogwarts, mago più potente del suo tempo, mentore di Harry Potter")
 
-    <!-- http://www.narrative-universes.org/ontology#influences -->
+# Individual: ontology:Anduril (Andúril)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#influences">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#influences"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeEvent"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio, oggetto o organizzazione a un evento narrativo che influenza significativamente</rdfs:comment>
-        <rdfs:label xml:lang="it">influenza</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:Anduril "Spada riforgiata di Aragorn, precedentemente Narsil"@it)
+AnnotationAssertion(rdfs:label ontology:Anduril "Andúril"@it)
+ClassAssertion(ontology:PowerArtifact ontology:Anduril)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Anduril ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:Anduril ontology:KinglyAuthority)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:Anduril "true"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:Anduril "Spada riforgiata dai frammenti di Narsil, simbolo della regalità di Aragorn")
+DataPropertyAssertion(ontology:hasPowerType ontology:Anduril "Symbolic")
 
+# Individual: ontology:AnnabethChase (Annabeth Chase)
 
-    <!-- http://www.narrative-universes.org/ontology#locatedAt -->
+AnnotationAssertion(rdfs:comment ontology:AnnabethChase "Semidea figlia di Atena, architetta e stratega della squadra"@it)
+AnnotationAssertion(rdfs:label ontology:AnnabethChase "Annabeth Chase"@it)
+ClassAssertion(ontology:HybridCharacter ontology:AnnabethChase)
+ObjectPropertyAssertion(ontology:alliedWith ontology:AnnabethChase ontology:PercyJackson)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:AnnabethChase ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:AnnabethChase ontology:DivineOrigin)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:AnnabethChase ontology:HumanOrigin)
+ObjectPropertyAssertion(ontology:memberOf ontology:AnnabethChase ontology:CampHalfBloodOrganization)
+ObjectPropertyAssertion(ontology:possesses ontology:AnnabethChase ontology:YankeeCap)
+DataPropertyAssertion(ontology:description ontology:AnnabethChase "Figlia di Atena, dea della saggezza, brillante stratega con talento per l'architettura e il combattimento")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#locatedAt">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#locatedAt"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Collega un&apos;organizzazione al luogo fisico dove si trova</rdfs:comment>
-        <rdfs:label xml:lang="it">situato in</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:Aragorn (Aragorn)
 
+AnnotationAssertion(rdfs:comment ontology:Aragorn "Ramingo del Nord, erede al trono di Gondor, futuro Re"@it)
+AnnotationAssertion(rdfs:label ontology:Aragorn "Aragorn"@it)
+ClassAssertion(ontology:HumanCharacter ontology:Aragorn)
+ObjectPropertyAssertion(ontology:alliedWith ontology:Aragorn ontology:FrodoBaggins)
+ObjectPropertyAssertion(ontology:alliedWith ontology:Aragorn ontology:Gandalf)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Aragorn ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:Aragorn ontology:FellowshipOfTheRing)
+ObjectPropertyAssertion(ontology:possesses ontology:Aragorn ontology:Anduril)
+DataPropertyAssertion(ontology:description ontology:Aragorn "Discendente di Isildur, ranger dei Dunedain, destinato a diventare Re di Gondor")
 
-    <!-- http://www.narrative-universes.org/ontology#locationOf -->
+# Individual: ontology:CampHalfBlood (Campo Mezzosangue)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#locationOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#locatedAt"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:CampHalfBlood "Campo di addestramento per semidei, protetto da barriere magiche"@it)
+AnnotationAssertion(rdfs:label ontology:CampHalfBlood "Campo Mezzosangue"@it)
+ClassAssertion(ontology:SafePlace ontology:CampHalfBlood)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:CampHalfBlood ontology:PercyJacksonUniverse)
+DataPropertyAssertion(ontology:description ontology:CampHalfBlood "Campo estivo sulla costa di Long Island, unico rifugio sicuro per i semidei dove possono allenarsi e essere al sicuro dai mostri")
 
+# Individual: ontology:CampHalfBloodOrganization (Organizzazione Campo Mezzosangue)
 
-    <!-- http://www.narrative-universes.org/ontology#memberOf -->
+AnnotationAssertion(rdfs:comment ontology:CampHalfBloodOrganization "Istituzione che gestisce e protegge i semidei al campo"@it)
+AnnotationAssertion(rdfs:label ontology:CampHalfBloodOrganization "Organizzazione Campo Mezzosangue"@it)
+ClassAssertion(ontology:School ontology:CampHalfBloodOrganization)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:CampHalfBloodOrganization ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:locatedAt ontology:CampHalfBloodOrganization ontology:CampHalfBlood)
+DataPropertyAssertion(ontology:description ontology:CampHalfBloodOrganization "Organizzazione diretta da Chirone e Mr. D (Dioniso), dedica all'addestramento e protezione dei figli degli dei")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#memberOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#memberOf"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio a un&apos;organizzazione di cui fa parte</rdfs:comment>
-        <rdfs:label xml:lang="it">membro di</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:CelestialBronzePower (Potere del Bronzo Celestiale)
 
+AnnotationAssertion(rdfs:comment ontology:CelestialBronzePower "Capacità di ferire creature mitologiche e ritornare al proprietario"@it)
+AnnotationAssertion(rdfs:label ontology:CelestialBronzePower "Potere del Bronzo Celestiale"@it)
+ClassAssertion(ontology:MagicalAbility ontology:CelestialBronzePower)
 
-    <!-- http://www.narrative-universes.org/ontology#mentoredBy -->
+# Individual: ontology:ChamberOfSecrets_Book (Harry Potter e la Camera dei Segreti)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#mentoredBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:ChamberOfSecrets_Book "Il secondo libro della saga"@it)
+AnnotationAssertion(rdfs:label ontology:ChamberOfSecrets_Book "Harry Potter e la Camera dei Segreti"@it)
+ClassAssertion(ontology:Book ontology:ChamberOfSecrets_Book)
+ObjectPropertyAssertion(ontology:setIn ontology:ChamberOfSecrets_Book ontology:Hogwarts)
+DataPropertyAssertion(ontology:description ontology:ChamberOfSecrets_Book "Il secondo libro, in cui Harry scopre la Camera dei Segreti e affronta il Basilisco")
+DataPropertyAssertion(ontology:numberOfPages ontology:ChamberOfSecrets_Book "251"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:ChamberOfSecrets_Book "1998"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:ChamberOfSecrets_Book "9.3"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:ChamberOfSecrets_Book "Harry Potter and the Chamber of Secrets")
 
+# Individual: ontology:Chiron (Chirone)
 
-    <!-- http://www.narrative-universes.org/ontology#mentors -->
+AnnotationAssertion(rdfs:comment ontology:Chiron "Centauro immortale, direttore delle attività del Campo Mezzosangue e mentore dei semidei"@it)
+AnnotationAssertion(rdfs:label ontology:Chiron "Chirone"@it)
+ClassAssertion(ontology:NonHumanCharacter ontology:Chiron)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Chiron ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:Chiron ontology:CampHalfBloodOrganization)
+ObjectPropertyAssertion(ontology:mentors ontology:Chiron ontology:AnnabethChase)
+ObjectPropertyAssertion(ontology:mentors ontology:Chiron ontology:PercyJackson)
+DataPropertyAssertion(ontology:description ontology:Chiron "Antico centauro figlio di Crono, addestra eroi da millenni, ora direttore delle attività al Campo Mezzosangue")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#mentors">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio mentore al personaggio che guida e insegna</rdfs:comment>
-        <rdfs:label xml:lang="it">fa da mentore a</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:DiagonAlley (Diagon Alley)
 
+AnnotationAssertion(rdfs:comment ontology:DiagonAlley "La via commerciale magica di Londra"@it)
+AnnotationAssertion(rdfs:label ontology:DiagonAlley "Diagon Alley"@it)
+ClassAssertion(ontology:SafePlace ontology:DiagonAlley)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:DiagonAlley ontology:HarryPotterUniverse)
+DataPropertyAssertion(ontology:description ontology:DiagonAlley "Via commerciale magica nascosta a Londra, dove i maghi acquistano bacchette, libri e altri oggetti magici")
 
-    <!-- http://www.narrative-universes.org/ontology#opposes -->
+# Individual: ontology:DivineOrigin (ontology:DivineOrigin)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#opposes">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Collega due personaggi che si oppongono in un conflitto o antagonismo</rdfs:comment>
-        <rdfs:label xml:lang="it">si oppone a</rdfs:label>
-    </owl:ObjectProperty>
-    
+ClassAssertion(ontology:Divine ontology:DivineOrigin)
 
+# Individual: ontology:DominationPower (Potere di Dominazione)
 
-    <!-- http://www.narrative-universes.org/ontology#originTypeOf -->
+AnnotationAssertion(rdfs:comment ontology:DominationPower "Capacità di controllare le menti e corrompere chi lo possiede"@it)
+AnnotationAssertion(rdfs:label ontology:DominationPower "Potere di Dominazione"@it)
+ClassAssertion(ontology:MagicalAbility ontology:DominationPower)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#originTypeOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasOriginType"/>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:ElderWand (Bacchetta di Sambuco)
 
+AnnotationAssertion(rdfs:comment ontology:ElderWand "La bacchetta più potente, uno di Doni della Morte"@it)
+AnnotationAssertion(rdfs:label ontology:ElderWand "Bacchetta di Sambuco"@it)
+ClassAssertion(ontology:PowerArtifact ontology:ElderWand)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:ElderWand ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:ElderWand ontology:UnbeatableMagic)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:ElderWand "true"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:ElderWand "La bacchetta più potente mai creata, uno dei tre Doni della Morte, realizzata dalla Morte stessa secondo la leggenda")
+DataPropertyAssertion(ontology:hasPowerType ontology:ElderWand "Magical")
 
-    <!-- http://www.narrative-universes.org/ontology#partOf -->
+# Individual: ontology:FellowshipOfTheRing (Compagnia dell'Anello)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#partOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#partOf"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Collega un luogo a un luogo più grande che lo contiene</rdfs:comment>
-        <rdfs:label xml:lang="it">parte di</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:FellowshipOfTheRing "Gruppo formato a Gran Burrone per aiutare Frodo a distruggere l'Anello"@it)
+AnnotationAssertion(rdfs:label ontology:FellowshipOfTheRing "Compagnia dell'Anello"@it)
+ClassAssertion(ontology:MissionBasedOrganization ontology:FellowshipOfTheRing)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FellowshipOfTheRing ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:locatedAt ontology:FellowshipOfTheRing ontology:Rivendell)
+DataPropertyAssertion(ontology:description ontology:FellowshipOfTheRing "Nove compagni scelti per accompagnare Frodo nella missione di distruggere l'Anello: 4 hobbit, 2 umani, 1 elfo, 1 nano, 1 stregone")
 
+# Individual: ontology:FellowshipOfTheRing_Book (La Compagnia dell'Anello)
 
-    <!-- http://www.narrative-universes.org/ontology#participatesIn -->
+AnnotationAssertion(rdfs:comment ontology:FellowshipOfTheRing_Book "Primo libro della trilogia del Signore degli Anelli"@it)
+AnnotationAssertion(rdfs:label ontology:FellowshipOfTheRing_Book "La Compagnia dell'Anello"@it)
+ClassAssertion(ontology:Book ontology:FellowshipOfTheRing_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FellowshipOfTheRing_Book ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:FellowshipOfTheRing_Book ontology:TheShire)
+DataPropertyAssertion(ontology:description ontology:FellowshipOfTheRing_Book "Primo volume della trilogia, narra la formazione della Compagnia e l'inizio del viaggio per distruggere l'Anello")
+DataPropertyAssertion(ontology:numberOfPages ontology:FellowshipOfTheRing_Book "423"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:FellowshipOfTheRing_Book "1954"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:FellowshipOfTheRing_Book "9.8"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:FellowshipOfTheRing_Book "The Fellowship of the Ring")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#participatesIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#participatesIn"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeEvent"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio a un evento narrativo a cui partecipa</rdfs:comment>
-        <rdfs:label xml:lang="it">partecipa a</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:FellowshipOfTheRing_Movie (La Compagnia dell'Anello (Film))
 
+AnnotationAssertion(rdfs:comment ontology:FellowshipOfTheRing_Movie "Adattamento cinematografico del primo libro, diretto da Peter Jackson"@it)
+AnnotationAssertion(rdfs:label ontology:FellowshipOfTheRing_Movie "La Compagnia dell'Anello (Film)"@it)
+ClassAssertion(ontology:Movie ontology:FellowshipOfTheRing_Movie)
+ObjectPropertyAssertion(ontology:adaptationOf ontology:FellowshipOfTheRing_Movie ontology:FellowshipOfTheRing_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FellowshipOfTheRing_Movie ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:FellowshipOfTheRing_Movie ontology:TheShire)
+DataPropertyAssertion(ontology:description ontology:FellowshipOfTheRing_Movie "Primo film della trilogia diretta da Peter Jackson, vincitore di 4 Oscar")
+DataPropertyAssertion(ontology:publicationYear ontology:FellowshipOfTheRing_Movie "2001"^^xsd:decimal)
+DataPropertyAssertion(ontology:runtime ontology:FellowshipOfTheRing_Movie "178"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:FellowshipOfTheRing_Movie "The Lord of the Rings: The Fellowship of the Ring")
 
-    <!-- http://www.narrative-universes.org/ontology#possessedBy -->
+# Individual: ontology:ForbiddenForest (Foresta Proibita)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#possessedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#possesses"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:ForbiddenForest "La foresta pericolosa vicino a Hogwarts"@it)
+AnnotationAssertion(rdfs:label ontology:ForbiddenForest "Foresta Proibita"@it)
+ClassAssertion(ontology:DangerZone ontology:ForbiddenForest)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:ForbiddenForest ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:partOf ontology:ForbiddenForest ontology:Hogwarts)
+DataPropertyAssertion(ontology:description ontology:ForbiddenForest "Foresta pericolosa nei pressi di Hogwarts, abitata da creature magiche e off-limits per gli studenti")
 
+# Individual: ontology:FrodoBaggins (Frodo Baggins)
 
-    <!-- http://www.narrative-universes.org/ontology#possesses -->
+AnnotationAssertion(rdfs:comment ontology:FrodoBaggins "Hobbit portatore dell'Anello, protagonista della missione per distruggere l'Unico Anello"@it)
+AnnotationAssertion(rdfs:label ontology:FrodoBaggins "Frodo Baggins"@it)
+ClassAssertion(ontology:HumanCharacter ontology:FrodoBaggins)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FrodoBaggins ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:FrodoBaggins ontology:FellowshipOfTheRing)
+ObjectPropertyAssertion(ontology:possesses ontology:FrodoBaggins ontology:OneRing)
+DataPropertyAssertion(ontology:description ontology:FrodoBaggins "Hobbit della Contea, nipote di Bilbo, scelto per portare l'Anello Unico a Monte Fato per distruggerlo")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#possesses">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#possesses"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:comment xml:lang="it">Collega un personaggio a un oggetto che possiede o controlla</rdfs:comment>
-        <rdfs:label xml:lang="it">possiede</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:Gandalf (Gandalf il Grigio)
 
+AnnotationAssertion(rdfs:comment ontology:Gandalf "Stregone istari, guida e mentore della Compagnia dell'Anello"@it)
+AnnotationAssertion(rdfs:label ontology:Gandalf "Gandalf il Grigio"@it)
+ClassAssertion(ontology:NonHumanCharacter ontology:Gandalf)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Gandalf ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:Gandalf ontology:FellowshipOfTheRing)
+ObjectPropertyAssertion(ontology:mentors ontology:Gandalf ontology:FrodoBaggins)
+DataPropertyAssertion(ontology:description ontology:Gandalf "Stregone immortale inviato nella Terra di Mezzo per guidare i Popoli Liberi contro Sauron")
 
-    <!-- http://www.narrative-universes.org/ontology#prequelOf -->
+# Individual: ontology:GroverUnderwood (Grover Underwood)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#prequelOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#sequelOf"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:GroverUnderwood "Satiro protettore e migliore amico di Percy"@it)
+AnnotationAssertion(rdfs:label ontology:GroverUnderwood "Grover Underwood"@it)
+ClassAssertion(ontology:NonHumanCharacter ontology:GroverUnderwood)
+ObjectPropertyAssertion(ontology:alliedWith ontology:GroverUnderwood ontology:AnnabethChase)
+ObjectPropertyAssertion(ontology:alliedWith ontology:GroverUnderwood ontology:PercyJackson)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:GroverUnderwood ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:GroverUnderwood ontology:CampHalfBloodOrganization)
+DataPropertyAssertion(ontology:description ontology:GroverUnderwood "Satiro (metà capra, metà umano), cercatore di semidei e protettore di Percy, dedito alla ricerca del dio Pan")
 
+# Individual: ontology:HarryPotter (Harry Potter)
 
-    <!-- http://www.narrative-universes.org/ontology#roleOf -->
+AnnotationAssertion(rdfs:comment ontology:HarryPotter "Il protagonista della saga, il ragazzo che è sopravvissuto"@it)
+AnnotationAssertion(rdfs:label ontology:HarryPotter "Harry Potter"@it)
+ClassAssertion(ontology:HumanCharacter ontology:HarryPotter)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:HarryPotter ontology:HarryPotterUniverse)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#roleOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#hasRole"/>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:HarryPotterUniverse (Universo di Harry Potter)
 
+AnnotationAssertion(rdfs:comment ontology:HarryPotterUniverse "L'universo narrativo fantasy creato da J.K. Rowling"@it)
+AnnotationAssertion(rdfs:label ontology:HarryPotterUniverse "Universo di Harry Potter"@it)
+ClassAssertion(ontology:NarrativeUniverse ontology:HarryPotterUniverse)
 
-    <!-- http://www.narrative-universes.org/ontology#sequelOf -->
+# Individual: ontology:Hogwarts (Hogwarts)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#sequelOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#sequelOf"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Collega un&apos;opera all&apos;opera precedente di cui è il seguito</rdfs:comment>
-        <rdfs:label xml:lang="it">seguito di</rdfs:label>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:Hogwarts "La scuola di Magia e Stregoneria di Hogwarts"@it)
+AnnotationAssertion(rdfs:label ontology:Hogwarts "Hogwarts"@it)
+ClassAssertion(ontology:SafePlace ontology:Hogwarts)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Hogwarts ontology:HarryPotterUniverse)
+DataPropertyAssertion(ontology:description ontology:Hogwarts "Castello magico in Scozia, scuola di magia e stregoneria fondata dai quattro fondatori: Godric Grifondoro, Tosca Tassorosso, Corinna Corvonero e Salazar Serpeverde")
 
+# Individual: ontology:HogwartsSchool (Scuola di Hogwarts)
 
-    <!-- http://www.narrative-universes.org/ontology#setIn -->
+AnnotationAssertion(rdfs:comment ontology:HogwartsSchool "L'istituzione educativa magica principale"@it)
+AnnotationAssertion(rdfs:label ontology:HogwartsSchool "Scuola di Hogwarts"@it)
+ClassAssertion(ontology:School ontology:HogwartsSchool)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:HogwartsSchool ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:locatedAt ontology:HogwartsSchool ontology:Hogwarts)
+DataPropertyAssertion(ontology:description ontology:HogwartsSchool "La Scuola di Magia e Stregoneria di Hogwarts, fondata oltre mille anni fa dai quattro maghi più potenti dell'epoca")
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#setIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.narrative-universes.org/ontology#setIn"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Collega un&apos;opera narrativa al luogo in cui è ambientata</rdfs:comment>
-        <rdfs:label xml:lang="it">ambientato in</rdfs:label>
-    </owl:ObjectProperty>
-    
+# Individual: ontology:HumanOrigin (Umano)
 
+AnnotationAssertion(rdfs:comment ontology:HumanOrigin "Origine Umana"@it)
+AnnotationAssertion(rdfs:label ontology:HumanOrigin "Umano"@it)
+ClassAssertion(ontology:Human ontology:HumanOrigin)
 
-    <!-- http://www.narrative-universes.org/ontology#settingFor -->
+# Individual: ontology:InvisibilityCloak (Mantello dell'Invisibilità)
 
-    <owl:ObjectProperty rdf:about="http://www.narrative-universes.org/ontology#settingFor">
-        <rdfs:subPropertyOf rdf:resource="http://www.narrative-universes.org/ontology#setIn"/>
-    </owl:ObjectProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:InvisibilityCloak "Il mantello magico che rende invisibili"@it)
+AnnotationAssertion(rdfs:label ontology:InvisibilityCloak "Mantello dell'Invisibilità"@it)
+ClassAssertion(ontology:PowerArtifact ontology:InvisibilityCloak)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:InvisibilityCloak ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:InvisibilityCloak ontology:TrueInvisibility)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:InvisibilityCloak "false"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:InvisibilityCloak "Mantello dell'invisibilità perfetto, uno dei tre Doni della Morte, ereditato da Harry da suo padre")
+DataPropertyAssertion(ontology:hasPowerType ontology:InvisibilityCloak "Magical")
 
+# Individual: ontology:KinglyAuthority (Autorità Regale)
 
-    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+AnnotationAssertion(rdfs:comment ontology:KinglyAuthority "Simbolo della legittimità del Re di Gondor"@it)
+AnnotationAssertion(rdfs:label ontology:KinglyAuthority "Autorità Regale"@it)
+ClassAssertion(ontology:MagicalAbility ontology:KinglyAuthority)
 
-    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#topObjectProperty">
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#setIn"/>
-            <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#partOf"/>
-        </owl:propertyChainAxiom>
-        <rdfs:comment xml:lang="it">Indica che un&apos;opera è ambientata indirettamente in un luogo che contiene il luogo principale</rdfs:comment>
-        <rdfs:label xml:lang="it">indirettamente ambientato in</rdfs:label>
-    </rdf:Description>
-    
+# Individual: ontology:Legolas (Legolas)
 
+AnnotationAssertion(rdfs:comment ontology:Legolas "Principe elfico del Regno Boscuro, arciere esperto e membro della Compagnia"@it)
+AnnotationAssertion(rdfs:label ontology:Legolas "Legolas"@it)
+ClassAssertion(ontology:NonHumanCharacter ontology:Legolas)
+ObjectPropertyAssertion(ontology:alliedWith ontology:Legolas ontology:Aragorn)
+ObjectPropertyAssertion(ontology:alliedWith ontology:Legolas ontology:FrodoBaggins)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Legolas ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:memberOf ontology:Legolas ontology:FellowshipOfTheRing)
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+# Individual: ontology:LightningThief_Book (Il Ladro di Fulmini)
 
-    
+AnnotationAssertion(rdfs:comment ontology:LightningThief_Book "Primo libro della saga di Percy Jackson"@it)
+AnnotationAssertion(rdfs:label ontology:LightningThief_Book "Il Ladro di Fulmini"@it)
+ClassAssertion(ontology:Book ontology:LightningThief_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:LightningThief_Book ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:LightningThief_Book ontology:CampHalfBlood)
+DataPropertyAssertion(ontology:description ontology:LightningThief_Book "Percy scopre di essere un semidio e parte in una missione per impedire una guerra tra gli dei recuperando il fulmine di Zeus")
+DataPropertyAssertion(ontology:numberOfPages ontology:LightningThief_Book "377"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:LightningThief_Book "2005"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:LightningThief_Book "9.2"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:LightningThief_Book "The Lightning Thief")
 
+# Individual: ontology:LightningThief_Movie (Il Ladro di Fulmini (Film))
 
-    <!-- http://www.narrative-universes.org/ontology#canBeDestroyed -->
+AnnotationAssertion(rdfs:comment ontology:LightningThief_Movie "Adattamento cinematografico del primo libro"@it)
+AnnotationAssertion(rdfs:label ontology:LightningThief_Movie "Il Ladro di Fulmini (Film)"@it)
+ClassAssertion(ontology:Movie ontology:LightningThief_Movie)
+ObjectPropertyAssertion(ontology:adaptationOf ontology:LightningThief_Movie ontology:LightningThief_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:LightningThief_Movie ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:LightningThief_Movie ontology:CampHalfBlood)
+DataPropertyAssertion(ontology:description ontology:LightningThief_Movie "Adattamento cinematografico della storia di Percy, diretto da Chris Columbus")
+DataPropertyAssertion(ontology:publicationYear ontology:LightningThief_Movie "2010"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:LightningThief_Movie "5.9"^^xsd:decimal)
+DataPropertyAssertion(ontology:runtime ontology:LightningThief_Movie "118"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:LightningThief_Movie "Percy Jackson & the Olympians: The Lightning Thief")
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#canBeDestroyed">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-        <rdfs:comment xml:lang="it">Indica se un artefatto può essere distrutto</rdfs:comment>
-        <rdfs:label xml:lang="it">può essere distrutto</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:LukeCastellan (Luke Castellan)
 
+AnnotationAssertion(rdfs:comment ontology:LukeCastellan "Semidio figlio di Hermes, antagonista che tradisce il campo per servire Crono"@it)
+AnnotationAssertion(rdfs:label ontology:LukeCastellan "Luke Castellan"@it)
+ClassAssertion(ontology:HybridCharacter ontology:LukeCastellan)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:LukeCastellan ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:LukeCastellan ontology:DivineOrigin)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:LukeCastellan ontology:HumanOrigin)
+ObjectPropertyAssertion(ontology:opposes ontology:LukeCastellan ontology:Chiron)
+ObjectPropertyAssertion(ontology:opposes ontology:LukeCastellan ontology:PercyJackson)
+DataPropertyAssertion(ontology:description ontology:LukeCastellan "Figlio di Hermes, ex campista esemplare corrotto dal rancore verso gli dei, diventa servitore di Crono")
 
-    <!-- http://www.narrative-universes.org/ontology#dangerLevel -->
+# Individual: ontology:MagicalInvisibility (Invisibilità Magica)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#dangerLevel">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#MagicalCreature"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il livello di pericolo dell&apos;entità: Low, Medium, High</rdfs:comment>
-        <rdfs:label xml:lang="it">livello di pericolo</rdfs:label>
-    </owl:DatatypeProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:MagicalInvisibility "Capacità di diventare invisibile indossando il berretto"@it)
+AnnotationAssertion(rdfs:label ontology:MagicalInvisibility "Invisibilità Magica"@it)
+ClassAssertion(ontology:MagicalAbility ontology:MagicalInvisibility)
 
+# Individual: ontology:MiddleEarthUniverse (Universo della Terra di Mezzo)
 
-    <!-- http://www.narrative-universes.org/ontology#description -->
+AnnotationAssertion(rdfs:comment ontology:MiddleEarthUniverse "Universo narrativo fantasy creato da J.R.R. Tolkien, ambientato nella Terra di Mezzo"@it)
+AnnotationAssertion(rdfs:label ontology:MiddleEarthUniverse "Universo della Terra di Mezzo"@it)
+ClassAssertion(ontology:NarrativeUniverse ontology:MiddleEarthUniverse)
+DataPropertyAssertion(ontology:description ontology:MiddleEarthUniverse "Elfo silvan, figlio di Thranduil, maestro arciere dalla vista acuta e agilità straordinaria")
+DataPropertyAssertion(ontology:description ontology:MiddleEarthUniverse "Mondo fantasy epico creato da Tolkien, caratterizzato da una mitologia complessa con elfi, nani, hobbit e la lotta contro il Signore Oscuro Sauron")
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#description">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Una descrizione testuale dell&apos;entità</rdfs:comment>
-        <rdfs:label xml:lang="it">descrizione</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:Mordor (Mordor)
 
+AnnotationAssertion(rdfs:comment ontology:Mordor "Terra desolata di Sauron, destinazione finale di Frodo per distruggere l'Anello"@it)
+AnnotationAssertion(rdfs:label ontology:Mordor "Mordor"@it)
+ClassAssertion(ontology:DangerZone ontology:Mordor)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Mordor ontology:MiddleEarthUniverse)
+DataPropertyAssertion(ontology:description ontology:Mordor "Regno oscuro nel sud-est della Terra di Mezzo, dominato dalla torre di Barad-dur e dal Monte Fato")
 
-    <!-- http://www.narrative-universes.org/ontology#hasNarrativeFunction -->
+# Individual: ontology:MountDoom (Monte Fato)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#hasNarrativeFunction">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">La funzione narrativa di un elemento (es: Transizione, Rifugio, Conflitto)</rdfs:comment>
-        <rdfs:label xml:lang="it">ha funzione narrativa</rdfs:label>
-    </owl:DatatypeProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:MountDoom "Vulcano dove l'Anello Unico fu forgiato e dove deve essere distrutto"@it)
+AnnotationAssertion(rdfs:label ontology:MountDoom "Monte Fato"@it)
+ClassAssertion(ontology:DangerZone ontology:MountDoom)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:MountDoom ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:partOf ontology:MountDoom ontology:Mordor)
+DataPropertyAssertion(ontology:description ontology:MountDoom "Vulcano attivo nel cuore di Mordor, unico luogo dove l'Anello Unico può essere distrutto")
 
+# Individual: ontology:MountOlympus (Monte Olimpo)
 
-    <!-- http://www.narrative-universes.org/ontology#hasPowerType -->
+AnnotationAssertion(rdfs:comment ontology:MountOlympus "Casa degli dei olimpici, fluttuante sopra l'Empire State Building"@it)
+AnnotationAssertion(rdfs:label ontology:MountOlympus "Monte Olimpo"@it)
+ClassAssertion(ontology:SafePlace ontology:MountOlympus)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:MountOlympus ontology:PercyJacksonUniverse)
+DataPropertyAssertion(ontology:description ontology:MountOlympus "Dimora degli dei greci, sospesa nel cielo sopra New York, accessibile dal 600° piano dell'Empire State Building")
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#hasPowerType">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)</rdfs:comment>
-        <rdfs:label xml:lang="it">ha tipo di potere</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:OneRing (Anello Unico)
 
+AnnotationAssertion(rdfs:comment ontology:OneRing "L'Anello del Potere forgiato da Sauron per dominare tutti gli altri anelli"@it)
+AnnotationAssertion(rdfs:label ontology:OneRing "Anello Unico"@it)
+ClassAssertion(ontology:PowerArtifact ontology:OneRing)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:OneRing ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:OneRing ontology:DominationPower)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:OneRing "true"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:OneRing "Anello forgiato da Sauron nelle fiamme del Monte Fato, contiene gran parte del suo potere")
+DataPropertyAssertion(ontology:hasPowerType ontology:OneRing "Corruptive")
 
-    <!-- http://www.narrative-universes.org/ontology#isOngoing -->
+# Individual: ontology:Parseltongue (Serpentese)
+
+AnnotationAssertion(rdfs:comment ontology:Parseltongue "L'abilità di parlare con i serpenti"@it)
+AnnotationAssertion(rdfs:label ontology:Parseltongue "Serpentese"@it)
+ClassAssertion(ontology:MagicalAbility ontology:Parseltongue)
+DataPropertyAssertion(ontology:description ontology:Parseltongue "La rara abilità di parlare con i serpenti, tipicamente associata ai discendenti di Salazar Serpeverde"@it)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#isOngoing">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#TVSeries"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-        <rdfs:comment xml:lang="it">Indica se una serie TV è ancora in produzione</rdfs:comment>
-        <rdfs:label xml:lang="it">in corso</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:PercyJackson (Percy Jackson)
 
+AnnotationAssertion(rdfs:comment ontology:PercyJackson "Semidio figlio di Poseidone, protagonista della saga, con poteri sull'acqua"@it)
+AnnotationAssertion(rdfs:label ontology:PercyJackson "Percy Jackson"@it)
+ClassAssertion(ontology:HybridCharacter ontology:PercyJackson)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PercyJackson ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:hasAbility ontology:PercyJackson ontology:WaterControl)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:PercyJackson ontology:DivineOrigin)
+ObjectPropertyAssertion(ontology:hasOriginType ontology:PercyJackson ontology:HumanOrigin)
+ObjectPropertyAssertion(ontology:memberOf ontology:PercyJackson ontology:CampHalfBloodOrganization)
+ObjectPropertyAssertion(ontology:possesses ontology:PercyJackson ontology:Riptide)
+DataPropertyAssertion(ontology:description ontology:PercyJackson "Figlio di Poseidone e Sally Jackson, semidio con controllo sull'acqua, spade e capacità di respirare sott'acqua")
 
-    <!-- http://www.narrative-universes.org/ontology#numberOfPages -->
+# Individual: ontology:PercyJacksonUniverse (Universo di Percy Jackson)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#numberOfPages">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <rdfs:comment xml:lang="it">Il numero di pagine di un libro</rdfs:comment>
-        <rdfs:label xml:lang="it">numero di pagine</rdfs:label>
-    </owl:DatatypeProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:PercyJacksonUniverse "Universo narrativo fantasy urbano creato da Rick Riordan, dove gli dei greci esistono nell'America moderna"@it)
+AnnotationAssertion(rdfs:label ontology:PercyJacksonUniverse "Universo di Percy Jackson"@it)
+ClassAssertion(ontology:NarrativeUniverse ontology:PercyJacksonUniverse)
+DataPropertyAssertion(ontology:description ontology:PercyJacksonUniverse "Mondo contemporaneo dove la mitologia greca è reale e gli dei olimpici convivono con gli umani, generando semidei con poteri straordinari")
 
+# Individual: ontology:PhilosophersStone_Book (Harry Potter e la Pietra Filosofale)
 
-    <!-- http://www.narrative-universes.org/ontology#publicationDate -->
+AnnotationAssertion(rdfs:comment ontology:PhilosophersStone_Book "Il primo libro della saga di Harry Potter"@it)
+AnnotationAssertion(rdfs:label ontology:PhilosophersStone_Book "Harry Potter e la Pietra Filosofale"@it)
+ClassAssertion(ontology:Book ontology:PhilosophersStone_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PhilosophersStone_Book ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:PhilosophersStone_Book ontology:Hogwarts)
+DataPropertyAssertion(ontology:description ontology:PhilosophersStone_Book "Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale")
+DataPropertyAssertion(ontology:numberOfPages ontology:PhilosophersStone_Book "223"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:PhilosophersStone_Book "1997"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:PhilosophersStone_Book "9.5"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:PhilosophersStone_Book "Harry Potter and the Philosopher's Stone")
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#publicationDate">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <rdfs:comment xml:lang="it">La data esatta di pubblicazione di un&apos;opera</rdfs:comment>
-        <rdfs:label xml:lang="it">data di pubblicazione</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:PhilosophersStone_Movie (Harry Potter e la Pietra Filosofale (Film))
 
+AnnotationAssertion(rdfs:comment ontology:PhilosophersStone_Movie "Adattamento cinematografico del primo libro"@it)
+AnnotationAssertion(rdfs:label ontology:PhilosophersStone_Movie "Harry Potter e la Pietra Filosofale (Film)"@it)
+ClassAssertion(ontology:Movie ontology:PhilosophersStone_Movie)
+ObjectPropertyAssertion(ontology:adaptationOf ontology:PhilosophersStone_Movie ontology:PhilosophersStone_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PhilosophersStone_Movie ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:PhilosophersStone_Movie ontology:Hogwarts)
+DataPropertyAssertion(ontology:description ontology:PhilosophersStone_Movie "Adattamento cinematografico del primo libro, diretto da Chris Columbus")
+DataPropertyAssertion(ontology:publicationYear ontology:PhilosophersStone_Movie "2001"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:PhilosophersStone_Movie "7.6"^^xsd:decimal)
+DataPropertyAssertion(ontology:runtime ontology:PhilosophersStone_Movie "152"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:PhilosophersStone_Movie "Harry Potter and the Philosopher's Stone")
 
-    <!-- http://www.narrative-universes.org/ontology#publicationYear -->
+# Individual: ontology:Riptide (Riptide (Controcorrente))
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#publicationYear">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <rdfs:comment xml:lang="it">L&apos;anno in cui un&apos;opera è stata pubblicata</rdfs:comment>
-        <rdfs:label xml:lang="it">anno di pubblicazione</rdfs:label>
-    </owl:DatatypeProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:Riptide "Spada di bronzo celestiale di Percy, si trasforma in una penna e ritorna sempre al suo proprietario"@it)
+AnnotationAssertion(rdfs:label ontology:Riptide "Riptide (Controcorrente)"@it)
+ClassAssertion(ontology:Weapon ontology:Riptide)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Riptide ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:Riptide ontology:CelestialBronzePower)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:Riptide "false"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:Riptide "Spada di bronzo celestiale che si trasforma in una penna con il tappo, data a Percy da Chirone, ritorna sempre in tasca")
+DataPropertyAssertion(ontology:hasPowerType ontology:Riptide "Magical")
 
+# Individual: ontology:Rivendell (Gran Burrone)
 
-    <!-- http://www.narrative-universes.org/ontology#rating -->
+AnnotationAssertion(rdfs:comment ontology:Rivendell "Rifugio elfico di Elrond, luogo del Consiglio dove si forma la Compagnia dell'Anello"@it)
+AnnotationAssertion(rdfs:label ontology:Rivendell "Gran Burrone"@it)
+ClassAssertion(ontology:SafePlace ontology:Rivendell)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Rivendell ontology:MiddleEarthUniverse)
+DataPropertyAssertion(ontology:description ontology:Rivendell "Valle nascosta governata da Elrond Mezzelfo, ultimo rifugio di saggezza e bellezza elfica nella Terra di Mezzo")
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#rating">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-        <rdfs:comment xml:lang="it">La valutazione media di un&apos;opera su scala 0-10</rdfs:comment>
-        <rdfs:label xml:lang="it">valutazione</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:Sauron (Sauron)
 
+AnnotationAssertion(rdfs:comment ontology:Sauron "Signore Oscuro, creatore dell'Anello Unico, antagonista principale"@it)
+AnnotationAssertion(rdfs:label ontology:Sauron "Sauron"@it)
+ClassAssertion(ontology:NonHumanCharacter ontology:Sauron)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Sauron ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:Aragorn)
+ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:FrodoBaggins)
+ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:Gandalf)
+DataPropertyAssertion(ontology:description ontology:Sauron "Maia corrotto, antico servitore di Morgoth, cerca di dominare la Terra di Mezzo attraverso l'Anello Unico")
 
-    <!-- http://www.narrative-universes.org/ontology#runtime -->
+# Individual: ontology:SeaOfMonsters_Book (Il Mare dei Mostri)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#runtime">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#TVSeries"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <rdfs:comment xml:lang="it">La durata in minuti di un film o episodio</rdfs:comment>
-        <rdfs:label xml:lang="it">durata</rdfs:label>
-    </owl:DatatypeProperty>
-    
+AnnotationAssertion(rdfs:comment ontology:SeaOfMonsters_Book "Secondo libro della saga"@it)
+AnnotationAssertion(rdfs:label ontology:SeaOfMonsters_Book "Il Mare dei Mostri"@it)
+ClassAssertion(ontology:Book ontology:SeaOfMonsters_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:SeaOfMonsters_Book ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:SeaOfMonsters_Book ontology:CampHalfBlood)
+DataPropertyAssertion(ontology:description ontology:SeaOfMonsters_Book "Percy e i suoi amici devono recuperare il Vello d'Oro per salvare il campo e salvare Grover")
+DataPropertyAssertion(ontology:numberOfPages ontology:SeaOfMonsters_Book "279"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:SeaOfMonsters_Book "2006"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:SeaOfMonsters_Book "9.0"^^xsd:decimal)
+DataPropertyAssertion(ontology:title ontology:SeaOfMonsters_Book "The Sea of Monsters")
 
+# Individual: ontology:TV_14 (TV-14 (14+))
 
-    <!-- http://www.narrative-universes.org/ontology#title -->
+AnnotationAssertion(rdfs:label ontology:TV_14 "TV-14 (14+)"@it)
+ClassAssertion(ontology:ContentRating ontology:TV_14)
 
-    <owl:DatatypeProperty rdf:about="http://www.narrative-universes.org/ontology#title">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il titolo di un&apos;opera narrativa</rdfs:comment>
-        <rdfs:label xml:lang="it">titolo</rdfs:label>
-    </owl:DatatypeProperty>
-    
+# Individual: ontology:TV_G (TV-G (Tutti))
 
+AnnotationAssertion(rdfs:label ontology:TV_G "TV-G (Tutti)"@it)
+ClassAssertion(ontology:ContentRating ontology:TV_G)
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+# Individual: ontology:TV_MA (TV-MA (Adulti))
 
-    
+AnnotationAssertion(rdfs:label ontology:TV_MA "TV-MA (Adulti)"@it)
+ClassAssertion(ontology:ContentRating ontology:TV_MA)
 
+# Individual: ontology:TV_PG (TV-PG (Supervisione))
 
-    <!-- http://www.narrative-universes.org/ontology#Ability -->
+AnnotationAssertion(rdfs:label ontology:TV_PG "TV-PG (Supervisione)"@it)
+ClassAssertion(ontology:ContentRating ontology:TV_PG)
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Ability">
-        <rdfs:comment xml:lang="it">Un&apos;abilità o potere che può essere concesso da un artefatto o posseduto da un personaggio</rdfs:comment>
-        <rdfs:label xml:lang="it">Abilità</rdfs:label>
-    </owl:Class>
-    
+# Individual: ontology:TV_Y (TV-Y (Bambini))
 
+AnnotationAssertion(rdfs:label ontology:TV_Y "TV-Y (Bambini)"@it)
+ClassAssertion(ontology:ContentRating ontology:TV_Y)
 
-    <!-- http://www.narrative-universes.org/ontology#Ally -->
+# Individual: ontology:Tartarus (Tartaro)
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Ally">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Amico o compagno che aiuta il protagonista</rdfs:comment>
-        <rdfs:label xml:lang="it">Alleato</rdfs:label>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment ontology:Tartarus "Abisso primordiale sotto gli Inferi, prigione dei Titani"@it)
+AnnotationAssertion(rdfs:label ontology:Tartarus "Tartaro"@it)
+ClassAssertion(ontology:DangerZone ontology:Tartarus)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Tartarus ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:partOf ontology:Tartarus ontology:TheUnderworld)
+DataPropertyAssertion(ontology:description ontology:Tartarus "Abisso più profondo dell'universo, sotto gli Inferi, dove sono imprigionati i Titani e i nemici più pericolosi degli dei")
 
+# Individual: ontology:TheShire (La Contea)
 
-    <!-- http://www.narrative-universes.org/ontology#Antagonist -->
+AnnotationAssertion(rdfs:comment ontology:TheShire "Regione pacifica abitata dagli hobbit, casa di Frodo e Bilbo"@it)
+AnnotationAssertion(rdfs:label ontology:TheShire "La Contea"@it)
+ClassAssertion(ontology:SafePlace ontology:TheShire)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:TheShire ontology:MiddleEarthUniverse)
+DataPropertyAssertion(ontology:description ontology:TheShire "Idilliaca regione verde nel nord-ovest della Terra di Mezzo, famosa per la sua pace e abbondanza")
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Antagonist">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Villain principale o forza oppositrice</rdfs:comment>
-        <rdfs:label xml:lang="it">Antagonista</rdfs:label>
-    </owl:Class>
-    
+# Individual: ontology:TheUnderworld (Gli Inferi)
 
+AnnotationAssertion(rdfs:comment ontology:TheUnderworld "Regno dei morti governato da Ade, luogo oscuro e pericoloso"@it)
+AnnotationAssertion(rdfs:label ontology:TheUnderworld "Gli Inferi"@it)
+ClassAssertion(ontology:DangerZone ontology:TheUnderworld)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:TheUnderworld ontology:PercyJacksonUniverse)
+DataPropertyAssertion(ontology:description ontology:TheUnderworld "Regno sotterraneo dei morti, governato da Ade, con ingresso a Los Angeles attraverso gli studi DOA")
 
-    <!-- http://www.narrative-universes.org/ontology#Book -->
+# Individual: ontology:TrueInvisibility (Invisibilità Vera)
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Book">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Un&apos;opera letteraria scritta, tipicamente un romanzo o una serie di libri</rdfs:comment>
-        <rdfs:label xml:lang="it">Libro</rdfs:label>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment ontology:TrueInvisibility "L'invisibilità perfetta del mantello"@it)
+AnnotationAssertion(rdfs:label ontology:TrueInvisibility "Invisibilità Vera"@it)
+ClassAssertion(ontology:MagicalAbility ontology:TrueInvisibility)
+DataPropertyAssertion(ontology:description ontology:TrueInvisibility "Invisibilità perfetta e permanente concessa dal Mantello dell'Invisibilità")
 
+# Individual: ontology:UnbeatableMagic (Magia Imbattibile)
 
-    <!-- http://www.narrative-universes.org/ontology#Character -->
+AnnotationAssertion(rdfs:comment ontology:UnbeatableMagic "Il potere supremo della Bacchetta di Sambuco"@it)
+AnnotationAssertion(rdfs:label ontology:UnbeatableMagic "Magia Imbattibile"@it)
+ClassAssertion(ontology:MagicalAbility ontology:UnbeatableMagic)
+DataPropertyAssertion(ontology:description ontology:UnbeatableMagic "Potere magico superiore concesso dalla Bacchetta di Sambuco al suo legittimo proprietario")
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Character">
-        <rdfs:comment xml:lang="it">Un personaggio fittizio che appare in una o più opere narrative</rdfs:comment>
-        <rdfs:label xml:lang="it">Personaggio</rdfs:label>
-    </owl:Class>
-    
+# Individual: ontology:WaterControl (Controllo dell'Acqua)
 
+AnnotationAssertion(rdfs:comment ontology:WaterControl "Capacità divina di controllare e manipolare l'acqua"@it)
+AnnotationAssertion(rdfs:label ontology:WaterControl "Controllo dell'Acqua"@it)
+ClassAssertion(ontology:DivineAbility ontology:WaterControl)
+DataPropertyAssertion(ontology:description ontology:WaterControl "Potere ereditato da Poseidone, permette di controllare l'acqua, respirare sott'acqua e comunicare con creature marine")
 
-    <!-- http://www.narrative-universes.org/ontology#ContentRating -->
+# Individual: ontology:YankeeCap (Cappello Yankees di Annabeth)
 
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#ContentRating">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:oneOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_14"/>
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_G"/>
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_MA"/>
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_PG"/>
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#TV_Y"/>
-                </owl:oneOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:comment xml:lang="it">La classificazione per età del contenuto di un&apos;opera narrativa</rdfs:comment>
-        <rdfs:label xml:lang="it">Classificazione Contenuti</rdfs:label>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment ontology:YankeeCap "Berretto magico che rende invisibile chi lo indossa"@it)
+AnnotationAssertion(rdfs:label ontology:YankeeCap "Cappello Yankees di Annabeth"@it)
+ClassAssertion(ontology:PowerArtifact ontology:YankeeCap)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:YankeeCap ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:grantsAbility ontology:YankeeCap ontology:MagicalInvisibility)
+DataPropertyAssertion(ontology:canBeDestroyed ontology:YankeeCap "true"^^xsd:boolean)
+DataPropertyAssertion(ontology:description ontology:YankeeCap "Berretto magico regalo di Atena che rende invisibile chi lo indossa")
+DataPropertyAssertion(ontology:hasPowerType ontology:YankeeCap "Magical")
 
 
-    <!-- http://www.narrative-universes.org/ontology#DangerZone -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#DangerZone">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Un luogo pericoloso o ostile</rdfs:comment>
-        <rdfs:label xml:lang="it">Zona Pericolosa</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Divine -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Divine">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:label xml:lang="it">Divino</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#DivineAbility -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#DivineAbility">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-        <rdfs:comment xml:lang="it">Un&apos;abilità di origine divina</rdfs:comment>
-        <rdfs:label xml:lang="it">Abilità Divina</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Elven -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Elven">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:label xml:lang="it">Elfico</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Giant -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Giant">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:label xml:lang="it">Gigante</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Human -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Human">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:label xml:lang="it">Umano</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#HumanCharacter -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#HumanCharacter">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Un personaggio completamente umano</rdfs:comment>
-        <rdfs:label xml:lang="it">Personaggio Umano</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#HybridCharacter -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#HybridCharacter">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Un personaggio di eredità mista (semidio, mezzo gigante, ecc.)</rdfs:comment>
-        <rdfs:label xml:lang="it">Personaggio Ibrido</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#LiminalSpace -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#LiminalSpace">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Una soglia o passaggio tra mondi o dimensioni</rdfs:comment>
-        <rdfs:label xml:lang="it">Spazio Liminale</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Location -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Location">
-        <rdfs:comment xml:lang="it">Un luogo o location all&apos;interno di un universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Luogo</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MagicalAbility -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MagicalAbility">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-        <rdfs:comment xml:lang="it">Un&apos;abilità di natura magica</rdfs:comment>
-        <rdfs:label xml:lang="it">Abilità Magica</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MagicalCreature -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MagicalCreature">
-        <rdfs:comment xml:lang="it">Una creatura non umana o soprannaturale in un universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Creatura Magica</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Mentor -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Mentor">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#Character"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#mentors"/>
-                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Guida saggia che insegna e supporta il protagonista</rdfs:comment>
-        <rdfs:label xml:lang="it">Mentore</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MilitaryFaction -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MilitaryFaction">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:comment xml:lang="it">Un&apos;organizzazione militare, esercito o gruppo armato</rdfs:comment>
-        <rdfs:label xml:lang="it">Fazione Militare</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MissionBasedOrganization -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MissionBasedOrganization">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Movie -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Movie">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Un film cinematografico</rdfs:comment>
-        <rdfs:label xml:lang="it">Film</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#NarrativeEvent -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeEvent">
-        <rdfs:comment xml:lang="it">Un&apos;opera letteraria scritta, tipicamente un romanzo o una serie di libri</rdfs:comment>
-        <rdfs:label xml:lang="it">Evento Narrativo</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#NarrativeRole -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeRole">
-        <rdfs:comment xml:lang="it">Una funzione o ruolo narrativo che un personaggio ricopre (protagonista, antagonista, mentore, ecc.)</rdfs:comment>
-        <rdfs:label xml:lang="it">Ruolo Narrativo</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#NarrativeUniverse -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeUniverse">
-        <rdfs:comment xml:lang="it">Un universo fittizio che si estende attraverso molteplici opere narrative su diversi media (libri, film, serie TV, videogiochi, teatro)</rdfs:comment>
-        <rdfs:label xml:lang="it">Universo Narrativo</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#NarrativeWork -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NarrativeWork">
-        <rdfs:comment xml:lang="it">Una singola opera creativa (libro, film, episodio) che fa parte di un universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Opera Narrativa</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#NonHumanCharacter -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#NonHumanCharacter">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Character"/>
-        <rdfs:comment xml:lang="it">Un personaggio non umano (elfo, nano, satiro, ecc.)</rdfs:comment>
-        <rdfs:label xml:lang="it">Personaggio Non Umano</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Object -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Object">
-        <rdfs:comment xml:lang="it">Un oggetto fisico o magico all&apos;interno di un universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Oggetto</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Organization -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Organization">
-        <rdfs:comment xml:lang="it">Un gruppo, istituzione o fazione all&apos;interno di un universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Organizzazione</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#OriginType -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#OriginType">
-        <rdfs:label xml:lang="it">Il tipo di origine di un personaggio ibrido (umano, divino, gigante, spirito)</rdfs:label>
-        <rdfs:label xml:lang="it">Tipo di Origine</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#PhysicalAbility -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PhysicalAbility">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-        <rdfs:comment xml:lang="it">Un&apos;abilità fisica (forza, velocità, resistenza)</rdfs:comment>
-        <rdfs:label xml:lang="it">Abilità Fisica</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#PowerArtifact -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#PowerArtifact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#Object"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#grantsAbility"/>
-                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#Ability"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:comment xml:lang="it">Un oggetto con potere magico o speciale che influenza la narrativa</rdfs:comment>
-        <rdfs:label xml:lang="it">Artefatto di Potere</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Protagonist -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Protagonist">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#Character"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#appearsIn"/>
-                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">3</owl:minQualifiedCardinality>
-                        <owl:onClass rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Eroe principale o personaggio centrale della narrazione</rdfs:comment>
-        <rdfs:label xml:lang="it">Protagonista</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#SafePlace -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#SafePlace">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Location"/>
-        <rdfs:comment xml:lang="it">Un luogo considerato sicuro, un rifugio o santuario</rdfs:comment>
-        <rdfs:label xml:lang="it">Luogo Sicuro</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#School -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#School">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
-        <rdfs:comment xml:lang="it">Un&apos;istituzione educativa all&apos;interno dell&apos;universo narrativo</rdfs:comment>
-        <rdfs:label xml:lang="it">Scuola</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Spirit -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Spirit">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#OriginType"/>
-        <rdfs:label xml:lang="it">Spirito</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TVSeries -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TVSeries">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Una serie televisiva con episodi multipli</rdfs:comment>
-        <rdfs:label xml:lang="it">Serie TV</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TheatricalPlay -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TheatricalPlay">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Un&apos;opera rappresentata a teatro</rdfs:comment>
-        <rdfs:label xml:lang="it">Opera Teatrale</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TransmediaWork -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#TransmediaWork">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.narrative-universes.org/ontology#adaptationOf"/>
-                        <owl:someValuesFrom rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Un&apos;opera narrativa che esiste su almeno due media diversi</rdfs:comment>
-        <rdfs:label xml:lang="it">Opera Transmediale</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Trickster -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Trickster">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeRole"/>
-        <rdfs:comment xml:lang="it">Personaggio che usa astuzia, inganni e comportamenti imprevedibili</rdfs:comment>
-        <rdfs:label xml:lang="it">Imbroglione</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#VideoGame -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#VideoGame">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
-        <rdfs:comment xml:lang="it">Un videogioco interattivo</rdfs:comment>
-        <rdfs:label xml:lang="it">VideoGioco</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Weapon -->
-
-    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Weapon">
-        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Object"/>
-        <rdfs:comment xml:lang="it">Un&apos;arma usata dai personaggi</rdfs:comment>
-        <rdfs:label xml:lang="it">Arma</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#AlbusDumbledore -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#AlbusDumbledore">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
-        <ontology:appearsIn rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Book"/>
-        <ontology:appearsIn rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Movie"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#HogwartsSchool"/>
-        <ontology:mentors rdf:resource="http://www.narrative-universes.org/ontology#HarryPotter"/>
-        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#ElderWand"/>
-        <ontology:description>Preside di Hogwarts, mago più potente del suo tempo, mentore di Harry Potter</ontology:description>
-        <rdfs:comment xml:lang="it">Preside di Hogwarts e mentore di Harry</rdfs:comment>
-        <rdfs:label xml:lang="it">Albus Silente</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Anduril -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Anduril">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#KinglyAuthority"/>
-        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
-        <ontology:description>Spada riforgiata dai frammenti di Narsil, simbolo della regalità di Aragorn</ontology:description>
-        <ontology:hasPowerType>Symbolic</ontology:hasPowerType>
-        <rdfs:comment xml:lang="it">Spada riforgiata di Aragorn, precedentemente Narsil</rdfs:comment>
-        <rdfs:label xml:lang="it">Andúril</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Aragorn -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Aragorn">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
-        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
-        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#Gandalf"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
-        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#Anduril"/>
-        <ontology:description>Discendente di Isildur, ranger dei Dunedain, destinato a diventare Re di Gondor</ontology:description>
-        <rdfs:comment xml:lang="it">Ramingo del Nord, erede al trono di Gondor, futuro Re</rdfs:comment>
-        <rdfs:label xml:lang="it">Aragorn</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#ChamberOfSecrets_Book -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ChamberOfSecrets_Book">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
-        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
-        <ontology:description>Il secondo libro, in cui Harry scopre la Camera dei Segreti e affronta il Basilisco</ontology:description>
-        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">251</ontology:numberOfPages>
-        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1998</ontology:publicationYear>
-        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.3</ontology:rating>
-        <ontology:title>Harry Potter and the Chamber of Secrets</ontology:title>
-        <rdfs:comment xml:lang="it">Il secondo libro della saga</rdfs:comment>
-        <rdfs:label xml:lang="it">Harry Potter e la Camera dei Segreti</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#DiagonAlley -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#DiagonAlley">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:description>Via commerciale magica nascosta a Londra, dove i maghi acquistano bacchette, libri e altri oggetti magici</ontology:description>
-        <rdfs:comment xml:lang="it">La via commerciale magica di Londra</rdfs:comment>
-        <rdfs:label xml:lang="it">Diagon Alley</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#DominationPower -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#DominationPower">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
-        <rdfs:comment xml:lang="it">Capacità di controllare le menti e corrompere chi lo possiede</rdfs:comment>
-        <rdfs:label xml:lang="it">Potere di Dominazione</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#ElderWand -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ElderWand">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#UnbeatableMagic"/>
-        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
-        <ontology:description>La bacchetta più potente mai creata, uno dei tre Doni della Morte, realizzata dalla Morte stessa secondo la leggenda</ontology:description>
-        <ontology:hasPowerType>Magical</ontology:hasPowerType>
-        <rdfs:comment xml:lang="it">La bacchetta più potente, uno di Doni della Morte</rdfs:comment>
-        <rdfs:label xml:lang="it">Bacchetta di Sambuco</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MissionBasedOrganization"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:locatedAt rdf:resource="http://www.narrative-universes.org/ontology#Rivendell"/>
-        <ontology:description>Nove compagni scelti per accompagnare Frodo nella missione di distruggere l&apos;Anello: 4 hobbit, 2 umani, 1 elfo, 1 nano, 1 stregone</ontology:description>
-        <rdfs:comment xml:lang="it">Gruppo formato a Gran Burrone per aiutare Frodo a distruggere l&apos;Anello</rdfs:comment>
-        <rdfs:label xml:lang="it">Compagnia dell&apos;Anello</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#TheShire"/>
-        <ontology:description>Primo volume della trilogia, narra la formazione della Compagnia e l&apos;inizio del viaggio per distruggere l&apos;Anello</ontology:description>
-        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">423</ontology:numberOfPages>
-        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1954</ontology:publicationYear>
-        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.8</ontology:rating>
-        <ontology:title>The Fellowship of the Ring</ontology:title>
-        <rdfs:comment xml:lang="it">Primo libro della trilogia del Signore degli Anelli</rdfs:comment>
-        <rdfs:label xml:lang="it">La Compagnia dell&apos;Anello</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Movie -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Movie">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
-        <ontology:adaptationOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#TheShire"/>
-        <ontology:description>Primo film della trilogia diretta da Peter Jackson, vincitore di 4 Oscar</ontology:description>
-        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2001</ontology:publicationYear>
-        <ontology:runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">178</ontology:runtime>
-        <ontology:title>The Lord of the Rings: The Fellowship of the Ring</ontology:title>
-        <rdfs:comment xml:lang="it">Adattamento cinematografico del primo libro, diretto da Peter Jackson</rdfs:comment>
-        <rdfs:label xml:lang="it">La Compagnia dell&apos;Anello (Film)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#ForbiddenForest -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ForbiddenForest">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:partOf rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
-        <ontology:description>Foresta pericolosa nei pressi di Hogwarts, abitata da creature magiche e off-limits per gli studenti</ontology:description>
-        <rdfs:comment xml:lang="it">La foresta pericolosa vicino a Hogwarts</rdfs:comment>
-        <rdfs:label xml:lang="it">Foresta Proibita</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#FrodoBaggins -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FrodoBaggins">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
-        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#OneRing"/>
-        <ontology:description>Hobbit della Contea, nipote di Bilbo, scelto per portare l&apos;Anello Unico a Monte Fato per distruggerlo</ontology:description>
-        <rdfs:comment xml:lang="it">Hobbit portatore dell&apos;Anello, protagonista della missione per distruggere l&apos;Unico Anello</rdfs:comment>
-        <rdfs:label xml:lang="it">Frodo Baggins</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Gandalf -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Gandalf">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
-        <ontology:mentors rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
-        <ontology:description>Stregone immortale inviato nella Terra di Mezzo per guidare i Popoli Liberi contro Sauron</ontology:description>
-        <rdfs:comment xml:lang="it">Stregone istari, guida e mentore della Compagnia dell&apos;Anello</rdfs:comment>
-        <rdfs:label xml:lang="it">Gandalf il Grigio</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#HarryPotter -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HarryPotter">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <rdfs:comment xml:lang="it">Il protagonista della saga, il ragazzo che è sopravvissuto</rdfs:comment>
-        <rdfs:label xml:lang="it">Harry Potter</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#HarryPotterUniverse -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HarryPotterUniverse">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
-        <rdfs:comment xml:lang="it">L&apos;universo narrativo fantasy creato da J.K. Rowling</rdfs:comment>
-        <rdfs:label xml:lang="it">Universo di Harry Potter</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Hogwarts -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Hogwarts">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:description>Castello magico in Scozia, scuola di magia e stregoneria fondata dai quattro fondatori: Godric Grifondoro, Tosca Tassorosso, Corinna Corvonero e Salazar Serpeverde</ontology:description>
-        <rdfs:comment xml:lang="it">La scuola di Magia e Stregoneria di Hogwarts</rdfs:comment>
-        <rdfs:label xml:lang="it">Hogwarts</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#HogwartsSchool -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HogwartsSchool">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#School"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:locatedAt rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
-        <ontology:description>La Scuola di Magia e Stregoneria di Hogwarts, fondata oltre mille anni fa dai quattro maghi più potenti dell&apos;epoca</ontology:description>
-        <rdfs:comment xml:lang="it">L&apos;istituzione educativa magica principale</rdfs:comment>
-        <rdfs:label xml:lang="it">Scuola di Hogwarts</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#InvisibilityCloak -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#InvisibilityCloak">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#TrueInvisibility"/>
-        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</ontology:canBeDestroyed>
-        <ontology:description>Mantello dell&apos;invisibilità perfetto, uno dei tre Doni della Morte, ereditato da Harry da suo padre</ontology:description>
-        <ontology:hasPowerType>Magical</ontology:hasPowerType>
-        <rdfs:comment xml:lang="it">Il mantello magico che rende invisibili</rdfs:comment>
-        <rdfs:label xml:lang="it">Mantello dell&apos;Invisibilità</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#KinglyAuthority -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#KinglyAuthority">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
-        <rdfs:comment xml:lang="it">Simbolo della legittimità del Re di Gondor</rdfs:comment>
-        <rdfs:label xml:lang="it">Autorità Regale</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Legolas -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Legolas">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
-        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#Aragorn"/>
-        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
-        <rdfs:comment xml:lang="it">Principe elfico del Regno Boscuro, arciere esperto e membro della Compagnia</rdfs:comment>
-        <rdfs:label xml:lang="it">Legolas</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MiddleEarthUniverse -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#MiddleEarthUniverse">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
-        <ontology:description>Elfo silvan, figlio di Thranduil, maestro arciere dalla vista acuta e agilità straordinaria</ontology:description>
-        <ontology:description>Mondo fantasy epico creato da Tolkien, caratterizzato da una mitologia complessa con elfi, nani, hobbit e la lotta contro il Signore Oscuro Sauron</ontology:description>
-        <rdfs:comment xml:lang="it">Universo narrativo fantasy creato da J.R.R. Tolkien, ambientato nella Terra di Mezzo</rdfs:comment>
-        <rdfs:label xml:lang="it">Universo della Terra di Mezzo</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Mordor -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Mordor">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:description>Regno oscuro nel sud-est della Terra di Mezzo, dominato dalla torre di Barad-dur e dal Monte Fato</ontology:description>
-        <rdfs:comment xml:lang="it">Terra desolata di Sauron, destinazione finale di Frodo per distruggere l&apos;Anello</rdfs:comment>
-        <rdfs:label xml:lang="it">Mordor</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#MountDoom -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#MountDoom">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:partOf rdf:resource="http://www.narrative-universes.org/ontology#Mordor"/>
-        <ontology:description>Vulcano attivo nel cuore di Mordor, unico luogo dove l&apos;Anello Unico può essere distrutto</ontology:description>
-        <rdfs:comment xml:lang="it">Vulcano dove l&apos;Anello Unico fu forgiato e dove deve essere distrutto</rdfs:comment>
-        <rdfs:label xml:lang="it">Monte Fato</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#OneRing -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#OneRing">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#DominationPower"/>
-        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
-        <ontology:description>Anello forgiato da Sauron nelle fiamme del Monte Fato, contiene gran parte del suo potere</ontology:description>
-        <ontology:hasPowerType>Corruptive</ontology:hasPowerType>
-        <rdfs:comment xml:lang="it">L&apos;Anello del Potere forgiato da Sauron per dominare tutti gli altri anelli</rdfs:comment>
-        <rdfs:label xml:lang="it">Anello Unico</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Parseltongue -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Parseltongue">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
-        <ontology:description xml:lang="it">La rara abilità di parlare con i serpenti, tipicamente associata ai discendenti di Salazar Serpeverde</ontology:description>
-        <rdfs:comment xml:lang="it">L&apos;abilità di parlare con i serpenti</rdfs:comment>
-        <rdfs:label xml:lang="it">Serpentese</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#PhilosophersStone_Book -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#PhilosophersStone_Book">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
-        <ontology:description>Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale</ontology:description>
-        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">223</ontology:numberOfPages>
-        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1997</ontology:publicationYear>
-        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.5</ontology:rating>
-        <ontology:title>Harry Potter and the Philosopher&apos;s Stone</ontology:title>
-        <rdfs:comment xml:lang="it">Il primo libro della saga di Harry Potter</rdfs:comment>
-        <rdfs:label xml:lang="it">Harry Potter e la Pietra Filosofale</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#PhilosophersStone_Movie -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#PhilosophersStone_Movie">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
-        <ontology:adaptationOf rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Book"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
-        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
-        <ontology:description>Adattamento cinematografico del primo libro, diretto da Chris Columbus</ontology:description>
-        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2001</ontology:publicationYear>
-        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.6</ontology:rating>
-        <ontology:runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">152</ontology:runtime>
-        <ontology:title>Harry Potter and the Philosopher&apos;s Stone</ontology:title>
-        <rdfs:comment xml:lang="it">Adattamento cinematografico del primo libro</rdfs:comment>
-        <rdfs:label xml:lang="it">Harry Potter e la Pietra Filosofale (Film)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Rivendell -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Rivendell">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:description>Valle nascosta governata da Elrond Mezzelfo, ultimo rifugio di saggezza e bellezza elfica nella Terra di Mezzo</ontology:description>
-        <rdfs:comment xml:lang="it">Rifugio elfico di Elrond, luogo del Consiglio dove si forma la Compagnia dell&apos;Anello</rdfs:comment>
-        <rdfs:label xml:lang="it">Gran Burrone</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#Sauron -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Sauron">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#Aragorn"/>
-        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
-        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#Gandalf"/>
-        <ontology:description>Maia corrotto, antico servitore di Morgoth, cerca di dominare la Terra di Mezzo attraverso l&apos;Anello Unico</ontology:description>
-        <rdfs:comment xml:lang="it">Signore Oscuro, creatore dell&apos;Anello Unico, antagonista principale</rdfs:comment>
-        <rdfs:label xml:lang="it">Sauron</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TV_14 -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_14">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
-        <rdfs:label xml:lang="it">TV-14 (14+)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TV_G -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_G">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
-        <rdfs:label xml:lang="it">TV-G (Tutti)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TV_MA -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_MA">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
-        <rdfs:label xml:lang="it">TV-MA (Adulti)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TV_PG -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_PG">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
-        <rdfs:label xml:lang="it">TV-PG (Supervisione)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TV_Y -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_Y">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
-        <rdfs:label xml:lang="it">TV-Y (Bambini)</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TheShire -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TheShire">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
-        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
-        <ontology:description>Idilliaca regione verde nel nord-ovest della Terra di Mezzo, famosa per la sua pace e abbondanza</ontology:description>
-        <rdfs:comment xml:lang="it">Regione pacifica abitata dagli hobbit, casa di Frodo e Bilbo</rdfs:comment>
-        <rdfs:label xml:lang="it">La Contea</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#TrueInvisibility -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TrueInvisibility">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
-        <ontology:description>Invisibilità perfetta e permanente concessa dal Mantello dell&apos;Invisibilità</ontology:description>
-        <rdfs:comment xml:lang="it">L&apos;invisibilità perfetta del mantello</rdfs:comment>
-        <rdfs:label xml:lang="it">Invisibilità Vera</rdfs:label>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.narrative-universes.org/ontology#UnbeatableMagic -->
-
-    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#UnbeatableMagic">
-        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
-        <ontology:description>Potere magico superiore concesso dalla Bacchetta di Sambuco al suo legittimo proprietario</ontology:description>
-        <rdfs:comment xml:lang="it">Il potere supremo della Bacchetta di Sambuco</rdfs:comment>
-        <rdfs:label xml:lang="it">Magia Imbattibile</rdfs:label>
-    </owl:NamedIndividual>
-</rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
-
+SubObjectPropertyOf(ObjectPropertyChain(ontology:mentors ontology:alliedWith) ontology:indirectlyMentors)
+SubObjectPropertyOf(ObjectPropertyChain(ontology:setIn ontology:partOf) owl:topObjectProperty)
+)
