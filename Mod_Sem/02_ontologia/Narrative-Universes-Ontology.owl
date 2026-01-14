@@ -936,6 +936,14 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#MissionBasedOrganization -->
+
+    <owl:Class rdf:about="http://www.narrative-universes.org/ontology#MissionBasedOrganization">
+        <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#Organization"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#Movie -->
 
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Movie">
@@ -1183,6 +1191,195 @@
     
 
 
+    <!-- http://www.narrative-universes.org/ontology#AlbusDumbledore -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#AlbusDumbledore">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
+        <ontology:appearsIn rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Book"/>
+        <ontology:appearsIn rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Movie"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#HogwartsSchool"/>
+        <ontology:mentors rdf:resource="http://www.narrative-universes.org/ontology#HarryPotter"/>
+        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#ElderWand"/>
+        <ontology:description>Preside di Hogwarts, mago più potente del suo tempo, mentore di Harry Potter</ontology:description>
+        <rdfs:comment xml:lang="it">Preside di Hogwarts e mentore di Harry</rdfs:comment>
+        <rdfs:label xml:lang="it">Albus Silente</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Anduril -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Anduril">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#KinglyAuthority"/>
+        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
+        <ontology:description>Spada riforgiata dai frammenti di Narsil, simbolo della regalità di Aragorn</ontology:description>
+        <ontology:hasPowerType>Symbolic</ontology:hasPowerType>
+        <rdfs:comment xml:lang="it">Spada riforgiata di Aragorn, precedentemente Narsil</rdfs:comment>
+        <rdfs:label xml:lang="it">Andúril</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Aragorn -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Aragorn">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
+        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
+        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#Gandalf"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
+        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#Anduril"/>
+        <ontology:description>Discendente di Isildur, ranger dei Dunedain, destinato a diventare Re di Gondor</ontology:description>
+        <rdfs:comment xml:lang="it">Ramingo del Nord, erede al trono di Gondor, futuro Re</rdfs:comment>
+        <rdfs:label xml:lang="it">Aragorn</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#ChamberOfSecrets_Book -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ChamberOfSecrets_Book">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
+        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
+        <ontology:description>Il secondo libro, in cui Harry scopre la Camera dei Segreti e affronta il Basilisco</ontology:description>
+        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">251</ontology:numberOfPages>
+        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1998</ontology:publicationYear>
+        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.3</ontology:rating>
+        <ontology:title>Harry Potter and the Chamber of Secrets</ontology:title>
+        <rdfs:comment xml:lang="it">Il secondo libro della saga</rdfs:comment>
+        <rdfs:label xml:lang="it">Harry Potter e la Camera dei Segreti</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#DiagonAlley -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#DiagonAlley">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:description>Via commerciale magica nascosta a Londra, dove i maghi acquistano bacchette, libri e altri oggetti magici</ontology:description>
+        <rdfs:comment xml:lang="it">La via commerciale magica di Londra</rdfs:comment>
+        <rdfs:label xml:lang="it">Diagon Alley</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#DominationPower -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#DominationPower">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
+        <rdfs:comment xml:lang="it">Capacità di controllare le menti e corrompere chi lo possiede</rdfs:comment>
+        <rdfs:label xml:lang="it">Potere di Dominazione</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#ElderWand -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ElderWand">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#UnbeatableMagic"/>
+        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
+        <ontology:description>La bacchetta più potente mai creata, uno dei tre Doni della Morte, realizzata dalla Morte stessa secondo la leggenda</ontology:description>
+        <ontology:hasPowerType>Magical</ontology:hasPowerType>
+        <rdfs:comment xml:lang="it">La bacchetta più potente, uno di Doni della Morte</rdfs:comment>
+        <rdfs:label xml:lang="it">Bacchetta di Sambuco</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MissionBasedOrganization"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:locatedAt rdf:resource="http://www.narrative-universes.org/ontology#Rivendell"/>
+        <ontology:description>Nove compagni scelti per accompagnare Frodo nella missione di distruggere l&apos;Anello: 4 hobbit, 2 umani, 1 elfo, 1 nano, 1 stregone</ontology:description>
+        <rdfs:comment xml:lang="it">Gruppo formato a Gran Burrone per aiutare Frodo a distruggere l&apos;Anello</rdfs:comment>
+        <rdfs:label xml:lang="it">Compagnia dell&apos;Anello</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#TheShire"/>
+        <ontology:description>Primo volume della trilogia, narra la formazione della Compagnia e l&apos;inizio del viaggio per distruggere l&apos;Anello</ontology:description>
+        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">423</ontology:numberOfPages>
+        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1954</ontology:publicationYear>
+        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.8</ontology:rating>
+        <ontology:title>The Fellowship of the Ring</ontology:title>
+        <rdfs:comment xml:lang="it">Primo libro della trilogia del Signore degli Anelli</rdfs:comment>
+        <rdfs:label xml:lang="it">La Compagnia dell&apos;Anello</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Movie -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Movie">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
+        <ontology:adaptationOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing_Book"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#TheShire"/>
+        <ontology:description>Primo film della trilogia diretta da Peter Jackson, vincitore di 4 Oscar</ontology:description>
+        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2001</ontology:publicationYear>
+        <ontology:runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">178</ontology:runtime>
+        <ontology:title>The Lord of the Rings: The Fellowship of the Ring</ontology:title>
+        <rdfs:comment xml:lang="it">Adattamento cinematografico del primo libro, diretto da Peter Jackson</rdfs:comment>
+        <rdfs:label xml:lang="it">La Compagnia dell&apos;Anello (Film)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#ForbiddenForest -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#ForbiddenForest">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:partOf rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
+        <ontology:description>Foresta pericolosa nei pressi di Hogwarts, abitata da creature magiche e off-limits per gli studenti</ontology:description>
+        <rdfs:comment xml:lang="it">La foresta pericolosa vicino a Hogwarts</rdfs:comment>
+        <rdfs:label xml:lang="it">Foresta Proibita</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#FrodoBaggins -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#FrodoBaggins">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#HumanCharacter"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
+        <ontology:possesses rdf:resource="http://www.narrative-universes.org/ontology#OneRing"/>
+        <ontology:description>Hobbit della Contea, nipote di Bilbo, scelto per portare l&apos;Anello Unico a Monte Fato per distruggerlo</ontology:description>
+        <rdfs:comment xml:lang="it">Hobbit portatore dell&apos;Anello, protagonista della missione per distruggere l&apos;Unico Anello</rdfs:comment>
+        <rdfs:label xml:lang="it">Frodo Baggins</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Gandalf -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Gandalf">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
+        <ontology:mentors rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
+        <ontology:description>Stregone immortale inviato nella Terra di Mezzo per guidare i Popoli Liberi contro Sauron</ontology:description>
+        <rdfs:comment xml:lang="it">Stregone istari, guida e mentore della Compagnia dell&apos;Anello</rdfs:comment>
+        <rdfs:label xml:lang="it">Gandalf il Grigio</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.narrative-universes.org/ontology#HarryPotter -->
 
     <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HarryPotter">
@@ -1200,6 +1397,195 @@
         <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
         <rdfs:comment xml:lang="it">L&apos;universo narrativo fantasy creato da J.K. Rowling</rdfs:comment>
         <rdfs:label xml:lang="it">Universo di Harry Potter</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Hogwarts -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Hogwarts">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:description>Castello magico in Scozia, scuola di magia e stregoneria fondata dai quattro fondatori: Godric Grifondoro, Tosca Tassorosso, Corinna Corvonero e Salazar Serpeverde</ontology:description>
+        <rdfs:comment xml:lang="it">La scuola di Magia e Stregoneria di Hogwarts</rdfs:comment>
+        <rdfs:label xml:lang="it">Hogwarts</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#HogwartsSchool -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#HogwartsSchool">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#School"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:locatedAt rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
+        <ontology:description>La Scuola di Magia e Stregoneria di Hogwarts, fondata oltre mille anni fa dai quattro maghi più potenti dell&apos;epoca</ontology:description>
+        <rdfs:comment xml:lang="it">L&apos;istituzione educativa magica principale</rdfs:comment>
+        <rdfs:label xml:lang="it">Scuola di Hogwarts</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#InvisibilityCloak -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#InvisibilityCloak">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#TrueInvisibility"/>
+        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</ontology:canBeDestroyed>
+        <ontology:description>Mantello dell&apos;invisibilità perfetto, uno dei tre Doni della Morte, ereditato da Harry da suo padre</ontology:description>
+        <ontology:hasPowerType>Magical</ontology:hasPowerType>
+        <rdfs:comment xml:lang="it">Il mantello magico che rende invisibili</rdfs:comment>
+        <rdfs:label xml:lang="it">Mantello dell&apos;Invisibilità</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#KinglyAuthority -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#KinglyAuthority">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
+        <rdfs:comment xml:lang="it">Simbolo della legittimità del Re di Gondor</rdfs:comment>
+        <rdfs:label xml:lang="it">Autorità Regale</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Legolas -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Legolas">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
+        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#Aragorn"/>
+        <ontology:alliedWith rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:memberOf rdf:resource="http://www.narrative-universes.org/ontology#FellowshipOfTheRing"/>
+        <rdfs:comment xml:lang="it">Principe elfico del Regno Boscuro, arciere esperto e membro della Compagnia</rdfs:comment>
+        <rdfs:label xml:lang="it">Legolas</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#MiddleEarthUniverse -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#MiddleEarthUniverse">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NarrativeUniverse"/>
+        <ontology:description>Elfo silvan, figlio di Thranduil, maestro arciere dalla vista acuta e agilità straordinaria</ontology:description>
+        <ontology:description>Mondo fantasy epico creato da Tolkien, caratterizzato da una mitologia complessa con elfi, nani, hobbit e la lotta contro il Signore Oscuro Sauron</ontology:description>
+        <rdfs:comment xml:lang="it">Universo narrativo fantasy creato da J.R.R. Tolkien, ambientato nella Terra di Mezzo</rdfs:comment>
+        <rdfs:label xml:lang="it">Universo della Terra di Mezzo</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Mordor -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Mordor">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:description>Regno oscuro nel sud-est della Terra di Mezzo, dominato dalla torre di Barad-dur e dal Monte Fato</ontology:description>
+        <rdfs:comment xml:lang="it">Terra desolata di Sauron, destinazione finale di Frodo per distruggere l&apos;Anello</rdfs:comment>
+        <rdfs:label xml:lang="it">Mordor</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#MountDoom -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#MountDoom">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#DangerZone"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:partOf rdf:resource="http://www.narrative-universes.org/ontology#Mordor"/>
+        <ontology:description>Vulcano attivo nel cuore di Mordor, unico luogo dove l&apos;Anello Unico può essere distrutto</ontology:description>
+        <rdfs:comment xml:lang="it">Vulcano dove l&apos;Anello Unico fu forgiato e dove deve essere distrutto</rdfs:comment>
+        <rdfs:label xml:lang="it">Monte Fato</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#OneRing -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#OneRing">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#PowerArtifact"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:grantsAbility rdf:resource="http://www.narrative-universes.org/ontology#DominationPower"/>
+        <ontology:canBeDestroyed rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ontology:canBeDestroyed>
+        <ontology:description>Anello forgiato da Sauron nelle fiamme del Monte Fato, contiene gran parte del suo potere</ontology:description>
+        <ontology:hasPowerType>Corruptive</ontology:hasPowerType>
+        <rdfs:comment xml:lang="it">L&apos;Anello del Potere forgiato da Sauron per dominare tutti gli altri anelli</rdfs:comment>
+        <rdfs:label xml:lang="it">Anello Unico</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Parseltongue -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Parseltongue">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
+        <ontology:description xml:lang="it">La rara abilità di parlare con i serpenti, tipicamente associata ai discendenti di Salazar Serpeverde</ontology:description>
+        <rdfs:comment xml:lang="it">L&apos;abilità di parlare con i serpenti</rdfs:comment>
+        <rdfs:label xml:lang="it">Serpentese</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#PhilosophersStone_Book -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#PhilosophersStone_Book">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Book"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
+        <ontology:description>Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale</ontology:description>
+        <ontology:numberOfPages rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">223</ontology:numberOfPages>
+        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1997</ontology:publicationYear>
+        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.5</ontology:rating>
+        <ontology:title>Harry Potter and the Philosopher&apos;s Stone</ontology:title>
+        <rdfs:comment xml:lang="it">Il primo libro della saga di Harry Potter</rdfs:comment>
+        <rdfs:label xml:lang="it">Harry Potter e la Pietra Filosofale</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#PhilosophersStone_Movie -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#PhilosophersStone_Movie">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#Movie"/>
+        <ontology:adaptationOf rdf:resource="http://www.narrative-universes.org/ontology#PhilosophersStone_Book"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#HarryPotterUniverse"/>
+        <ontology:setIn rdf:resource="http://www.narrative-universes.org/ontology#Hogwarts"/>
+        <ontology:description>Adattamento cinematografico del primo libro, diretto da Chris Columbus</ontology:description>
+        <ontology:publicationYear rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2001</ontology:publicationYear>
+        <ontology:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.6</ontology:rating>
+        <ontology:runtime rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">152</ontology:runtime>
+        <ontology:title>Harry Potter and the Philosopher&apos;s Stone</ontology:title>
+        <rdfs:comment xml:lang="it">Adattamento cinematografico del primo libro</rdfs:comment>
+        <rdfs:label xml:lang="it">Harry Potter e la Pietra Filosofale (Film)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Rivendell -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Rivendell">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:description>Valle nascosta governata da Elrond Mezzelfo, ultimo rifugio di saggezza e bellezza elfica nella Terra di Mezzo</ontology:description>
+        <rdfs:comment xml:lang="it">Rifugio elfico di Elrond, luogo del Consiglio dove si forma la Compagnia dell&apos;Anello</rdfs:comment>
+        <rdfs:label xml:lang="it">Gran Burrone</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#Sauron -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#Sauron">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#NonHumanCharacter"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#Aragorn"/>
+        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#FrodoBaggins"/>
+        <ontology:opposes rdf:resource="http://www.narrative-universes.org/ontology#Gandalf"/>
+        <ontology:description>Maia corrotto, antico servitore di Morgoth, cerca di dominare la Terra di Mezzo attraverso l&apos;Anello Unico</ontology:description>
+        <rdfs:comment xml:lang="it">Signore Oscuro, creatore dell&apos;Anello Unico, antagonista principale</rdfs:comment>
+        <rdfs:label xml:lang="it">Sauron</rdfs:label>
     </owl:NamedIndividual>
     
 
@@ -1245,6 +1631,40 @@
     <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TV_Y">
         <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#ContentRating"/>
         <rdfs:label xml:lang="it">TV-Y (Bambini)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#TheShire -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TheShire">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#SafePlace"/>
+        <ontology:belongsToUniverse rdf:resource="http://www.narrative-universes.org/ontology#MiddleEarthUniverse"/>
+        <ontology:description>Idilliaca regione verde nel nord-ovest della Terra di Mezzo, famosa per la sua pace e abbondanza</ontology:description>
+        <rdfs:comment xml:lang="it">Regione pacifica abitata dagli hobbit, casa di Frodo e Bilbo</rdfs:comment>
+        <rdfs:label xml:lang="it">La Contea</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#TrueInvisibility -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#TrueInvisibility">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
+        <ontology:description>Invisibilità perfetta e permanente concessa dal Mantello dell&apos;Invisibilità</ontology:description>
+        <rdfs:comment xml:lang="it">L&apos;invisibilità perfetta del mantello</rdfs:comment>
+        <rdfs:label xml:lang="it">Invisibilità Vera</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.narrative-universes.org/ontology#UnbeatableMagic -->
+
+    <owl:NamedIndividual rdf:about="http://www.narrative-universes.org/ontology#UnbeatableMagic">
+        <rdf:type rdf:resource="http://www.narrative-universes.org/ontology#MagicalAbility"/>
+        <ontology:description>Potere magico superiore concesso dalla Bacchetta di Sambuco al suo legittimo proprietario</ontology:description>
+        <rdfs:comment xml:lang="it">Il potere supremo della Bacchetta di Sambuco</rdfs:comment>
+        <rdfs:label xml:lang="it">Magia Imbattibile</rdfs:label>
     </owl:NamedIndividual>
 </rdf:RDF>
 
