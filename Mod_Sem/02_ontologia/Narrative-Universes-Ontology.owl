@@ -11,21 +11,20 @@ Prefix(ontology:=<http://www.narrative-universes.org/ontology#>)
 
 Ontology(<http://www.narrative-universes.org/ontology>
 <http://www.narrative-universes.org/ontology/1.0>
-Annotation(dc:creator "\"Alessandro Olivero\"")
-Annotation(dc:creator "\"Giovanni Grillo\"")
+Annotation(dc:creator "Alessandro Olivero")
+Annotation(dc:creator "Giovanni Grillo")
 Annotation(dc:date "2026-01-10T00:00:00"^^xsd:dateTime)
-Annotation(dc:description "\"An ontology for representing crossmedia narrative universes including characters, locations, objects, works, and narrative roles\"@en")
-Annotation(dc:title "\"Narrative Universes Ontology\"@en")
+Annotation(dc:description "An ontology for representing crossmedia narrative universes including characters, locations, objects, works, and narrative roles"@en)
+Annotation(dc:title "Ontologia degli universi narrativi"@it)
 Annotation(vann:preferredNamespacePrefix "\"nuo\"")
 Annotation(vann:preferredNamespaceUri "\"http://www.narrative-universes.org/ontology#\"")
-Annotation(rdfs:label "\"Narrative Universes Ontology\"@en")
+Annotation(rdfs:label "Narrative Universes Ontology"@en)
 
 Declaration(Class(ontology:Ability))
 Declaration(Class(ontology:Ally))
 Declaration(Class(ontology:Antagonist))
 Declaration(Class(ontology:Book))
 Declaration(Class(ontology:Character))
-Declaration(Class(ontology:ContentRating))
 Declaration(Class(ontology:DangerZone))
 Declaration(Class(ontology:Divine))
 Declaration(Class(ontology:DivineAbility))
@@ -37,12 +36,8 @@ Declaration(Class(ontology:HybridCharacter))
 Declaration(Class(ontology:LiminalSpace))
 Declaration(Class(ontology:Location))
 Declaration(Class(ontology:MagicalAbility))
-Declaration(Class(ontology:MagicalCreature))
 Declaration(Class(ontology:Mentor))
-Declaration(Class(ontology:MilitaryFaction))
-Declaration(Class(ontology:MissionBasedOrganization))
 Declaration(Class(ontology:Movie))
-Declaration(Class(ontology:NarrativeEvent))
 Declaration(Class(ontology:NarrativeRole))
 Declaration(Class(ontology:NarrativeUniverse))
 Declaration(Class(ontology:NarrativeWork))
@@ -51,7 +46,6 @@ Declaration(Class(ontology:Object))
 Declaration(Class(ontology:Organization))
 Declaration(Class(ontology:OriginType))
 Declaration(Class(ontology:PhysicalAbility))
-Declaration(Class(ontology:PowerArtifact))
 Declaration(Class(ontology:Protagonist))
 Declaration(Class(ontology:SafePlace))
 Declaration(Class(ontology:School))
@@ -59,51 +53,33 @@ Declaration(Class(ontology:Spirit))
 Declaration(Class(ontology:TVSeries))
 Declaration(Class(ontology:TheatricalPlay))
 Declaration(Class(ontology:TransmediaWork))
-Declaration(Class(ontology:Trickster))
 Declaration(Class(ontology:VideoGame))
 Declaration(Class(ontology:Weapon))
-Declaration(ObjectProperty(ontology:abilityOf))
 Declaration(ObjectProperty(ontology:adaptationOf))
-Declaration(ObjectProperty(ontology:adaptedInto))
 Declaration(ObjectProperty(ontology:alliedWith))
 Declaration(ObjectProperty(ontology:appearsIn))
 Declaration(ObjectProperty(ontology:belongsToUniverse))
-Declaration(ObjectProperty(ontology:contains))
-Declaration(ObjectProperty(ontology:created))
 Declaration(ObjectProperty(ontology:createdBy))
-Declaration(ObjectProperty(ontology:destroyed))
 Declaration(ObjectProperty(ontology:destroyedBy))
 Declaration(ObjectProperty(ontology:enemyOf))
 Declaration(ObjectProperty(ontology:features))
-Declaration(ObjectProperty(ontology:grantedBy))
 Declaration(ObjectProperty(ontology:grantsAbility))
 Declaration(ObjectProperty(ontology:hasAbility))
 Declaration(ObjectProperty(ontology:hasMember))
 Declaration(ObjectProperty(ontology:hasOriginType))
-Declaration(ObjectProperty(ontology:hasPart))
-Declaration(ObjectProperty(ontology:hasParticipant))
 Declaration(ObjectProperty(ontology:hasRole))
-Declaration(ObjectProperty(ontology:indirectlyMentoredBy))
 Declaration(ObjectProperty(ontology:indirectlyMentors))
 Declaration(ObjectProperty(ontology:indirectlySetIn))
-Declaration(ObjectProperty(ontology:influencedBy))
 Declaration(ObjectProperty(ontology:influences))
 Declaration(ObjectProperty(ontology:locatedAt))
-Declaration(ObjectProperty(ontology:locationOf))
 Declaration(ObjectProperty(ontology:memberOf))
-Declaration(ObjectProperty(ontology:mentoredBy))
 Declaration(ObjectProperty(ontology:mentors))
-Declaration(ObjectProperty(ontology:opposes))
-Declaration(ObjectProperty(ontology:originTypeOf))
+Declaration(ObjectProperty(ontology:ospita))
 Declaration(ObjectProperty(ontology:partOf))
-Declaration(ObjectProperty(ontology:participatesIn))
-Declaration(ObjectProperty(ontology:possessedBy))
 Declaration(ObjectProperty(ontology:possesses))
 Declaration(ObjectProperty(ontology:prequelOf))
-Declaration(ObjectProperty(ontology:roleOf))
 Declaration(ObjectProperty(ontology:sequelOf))
 Declaration(ObjectProperty(ontology:setIn))
-Declaration(ObjectProperty(ontology:settingFor))
 Declaration(DataProperty(ontology:canBeDestroyed))
 Declaration(DataProperty(ontology:dangerLevel))
 Declaration(DataProperty(ontology:description))
@@ -162,11 +138,6 @@ Declaration(NamedIndividual(ontology:Riptide))
 Declaration(NamedIndividual(ontology:Rivendell))
 Declaration(NamedIndividual(ontology:Sauron))
 Declaration(NamedIndividual(ontology:SeaOfMonsters_Book))
-Declaration(NamedIndividual(ontology:TV_14))
-Declaration(NamedIndividual(ontology:TV_G))
-Declaration(NamedIndividual(ontology:TV_MA))
-Declaration(NamedIndividual(ontology:TV_PG))
-Declaration(NamedIndividual(ontology:TV_Y))
 Declaration(NamedIndividual(ontology:Tartarus))
 Declaration(NamedIndividual(ontology:TheShire))
 Declaration(NamedIndividual(ontology:TheUnderworld))
@@ -185,22 +156,13 @@ Declaration(AnnotationProperty(vann:preferredNamespaceUri))
 #   Object Properties
 ############################
 
-# Object Property: ontology:abilityOf (ontology:abilityOf)
-
-SubObjectPropertyOf(ontology:abilityOf ontology:hasAbility)
-
 # Object Property: ontology:adaptationOf (adattamento di)
 
 AnnotationAssertion(rdfs:comment ontology:adaptationOf "Collega un'opera (tipicamente film) all'opera originale (libro) da cui è adattata"@it)
 AnnotationAssertion(rdfs:label ontology:adaptationOf "adattamento di"@it)
 SubObjectPropertyOf(ontology:adaptationOf owl:topObjectProperty)
-InverseObjectProperties(ontology:adaptationOf ontology:adaptationOf)
 ObjectPropertyDomain(ontology:adaptationOf ontology:NarrativeWork)
 ObjectPropertyRange(ontology:adaptationOf ontology:NarrativeWork)
-
-# Object Property: ontology:adaptedInto (ontology:adaptedInto)
-
-SubObjectPropertyOf(ontology:adaptedInto ontology:adaptationOf)
 
 # Object Property: ontology:alliedWith (alleato con)
 
@@ -216,7 +178,7 @@ ObjectPropertyRange(ontology:alliedWith ontology:Character)
 AnnotationAssertion(rdfs:comment ontology:appearsIn "Collega un personaggio a un'opera narrativa in cui appare"@it)
 AnnotationAssertion(rdfs:label ontology:appearsIn "appare in"@it)
 SubObjectPropertyOf(ontology:appearsIn owl:topObjectProperty)
-InverseObjectProperties(ontology:appearsIn ontology:appearsIn)
+InverseObjectProperties(ontology:appearsIn ontology:features)
 ObjectPropertyDomain(ontology:appearsIn ontology:Character)
 ObjectPropertyRange(ontology:appearsIn ontology:NarrativeWork)
 
@@ -225,41 +187,22 @@ ObjectPropertyRange(ontology:appearsIn ontology:NarrativeWork)
 AnnotationAssertion(rdfs:comment ontology:belongsToUniverse "Collega un'entità (personaggio, luogo, oggetto, creatura) all'universo narrativo a cui appartiene"@it)
 AnnotationAssertion(rdfs:label ontology:belongsToUniverse "appartiene all'universo"@it)
 SubObjectPropertyOf(ontology:belongsToUniverse owl:topObjectProperty)
-InverseObjectProperties(ontology:belongsToUniverse ontology:belongsToUniverse)
-ObjectPropertyDomain(ontology:belongsToUniverse ontology:Character)
-ObjectPropertyDomain(ontology:belongsToUniverse ontology:Location)
-ObjectPropertyDomain(ontology:belongsToUniverse ontology:MagicalCreature)
-ObjectPropertyDomain(ontology:belongsToUniverse ontology:Object)
+ObjectPropertyDomain(ontology:belongsToUniverse owl:Thing)
 ObjectPropertyRange(ontology:belongsToUniverse ontology:NarrativeUniverse)
-
-# Object Property: ontology:contains (ontology:contains)
-
-SubObjectPropertyOf(ontology:contains ontology:belongsToUniverse)
-
-# Object Property: ontology:created (ontology:created)
-
-SubObjectPropertyOf(ontology:created ontology:createdBy)
 
 # Object Property: ontology:createdBy (creato da)
 
 AnnotationAssertion(rdfs:comment ontology:createdBy "Collega un oggetto o organizzazione al personaggio che lo ha creato"@it)
 AnnotationAssertion(rdfs:label ontology:createdBy "creato da"@it)
 SubObjectPropertyOf(ontology:createdBy owl:topObjectProperty)
-InverseObjectProperties(ontology:createdBy ontology:createdBy)
-ObjectPropertyDomain(ontology:createdBy ontology:Object)
-ObjectPropertyDomain(ontology:createdBy ontology:Organization)
+ObjectPropertyDomain(ontology:createdBy owl:Thing)
 ObjectPropertyRange(ontology:createdBy ontology:Character)
-
-# Object Property: ontology:destroyed (ontology:destroyed)
-
-SubObjectPropertyOf(ontology:destroyed ontology:destroyedBy)
 
 # Object Property: ontology:destroyedBy (distrutto da)
 
 AnnotationAssertion(rdfs:comment ontology:destroyedBy "Collega un oggetto al personaggio che lo ha distrutto"@it)
 AnnotationAssertion(rdfs:label ontology:destroyedBy "distrutto da"@it)
 SubObjectPropertyOf(ontology:destroyedBy owl:topObjectProperty)
-InverseObjectProperties(ontology:destroyedBy ontology:destroyedBy)
 ObjectPropertyDomain(ontology:destroyedBy ontology:Object)
 ObjectPropertyRange(ontology:destroyedBy ontology:Character)
 
@@ -272,21 +215,18 @@ SymmetricObjectProperty(ontology:enemyOf)
 ObjectPropertyDomain(ontology:enemyOf ontology:Character)
 ObjectPropertyRange(ontology:enemyOf ontology:Character)
 
-# Object Property: ontology:features (ontology:features)
+# Object Property: ontology:features (presenta)
 
-SubObjectPropertyOf(ontology:features ontology:appearsIn)
-
-# Object Property: ontology:grantedBy (ontology:grantedBy)
-
-SubObjectPropertyOf(ontology:grantedBy ontology:grantsAbility)
-InverseObjectProperties(ontology:grantedBy ontology:grantsAbility)
+AnnotationAssertion(rdfs:comment ontology:features "Indica quali personaggi appaiono in un'opera narrativa"@it)
+AnnotationAssertion(rdfs:label ontology:features "presenta"@it)
+ObjectPropertyDomain(ontology:features ontology:NarrativeWork)
+ObjectPropertyRange(ontology:features ontology:Character)
 
 # Object Property: ontology:grantsAbility (concede abilità)
 
 AnnotationAssertion(rdfs:comment ontology:grantsAbility "Collega un artefatto di potere all'abilità che concede"@it)
 AnnotationAssertion(rdfs:label ontology:grantsAbility "concede abilità"@it)
 SubObjectPropertyOf(ontology:grantsAbility owl:topObjectProperty)
-ObjectPropertyDomain(ontology:grantsAbility ontology:PowerArtifact)
 ObjectPropertyRange(ontology:grantsAbility ontology:Ability)
 
 # Object Property: ontology:hasAbility (ha abilità)
@@ -294,50 +234,38 @@ ObjectPropertyRange(ontology:grantsAbility ontology:Ability)
 AnnotationAssertion(rdfs:comment ontology:hasAbility "Collega un personaggio a un'abilità che possiede naturalmente (senza artefatti)"@it)
 AnnotationAssertion(rdfs:label ontology:hasAbility "ha abilità"@it)
 SubObjectPropertyOf(ontology:hasAbility owl:topObjectProperty)
-InverseObjectProperties(ontology:hasAbility ontology:hasAbility)
 ObjectPropertyDomain(ontology:hasAbility ontology:Character)
 ObjectPropertyRange(ontology:hasAbility ontology:Ability)
 
 # Object Property: ontology:hasMember (ontology:hasMember)
 
-SubObjectPropertyOf(ontology:hasMember ontology:memberOf)
+AnnotationAssertion(rdfs:comment ontology:hasMember "Indica i membri di un'organizzazione"@it)
+SubObjectPropertyOf(ontology:hasMember owl:topObjectProperty)
+InverseObjectProperties(ontology:hasMember ontology:memberOf)
+ObjectPropertyDomain(ontology:hasMember ontology:Organization)
+ObjectPropertyRange(ontology:hasMember ontology:Character)
 
 # Object Property: ontology:hasOriginType (ha tipo di origine)
 
 AnnotationAssertion(rdfs:comment ontology:hasOriginType "Collega un personaggio ibrido ai suoi tipi di origine (es: umano + divino)"@it)
 AnnotationAssertion(rdfs:label ontology:hasOriginType "ha tipo di origine"@it)
 SubObjectPropertyOf(ontology:hasOriginType owl:topObjectProperty)
-InverseObjectProperties(ontology:hasOriginType ontology:originTypeOf)
 ObjectPropertyDomain(ontology:hasOriginType ontology:HybridCharacter)
 ObjectPropertyRange(ontology:hasOriginType ontology:OriginType)
-
-# Object Property: ontology:hasPart (ontology:hasPart)
-
-SubObjectPropertyOf(ontology:hasPart ontology:partOf)
-
-# Object Property: ontology:hasParticipant (ontology:hasParticipant)
-
-SubObjectPropertyOf(ontology:hasParticipant ontology:participatesIn)
 
 # Object Property: ontology:hasRole (ha ruolo)
 
 AnnotationAssertion(rdfs:comment ontology:hasRole "Collega un personaggio al suo ruolo narrativo"@it)
 AnnotationAssertion(rdfs:label ontology:hasRole "ha ruolo"@it)
 SubObjectPropertyOf(ontology:hasRole owl:topObjectProperty)
-InverseObjectProperties(ontology:hasRole ontology:hasRole)
 ObjectPropertyDomain(ontology:hasRole ontology:Character)
 ObjectPropertyRange(ontology:hasRole ontology:NarrativeRole)
-
-# Object Property: ontology:indirectlyMentoredBy (ontology:indirectlyMentoredBy)
-
-SubObjectPropertyOf(ontology:indirectlyMentoredBy ontology:indirectlyMentors)
 
 # Object Property: ontology:indirectlyMentors (fa da mentore indirettamente)
 
 AnnotationAssertion(rdfs:comment ontology:indirectlyMentors "Indica una relazione di mentoring indiretta attraverso alleanze"@it)
 AnnotationAssertion(rdfs:label ontology:indirectlyMentors "fa da mentore indirettamente"@it)
 SubObjectPropertyOf(ontology:indirectlyMentors owl:topObjectProperty)
-InverseObjectProperties(ontology:indirectlyMentors ontology:indirectlyMentors)
 ObjectPropertyDomain(ontology:indirectlyMentors ontology:Character)
 ObjectPropertyRange(ontology:indirectlyMentors ontology:Character)
 
@@ -345,115 +273,71 @@ ObjectPropertyRange(ontology:indirectlyMentors ontology:Character)
 
 SubObjectPropertyOf(ontology:indirectlySetIn owl:topObjectProperty)
 
-# Object Property: ontology:influencedBy (ontology:influencedBy)
-
-SubObjectPropertyOf(ontology:influencedBy ontology:influences)
-
 # Object Property: ontology:influences (influenza)
 
 AnnotationAssertion(rdfs:comment ontology:influences "Collega un personaggio, oggetto o organizzazione a un evento narrativo che influenza significativamente"@it)
 AnnotationAssertion(rdfs:label ontology:influences "influenza"@it)
 SubObjectPropertyOf(ontology:influences owl:topObjectProperty)
-InverseObjectProperties(ontology:influences ontology:influences)
-ObjectPropertyDomain(ontology:influences ontology:Character)
-ObjectPropertyDomain(ontology:influences ontology:Object)
-ObjectPropertyDomain(ontology:influences ontology:Organization)
-ObjectPropertyRange(ontology:influences ontology:NarrativeEvent)
+ObjectPropertyDomain(ontology:influences owl:Thing)
 
 # Object Property: ontology:locatedAt (situato in)
 
 AnnotationAssertion(rdfs:comment ontology:locatedAt "Collega un'organizzazione al luogo fisico dove si trova"@it)
 AnnotationAssertion(rdfs:label ontology:locatedAt "situato in"@it)
 SubObjectPropertyOf(ontology:locatedAt owl:topObjectProperty)
-InverseObjectProperties(ontology:locatedAt ontology:locatedAt)
+InverseObjectProperties(ontology:locatedAt ontology:ospita)
 ObjectPropertyDomain(ontology:locatedAt ontology:Organization)
 ObjectPropertyRange(ontology:locatedAt ontology:Location)
-
-# Object Property: ontology:locationOf (ontology:locationOf)
-
-SubObjectPropertyOf(ontology:locationOf ontology:locatedAt)
 
 # Object Property: ontology:memberOf (membro di)
 
 AnnotationAssertion(rdfs:comment ontology:memberOf "Collega un personaggio a un'organizzazione di cui fa parte"@it)
 AnnotationAssertion(rdfs:label ontology:memberOf "membro di"@it)
 SubObjectPropertyOf(ontology:memberOf owl:topObjectProperty)
-InverseObjectProperties(ontology:memberOf ontology:memberOf)
 ObjectPropertyDomain(ontology:memberOf ontology:Character)
 ObjectPropertyRange(ontology:memberOf ontology:Organization)
-
-# Object Property: ontology:mentoredBy (ontology:mentoredBy)
-
-SubObjectPropertyOf(ontology:mentoredBy ontology:mentors)
 
 # Object Property: ontology:mentors (fa da mentore a)
 
 AnnotationAssertion(rdfs:comment ontology:mentors "Collega un personaggio mentore al personaggio che guida e insegna"@it)
 AnnotationAssertion(rdfs:label ontology:mentors "fa da mentore a"@it)
 SubObjectPropertyOf(ontology:mentors owl:topObjectProperty)
-InverseObjectProperties(ontology:mentors ontology:mentors)
 ObjectPropertyDomain(ontology:mentors ontology:Character)
 ObjectPropertyRange(ontology:mentors ontology:Character)
 
-# Object Property: ontology:opposes (si oppone a)
+# Object Property: ontology:ospita (ospita)
 
-AnnotationAssertion(rdfs:comment ontology:opposes "Collega due personaggi che si oppongono in un conflitto o antagonismo"@it)
-AnnotationAssertion(rdfs:label ontology:opposes "si oppone a"@it)
-SubObjectPropertyOf(ontology:opposes owl:topObjectProperty)
-SymmetricObjectProperty(ontology:opposes)
-ObjectPropertyDomain(ontology:opposes ontology:Character)
-ObjectPropertyRange(ontology:opposes ontology:Character)
-
-# Object Property: ontology:originTypeOf (ontology:originTypeOf)
-
-SubObjectPropertyOf(ontology:originTypeOf ontology:hasOriginType)
+AnnotationAssertion(rdfs:comment ontology:ospita "Indica quali organizzazioni si trovano in un luogo"@it)
+AnnotationAssertion(rdfs:label ontology:ospita "ospita"@it)
+ObjectPropertyDomain(ontology:ospita ontology:Location)
+ObjectPropertyRange(ontology:ospita ontology:Organization)
 
 # Object Property: ontology:partOf (parte di)
 
 AnnotationAssertion(rdfs:comment ontology:partOf "Collega un luogo a un luogo più grande che lo contiene"@it)
 AnnotationAssertion(rdfs:label ontology:partOf "parte di"@it)
 SubObjectPropertyOf(ontology:partOf owl:topObjectProperty)
-InverseObjectProperties(ontology:partOf ontology:partOf)
 TransitiveObjectProperty(ontology:partOf)
 ObjectPropertyDomain(ontology:partOf ontology:Location)
 ObjectPropertyRange(ontology:partOf ontology:Location)
-
-# Object Property: ontology:participatesIn (partecipa a)
-
-AnnotationAssertion(rdfs:comment ontology:participatesIn "Collega un personaggio a un evento narrativo a cui partecipa"@it)
-AnnotationAssertion(rdfs:label ontology:participatesIn "partecipa a"@it)
-SubObjectPropertyOf(ontology:participatesIn owl:topObjectProperty)
-InverseObjectProperties(ontology:participatesIn ontology:participatesIn)
-ObjectPropertyDomain(ontology:participatesIn ontology:Character)
-ObjectPropertyRange(ontology:participatesIn ontology:NarrativeEvent)
-
-# Object Property: ontology:possessedBy (ontology:possessedBy)
-
-SubObjectPropertyOf(ontology:possessedBy ontology:possesses)
 
 # Object Property: ontology:possesses (possiede)
 
 AnnotationAssertion(rdfs:comment ontology:possesses "Collega un personaggio a un oggetto che possiede o controlla"@it)
 AnnotationAssertion(rdfs:label ontology:possesses "possiede"@it)
 SubObjectPropertyOf(ontology:possesses owl:topObjectProperty)
-InverseObjectProperties(ontology:possesses ontology:possesses)
 ObjectPropertyDomain(ontology:possesses ontology:Character)
 ObjectPropertyRange(ontology:possesses ontology:Object)
 
 # Object Property: ontology:prequelOf (ontology:prequelOf)
 
-SubObjectPropertyOf(ontology:prequelOf ontology:sequelOf)
-
-# Object Property: ontology:roleOf (ontology:roleOf)
-
-SubObjectPropertyOf(ontology:roleOf ontology:hasRole)
+InverseObjectProperties(ontology:prequelOf ontology:sequelOf)
 
 # Object Property: ontology:sequelOf (seguito di)
 
 AnnotationAssertion(rdfs:comment ontology:sequelOf "Collega un'opera all'opera precedente di cui è il seguito"@it)
 AnnotationAssertion(rdfs:label ontology:sequelOf "seguito di"@it)
 SubObjectPropertyOf(ontology:sequelOf owl:topObjectProperty)
-InverseObjectProperties(ontology:sequelOf ontology:sequelOf)
 TransitiveObjectProperty(ontology:sequelOf)
 ObjectPropertyDomain(ontology:sequelOf ontology:NarrativeWork)
 ObjectPropertyRange(ontology:sequelOf ontology:NarrativeWork)
@@ -463,20 +347,8 @@ ObjectPropertyRange(ontology:sequelOf ontology:NarrativeWork)
 AnnotationAssertion(rdfs:comment ontology:setIn "Collega un'opera narrativa al luogo in cui è ambientata"@it)
 AnnotationAssertion(rdfs:label ontology:setIn "ambientato in"@it)
 SubObjectPropertyOf(ontology:setIn owl:topObjectProperty)
-InverseObjectProperties(ontology:setIn ontology:setIn)
 ObjectPropertyDomain(ontology:setIn ontology:NarrativeWork)
 ObjectPropertyRange(ontology:setIn ontology:Location)
-
-# Object Property: ontology:settingFor (ontology:settingFor)
-
-SubObjectPropertyOf(ontology:settingFor ontology:setIn)
-
-# Object Property: owl:topObjectProperty (indirettamente ambientato in)
-
-AnnotationAssertion(rdfs:comment owl:topObjectProperty "Indica che un'opera è ambientata indirettamente in un luogo che contiene il luogo principale"@it)
-AnnotationAssertion(rdfs:label owl:topObjectProperty "indirettamente ambientato in"@it)
-ObjectPropertyDomain(owl:topObjectProperty ontology:NarrativeWork)
-ObjectPropertyRange(owl:topObjectProperty ontology:Location)
 
 
 ############################
@@ -488,7 +360,6 @@ ObjectPropertyRange(owl:topObjectProperty ontology:Location)
 AnnotationAssertion(rdfs:comment ontology:canBeDestroyed "Indica se un artefatto può essere distrutto"@it)
 AnnotationAssertion(rdfs:label ontology:canBeDestroyed "può essere distrutto"@it)
 SubDataPropertyOf(ontology:canBeDestroyed owl:topDataProperty)
-DataPropertyDomain(ontology:canBeDestroyed ontology:PowerArtifact)
 DataPropertyRange(ontology:canBeDestroyed xsd:boolean)
 
 # Data Property: ontology:dangerLevel (livello di pericolo)
@@ -496,7 +367,6 @@ DataPropertyRange(ontology:canBeDestroyed xsd:boolean)
 AnnotationAssertion(rdfs:comment ontology:dangerLevel "Il livello di pericolo dell'entità: Low, Medium, High"@it)
 AnnotationAssertion(rdfs:label ontology:dangerLevel "livello di pericolo"@it)
 SubDataPropertyOf(ontology:dangerLevel owl:topDataProperty)
-DataPropertyDomain(ontology:dangerLevel ontology:MagicalCreature)
 DataPropertyRange(ontology:dangerLevel xsd:string)
 
 # Data Property: ontology:description (descrizione)
@@ -504,9 +374,6 @@ DataPropertyRange(ontology:dangerLevel xsd:string)
 AnnotationAssertion(rdfs:comment ontology:description "Una descrizione testuale dell'entità"@it)
 AnnotationAssertion(rdfs:label ontology:description "descrizione"@it)
 SubDataPropertyOf(ontology:description owl:topDataProperty)
-DataPropertyDomain(ontology:description ontology:Character)
-DataPropertyDomain(ontology:description ontology:Location)
-DataPropertyDomain(ontology:description ontology:NarrativeWork)
 DataPropertyRange(ontology:description xsd:string)
 
 # Data Property: ontology:hasNarrativeFunction (ha funzione narrativa)
@@ -522,7 +389,6 @@ DataPropertyRange(ontology:hasNarrativeFunction xsd:string)
 AnnotationAssertion(rdfs:comment ontology:hasPowerType "Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)"@it)
 AnnotationAssertion(rdfs:label ontology:hasPowerType "ha tipo di potere"@it)
 SubDataPropertyOf(ontology:hasPowerType owl:topDataProperty)
-DataPropertyDomain(ontology:hasPowerType ontology:PowerArtifact)
 DataPropertyRange(ontology:hasPowerType xsd:string)
 
 # Data Property: ontology:isOngoing (in corso)
@@ -597,18 +463,21 @@ AnnotationAssertion(rdfs:label ontology:Ability "Abilità"@it)
 
 AnnotationAssertion(rdfs:comment ontology:Ally "Amico o compagno che aiuta il protagonista"@it)
 AnnotationAssertion(rdfs:label ontology:Ally "Alleato"@it)
+EquivalentClasses(ontology:Ally ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:alliedWith ontology:Character)))
 SubClassOf(ontology:Ally ontology:NarrativeRole)
 
 # Class: ontology:Antagonist (Antagonista)
 
 AnnotationAssertion(rdfs:comment ontology:Antagonist "Villain principale o forza oppositrice"@it)
 AnnotationAssertion(rdfs:label ontology:Antagonist "Antagonista"@it)
+EquivalentClasses(ontology:Antagonist ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:enemyOf ontology:Protagonist)))
 SubClassOf(ontology:Antagonist ontology:NarrativeRole)
 
 # Class: ontology:Book (Libro)
 
 AnnotationAssertion(rdfs:comment ontology:Book "Un'opera letteraria scritta, tipicamente un romanzo o una serie di libri"@it)
 AnnotationAssertion(rdfs:label ontology:Book "Libro"@it)
+EquivalentClasses(ontology:Book ObjectIntersectionOf(ontology:NarrativeWork DataSomeValuesFrom(ontology:numberOfPages xsd:integer)))
 SubClassOf(ontology:Book ontology:NarrativeWork)
 
 # Class: ontology:Character (Personaggio)
@@ -616,16 +485,11 @@ SubClassOf(ontology:Book ontology:NarrativeWork)
 AnnotationAssertion(rdfs:comment ontology:Character "Un personaggio fittizio che appare in una o più opere narrative"@it)
 AnnotationAssertion(rdfs:label ontology:Character "Personaggio"@it)
 
-# Class: ontology:ContentRating (Classificazione Contenuti)
-
-AnnotationAssertion(rdfs:comment ontology:ContentRating "La classificazione per età del contenuto di un'opera narrativa"@it)
-AnnotationAssertion(rdfs:label ontology:ContentRating "Classificazione Contenuti"@it)
-EquivalentClasses(ontology:ContentRating ObjectOneOf(ontology:TV_14 ontology:TV_G ontology:TV_MA ontology:TV_PG ontology:TV_Y))
-
 # Class: ontology:DangerZone (Zona Pericolosa)
 
 AnnotationAssertion(rdfs:comment ontology:DangerZone "Un luogo pericoloso o ostile"@it)
 AnnotationAssertion(rdfs:label ontology:DangerZone "Zona Pericolosa"@it)
+EquivalentClasses(ontology:DangerZone ObjectIntersectionOf(ontology:Location DataHasValue(ontology:hasNarrativeFunction "Conflitto")))
 SubClassOf(ontology:DangerZone ontology:Location)
 
 # Class: ontology:Divine (Divino)
@@ -664,6 +528,7 @@ SubClassOf(ontology:HumanCharacter ontology:Character)
 
 AnnotationAssertion(rdfs:comment ontology:HybridCharacter "Un personaggio di eredità mista (semidio, mezzo gigante, ecc.)"@it)
 AnnotationAssertion(rdfs:label ontology:HybridCharacter "Personaggio Ibrido"@it)
+EquivalentClasses(ontology:HybridCharacter ObjectIntersectionOf(ontology:Character ObjectMinCardinality(2 ontology:hasOriginType)))
 SubClassOf(ontology:HybridCharacter ontology:Character)
 
 # Class: ontology:LiminalSpace (Spazio Liminale)
@@ -683,11 +548,6 @@ AnnotationAssertion(rdfs:comment ontology:MagicalAbility "Un'abilità di natura 
 AnnotationAssertion(rdfs:label ontology:MagicalAbility "Abilità Magica"@it)
 SubClassOf(ontology:MagicalAbility ontology:Ability)
 
-# Class: ontology:MagicalCreature (Creatura Magica)
-
-AnnotationAssertion(rdfs:comment ontology:MagicalCreature "Una creatura non umana o soprannaturale in un universo narrativo"@it)
-AnnotationAssertion(rdfs:label ontology:MagicalCreature "Creatura Magica"@it)
-
 # Class: ontology:Mentor (Mentore)
 
 AnnotationAssertion(rdfs:comment ontology:Mentor "Guida saggia che insegna e supporta il protagonista"@it)
@@ -695,26 +555,12 @@ AnnotationAssertion(rdfs:label ontology:Mentor "Mentore"@it)
 EquivalentClasses(ontology:Mentor ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:mentors ontology:Character)))
 SubClassOf(ontology:Mentor ontology:NarrativeRole)
 
-# Class: ontology:MilitaryFaction (Fazione Militare)
-
-AnnotationAssertion(rdfs:comment ontology:MilitaryFaction "Un'organizzazione militare, esercito o gruppo armato"@it)
-AnnotationAssertion(rdfs:label ontology:MilitaryFaction "Fazione Militare"@it)
-SubClassOf(ontology:MilitaryFaction ontology:Organization)
-
-# Class: ontology:MissionBasedOrganization (ontology:MissionBasedOrganization)
-
-SubClassOf(ontology:MissionBasedOrganization ontology:Organization)
-
 # Class: ontology:Movie (Film)
 
 AnnotationAssertion(rdfs:comment ontology:Movie "Un film cinematografico"@it)
 AnnotationAssertion(rdfs:label ontology:Movie "Film"@it)
+EquivalentClasses(ontology:Movie ObjectIntersectionOf(ontology:NarrativeWork ObjectComplementOf(DataHasValue(ontology:isOngoing "true"^^xsd:boolean)) DataSomeValuesFrom(ontology:runtime xsd:integer)))
 SubClassOf(ontology:Movie ontology:NarrativeWork)
-
-# Class: ontology:NarrativeEvent (Evento Narrativo)
-
-AnnotationAssertion(rdfs:comment ontology:NarrativeEvent "Un'opera letteraria scritta, tipicamente un romanzo o una serie di libri"@it)
-AnnotationAssertion(rdfs:label ontology:NarrativeEvent "Evento Narrativo"@it)
 
 # Class: ontology:NarrativeRole (Ruolo Narrativo)
 
@@ -758,13 +604,6 @@ AnnotationAssertion(rdfs:comment ontology:PhysicalAbility "Un'abilità fisica (f
 AnnotationAssertion(rdfs:label ontology:PhysicalAbility "Abilità Fisica"@it)
 SubClassOf(ontology:PhysicalAbility ontology:Ability)
 
-# Class: ontology:PowerArtifact (Artefatto di Potere)
-
-AnnotationAssertion(rdfs:comment ontology:PowerArtifact "Un oggetto con potere magico o speciale che influenza la narrativa"@it)
-AnnotationAssertion(rdfs:label ontology:PowerArtifact "Artefatto di Potere"@it)
-EquivalentClasses(ontology:PowerArtifact ObjectIntersectionOf(ontology:Object ObjectSomeValuesFrom(ontology:grantsAbility ontology:Ability)))
-SubClassOf(ontology:PowerArtifact ontology:Object)
-
 # Class: ontology:Protagonist (Protagonista)
 
 AnnotationAssertion(rdfs:comment ontology:Protagonist "Eroe principale o personaggio centrale della narrazione"@it)
@@ -776,6 +615,7 @@ SubClassOf(ontology:Protagonist ontology:NarrativeRole)
 
 AnnotationAssertion(rdfs:comment ontology:SafePlace "Un luogo considerato sicuro, un rifugio o santuario"@it)
 AnnotationAssertion(rdfs:label ontology:SafePlace "Luogo Sicuro"@it)
+EquivalentClasses(ontology:SafePlace ObjectIntersectionOf(ontology:Location DataHasValue(ontology:hasNarrativeFunction "Rifugio")))
 SubClassOf(ontology:SafePlace ontology:Location)
 
 # Class: ontology:School (Scuola)
@@ -807,12 +647,6 @@ AnnotationAssertion(rdfs:comment ontology:TransmediaWork "Un'opera narrativa che
 AnnotationAssertion(rdfs:label ontology:TransmediaWork "Opera Transmediale"@it)
 EquivalentClasses(ontology:TransmediaWork ObjectIntersectionOf(ontology:NarrativeWork ObjectSomeValuesFrom(ontology:adaptationOf ontology:NarrativeWork)))
 SubClassOf(ontology:TransmediaWork ontology:NarrativeWork)
-
-# Class: ontology:Trickster (Imbroglione)
-
-AnnotationAssertion(rdfs:comment ontology:Trickster "Personaggio che usa astuzia, inganni e comportamenti imprevedibili"@it)
-AnnotationAssertion(rdfs:label ontology:Trickster "Imbroglione"@it)
-SubClassOf(ontology:Trickster ontology:NarrativeRole)
 
 # Class: ontology:VideoGame (VideoGioco)
 
@@ -962,7 +796,7 @@ DataPropertyAssertion(ontology:hasPowerType ontology:ElderWand "Magical")
 
 AnnotationAssertion(rdfs:comment ontology:FellowshipOfTheRing "Gruppo formato a Gran Burrone per aiutare Frodo a distruggere l'Anello"@it)
 AnnotationAssertion(rdfs:label ontology:FellowshipOfTheRing "Compagnia dell'Anello"@it)
-ClassAssertion(ontology:MissionBasedOrganization ontology:FellowshipOfTheRing)
+ClassAssertion(ontology:Organization ontology:FellowshipOfTheRing)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FellowshipOfTheRing ontology:MiddleEarthUniverse)
 ObjectPropertyAssertion(ontology:locatedAt ontology:FellowshipOfTheRing ontology:Rivendell)
 DataPropertyAssertion(ontology:description ontology:FellowshipOfTheRing "Nove compagni scelti per accompagnare Frodo nella missione di distruggere l'Anello: 4 hobbit, 2 umani, 1 elfo, 1 nano, 1 stregone")
@@ -1011,6 +845,7 @@ ClassAssertion(ontology:HumanCharacter ontology:FrodoBaggins)
 ObjectPropertyAssertion(ontology:appearsIn ontology:FrodoBaggins ontology:FellowshipOfTheRing_Book)
 ObjectPropertyAssertion(ontology:appearsIn ontology:FrodoBaggins ontology:FellowshipOfTheRing_Movie)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:FrodoBaggins ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:enemyOf ontology:FrodoBaggins ontology:Sauron)
 ObjectPropertyAssertion(ontology:memberOf ontology:FrodoBaggins ontology:FellowshipOfTheRing)
 ObjectPropertyAssertion(ontology:possesses ontology:FrodoBaggins ontology:OneRing)
 DataPropertyAssertion(ontology:description ontology:FrodoBaggins "Hobbit della Contea, nipote di Bilbo, scelto per portare l'Anello Unico a Monte Fato per distruggerlo")
@@ -1145,8 +980,6 @@ ClassAssertion(ontology:HybridCharacter ontology:LukeCastellan)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:LukeCastellan ontology:PercyJacksonUniverse)
 ObjectPropertyAssertion(ontology:hasOriginType ontology:LukeCastellan ontology:DivineOrigin)
 ObjectPropertyAssertion(ontology:hasOriginType ontology:LukeCastellan ontology:HumanOrigin)
-ObjectPropertyAssertion(ontology:opposes ontology:LukeCastellan ontology:Chiron)
-ObjectPropertyAssertion(ontology:opposes ontology:LukeCastellan ontology:PercyJackson)
 DataPropertyAssertion(ontology:description ontology:LukeCastellan "Figlio di Hermes, ex campista esemplare corrotto dal rancore verso gli dei, diventa servitore di Crono")
 
 # Individual: ontology:MagicalInvisibility (Invisibilità Magica)
@@ -1207,7 +1040,6 @@ ClassAssertion(ontology:MagicalAbility ontology:Parseltongue)
 
 AnnotationAssertion(rdfs:comment ontology:PercyJackson "Semidio figlio di Poseidone, protagonista della saga, con poteri sull'acqua"@it)
 AnnotationAssertion(rdfs:label ontology:PercyJackson "Percy Jackson"@it)
-ClassAssertion(ontology:HybridCharacter ontology:PercyJackson)
 ObjectPropertyAssertion(ontology:appearsIn ontology:PercyJackson ontology:LightningThief_Book)
 ObjectPropertyAssertion(ontology:appearsIn ontology:PercyJackson ontology:LightningThief_Movie)
 ObjectPropertyAssertion(ontology:appearsIn ontology:PercyJackson ontology:SeaOfMonsters_Book)
@@ -1277,9 +1109,6 @@ AnnotationAssertion(rdfs:comment ontology:Sauron "Signore Oscuro, creatore dell'
 AnnotationAssertion(rdfs:label ontology:Sauron "Sauron"@it)
 ClassAssertion(ontology:NonHumanCharacter ontology:Sauron)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Sauron ontology:MiddleEarthUniverse)
-ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:Aragorn)
-ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:FrodoBaggins)
-ObjectPropertyAssertion(ontology:opposes ontology:Sauron ontology:Gandalf)
 DataPropertyAssertion(ontology:description ontology:Sauron "Maia corrotto, antico servitore di Morgoth, cerca di dominare la Terra di Mezzo attraverso l'Anello Unico")
 
 # Individual: ontology:SeaOfMonsters_Book (Il Mare dei Mostri)
@@ -1294,31 +1123,6 @@ DataPropertyAssertion(ontology:numberOfPages ontology:SeaOfMonsters_Book "279"^^
 DataPropertyAssertion(ontology:publicationYear ontology:SeaOfMonsters_Book "2006"^^xsd:decimal)
 DataPropertyAssertion(ontology:rating ontology:SeaOfMonsters_Book "9.0"^^xsd:float)
 DataPropertyAssertion(ontology:title ontology:SeaOfMonsters_Book "The Sea of Monsters")
-
-# Individual: ontology:TV_14 (TV-14 (14+))
-
-AnnotationAssertion(rdfs:label ontology:TV_14 "TV-14 (14+)"@it)
-ClassAssertion(ontology:ContentRating ontology:TV_14)
-
-# Individual: ontology:TV_G (TV-G (Tutti))
-
-AnnotationAssertion(rdfs:label ontology:TV_G "TV-G (Tutti)"@it)
-ClassAssertion(ontology:ContentRating ontology:TV_G)
-
-# Individual: ontology:TV_MA (TV-MA (Adulti))
-
-AnnotationAssertion(rdfs:label ontology:TV_MA "TV-MA (Adulti)"@it)
-ClassAssertion(ontology:ContentRating ontology:TV_MA)
-
-# Individual: ontology:TV_PG (TV-PG (Supervisione))
-
-AnnotationAssertion(rdfs:label ontology:TV_PG "TV-PG (Supervisione)"@it)
-ClassAssertion(ontology:ContentRating ontology:TV_PG)
-
-# Individual: ontology:TV_Y (TV-Y (Bambini))
-
-AnnotationAssertion(rdfs:label ontology:TV_Y "TV-Y (Bambini)"@it)
-ClassAssertion(ontology:ContentRating ontology:TV_Y)
 
 # Individual: ontology:Tartarus (Tartaro)
 
@@ -1375,5 +1179,4 @@ DataPropertyAssertion(ontology:hasPowerType ontology:YankeeCap "Magical")
 
 
 SubObjectPropertyOf(ObjectPropertyChain(ontology:mentors ontology:alliedWith) ontology:indirectlyMentors)
-SubObjectPropertyOf(ObjectPropertyChain(ontology:setIn ontology:partOf) owl:topObjectProperty)
 )
