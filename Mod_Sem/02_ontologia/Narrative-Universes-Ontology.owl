@@ -5,7 +5,9 @@ Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
 Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
 Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
 Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(skos:=<http://www.w3.org/2004/02/skos/core#>)
 Prefix(vann:=<http://purl.org/vocab/vann/>)
+Prefix(schema:=<http://schema.org/>)
 Prefix(ontology:=<http://www.narrative-universes.org/ontology#>)
 
 
@@ -80,6 +82,7 @@ Declaration(ObjectProperty(ontology:sequelOf))
 Declaration(ObjectProperty(ontology:setIn))
 Declaration(DataProperty(ontology:birthYear))
 Declaration(DataProperty(ontology:canBeDestroyed))
+Declaration(DataProperty(ontology:dangerLevel))
 Declaration(DataProperty(ontology:description))
 Declaration(DataProperty(ontology:hasNarrativeFunction))
 Declaration(DataProperty(ontology:hasPowerType))
@@ -158,6 +161,7 @@ Declaration(AnnotationProperty(dc:description))
 Declaration(AnnotationProperty(dc:title))
 Declaration(AnnotationProperty(vann:preferredNamespacePrefix))
 Declaration(AnnotationProperty(vann:preferredNamespaceUri))
+Declaration(AnnotationProperty(skos:closeMatch))
 
 ############################
 #   Object Properties
@@ -291,8 +295,10 @@ SubObjectPropertyOf(ontology:indirectlyMentors owl:topObjectProperty)
 ObjectPropertyDomain(ontology:indirectlyMentors ontology:Character)
 ObjectPropertyRange(ontology:indirectlyMentors ontology:Character)
 
-# Object Property: ontology:indirectlySetIn (ontology:indirectlySetIn)
+# Object Property: ontology:indirectlySetIn (Impostato indirettamente)
 
+AnnotationAssertion(rdfs:comment ontology:indirectlySetIn "Usata per rappresentare legami indiretti tra entità narrative e ambientazioni"@it)
+AnnotationAssertion(rdfs:label ontology:indirectlySetIn "Impostato indirettamente"@it)
 SubObjectPropertyOf(ontology:indirectlySetIn owl:topObjectProperty)
 
 # Object Property: ontology:influences (influenza)
@@ -391,6 +397,13 @@ AnnotationAssertion(rdfs:comment ontology:canBeDestroyed "Indica se un artefatto
 AnnotationAssertion(rdfs:label ontology:canBeDestroyed "può essere distrutto"@it)
 SubDataPropertyOf(ontology:canBeDestroyed owl:topDataProperty)
 DataPropertyRange(ontology:canBeDestroyed xsd:boolean)
+
+# Data Property: ontology:dangerLevel (livello di pericolo)
+
+AnnotationAssertion(rdfs:comment ontology:dangerLevel "Il livello di pericolo dell'entità: Low, Medium, High"@it)
+AnnotationAssertion(rdfs:label ontology:dangerLevel "livello di pericolo"@it)
+SubDataPropertyOf(ontology:dangerLevel owl:topDataProperty)
+DataPropertyRange(ontology:dangerLevel xsd:string)
 
 # Data Property: ontology:description (descrizione)
 
@@ -498,6 +511,7 @@ EquivalentClasses(ontology:Antagonist ObjectIntersectionOf(ontology:Character Ob
 
 AnnotationAssertion(rdfs:comment ontology:Book "Un'opera letteraria scritta, tipicamente un romanzo o una serie di libri"@it)
 AnnotationAssertion(rdfs:label ontology:Book "Libro"@it)
+AnnotationAssertion(skos:closeMatch ontology:Book schema:Book)
 EquivalentClasses(ontology:Book ObjectIntersectionOf(ontology:NarrativeWork DataSomeValuesFrom(ontology:numberOfPages xsd:integer)))
 SubClassOf(ontology:Book ontology:NarrativeWork)
 
@@ -505,6 +519,7 @@ SubClassOf(ontology:Book ontology:NarrativeWork)
 
 AnnotationAssertion(rdfs:comment ontology:Character "Un personaggio fittizio che appare in una o più opere narrative"@it)
 AnnotationAssertion(rdfs:label ontology:Character "Personaggio"@it)
+AnnotationAssertion(skos:closeMatch ontology:Character schema:Person)
 
 # Class: ontology:DangerZone (Zona Pericolosa)
 
@@ -565,6 +580,7 @@ SubClassOf(ontology:LiminalSpace ontology:Location)
 
 AnnotationAssertion(rdfs:comment ontology:Location "Un luogo o location all'interno di un universo narrativo"@it)
 AnnotationAssertion(rdfs:label ontology:Location "Luogo"@it)
+AnnotationAssertion(skos:closeMatch ontology:Location schema:Place)
 
 # Class: ontology:MagicalAbility (Abilità Magica)
 
@@ -582,6 +598,7 @@ EquivalentClasses(ontology:Mentor ObjectIntersectionOf(ontology:Character Object
 
 AnnotationAssertion(rdfs:comment ontology:Movie "Un film cinematografico"@it)
 AnnotationAssertion(rdfs:label ontology:Movie "Film"@it)
+AnnotationAssertion(skos:closeMatch ontology:Movie schema:Movie)
 EquivalentClasses(ontology:Movie ObjectIntersectionOf(ontology:NarrativeWork ObjectComplementOf(DataHasValue(ontology:isOngoing "true"^^xsd:boolean)) DataSomeValuesFrom(ontology:runtime xsd:integer)))
 SubClassOf(ontology:Movie ontology:NarrativeWork)
 
@@ -952,7 +969,6 @@ AnnotationAssertion(rdfs:comment ontology:IngressoCampoMezzosangue "Segna il pas
 ClassAssertion(ontology:LiminalSpace ontology:IngressoCampoMezzosangue)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:IngressoCampoMezzosangue ontology:PercyJacksonUniverse)
 DataPropertyAssertion(ontology:description ontology:IngressoCampoMezzosangue "Ingresso sorvegliato del Campo Mezzosangue, protetto da barriere magiche che impediscono ai mostri di entrare. Solo i semidei possono attraversarlo")
-DataPropertyAssertion(ontology:hasNarrativeFunction ontology:IngressoCampoMezzosangue "Transizione")
 
 # Individual: ontology:InvisibilityCloak (Mantello dell'Invisibilità)
 
@@ -1118,6 +1134,7 @@ AnnotationAssertion(rdfs:label ontology:PhilosophersStone_Book "Harry Potter e l
 ClassAssertion(ontology:Book ontology:PhilosophersStone_Book)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PhilosophersStone_Book ontology:HarryPotterUniverse)
 ObjectPropertyAssertion(ontology:hasMainProtagonist ontology:PhilosophersStone_Book ontology:HarryPotter)
+ObjectPropertyAssertion(ontology:indirectlySetIn ontology:PhilosophersStone_Book ontology:ForbiddenForest)
 ObjectPropertyAssertion(ontology:setIn ontology:PhilosophersStone_Book ontology:Hogwarts)
 DataPropertyAssertion(ontology:description ontology:PhilosophersStone_Book "Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale")
 DataPropertyAssertion(ontology:numberOfPages ontology:PhilosophersStone_Book "223"^^xsd:integer)
@@ -1263,4 +1280,6 @@ DataPropertyAssertion(ontology:canBeDestroyed ontology:YankeeCap "true"^^xsd:boo
 
 DisjointClasses(ontology:DangerZone ontology:LiminalSpace ontology:SafePlace)
 SubObjectPropertyOf(ObjectPropertyChain(ontology:mentors ontology:alliedWith) ontology:indirectlyMentors)
+SubObjectPropertyOf(ObjectPropertyChain(ontology:partOf) ontology:indirectlySetIn)
+SubObjectPropertyOf(ObjectPropertyChain(ontology:setIn) ontology:indirectlySetIn)
 )
