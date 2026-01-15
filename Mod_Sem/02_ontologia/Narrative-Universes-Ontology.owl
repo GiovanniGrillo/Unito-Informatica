@@ -38,13 +38,13 @@ Declaration(Class(ontology:Location))
 Declaration(Class(ontology:MagicalAbility))
 Declaration(Class(ontology:Mentor))
 Declaration(Class(ontology:Movie))
-Declaration(Class(ontology:NarrativeRole))
 Declaration(Class(ontology:NarrativeUniverse))
 Declaration(Class(ontology:NarrativeWork))
 Declaration(Class(ontology:NonHumanCharacter))
 Declaration(Class(ontology:Object))
 Declaration(Class(ontology:Organization))
 Declaration(Class(ontology:OriginType))
+Declaration(Class(ontology:PowerType))
 Declaration(Class(ontology:Protagonist))
 Declaration(Class(ontology:SafePlace))
 Declaration(Class(ontology:School))
@@ -61,8 +61,10 @@ Declaration(ObjectProperty(ontology:enemyOf))
 Declaration(ObjectProperty(ontology:features))
 Declaration(ObjectProperty(ontology:grantsAbility))
 Declaration(ObjectProperty(ontology:hasAbility))
+Declaration(ObjectProperty(ontology:hasMainProtagonist))
 Declaration(ObjectProperty(ontology:hasMember))
 Declaration(ObjectProperty(ontology:hasOriginType))
+Declaration(ObjectProperty(ontology:hasPowerTypeEnum))
 Declaration(ObjectProperty(ontology:hasRole))
 Declaration(ObjectProperty(ontology:indirectlyMentors))
 Declaration(ObjectProperty(ontology:indirectlySetIn))
@@ -76,8 +78,8 @@ Declaration(ObjectProperty(ontology:possesses))
 Declaration(ObjectProperty(ontology:prequelOf))
 Declaration(ObjectProperty(ontology:sequelOf))
 Declaration(ObjectProperty(ontology:setIn))
+Declaration(DataProperty(ontology:birthYear))
 Declaration(DataProperty(ontology:canBeDestroyed))
-Declaration(DataProperty(ontology:dangerLevel))
 Declaration(DataProperty(ontology:description))
 Declaration(DataProperty(ontology:hasNarrativeFunction))
 Declaration(DataProperty(ontology:hasPowerType))
@@ -92,13 +94,16 @@ Declaration(NamedIndividual(ontology:AlbusDumbledore))
 Declaration(NamedIndividual(ontology:Anduril))
 Declaration(NamedIndividual(ontology:AnnabethChase))
 Declaration(NamedIndividual(ontology:Aragorn))
+Declaration(NamedIndividual(ontology:Binario9e3Quarti))
 Declaration(NamedIndividual(ontology:CampHalfBlood))
 Declaration(NamedIndividual(ontology:CampHalfBloodOrganization))
 Declaration(NamedIndividual(ontology:CelestialBronzePower))
 Declaration(NamedIndividual(ontology:ChamberOfSecrets_Book))
 Declaration(NamedIndividual(ontology:Chiron))
+Declaration(NamedIndividual(ontology:CorruptivePower))
 Declaration(NamedIndividual(ontology:DiagonAlley))
 Declaration(NamedIndividual(ontology:DivineOrigin))
+Declaration(NamedIndividual(ontology:DivinePower))
 Declaration(NamedIndividual(ontology:DominationPower))
 Declaration(NamedIndividual(ontology:ElderWand))
 Declaration(NamedIndividual(ontology:FellowshipOfTheRing))
@@ -113,6 +118,7 @@ Declaration(NamedIndividual(ontology:HarryPotterUniverse))
 Declaration(NamedIndividual(ontology:Hermione_Granger))
 Declaration(NamedIndividual(ontology:Hogwarts))
 Declaration(NamedIndividual(ontology:HogwartsSchool))
+Declaration(NamedIndividual(ontology:IngressoCampoMezzosangue))
 Declaration(NamedIndividual(ontology:InvisibilityCloak))
 Declaration(NamedIndividual(ontology:KinglyAuthority))
 Declaration(NamedIndividual(ontology:Legolas))
@@ -121,6 +127,7 @@ Declaration(NamedIndividual(ontology:LightningThief_Movie))
 Declaration(NamedIndividual(ontology:Lord_Voldemort))
 Declaration(NamedIndividual(ontology:LukeCastellan))
 Declaration(NamedIndividual(ontology:MagicalInvisibility))
+Declaration(NamedIndividual(ontology:MagicalPower))
 Declaration(NamedIndividual(ontology:MiddleEarthUniverse))
 Declaration(NamedIndividual(ontology:Mordor))
 Declaration(NamedIndividual(ontology:MountDoom))
@@ -131,11 +138,13 @@ Declaration(NamedIndividual(ontology:PercyJackson))
 Declaration(NamedIndividual(ontology:PercyJacksonUniverse))
 Declaration(NamedIndividual(ontology:PhilosophersStone_Book))
 Declaration(NamedIndividual(ontology:PhilosophersStone_Movie))
+Declaration(NamedIndividual(ontology:PortaleMondoMorti))
 Declaration(NamedIndividual(ontology:Riptide))
 Declaration(NamedIndividual(ontology:Rivendell))
 Declaration(NamedIndividual(ontology:Ron_Weasley))
 Declaration(NamedIndividual(ontology:Sauron))
 Declaration(NamedIndividual(ontology:SeaOfMonsters_Book))
+Declaration(NamedIndividual(ontology:SymbolicPower))
 Declaration(NamedIndividual(ontology:Tartarus))
 Declaration(NamedIndividual(ontology:TheShire))
 Declaration(NamedIndividual(ontology:TheUnderworld))
@@ -213,10 +222,10 @@ SymmetricObjectProperty(ontology:enemyOf)
 ObjectPropertyDomain(ontology:enemyOf ontology:Character)
 ObjectPropertyRange(ontology:enemyOf ontology:Character)
 
-# Object Property: ontology:features (presenta)
+# Object Property: ontology:features (presente)
 
 AnnotationAssertion(rdfs:comment ontology:features "Indica quali personaggi appaiono in un'opera narrativa"@it)
-AnnotationAssertion(rdfs:label ontology:features "presenta"@it)
+AnnotationAssertion(rdfs:label ontology:features "presente"@it)
 ObjectPropertyDomain(ontology:features ontology:NarrativeWork)
 ObjectPropertyRange(ontology:features ontology:Character)
 
@@ -235,6 +244,15 @@ SubObjectPropertyOf(ontology:hasAbility owl:topObjectProperty)
 ObjectPropertyDomain(ontology:hasAbility ontology:Character)
 ObjectPropertyRange(ontology:hasAbility ontology:Ability)
 
+# Object Property: ontology:hasMainProtagonist (ha protagonista principale)
+
+AnnotationAssertion(rdfs:comment ontology:hasMainProtagonist "Collega un'opera al suo protagonista principale (uno solo per opera)"@it)
+AnnotationAssertion(rdfs:label ontology:hasMainProtagonist "ha protagonista principale"@it)
+SubObjectPropertyOf(ontology:hasMainProtagonist ontology:features)
+FunctionalObjectProperty(ontology:hasMainProtagonist)
+ObjectPropertyDomain(ontology:hasMainProtagonist ontology:NarrativeWork)
+ObjectPropertyRange(ontology:hasMainProtagonist ontology:Protagonist)
+
 # Object Property: ontology:hasMember (ontology:hasMember)
 
 AnnotationAssertion(rdfs:comment ontology:hasMember "Indica i membri di un'organizzazione"@it)
@@ -251,13 +269,19 @@ SubObjectPropertyOf(ontology:hasOriginType owl:topObjectProperty)
 ObjectPropertyDomain(ontology:hasOriginType ontology:HybridCharacter)
 ObjectPropertyRange(ontology:hasOriginType ontology:OriginType)
 
+# Object Property: ontology:hasPowerTypeEnum (ha tipo di potere)
+
+AnnotationAssertion(rdfs:comment ontology:hasPowerTypeEnum "Collega un oggetto magico al suo tipo di potere tramite la classe enumerata PowerType"@it)
+AnnotationAssertion(rdfs:label ontology:hasPowerTypeEnum "ha tipo di potere"@it)
+ObjectPropertyDomain(ontology:hasPowerTypeEnum ontology:Object)
+ObjectPropertyRange(ontology:hasPowerTypeEnum ontology:PowerType)
+
 # Object Property: ontology:hasRole (ha ruolo)
 
 AnnotationAssertion(rdfs:comment ontology:hasRole "Collega un personaggio al suo ruolo narrativo"@it)
 AnnotationAssertion(rdfs:label ontology:hasRole "ha ruolo"@it)
 SubObjectPropertyOf(ontology:hasRole owl:topObjectProperty)
 ObjectPropertyDomain(ontology:hasRole ontology:Character)
-ObjectPropertyRange(ontology:hasRole ontology:NarrativeRole)
 
 # Object Property: ontology:indirectlyMentors (fa da mentore indirettamente)
 
@@ -353,19 +377,20 @@ ObjectPropertyRange(ontology:setIn ontology:Location)
 #   Data Properties
 ############################
 
+# Data Property: ontology:birthYear (anno di nascita)
+
+AnnotationAssertion(rdfs:comment ontology:birthYear "L'anno di nascita di un personaggio"@it)
+AnnotationAssertion(rdfs:label ontology:birthYear "anno di nascita"@it)
+FunctionalDataProperty(ontology:birthYear)
+DataPropertyDomain(ontology:birthYear ontology:Character)
+DataPropertyRange(ontology:birthYear xsd:integer)
+
 # Data Property: ontology:canBeDestroyed (può essere distrutto)
 
 AnnotationAssertion(rdfs:comment ontology:canBeDestroyed "Indica se un artefatto può essere distrutto"@it)
 AnnotationAssertion(rdfs:label ontology:canBeDestroyed "può essere distrutto"@it)
 SubDataPropertyOf(ontology:canBeDestroyed owl:topDataProperty)
 DataPropertyRange(ontology:canBeDestroyed xsd:boolean)
-
-# Data Property: ontology:dangerLevel (livello di pericolo)
-
-AnnotationAssertion(rdfs:comment ontology:dangerLevel "Il livello di pericolo dell'entità: Low, Medium, High"@it)
-AnnotationAssertion(rdfs:label ontology:dangerLevel "livello di pericolo"@it)
-SubDataPropertyOf(ontology:dangerLevel owl:topDataProperty)
-DataPropertyRange(ontology:dangerLevel xsd:string)
 
 # Data Property: ontology:description (descrizione)
 
@@ -462,14 +487,12 @@ AnnotationAssertion(rdfs:label ontology:Ability "Abilità"@it)
 AnnotationAssertion(rdfs:comment ontology:Alleato "Amico o compagno che aiuta il protagonista"@it)
 AnnotationAssertion(rdfs:label ontology:Alleato "Alleato"@it)
 EquivalentClasses(ontology:Alleato ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:alliedWith ontology:Character)))
-SubClassOf(ontology:Alleato ontology:NarrativeRole)
 
 # Class: ontology:Antagonist (Antagonista)
 
 AnnotationAssertion(rdfs:comment ontology:Antagonist "Villain principale o forza oppositrice"@it)
 AnnotationAssertion(rdfs:label ontology:Antagonist "Antagonista"@it)
 EquivalentClasses(ontology:Antagonist ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:enemyOf ontology:Protagonist)))
-SubClassOf(ontology:Antagonist ontology:NarrativeRole)
 
 # Class: ontology:Book (Libro)
 
@@ -554,7 +577,6 @@ SubClassOf(ontology:MagicalAbility ontology:Ability)
 AnnotationAssertion(rdfs:comment ontology:Mentor "Guida saggia che insegna e supporta il protagonista"@it)
 AnnotationAssertion(rdfs:label ontology:Mentor "Mentore"@it)
 EquivalentClasses(ontology:Mentor ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:mentors ontology:Character)))
-SubClassOf(ontology:Mentor ontology:NarrativeRole)
 
 # Class: ontology:Movie (Film)
 
@@ -562,11 +584,6 @@ AnnotationAssertion(rdfs:comment ontology:Movie "Un film cinematografico"@it)
 AnnotationAssertion(rdfs:label ontology:Movie "Film"@it)
 EquivalentClasses(ontology:Movie ObjectIntersectionOf(ontology:NarrativeWork ObjectComplementOf(DataHasValue(ontology:isOngoing "true"^^xsd:boolean)) DataSomeValuesFrom(ontology:runtime xsd:integer)))
 SubClassOf(ontology:Movie ontology:NarrativeWork)
-
-# Class: ontology:NarrativeRole (Ruolo Narrativo)
-
-AnnotationAssertion(rdfs:comment ontology:NarrativeRole "Una funzione o ruolo narrativo che un personaggio ricopre (protagonista, antagonista, mentore, ecc.)"@it)
-AnnotationAssertion(rdfs:label ontology:NarrativeRole "Ruolo Narrativo"@it)
 
 # Class: ontology:NarrativeUniverse (Universo Narrativo)
 
@@ -599,11 +616,17 @@ AnnotationAssertion(rdfs:label ontology:Organization "Organizzazione"@it)
 AnnotationAssertion(rdfs:label ontology:OriginType "Il tipo di origine di un personaggio ibrido (umano, divino, gigante, spirito)"@it)
 AnnotationAssertion(rdfs:label ontology:OriginType "Tipo di Origine"@it)
 
+# Class: ontology:PowerType (Tipo di Potere)
+
+AnnotationAssertion(rdfs:comment ontology:PowerType "Il tipo di potere di un artefatto magico. Può essere solo uno tra: Magico, Divino, Corruttivo o Simbolico"@it)
+AnnotationAssertion(rdfs:label ontology:PowerType "Tipo di Potere"@it)
+EquivalentClasses(ontology:PowerType ObjectOneOf(ontology:CorruptivePower ontology:DivinePower ontology:MagicalPower ontology:SymbolicPower))
+
 # Class: ontology:Protagonist (Protagonista)
 
 AnnotationAssertion(rdfs:comment ontology:Protagonist "Eroe principale o personaggio centrale della narrazione"@it)
 AnnotationAssertion(rdfs:label ontology:Protagonist "Protagonista"@it)
-SubClassOf(ontology:Protagonist ontology:NarrativeRole)
+SubClassOf(ontology:Protagonist ontology:Character)
 
 # Class: ontology:SafePlace (Luogo Sicuro)
 
@@ -660,8 +683,8 @@ AnnotationAssertion(rdfs:label ontology:Anduril "Andúril"@it)
 ClassAssertion(ontology:Object ontology:Anduril)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Anduril ontology:MiddleEarthUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:Anduril ontology:KinglyAuthority)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:Anduril ontology:SymbolicPower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:Anduril "true"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:Anduril "Symbolic")
 
 # Individual: ontology:AnnabethChase (Annabeth Chase)
 
@@ -691,6 +714,15 @@ ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Aragorn ontology:Mid
 ObjectPropertyAssertion(ontology:memberOf ontology:Aragorn ontology:FellowshipOfTheRing)
 ObjectPropertyAssertion(ontology:possesses ontology:Aragorn ontology:Anduril)
 DataPropertyAssertion(ontology:description ontology:Aragorn "Discendente di Isildur, ranger dei Dunedain, destinato a diventare Re di Gondor")
+
+# Individual: ontology:Binario9e3Quarti (Binario 9 e ¾)
+
+AnnotationAssertion(rdfs:comment ontology:Binario9e3Quarti "È uno spazio di transizione tra il mondo babbano e quello magico. Perfetto come spazio liminale."@it)
+AnnotationAssertion(rdfs:label ontology:Binario9e3Quarti "Binario 9 e ¾"@it)
+ClassAssertion(ontology:LiminalSpace ontology:Binario9e3Quarti)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Binario9e3Quarti ontology:HarryPotterUniverse)
+DataPropertyAssertion(ontology:description ontology:Binario9e3Quarti "Piattaforma magica nascosta nella stazione di King's Cross a Londra, accessibile attraversando il muro tra i binari 9 e 10. Da qui parte l'Hogwarts Express")
+DataPropertyAssertion(ontology:hasNarrativeFunction ontology:Binario9e3Quarti "Transizione")
 
 # Individual: ontology:CampHalfBlood (Campo Mezzosangue)
 
@@ -738,6 +770,12 @@ ObjectPropertyAssertion(ontology:mentors ontology:Chiron ontology:AnnabethChase)
 ObjectPropertyAssertion(ontology:mentors ontology:Chiron ontology:PercyJackson)
 DataPropertyAssertion(ontology:description ontology:Chiron "Antico centauro figlio di Crono, addestra eroi da millenni, ora direttore delle attività al Campo Mezzosangue")
 
+# Individual: ontology:CorruptivePower (Potere Corruttivo)
+
+AnnotationAssertion(rdfs:comment ontology:CorruptivePower "Potere che corrompe e influenza negativamente chi lo usa"@it)
+AnnotationAssertion(rdfs:label ontology:CorruptivePower "Potere Corruttivo"@it)
+ClassAssertion(ontology:PowerType ontology:CorruptivePower)
+
 # Individual: ontology:DiagonAlley (Diagon Alley)
 
 AnnotationAssertion(rdfs:comment ontology:DiagonAlley "La via commerciale magica di Londra"@it)
@@ -749,6 +787,12 @@ DataPropertyAssertion(ontology:description ontology:DiagonAlley "Via commerciale
 # Individual: ontology:DivineOrigin (ontology:DivineOrigin)
 
 ClassAssertion(ontology:Divine ontology:DivineOrigin)
+
+# Individual: ontology:DivinePower (Potere Divino)
+
+AnnotationAssertion(rdfs:comment ontology:DivinePower "Potere di origine divina o soprannaturale"@it)
+AnnotationAssertion(rdfs:label ontology:DivinePower "Potere Divino"@it)
+ClassAssertion(ontology:PowerType ontology:DivinePower)
 
 # Individual: ontology:DominationPower (Potere di Dominazione)
 
@@ -763,8 +807,8 @@ AnnotationAssertion(rdfs:label ontology:ElderWand "Bacchetta di Sambuco"@it)
 ClassAssertion(ontology:Object ontology:ElderWand)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:ElderWand ontology:HarryPotterUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:ElderWand ontology:UnbeatableMagic)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:ElderWand ontology:MagicalPower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:ElderWand "true"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:ElderWand "Magical")
 
 # Individual: ontology:FellowshipOfTheRing (Compagnia dell'Anello)
 
@@ -862,6 +906,7 @@ ObjectPropertyAssertion(ontology:belongsToUniverse ontology:HarryPotter ontology
 ObjectPropertyAssertion(ontology:hasAbility ontology:HarryPotter ontology:Parseltongue)
 ObjectPropertyAssertion(ontology:memberOf ontology:HarryPotter ontology:HogwartsSchool)
 ObjectPropertyAssertion(ontology:possesses ontology:HarryPotter ontology:InvisibilityCloak)
+DataPropertyAssertion(ontology:birthYear ontology:HarryPotter "1980"^^xsd:integer)
 DataPropertyAssertion(ontology:description ontology:HarryPotter "Il ragazzo che è sopravvissuto, protagonista della saga, con una cicatrice a forma di fulmine sulla fronte")
 
 # Individual: ontology:HarryPotterUniverse (Universo di Harry Potter)
@@ -901,6 +946,14 @@ ObjectPropertyAssertion(ontology:belongsToUniverse ontology:HogwartsSchool ontol
 ObjectPropertyAssertion(ontology:locatedAt ontology:HogwartsSchool ontology:Hogwarts)
 DataPropertyAssertion(ontology:description ontology:HogwartsSchool "La Scuola di Magia e Stregoneria di Hogwarts, fondata oltre mille anni fa dai quattro maghi più potenti dell'epoca")
 
+# Individual: ontology:IngressoCampoMezzosangue (ontology:IngressoCampoMezzosangue)
+
+AnnotationAssertion(rdfs:comment ontology:IngressoCampoMezzosangue "Segna il passaggio dal mondo umano a quello mitologico degli dei greci."@it)
+ClassAssertion(ontology:LiminalSpace ontology:IngressoCampoMezzosangue)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:IngressoCampoMezzosangue ontology:PercyJacksonUniverse)
+DataPropertyAssertion(ontology:description ontology:IngressoCampoMezzosangue "Ingresso sorvegliato del Campo Mezzosangue, protetto da barriere magiche che impediscono ai mostri di entrare. Solo i semidei possono attraversarlo")
+DataPropertyAssertion(ontology:hasNarrativeFunction ontology:IngressoCampoMezzosangue "Transizione")
+
 # Individual: ontology:InvisibilityCloak (Mantello dell'Invisibilità)
 
 AnnotationAssertion(rdfs:comment ontology:InvisibilityCloak "Il mantello magico che rende invisibili"@it)
@@ -908,8 +961,8 @@ AnnotationAssertion(rdfs:label ontology:InvisibilityCloak "Mantello dell'Invisib
 ClassAssertion(ontology:Object ontology:InvisibilityCloak)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:InvisibilityCloak ontology:HarryPotterUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:InvisibilityCloak ontology:TrueInvisibility)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:InvisibilityCloak ontology:MagicalPower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:InvisibilityCloak "false"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:InvisibilityCloak "Magical")
 
 # Individual: ontology:KinglyAuthority (Autorità Regale)
 
@@ -982,6 +1035,12 @@ AnnotationAssertion(rdfs:comment ontology:MagicalInvisibility "Capacità di dive
 AnnotationAssertion(rdfs:label ontology:MagicalInvisibility "Invisibilità Magica"@it)
 ClassAssertion(ontology:MagicalAbility ontology:MagicalInvisibility)
 
+# Individual: ontology:MagicalPower (Potere Magico)
+
+AnnotationAssertion(rdfs:comment ontology:MagicalPower "Potere di natura magica tradizionale"@it)
+AnnotationAssertion(rdfs:label ontology:MagicalPower "Potere Magico"@it)
+ClassAssertion(ontology:PowerType ontology:MagicalPower)
+
 # Individual: ontology:MiddleEarthUniverse (Universo della Terra di Mezzo)
 
 AnnotationAssertion(rdfs:comment ontology:MiddleEarthUniverse "Universo narrativo fantasy creato da J.R.R. Tolkien, ambientato nella Terra di Mezzo"@it)
@@ -1021,8 +1080,8 @@ AnnotationAssertion(rdfs:label ontology:OneRing "Anello Unico"@it)
 ClassAssertion(ontology:Object ontology:OneRing)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:OneRing ontology:MiddleEarthUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:OneRing ontology:DominationPower)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:OneRing ontology:CorruptivePower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:OneRing "true"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:OneRing "Corruptive")
 
 # Individual: ontology:Parseltongue (Serpentese)
 
@@ -1058,6 +1117,7 @@ AnnotationAssertion(rdfs:comment ontology:PhilosophersStone_Book "Il primo libro
 AnnotationAssertion(rdfs:label ontology:PhilosophersStone_Book "Harry Potter e la Pietra Filosofale"@it)
 ClassAssertion(ontology:Book ontology:PhilosophersStone_Book)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PhilosophersStone_Book ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:hasMainProtagonist ontology:PhilosophersStone_Book ontology:HarryPotter)
 ObjectPropertyAssertion(ontology:setIn ontology:PhilosophersStone_Book ontology:Hogwarts)
 DataPropertyAssertion(ontology:description ontology:PhilosophersStone_Book "Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale")
 DataPropertyAssertion(ontology:numberOfPages ontology:PhilosophersStone_Book "223"^^xsd:integer)
@@ -1079,6 +1139,15 @@ DataPropertyAssertion(ontology:rating ontology:PhilosophersStone_Movie "7.6"^^xs
 DataPropertyAssertion(ontology:runtime ontology:PhilosophersStone_Movie "152"^^xsd:decimal)
 DataPropertyAssertion(ontology:title ontology:PhilosophersStone_Movie "Harry Potter and the Philosopher's Stone")
 
+# Individual: ontology:PortaleMondoMorti (ontology:PortaleMondoMorti)
+
+AnnotationAssertion(rdfs:comment ontology:PortaleMondoMorti "Luogo di confine tra il mondo dei vivi e l’Oltretomba."@it)
+ClassAssertion(ontology:LiminalSpace ontology:PortaleMondoMorti)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:PortaleMondoMorti ontology:PercyJacksonUniverse)
+ObjectPropertyAssertion(ontology:partOf ontology:PortaleMondoMorti ontology:CampHalfBlood)
+DataPropertyAssertion(ontology:description ontology:PortaleMondoMorti "Portale d'ingresso agli Inferi, situato a Los Angeles presso gli Studios DOA. Permette ai vivi di entrare nel regno di Ade")
+DataPropertyAssertion(ontology:hasNarrativeFunction ontology:PortaleMondoMorti "Transizione")
+
 # Individual: ontology:Riptide (Riptide (Controcorrente))
 
 AnnotationAssertion(rdfs:comment ontology:Riptide "Spada di bronzo celestiale di Percy, si trasforma in una penna e ritorna sempre al suo proprietario"@it)
@@ -1086,8 +1155,8 @@ AnnotationAssertion(rdfs:label ontology:Riptide "Riptide (Controcorrente)"@it)
 ClassAssertion(ontology:Object ontology:Riptide)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Riptide ontology:PercyJacksonUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:Riptide ontology:CelestialBronzePower)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:Riptide ontology:MagicalPower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:Riptide "false"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:Riptide "Magical")
 
 # Individual: ontology:Rivendell (Gran Burrone)
 
@@ -1131,6 +1200,12 @@ DataPropertyAssertion(ontology:numberOfPages ontology:SeaOfMonsters_Book "279"^^
 DataPropertyAssertion(ontology:publicationYear ontology:SeaOfMonsters_Book "2006"^^xsd:decimal)
 DataPropertyAssertion(ontology:rating ontology:SeaOfMonsters_Book "9.0"^^xsd:float)
 DataPropertyAssertion(ontology:title ontology:SeaOfMonsters_Book "The Sea of Monsters")
+
+# Individual: ontology:SymbolicPower (Potere Simbolico)
+
+AnnotationAssertion(rdfs:comment ontology:SymbolicPower "Potere rappresentato da autorità, legittimità o significato simbolico"@it)
+AnnotationAssertion(rdfs:label ontology:SymbolicPower "Potere Simbolico"@it)
+ClassAssertion(ontology:PowerType ontology:SymbolicPower)
 
 # Individual: ontology:Tartarus (Tartaro)
 
@@ -1182,8 +1257,8 @@ AnnotationAssertion(rdfs:label ontology:YankeeCap "Cappello Yankees di Annabeth"
 ClassAssertion(ontology:Object ontology:YankeeCap)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:YankeeCap ontology:PercyJacksonUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:YankeeCap ontology:MagicalInvisibility)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:YankeeCap ontology:MagicalPower)
 DataPropertyAssertion(ontology:canBeDestroyed ontology:YankeeCap "true"^^xsd:boolean)
-DataPropertyAssertion(ontology:hasPowerType ontology:YankeeCap "Magical")
 
 
 DisjointClasses(ontology:DangerZone ontology:LiminalSpace ontology:SafePlace)
