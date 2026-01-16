@@ -22,6 +22,7 @@ Annotation(vann:preferredNamespacePrefix "\"nuo\"")
 Annotation(vann:preferredNamespaceUri "\"http://www.narrative-universes.org/ontology#\"")
 Annotation(rdfs:label "Narrative Universes Ontology"@en)
 
+Declaration(Class(<http://www.co-ode.org/ontologies/ont.owl#PowerArtifact>))
 Declaration(Class(ontology:Ability))
 Declaration(Class(ontology:Alleato))
 Declaration(Class(ontology:Antagonist))
@@ -81,7 +82,6 @@ Declaration(DataProperty(ontology:canBeDestroyed))
 Declaration(DataProperty(ontology:dangerLevel))
 Declaration(DataProperty(ontology:description))
 Declaration(DataProperty(ontology:hasNarrativeFunction))
-Declaration(DataProperty(ontology:hasPowerType))
 Declaration(DataProperty(ontology:isOngoing))
 Declaration(DataProperty(ontology:numberOfPages))
 Declaration(DataProperty(ontology:publicationDate))
@@ -91,7 +91,10 @@ Declaration(DataProperty(ontology:runtime))
 Declaration(DataProperty(ontology:title))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#GiantOrigin>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#GondorSoldier>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#GondorianSword>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#HumanOrigin>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin>))
 Declaration(NamedIndividual(ontology:AlbusDumbledore))
@@ -428,13 +431,6 @@ SubDataPropertyOf(ontology:hasNarrativeFunction owl:topDataProperty)
 DataPropertyDomain(ontology:hasNarrativeFunction ontology:Location)
 DataPropertyRange(ontology:hasNarrativeFunction xsd:string)
 
-# Data Property: ontology:hasPowerType (ha tipo di potere)
-
-AnnotationAssertion(rdfs:comment ontology:hasPowerType "Il tipo di potere di un artefatto (Magical, Divine, Corruptive, Symbolic)"@it)
-AnnotationAssertion(rdfs:label ontology:hasPowerType "ha tipo di potere"@it)
-SubDataPropertyOf(ontology:hasPowerType owl:topDataProperty)
-DataPropertyRange(ontology:hasPowerType xsd:string)
-
 # Data Property: ontology:isOngoing (in corso)
 
 AnnotationAssertion(rdfs:comment ontology:isOngoing "Indica se una serie TV è ancora in produzione"@it)
@@ -496,6 +492,14 @@ DataPropertyRange(ontology:title xsd:string)
 ############################
 #   Classes
 ############################
+
+# Class: <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> (Artefatto di Potere)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> "Un oggetto magico di grande potere, non necessariamente un'arma da combattimento. Include anelli, mantelli, bacchette e altri artefatti leggendari"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> "Artefatto di Potere"@it)
+EquivalentClasses(<http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ObjectIntersectionOf(ontology:Object ObjectSomeValuesFrom(ontology:grantsAbility ontology:Ability)))
+SubClassOf(<http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ontology:Object)
+DisjointClasses(<http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ontology:Weapon)
 
 # Class: ontology:Ability (Abilità)
 
@@ -628,7 +632,7 @@ EquivalentClasses(ontology:OriginType ObjectOneOf(<http://www.co-ode.org/ontolog
 
 AnnotationAssertion(rdfs:comment ontology:PowerType "Il tipo di potere di un artefatto magico. Può essere solo uno tra: Magico, Divino, Corruttivo o Simbolico"@it)
 AnnotationAssertion(rdfs:label ontology:PowerType "Tipo di Potere"@it)
-EquivalentClasses(ontology:PowerType ObjectOneOf(ontology:CorruptivePower ontology:DivinePower ontology:MagicalPower ontology:SymbolicPower))
+EquivalentClasses(ontology:PowerType ObjectOneOf(<http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower> ontology:CorruptivePower ontology:DivinePower ontology:MagicalPower ontology:SymbolicPower))
 
 # Class: ontology:Protagonist (Protagonista)
 
@@ -660,6 +664,7 @@ SubClassOf(ontology:TVSeries ontology:NarrativeWork)
 
 AnnotationAssertion(rdfs:comment ontology:Weapon "Un'arma usata dai personaggi"@it)
 AnnotationAssertion(rdfs:label ontology:Weapon "Arma"@it)
+EquivalentClasses(ontology:Weapon ObjectIntersectionOf(ontology:Object ObjectSomeValuesFrom(ObjectInverseOf(ontology:possesses) ontology:Character) ObjectHasValue(ontology:hasPowerTypeEnum <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>)))
 SubClassOf(ontology:Weapon ontology:Object)
 
 
@@ -679,11 +684,34 @@ AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#Giant
 AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin> "Origine Gigante"@it)
 ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin>)
 
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> (Soldato di Gondor)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> "Guerriero umano dell’esercito di Gondor, privo di poteri speciali, usato come esempio di personaggio non magico"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> "Soldato di Gondor"@it)
+ClassAssertion(ontology:HumanCharacter <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier>)
+ObjectPropertyAssertion(ontology:belongsToUniverse <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:possesses <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> <http://www.co-ode.org/ontologies/ont.owl#GondorianSword>)
+DataPropertyAssertion(ontology:description <http://www.co-ode.org/ontologies/ont.owl#GondorSoldier> "Personaggio generico dell’universo narrativo della Terra di Mezzo, utilizzato per testare relazioni di possesso con armi comuni")
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> (Spada Gondoriana)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> "Spada comune utilizzata da un soldato di Gondor; non possiede poteri magici o abilità speciali."@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> "Spada Gondoriana"@it)
+ObjectPropertyAssertion(ontology:belongsToUniverse <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> ontology:MiddleEarthUniverse)
+ObjectPropertyAssertion(ontology:hasPowerTypeEnum <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>)
+ObjectPropertyAssertion(ontology:indirectlySetIn <http://www.co-ode.org/ontologies/ont.owl#GondorianSword> ontology:MiddleEarthUniverse)
+
 # Individual: <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> (Origine Umana)
 
 AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> "Origine completamente umana"@it)
 AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> "Origine Umana"@it)
 ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin>)
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower> (Potere Ordinario)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower> "Rappresenta un tipo di potere comune o umano, che non è magico, divino o simbolico. Può essere usato per oggetti o personaggi ordinari"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower> "Potere Ordinario"@it)
+ClassAssertion(ontology:PowerType <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>)
 
 # Individual: <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> (Percy Jackson e gli dei dell'Olimpo (serie TV))
 
@@ -720,7 +748,6 @@ DataPropertyAssertion(ontology:description ontology:AlbusDumbledore "Preside di 
 
 AnnotationAssertion(rdfs:comment ontology:Anduril "Spada riforgiata di Aragorn, precedentemente Narsil"@it)
 AnnotationAssertion(rdfs:label ontology:Anduril "Andúril"@it)
-ClassAssertion(ontology:Object ontology:Anduril)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Anduril ontology:MiddleEarthUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:Anduril ontology:KinglyAuthority)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:Anduril ontology:SymbolicPower)
@@ -845,7 +872,6 @@ ClassAssertion(ontology:MagicalAbility ontology:DominationPower)
 
 AnnotationAssertion(rdfs:comment ontology:ElderWand "La bacchetta più potente, uno di Doni della Morte"@it)
 AnnotationAssertion(rdfs:label ontology:ElderWand "Bacchetta di Sambuco"@it)
-ClassAssertion(ontology:Object ontology:ElderWand)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:ElderWand ontology:HarryPotterUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:ElderWand ontology:UnbeatableMagic)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:ElderWand ontology:MagicalPower)
@@ -998,7 +1024,6 @@ DataPropertyAssertion(ontology:description ontology:IngressoCampoMezzosangue "In
 
 AnnotationAssertion(rdfs:comment ontology:InvisibilityCloak "Il mantello magico che rende invisibili"@it)
 AnnotationAssertion(rdfs:label ontology:InvisibilityCloak "Mantello dell'Invisibilità"@it)
-ClassAssertion(ontology:Object ontology:InvisibilityCloak)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:InvisibilityCloak ontology:HarryPotterUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:InvisibilityCloak ontology:TrueInvisibility)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:InvisibilityCloak ontology:MagicalPower)
@@ -1117,7 +1142,6 @@ DataPropertyAssertion(ontology:description ontology:MountOlympus "Dimora degli d
 
 AnnotationAssertion(rdfs:comment ontology:OneRing "L'Anello del Potere forgiato da Sauron per dominare tutti gli altri anelli"@it)
 AnnotationAssertion(rdfs:label ontology:OneRing "Anello Unico"@it)
-ClassAssertion(ontology:Object ontology:OneRing)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:OneRing ontology:MiddleEarthUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:OneRing ontology:DominationPower)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:OneRing ontology:CorruptivePower)
@@ -1193,7 +1217,6 @@ DataPropertyAssertion(ontology:hasNarrativeFunction ontology:PortaleMondoMorti "
 
 AnnotationAssertion(rdfs:comment ontology:Riptide "Spada di bronzo celestiale di Percy, si trasforma in una penna e ritorna sempre al suo proprietario"@it)
 AnnotationAssertion(rdfs:label ontology:Riptide "Riptide (Controcorrente)"@it)
-ClassAssertion(ontology:Object ontology:Riptide)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Riptide ontology:PercyJacksonUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:Riptide ontology:CelestialBronzePower)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:Riptide ontology:MagicalPower)
@@ -1295,7 +1318,6 @@ ClassAssertion(ontology:DivineAbility ontology:WaterControl)
 
 AnnotationAssertion(rdfs:comment ontology:YankeeCap "Berretto magico che rende invisibile chi lo indossa"@it)
 AnnotationAssertion(rdfs:label ontology:YankeeCap "Cappello Yankees di Annabeth"@it)
-ClassAssertion(ontology:Object ontology:YankeeCap)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:YankeeCap ontology:PercyJacksonUniverse)
 ObjectPropertyAssertion(ontology:grantsAbility ontology:YankeeCap ontology:MagicalInvisibility)
 ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:YankeeCap ontology:MagicalPower)
