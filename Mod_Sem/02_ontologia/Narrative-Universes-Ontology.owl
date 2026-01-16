@@ -28,11 +28,7 @@ Declaration(Class(ontology:Antagonist))
 Declaration(Class(ontology:Book))
 Declaration(Class(ontology:Character))
 Declaration(Class(ontology:DangerZone))
-Declaration(Class(ontology:Divine))
 Declaration(Class(ontology:DivineAbility))
-Declaration(Class(ontology:Elven))
-Declaration(Class(ontology:Giant))
-Declaration(Class(ontology:Human))
 Declaration(Class(ontology:HumanCharacter))
 Declaration(Class(ontology:HybridCharacter))
 Declaration(Class(ontology:LiminalSpace))
@@ -50,7 +46,6 @@ Declaration(Class(ontology:PowerType))
 Declaration(Class(ontology:Protagonist))
 Declaration(Class(ontology:SafePlace))
 Declaration(Class(ontology:School))
-Declaration(Class(ontology:Spirit))
 Declaration(Class(ontology:TVSeries))
 Declaration(Class(ontology:Weapon))
 Declaration(ObjectProperty(ontology:adaptationOf))
@@ -80,6 +75,7 @@ Declaration(ObjectProperty(ontology:possesses))
 Declaration(ObjectProperty(ontology:prequelOf))
 Declaration(ObjectProperty(ontology:sequelOf))
 Declaration(ObjectProperty(ontology:setIn))
+Declaration(DataProperty(<http://www.co-ode.org/ontologies/ont.owl#hasSeasons>))
 Declaration(DataProperty(ontology:birthYear))
 Declaration(DataProperty(ontology:canBeDestroyed))
 Declaration(DataProperty(ontology:dangerLevel))
@@ -93,6 +89,11 @@ Declaration(DataProperty(ontology:publicationYear))
 Declaration(DataProperty(ontology:rating))
 Declaration(DataProperty(ontology:runtime))
 Declaration(DataProperty(ontology:title))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#GiantOrigin>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#HumanOrigin>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries>))
+Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin>))
 Declaration(NamedIndividual(ontology:AlbusDumbledore))
 Declaration(NamedIndividual(ontology:Anduril))
 Declaration(NamedIndividual(ontology:AnnabethChase))
@@ -193,10 +194,10 @@ InverseObjectProperties(ontology:appearsIn ontology:features)
 ObjectPropertyDomain(ontology:appearsIn ontology:Character)
 ObjectPropertyRange(ontology:appearsIn ontology:NarrativeWork)
 
-# Object Property: ontology:belongsToUniverse (appartiene all'universo)
+# Object Property: ontology:belongsToUniverse (appartiene a universo)
 
 AnnotationAssertion(rdfs:comment ontology:belongsToUniverse "Collega un'entità (personaggio, luogo, oggetto, creatura) all'universo narrativo a cui appartiene"@it)
-AnnotationAssertion(rdfs:label ontology:belongsToUniverse "appartiene all'universo"@it)
+AnnotationAssertion(rdfs:label ontology:belongsToUniverse "appartiene a universo"@it)
 SubObjectPropertyOf(ontology:belongsToUniverse owl:topObjectProperty)
 ObjectPropertyDomain(ontology:belongsToUniverse owl:Thing)
 ObjectPropertyRange(ontology:belongsToUniverse ontology:NarrativeUniverse)
@@ -383,6 +384,13 @@ ObjectPropertyRange(ontology:setIn ontology:Location)
 #   Data Properties
 ############################
 
+# Data Property: <http://www.co-ode.org/ontologies/ont.owl#hasSeasons> (ha stagioni)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#hasSeasons> "Il numero di stagioni che una serie televisiva possiede"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#hasSeasons> "ha stagioni"@it)
+DataPropertyDomain(<http://www.co-ode.org/ontologies/ont.owl#hasSeasons> ontology:NarrativeWork)
+DataPropertyRange(<http://www.co-ode.org/ontologies/ont.owl#hasSeasons> xsd:integer)
+
 # Data Property: ontology:birthYear (anno di nascita)
 
 AnnotationAssertion(rdfs:comment ontology:birthYear "L'anno di nascita di un personaggio"@it)
@@ -472,8 +480,7 @@ DataPropertyRange(ontology:rating xsd:float)
 AnnotationAssertion(rdfs:comment ontology:runtime "La durata in minuti di un film o episodio"@it)
 AnnotationAssertion(rdfs:label ontology:runtime "durata"@it)
 SubDataPropertyOf(ontology:runtime owl:topDataProperty)
-DataPropertyDomain(ontology:runtime ontology:Movie)
-DataPropertyDomain(ontology:runtime ontology:TVSeries)
+DataPropertyDomain(ontology:runtime ontology:NarrativeWork)
 DataPropertyRange(ontology:runtime xsd:integer)
 
 # Data Property: ontology:title (titolo)
@@ -506,6 +513,7 @@ EquivalentClasses(ontology:Alleato ObjectIntersectionOf(ontology:Character Objec
 AnnotationAssertion(rdfs:comment ontology:Antagonist "Villain principale o forza oppositrice"@it)
 AnnotationAssertion(rdfs:label ontology:Antagonist "Antagonista"@it)
 EquivalentClasses(ontology:Antagonist ObjectIntersectionOf(ontology:Character ObjectSomeValuesFrom(ontology:enemyOf ontology:Protagonist)))
+DisjointClasses(ontology:Antagonist ontology:Protagonist)
 
 # Class: ontology:Book (Libro)
 
@@ -528,31 +536,12 @@ AnnotationAssertion(rdfs:label ontology:DangerZone "Zona Pericolosa"@it)
 EquivalentClasses(ontology:DangerZone ObjectIntersectionOf(ontology:Location DataHasValue(ontology:hasNarrativeFunction "Conflitto")))
 SubClassOf(ontology:DangerZone ontology:Location)
 
-# Class: ontology:Divine (Divino)
-
-AnnotationAssertion(rdfs:label ontology:Divine "Divino"@it)
-SubClassOf(ontology:Divine ontology:OriginType)
-
 # Class: ontology:DivineAbility (Abilità Divina)
 
 AnnotationAssertion(rdfs:comment ontology:DivineAbility "Un'abilità di origine divina"@it)
 AnnotationAssertion(rdfs:label ontology:DivineAbility "Abilità Divina"@it)
 SubClassOf(ontology:DivineAbility ontology:Ability)
-
-# Class: ontology:Elven (Elfico)
-
-AnnotationAssertion(rdfs:label ontology:Elven "Elfico"@it)
-SubClassOf(ontology:Elven ontology:OriginType)
-
-# Class: ontology:Giant (Gigante)
-
-AnnotationAssertion(rdfs:label ontology:Giant "Gigante"@it)
-SubClassOf(ontology:Giant ontology:OriginType)
-
-# Class: ontology:Human (Umano)
-
-AnnotationAssertion(rdfs:label ontology:Human "Umano"@it)
-SubClassOf(ontology:Human ontology:OriginType)
+DisjointClasses(ontology:DivineAbility ontology:MagicalAbility)
 
 # Class: ontology:HumanCharacter (Personaggio Umano)
 
@@ -574,6 +563,7 @@ DisjointClasses(ontology:HybridCharacter ontology:NonHumanCharacter)
 
 AnnotationAssertion(rdfs:comment ontology:LiminalSpace "Una soglia o passaggio tra mondi o dimensioni"@it)
 AnnotationAssertion(rdfs:label ontology:LiminalSpace "Spazio Liminale"@it)
+EquivalentClasses(ontology:LiminalSpace ObjectIntersectionOf(ontology:Location DataHasValue(ontology:hasNarrativeFunction "Transizione")))
 SubClassOf(ontology:LiminalSpace ontology:Location)
 
 # Class: ontology:Location (Luogo)
@@ -632,6 +622,7 @@ AnnotationAssertion(rdfs:label ontology:Organization "Organizzazione"@it)
 
 AnnotationAssertion(rdfs:label ontology:OriginType "Il tipo di origine di un personaggio ibrido (umano, divino, gigante, spirito)"@it)
 AnnotationAssertion(rdfs:label ontology:OriginType "Tipo di Origine"@it)
+EquivalentClasses(ontology:OriginType ObjectOneOf(<http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin> <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin> <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin> ontology:DivineOrigin))
 
 # Class: ontology:PowerType (Tipo di Potere)
 
@@ -658,15 +649,11 @@ AnnotationAssertion(rdfs:comment ontology:School "Un'istituzione educativa all'i
 AnnotationAssertion(rdfs:label ontology:School "Scuola"@it)
 SubClassOf(ontology:School ontology:Organization)
 
-# Class: ontology:Spirit (Spirito)
-
-AnnotationAssertion(rdfs:label ontology:Spirit "Spirito"@it)
-SubClassOf(ontology:Spirit ontology:OriginType)
-
 # Class: ontology:TVSeries (Serie TV)
 
 AnnotationAssertion(rdfs:comment ontology:TVSeries "Una serie televisiva con episodi multipli"@it)
 AnnotationAssertion(rdfs:label ontology:TVSeries "Serie TV"@it)
+EquivalentClasses(ontology:TVSeries ObjectIntersectionOf(ontology:NarrativeWork DataSomeValuesFrom(<http://www.co-ode.org/ontologies/ont.owl#hasSeasons> xsd:integer)))
 SubClassOf(ontology:TVSeries ontology:NarrativeWork)
 
 # Class: ontology:Weapon (Arma)
@@ -679,6 +666,42 @@ SubClassOf(ontology:Weapon ontology:Object)
 ############################
 #   Named Individuals
 ############################
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin> (Origine Elfica)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin> "Origine da stirpe elfica o fatata"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin> "Origine Elfica"@it)
+ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#ElvenOrigin>)
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin> (Origine Gigante)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin> "Origine da stirpe di giganti"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin> "Origine Gigante"@it)
+ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#GiantOrigin>)
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> (Origine Umana)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> "Origine completamente umana"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin> "Origine Umana"@it)
+ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#HumanOrigin>)
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> (Percy Jackson e gli dei dell'Olimpo (serie TV))
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "Serie TV fantasy basata sui romanzi di Rick Riordan, che segue le avventure del semidio Percy Jackson"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "Percy Jackson e gli dei dell'Olimpo (serie TV)"@it)
+ObjectPropertyAssertion(ontology:indirectlySetIn <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> ontology:CampHalfBlood)
+DataPropertyAssertion(<http://www.co-ode.org/ontologies/ont.owl#hasSeasons> <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "1"^^xsd:decimal)
+DataPropertyAssertion(ontology:description <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "Adattamento televisivo dei libri Percy Jackson & the Olympians, prodotto da Disney")
+DataPropertyAssertion(ontology:isOngoing <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "true"^^xsd:boolean)
+DataPropertyAssertion(ontology:publicationYear <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "2023"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "7.0"^^xsd:float)
+DataPropertyAssertion(ontology:title <http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries> "Percy Jackson and the Olympians (TV Series)")
+
+# Individual: <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin> (Origine Spirituale)
+
+AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin> "Origine da entità spirituali o soprannaturali"@it)
+AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin> "Origine Spirituale"@it)
+ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin>)
 
 # Individual: ontology:AlbusDumbledore (Albus Silente)
 
@@ -736,7 +759,6 @@ DataPropertyAssertion(ontology:description ontology:Aragorn "Discendente di Isil
 
 AnnotationAssertion(rdfs:comment ontology:Binario9e3Quarti "È uno spazio di transizione tra il mondo babbano e quello magico. Perfetto come spazio liminale."@it)
 AnnotationAssertion(rdfs:label ontology:Binario9e3Quarti "Binario 9 e ¾"@it)
-ClassAssertion(ontology:LiminalSpace ontology:Binario9e3Quarti)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:Binario9e3Quarti ontology:HarryPotterUniverse)
 DataPropertyAssertion(ontology:description ontology:Binario9e3Quarti "Piattaforma magica nascosta nella stazione di King's Cross a Londra, accessibile attraversando il muro tra i binari 9 e 10. Da qui parte l'Hogwarts Express")
 DataPropertyAssertion(ontology:hasNarrativeFunction ontology:Binario9e3Quarti "Transizione")
@@ -801,9 +823,11 @@ ClassAssertion(ontology:SafePlace ontology:DiagonAlley)
 ObjectPropertyAssertion(ontology:belongsToUniverse ontology:DiagonAlley ontology:HarryPotterUniverse)
 DataPropertyAssertion(ontology:description ontology:DiagonAlley "Via commerciale magica nascosta a Londra, dove i maghi acquistano bacchette, libri e altri oggetti magici")
 
-# Individual: ontology:DivineOrigin (ontology:DivineOrigin)
+# Individual: ontology:DivineOrigin (Origine Divina)
 
-ClassAssertion(ontology:Divine ontology:DivineOrigin)
+AnnotationAssertion(rdfs:comment ontology:DivineOrigin "Indica che un personaggioc che ha un’origine legata a una divinità, cioè deriva direttamente dal mondo degli dèi"@it)
+AnnotationAssertion(rdfs:label ontology:DivineOrigin "Origine Divina"@it)
+ClassAssertion(ontology:OriginType ontology:DivineOrigin)
 
 # Individual: ontology:DivinePower (Potere Divino)
 
@@ -1278,6 +1302,7 @@ ObjectPropertyAssertion(ontology:hasPowerTypeEnum ontology:YankeeCap ontology:Ma
 DataPropertyAssertion(ontology:canBeDestroyed ontology:YankeeCap "true"^^xsd:boolean)
 
 
+DisjointClasses(ontology:Book ontology:Movie ontology:TVSeries)
 DisjointClasses(ontology:DangerZone ontology:LiminalSpace ontology:SafePlace)
 SubObjectPropertyOf(ObjectPropertyChain(ontology:mentors ontology:alliedWith) ontology:indirectlyMentors)
 SubObjectPropertyOf(ObjectPropertyChain(ontology:partOf) ontology:indirectlySetIn)
