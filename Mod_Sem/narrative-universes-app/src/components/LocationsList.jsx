@@ -12,9 +12,9 @@ export default function LocationsList({ universeUri }) {
 
     // Etichette italiane per i ruoli
     const roleLabels = {
-        SAFEPLACE: "Luogo Sicuro",
-        DANGERZONE: "Zona Pericolosa",
-        LIMINALSPACE: "Spazio di Confine"
+        SafePlace: "Luogo Sicuro",
+        DangerZone: "Zona Pericolosa",
+        LiminalSpace: "Spazio di Confine"
     };
 
     useEffect(() => {
@@ -38,13 +38,13 @@ export default function LocationsList({ universeUri }) {
                     }
 
                     // Estrai localName da URI (sia con # che con /)
-                    const role = b.type?.value?.split(/[#/]/).pop() || "LOCATION";
+                    const role = b.type?.value?.split(/[#/]/).pop() || "Location";
                     grouped[uri].types.add(role);
                 });
 
                 const finalLocations = Object.values(grouped).map(l => ({
                     ...l,
-                    types: Array.from(l.types).filter(t => t !== "LOCATION" && t !== "Location")
+                    types: Array.from(l.types).filter(t => t !== "Location")
                 }));
 
                 setLocations(finalLocations);
@@ -70,9 +70,9 @@ export default function LocationsList({ universeUri }) {
     // Conteggi per i filtri
     const typeCounts = {
         all: locations.length,
-        SAFEPLACE: locations.filter(l => l.types.includes("SAFEPLACE")).length,
-        DANGERZONE: locations.filter(l => l.types.includes("DANGERZONE")).length,
-        LIMINALSPACE: locations.filter(l => l.types.includes("LIMINALSPACE")).length
+        SafePlace: locations.filter(l => l.types.includes("SafePlace")).length,
+        DangerZone: locations.filter(l => l.types.includes("DangerZone")).length,
+        LiminalSpace: locations.filter(l => l.types.includes("LiminalSpace")).length
     };
 
     // Filtro attivo
@@ -93,24 +93,24 @@ export default function LocationsList({ universeUri }) {
                 </button>
 
                 <button
-                    className={`filter-btn ${filter === 'SAFEPLACE' ? 'active' : ''}`}
-                    onClick={() => setFilter('SAFEPLACE')}
+                    className={`filter-btn ${filter === 'SafePlace' ? 'active' : ''}`}
+                    onClick={() => setFilter('SafePlace')}
                 >
-                    Luoghi Sicuri ({typeCounts.SAFEPLACE})
+                    Luoghi Sicuri ({typeCounts.SafePlace})
                 </button>
 
                 <button
-                    className={`filter-btn ${filter === 'DANGERZONE' ? 'active' : ''}`}
-                    onClick={() => setFilter('DANGERZONE')}
+                    className={`filter-btn ${filter === 'DangerZone' ? 'active' : ''}`}
+                    onClick={() => setFilter('DangerZone')}
                 >
-                    Zone Pericolose ({typeCounts.DANGERZONE})
+                    Zone Pericolose ({typeCounts.DangerZone})
                 </button>
 
                 <button
-                    className={`filter-btn ${filter === 'LIMINALSPACE' ? 'active' : ''}`}
-                    onClick={() => setFilter('LIMINALSPACE')}
+                    className={`filter-btn ${filter === 'LiminalSpace' ? 'active' : ''}`}
+                    onClick={() => setFilter('LiminalSpace')}
                 >
-                    Spazi di Confine ({typeCounts.LIMINALSPACE})
+                    Spazi di Confine ({typeCounts.LiminalSpace})
                 </button>
             </div>
 
