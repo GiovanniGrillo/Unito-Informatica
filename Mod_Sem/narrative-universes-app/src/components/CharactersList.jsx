@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getCharactersByUniverse } from '../services/sparqlService';
 import './CharactersList.css';
 
@@ -6,6 +7,8 @@ export default function CharactersList({ universeUri }) {
     const [characters, setCharacters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function loadCharacters() {
@@ -37,13 +40,11 @@ export default function CharactersList({ universeUri }) {
         );
     }
 
-    // Filtro personaggi per tipo
     const filteredCharacters = characters.filter(char => {
         if (filter === 'all') return true;
         return char.type.includes(filter);
     });
 
-    // Conta tipi
     const typeCounts = {
         all: characters.length,
         Protagonist: characters.filter(c => c.type.includes('Protagonist')).length,
@@ -102,10 +103,18 @@ export default function CharactersList({ universeUri }) {
                     </div>
                 ) : (
                     filteredCharacters.map(character => (
-                        <div key={character.uri} className="character-card">
+                        <div
+                            key={character.uri}
+                            className="character-card"
+                            onClick={() =>
+                                navigate(`/entity?uri=${encodeURIComponent(character.uri)}`)
+                            }
+                        >
                             <div className="character-header">
                                 <h3 className="character-name">{character.name}</h3>
-                                <span className="character-type">{character.type.split('#').pop()}</span>
+                                <span className="character-type">
+                                    {character.type.split('#').pop()}
+                                </span>
                             </div>
                             {character.description && (
                                 <p className="character-description">{character.description}</p>

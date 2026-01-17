@@ -1,34 +1,28 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import UniverseDashboard from './components/UniverseDashboard';
-import './App.css';
+import EntityDetails from './components/EntityDetails';
 
 function App() {
-    const [selectedUniverse, setSelectedUniverse] = useState(null);
-
     return (
-        <div className="app">
-            <header className="header">
-                <h1>Narrative Universes Explorer</h1>
-                {selectedUniverse && (
-                    <button
-                        className="back-button"
-                        onClick={() => setSelectedUniverse(null)}
-                    >
-                        ← Torna alla Home
-                    </button>
-                )}
-            </header>
-
-            <div className="container">
-                {!selectedUniverse ? (
-                    <HomePage onSelectUniverse={setSelectedUniverse} />
-                ) : (
-                    <UniverseDashboard universe={selectedUniverse} />
-                )}
-            </div>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<HomeWrapper />} />
+                <Route path="/universe" element={<UniverseDashboard />} />
+                <Route path="/entity" element={<EntityDetails />} />
+            </Routes>
+        </Router>
     );
 }
 
-export default App; 
+function HomeWrapper() {
+    const navigate = useNavigate();
+
+    const handleSelectUniverse = (universe) => {
+        navigate(`/universe?uri=${encodeURIComponent(universe.uri)}`);
+    };
+
+    return <HomePage onSelectUniverse={handleSelectUniverse} />;
+}
+
+export default App;

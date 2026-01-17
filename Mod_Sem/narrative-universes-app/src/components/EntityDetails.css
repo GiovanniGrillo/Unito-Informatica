@@ -1,0 +1,56 @@
+.entity-details {
+    padding: 2rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.entity-details h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.type {
+    background: var(--primary);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Sezioni */
+.section {
+    margin-top: 2rem;
+}
+
+.section h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section li {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.section li:hover {
+    color: var(--primary);
+    padding-left: 0.5rem;
+}

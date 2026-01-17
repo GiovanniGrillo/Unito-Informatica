@@ -1,11 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getUniverseDetails } from '../services/sparqlService';
 import CharactersList from './CharactersList';
 import LocationsList from './LocationsList';
 import WorksList from './WorksList';
 import './UniverseDashboard.css';
 
-export default function UniverseDashboard({ universe }) {
+export default function UniverseDashboard() {
+    const [params] = useSearchParams();
+    const uri = params.get("uri");
+
+    const [universe, setUniverse] = useState(null);
     const [activeTab, setActiveTab] = useState('characters');
+
+    useEffect(() => {
+        async function load() {
+            const data = await getUniverseDetails(uri);
+            const b = data.results.bindings[0];
+            setUniverse({
+                uri,
+                name: b.name.value,
+                characters: parseInt(b.numCharacters.value),
+                locations: parseInt(b.numLocations.value),
+                works: parseInt(b.numWorks.value)
+            });
+        }
+        load();
+    }, [uri]);
+
+    if (!universe) {
+        return (
+            <div className="loading-state">
+                <div className="spinner"></div>
+                <p>Caricamento universo...</p>
+            </div>
+        );
+    }
 
     const tabs = [
         { id: 'characters', label: 'Personaggi', count: universe.characters },

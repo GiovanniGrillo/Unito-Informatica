@@ -43,14 +43,13 @@ export default function HomePage({ onSelectUniverse }) {
             <div className="error">
                 <h2>⚠️ Errore</h2>
                 <p>{error}</p>
-                <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
+                <p className="error-hint">
                     Assicurati che GraphDB e il proxy server siano attivi
                 </p>
             </div>
         );
     }
 
-    // Emoji per ogni universo
     const universeEmojis = {
         "Universo di Harry Potter": "🧙‍♂️",
         "Universo di Percy Jackson": "⚡",
@@ -59,12 +58,12 @@ export default function HomePage({ onSelectUniverse }) {
 
     return (
         <div className="home-page">
-            <div className="hero">
+            <header className="hero">
                 <h1 className="hero-title">✨ Esplora gli Universi Narrativi</h1>
                 <p className="hero-subtitle">
-                    Immergiti nei mondi della narrativa fantasy più amati
+                    Scegli un universo e scopri personaggi, luoghi, oggetti e opere che lo compongono
                 </p>
-            </div>
+            </header>
 
             <div className="universes-grid">
                 {universes.map(universe => (
@@ -72,31 +71,30 @@ export default function HomePage({ onSelectUniverse }) {
                         <div className="universe-icon">
                             {universeEmojis[universe.name] || "🌟"}
                         </div>
+
                         <h2 className="universe-name">{universe.name}</h2>
+
+                        <p className="universe-description">
+                            Un mondo ricco di storie, personaggi e avventure.
+                        </p>
 
                         <div className="universe-stats">
                             <div className="stat">
                                 <span className="stat-icon">👤</span>
-                                <div className="stat-content">
-                                    <span className="stat-number">{universe.characters}</span>
-                                    <span className="stat-label">Personaggi</span>
-                                </div>
+                                <span className="stat-number">{universe.characters}</span>
+                                <span className="stat-label">Personaggi</span>
                             </div>
 
                             <div className="stat">
                                 <span className="stat-icon">📍</span>
-                                <div className="stat-content">
-                                    <span className="stat-number">{universe.locations}</span>
-                                    <span className="stat-label">Luoghi</span>
-                                </div>
+                                <span className="stat-number">{universe.locations}</span>
+                                <span className="stat-label">Luoghi</span>
                             </div>
 
                             <div className="stat">
                                 <span className="stat-icon">📚</span>
-                                <div className="stat-content">
-                                    <span className="stat-number">{universe.works}</span>
-                                    <span className="stat-label">Opere</span>
-                                </div>
+                                <span className="stat-number">{universe.works}</span>
+                                <span className="stat-label">Opere</span>
                             </div>
                         </div>
 
