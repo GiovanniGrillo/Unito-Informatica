@@ -27,7 +27,11 @@ export default function EntityDetails() {
                 <h3>{title}</h3>
                 <ul>
                     {items.map(i => (
-                        <li key={i} onClick={() => navigate(`/entity?uri=${encodeURIComponent(i)}`)}>
+                        <li
+                            key={i}
+                            className="clickable"
+                            onClick={() => navigate(`/entity?uri=${encodeURIComponent(i)}`)}
+                        >
                             {i.split('#').pop()}
                         </li>
                     ))}
@@ -41,7 +45,9 @@ export default function EntityDetails() {
             <h1>{entity.label}</h1>
             <span className="type">{entity.type}</span>
 
-            {entity.description && <p className="description">{entity.description}</p>}
+            {entity.description && (
+                <p className="description">{entity.description}</p>
+            )}
 
             {renderList("Alleati", entity.allies)}
             {renderList("Nemici", entity.enemies)}
@@ -51,7 +57,6 @@ export default function EntityDetails() {
             {renderList("Abilità", entity.abilities)}
             {renderList("Opere", entity.works)}
             {renderList("Organizzazioni", entity.organizations)}
-
             {renderList("Luoghi ambientazione", entity.locations)}
             {renderList("Prequel", entity.prequels)}
             {renderList("Sequel", entity.sequels)}

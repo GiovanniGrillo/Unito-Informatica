@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getLocationsByUniverse } from '../services/sparqlService';
 import './LocationsList.css';
 
@@ -7,20 +8,48 @@ export default function LocationsList({ universeUri }) {
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('all');
 
+    const navigate = useNavigate();
+
+    // Etichette italiane per i ruoli
+    const roleLabels = {
+        SAFEPLACE: "Luogo Sicuro",
+        DANGERZONE: "Zona Pericolosa",
+        LIMINALSPACE: "Spazio di Confine"
+    };
+
     useEffect(() => {
         async function loadLocations() {
             try {
                 const data = await getLocationsByUniverse(universeUri);
-                const results = data.results.bindings.map(b => ({
-                    uri: b.location.value,
-                    name: b.name.value,
-                    type: b.type?.value || 'Location',
-                    narrativeFunction: b.function?.value || null,
-                    dangerLevel: b.danger?.value || null
+                const raw = data.results.bindings;
+
+                const grouped = {};
+
+                raw.forEach(b => {
+                    const uri = b.location.value;
+
+                    if (!grouped[uri]) {
+                        grouped[uri] = {
+                            uri,
+                            name: b.name.value,
+                            narrativeFunction: b.narrativeFunction?.value || "",
+                            types: new Set()
+                        };
+                    }
+
+                    // Estrai localName da URI (sia con # che con /)
+                    const role = b.type?.value?.split(/[#/]/).pop() || "LOCATION";
+                    grouped[uri].types.add(role);
+                });
+
+                const finalLocations = Object.values(grouped).map(l => ({
+                    ...l,
+                    types: Array.from(l.types).filter(t => t !== "LOCATION" && t !== "Location")
                 }));
-                setLocations(results);
-            } catch (err) {
-                console.error('Error loading locations:', err);
+
+                setLocations(finalLocations);
+            } catch (error) {
+                console.error("Errore nel caricamento dei luoghi:", error);
             } finally {
                 setLoading(false);
             }
@@ -38,61 +67,83 @@ export default function LocationsList({ universeUri }) {
         );
     }
 
-    const filtered = locations.filter(loc => {
-        if (filter === 'all') return true;
-        return loc.type === filter;
-    });
-
+    // Conteggi per i filtri
     const typeCounts = {
         all: locations.length,
-        SafePlace: locations.filter(l => l.type === 'SafePlace').length,
-        DangerZone: locations.filter(l => l.type === 'DangerZone').length,
-        LiminalSpace: locations.filter(l => l.type === 'LiminalSpace').length
+        SAFEPLACE: locations.filter(l => l.types.includes("SAFEPLACE")).length,
+        DANGERZONE: locations.filter(l => l.types.includes("DANGERZONE")).length,
+        LIMINALSPACE: locations.filter(l => l.types.includes("LIMINALSPACE")).length
     };
+
+    // Filtro attivo
+    const filteredLocations =
+        filter === 'all'
+            ? locations
+            : locations.filter(l => l.types.includes(filter));
 
     return (
         <div className="locations-list">
+            {/* FILTRI */}
             <div className="filters">
-                <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>
+                <button
+                    className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
+                    onClick={() => setFilter('all')}
+                >
                     Tutti ({typeCounts.all})
                 </button>
 
-                {typeCounts.SafePlace > 0 && (
-                    <button className={filter === 'SafePlace' ? 'active' : ''} onClick={() => setFilter('SafePlace')}>
-                        Luoghi Sicuri ({typeCounts.SafePlace})
-                    </button>
-                )}
+                <button
+                    className={`filter-btn ${filter === 'SAFEPLACE' ? 'active' : ''}`}
+                    onClick={() => setFilter('SAFEPLACE')}
+                >
+                    Luoghi Sicuri ({typeCounts.SAFEPLACE})
+                </button>
 
-                {typeCounts.DangerZone > 0 && (
-                    <button className={filter === 'DangerZone' ? 'active' : ''} onClick={() => setFilter('DangerZone')}>
-                        Zone Pericolose ({typeCounts.DangerZone})
-                    </button>
-                )}
+                <button
+                    className={`filter-btn ${filter === 'DANGERZONE' ? 'active' : ''}`}
+                    onClick={() => setFilter('DANGERZONE')}
+                >
+                    Zone Pericolose ({typeCounts.DANGERZONE})
+                </button>
 
-                {typeCounts.LiminalSpace > 0 && (
-                    <button className={filter === 'LiminalSpace' ? 'active' : ''} onClick={() => setFilter('LiminalSpace')}>
-                        Spazi di Confine ({typeCounts.LiminalSpace})
-                    </button>
-                )}
+                <button
+                    className={`filter-btn ${filter === 'LIMINALSPACE' ? 'active' : ''}`}
+                    onClick={() => setFilter('LIMINALSPACE')}
+                >
+                    Spazi di Confine ({typeCounts.LIMINALSPACE})
+                </button>
             </div>
 
+            {/* GRID */}
             <div className="cards-grid">
-                {filtered.length === 0 ? (
-                    <div className="empty-state">Nessun luogo trovato</div>
+                {filteredLocations.length === 0 ? (
+                    <div className="empty-state">
+                        <p>Nessun luogo trovato</p>
+                    </div>
                 ) : (
-                    filtered.map(loc => (
-                        <div key={loc.uri} className="location-card">
-                            <h3 className="location-name">{loc.name}</h3>
-                            <span className="location-type">{loc.type}</span>
+                    filteredLocations.map(location => (
+                        <div
+                            key={location.uri}
+                            className="location-card"
+                            onClick={() =>
+                                navigate(`/entity?uri=${encodeURIComponent(location.uri)}`)
+                            }
+                        >
+                            <h3 className="location-name">{location.name}</h3>
 
-                            <div className="location-info">
-                                {loc.narrativeFunction && (
-                                    <p><strong>Funzione narrativa:</strong> {loc.narrativeFunction}</p>
-                                )}
-                                {loc.dangerLevel && (
-                                    <p><strong>Pericolo:</strong> {loc.dangerLevel}</p>
-                                )}
+                            <div className="location-tags">
+                                {location.types.map(role => (
+                                    <span key={role} className="tag">
+                                        {roleLabels[role] || role}
+                                    </span>
+                                ))}
                             </div>
+
+                            {location.narrativeFunction && (
+                                <p className="location-description">
+                                    Funzione narrativa: {location.narrativeFunction}
+                                </p>
+                            )}
                         </div>
                     ))
                 )}

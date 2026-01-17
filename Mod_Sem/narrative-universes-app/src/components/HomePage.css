@@ -1,94 +1,113 @@
 .home-page {
+    animation: fadeIn 0.45s ease-out;
     padding: 4rem 2rem;
-    animation: fadeIn 0.5s ease-out;
 }
 
+/* HERO */
 .hero {
     text-align: center;
     margin-bottom: 4rem;
 }
 
 .hero-title {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--primary);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
     margin-bottom: 1rem;
-    letter-spacing: -0.5px;
+}
+
+.hero-title span {
+    color: var(--primary);
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--text-secondary);
-    max-width: 650px;
+    max-width: 700px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* Grid universi */
+/* GRID UNIVERSI */
 .universes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     gap: 2.5rem;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
-/* Card universo */
+/* CARD UNIVERSO */
 .universe-card {
-    background: var(--card-bg);
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 18px;
     padding: 2.5rem 2rem;
-    text-align: center;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: 0 4px 12px var(--shadow);
+    position: relative;
+    overflow: hidden;
 }
 
 .universe-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     border-color: var(--primary);
 }
 
+.universe-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(63, 81, 181, 0.12), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    /* FIX CLICK */
+}
+
+.universe-card:hover::before {
+    opacity: 1;
+}
+
+/* ICONA */
 .universe-icon {
-    font-size: 3rem;
+    font-size: 3.2rem;
     margin-bottom: 1rem;
 }
 
+/* TITOLO UNIVERSO */
 .universe-name {
     font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-weight: 700;
     color: var(--text-primary);
+    margin-bottom: 0.5rem;
 }
 
+/* DESCRIZIONE */
 .universe-description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    line-height: 1.6;
 }
 
-/* Statistiche */
+/* STATISTICHE */
 .universe-stats {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 2rem;
 }
 
 .stat {
     text-align: center;
-}
-
-.stat-icon {
-    font-size: 1.4rem;
-    display: block;
-    margin-bottom: 0.2rem;
+    flex: 1;
 }
 
 .stat-number {
-    display: block;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--primary);
 }
@@ -97,37 +116,38 @@
     font-size: 0.8rem;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.06em;
 }
 
-/* Pulsante */
+/* BOTTONE */
 .explore-button {
     width: 100%;
-    padding: 1rem;
+    padding: 0.9rem 1rem;
     background: var(--primary);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 1rem;
     font-weight: 600;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
 }
 
 .explore-button:hover {
     background: var(--primary-light);
-    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.3);
     transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(63, 81, 181, 0.25);
 }
 
 .explore-button:active {
     transform: scale(0.98);
 }
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
-    .home-page {
-        padding: 3rem 1.5rem;
-    }
-
     .hero-title {
         font-size: 2.2rem;
     }

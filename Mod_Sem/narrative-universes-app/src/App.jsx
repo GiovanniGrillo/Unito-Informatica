@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import HomePage from './components/HomePage';
 import UniverseDashboard from './components/UniverseDashboard';
 import EntityDetails from './components/EntityDetails';
+import './styles/design-system.css';
 
 function App() {
     return (

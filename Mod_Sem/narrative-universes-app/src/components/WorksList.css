@@ -1,82 +1,117 @@
 .works-list {
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.35s ease-out;
+    padding: 1rem 0;
 }
 
-/* Filtri */
-.filters {
+/* FILTRI — ISOLATI SOLO PER WORKS */
+.works-list .filters {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.2rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
-.filters button {
-    padding: 0.6rem 1.2rem;
-    background: var(--card-bg);
+.works-list .filters button {
+    padding: 0.55rem 1.2rem;
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 20px;
+    border-radius: 999px;
     font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.filters button:hover {
+.works-list .filters button:hover {
+    background: #f3f4ff;
     border-color: var(--primary);
     color: var(--primary);
 }
 
-.filters button.active {
+.works-list .filters button.active {
     background: var(--primary);
-    color: white;
+    color: #ffffff;
     border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.25);
 }
 
-/* Grid */
+/* GRID */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
-/* Card */
+/* CARD OPERA */
 .work-card {
-    background: var(--card-bg);
+    background: #ffffff;
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.2s;
+    border-radius: 14px;
+    padding: 1.8rem;
+    transition: all 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .work-card:hover {
-    box-shadow: 0 4px 12px var(--shadow);
+    transform: translateY(-4px);
     border-color: var(--primary);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* TITOLO */
 .work-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
 }
 
+/* TIPO */
 .work-type {
-    background: var(--background);
+    background: #eef2ff;
     color: var(--primary);
-    padding: 0.25rem 0.75rem;
+    padding: 0.3rem 0.85rem;
     border-radius: 12px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 1rem;
 }
 
+/* INFO */
 .work-info p {
-    margin: 0.3rem 0;
+    margin: 0.4rem 0;
     color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
-/* Empty */
+/* EMPTY STATE */
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
     color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .works-list .filters {
+        gap: 0.5rem;
+    }
+
+    .works-list .filters button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
 }

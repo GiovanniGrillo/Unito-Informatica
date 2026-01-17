@@ -10,17 +10,51 @@ export default function CharactersList({ universeUri }) {
 
     const navigate = useNavigate();
 
+    // Funzione per pulire e rinominare i ruoli
+    function cleanRoles(types) {
+        const blacklist = ["Character", "HUMANCHARACTER", "HumanCharacter"];
+        const rename = {
+            Protagonist: "Protagonista",
+            Alleato: "Alleato",
+            Antagonist: "Antagonista",
+            Mentor: "Mentore"
+        };
+
+        return types
+            .filter(t => !blacklist.includes(t))
+            .map(t => rename[t] || t);
+    }
+
     useEffect(() => {
         async function loadCharacters() {
             try {
                 const data = await getCharactersByUniverse(universeUri);
-                const results = data.results.bindings.map(b => ({
-                    uri: b.character.value,
-                    name: b.name.value,
-                    type: b.type?.value || 'Character',
-                    description: b.description?.value || ''
+                const raw = data.results.bindings;
+
+                const grouped = {};
+
+                raw.forEach(b => {
+                    const uri = b.character.value;
+
+                    if (!grouped[uri]) {
+                        grouped[uri] = {
+                            uri,
+                            name: b.name.value,
+                            description: b.description?.value || "",
+                            types: new Set()
+                        };
+                    }
+
+                    const role = b.type?.value?.split('#').pop() || "Character";
+                    grouped[uri].types.add(role);
+                });
+
+                const finalCharacters = Object.values(grouped).map(c => ({
+                    ...c,
+                    types: cleanRoles(Array.from(c.types))
                 }));
-                setCharacters(results);
+
+                setCharacters(finalCharacters);
             } catch (error) {
                 console.error('Error loading characters:', error);
             } finally {
@@ -40,17 +74,17 @@ export default function CharactersList({ universeUri }) {
         );
     }
 
-    const filteredCharacters = characters.filter(char => {
-        if (filter === 'all') return true;
-        return char.type.includes(filter);
-    });
+    const filteredCharacters =
+        filter === 'all'
+            ? characters
+            : characters.filter(c => c.types.includes(filter));
 
     const typeCounts = {
         all: characters.length,
-        Protagonist: characters.filter(c => c.type.includes('Protagonist')).length,
-        Alleato: characters.filter(c => c.type.includes('Alleato')).length,
-        Antagonist: characters.filter(c => c.type.includes('Antagonist')).length,
-        Mentor: characters.filter(c => c.type.includes('Mentor')).length
+        Protagonista: characters.filter(c => c.types.includes('Protagonista')).length,
+        Alleato: characters.filter(c => c.types.includes('Alleato')).length,
+        Antagonista: characters.filter(c => c.types.includes('Antagonista')).length,
+        Mentore: characters.filter(c => c.types.includes('Mentore')).length
     };
 
     return (
@@ -62,14 +96,16 @@ export default function CharactersList({ universeUri }) {
                 >
                     Tutti ({typeCounts.all})
                 </button>
-                {typeCounts.Protagonist > 0 && (
+
+                {typeCounts.Protagonista > 0 && (
                     <button
-                        className={`filter-btn ${filter === 'Protagonist' ? 'active' : ''}`}
-                        onClick={() => setFilter('Protagonist')}
+                        className={`filter-btn ${filter === 'Protagonista' ? 'active' : ''}`}
+                        onClick={() => setFilter('Protagonista')}
                     >
-                        Protagonisti ({typeCounts.Protagonist})
+                        Protagonisti ({typeCounts.Protagonista})
                     </button>
                 )}
+
                 {typeCounts.Alleato > 0 && (
                     <button
                         className={`filter-btn ${filter === 'Alleato' ? 'active' : ''}`}
@@ -78,20 +114,22 @@ export default function CharactersList({ universeUri }) {
                         Alleati ({typeCounts.Alleato})
                     </button>
                 )}
-                {typeCounts.Antagonist > 0 && (
+
+                {typeCounts.Antagonista > 0 && (
                     <button
-                        className={`filter-btn ${filter === 'Antagonist' ? 'active' : ''}`}
-                        onClick={() => setFilter('Antagonist')}
+                        className={`filter-btn ${filter === 'Antagonista' ? 'active' : ''}`}
+                        onClick={() => setFilter('Antagonista')}
                     >
-                        Antagonisti ({typeCounts.Antagonist})
+                        Antagonisti ({typeCounts.Antagonista})
                     </button>
                 )}
-                {typeCounts.Mentor > 0 && (
+
+                {typeCounts.Mentore > 0 && (
                     <button
-                        className={`filter-btn ${filter === 'Mentor' ? 'active' : ''}`}
-                        onClick={() => setFilter('Mentor')}
+                        className={`filter-btn ${filter === 'Mentore' ? 'active' : ''}`}
+                        onClick={() => setFilter('Mentore')}
                     >
-                        Mentori ({typeCounts.Mentor})
+                        Mentori ({typeCounts.Mentore})
                     </button>
                 )}
             </div>
@@ -112,10 +150,14 @@ export default function CharactersList({ universeUri }) {
                         >
                             <div className="character-header">
                                 <h3 className="character-name">{character.name}</h3>
-                                <span className="character-type">
-                                    {character.type.split('#').pop()}
-                                </span>
+
+                                <div className="character-tags">
+                                    {character.types.map(role => (
+                                        <span key={role} className="tag">{role}</span>
+                                    ))}
+                                </div>
                             </div>
+
                             {character.description && (
                                 <p className="character-description">{character.description}</p>
                             )}
