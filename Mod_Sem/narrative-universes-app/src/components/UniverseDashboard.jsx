@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getUniverseDetails } from '../services/sparqlService';
 import CharactersList from './CharactersList';
 import LocationsList from './LocationsList';
@@ -9,6 +9,7 @@ import './UniverseDashboard.css';
 export default function UniverseDashboard() {
     const [params] = useSearchParams();
     const uri = params.get("uri");
+    const navigate = useNavigate();
 
     const [universe, setUniverse] = useState(null);
     const [activeTab, setActiveTab] = useState('characters');
@@ -47,6 +48,13 @@ export default function UniverseDashboard() {
         <div className="dashboard">
             <div className="dashboard-header">
                 <div className="universe-info">
+                    <button
+                        className="home-button"
+                        onClick={() => navigate('/')}
+                    >
+                        <span className="home-icon" aria-hidden="true" />
+                        <span className="sr-only">Torna alla home</span>
+                    </button>
                     <h1 className="universe-title">{universe.name}</h1>
                     <div className="universe-meta">
                         <span className="meta-item">{universe.characters} Personaggi</span>

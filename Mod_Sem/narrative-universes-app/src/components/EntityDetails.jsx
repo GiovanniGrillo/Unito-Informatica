@@ -41,40 +41,49 @@ export default function EntityDetails() {
     };
 
     return (
-        <div className="entity-details">
-            <h1>{entity.label}</h1>
-            <span className="type">{entity.type}</span>
+        <>
+            <header className="header">
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    <span className="back-icon" aria-hidden="true" />
+                    <span className="sr-only">Torna indietro</span>
+                </button>
+            </header>
 
-            {entity.description && (
-                <p className="description">{entity.description}</p>
-            )}
+            <div className="entity-details">
+                <h1>{entity.label}</h1>
+                <span className="type">{entity.type}</span>
 
-            {renderList("Alleati", entity.allies)}
-            {renderList("Nemici", entity.enemies)}
-            {renderList("Mentori", entity.mentors)}
-            {renderList("Allievi", entity.students)}
-            {renderList("Oggetti posseduti", entity.objects)}
-            {renderList("Abilità", entity.abilities)}
-            {renderList("Opere", entity.works)}
-            {renderList("Organizzazioni", entity.organizations)}
-            {renderList("Luoghi ambientazione", entity.locations)}
-            {renderList("Prequel", entity.prequels)}
-            {renderList("Sequel", entity.sequels)}
-            {renderList("Adattamenti", entity.adaptations)}
+                {entity.description && (
+                    <p className="description">{entity.description}</p>
+                )}
 
-            {entity.narrativeFunction && (
-                <div className="section">
-                    <h3>Funzione narrativa</h3>
-                    <p>{entity.narrativeFunction}</p>
-                </div>
-            )}
+                {renderList("Alleati", entity.allies)}
+                {renderList("Nemici", entity.enemies)}
+                {renderList("Mentori", entity.mentors)}
+                {renderList("Allievi", entity.students)}
+                {renderList("Oggetti posseduti", entity.objects)}
+                {renderList("Abilità", entity.abilities)}
+                {renderList("Opere", entity.works)}
+                {renderList("Organizzazioni", entity.organizations)}
+                {renderList("Luoghi ambientazione", entity.locations)}
+                {renderList("Prequel", entity.prequels)}
+                {renderList("Sequel", entity.sequels)}
+                {renderList("Adattamenti", entity.adaptations)}
 
-            {entity.dangerLevel && (
-                <div className="section">
-                    <h3>Livello di pericolo</h3>
-                    <p>{entity.dangerLevel}</p>
-                </div>
-            )}
-        </div>
+                {entity.narrativeFunction && (
+                    <div className="section">
+                        <h3>Funzione narrativa</h3>
+                        <p>{entity.narrativeFunction}</p>
+                    </div>
+                )}
+
+                {entity.dangerLevel && (
+                    <div className="section">
+                        <h3>Livello di pericolo</h3>
+                        <p>{entity.dangerLevel}</p>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }

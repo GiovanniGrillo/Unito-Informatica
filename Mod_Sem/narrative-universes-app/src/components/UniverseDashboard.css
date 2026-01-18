@@ -1,28 +1,60 @@
 .dashboard {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 3.5rem 1.5rem;
+    padding: 3rem 1.5rem;
     animation: slideUp 0.45s ease-out;
 }
 
 /* HEADER */
 .dashboard-header {
-    background: #ffffff;
+    background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 3rem 2.5rem;
+    border-radius: 12px;
+    padding: 2.5rem 2.25rem;
     margin-bottom: 2.8rem;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-    transition: 0.3s ease;
-}
-
-.dashboard-header:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 22px var(--shadow);
 }
 
 .universe-info {
     text-align: center;
+}
+
+.home-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.home-button:hover {
+    background: #e5e7eb;
+}
+
+.home-icon {
+    width: 14px;
+    height: 10px;
+    border: 2px solid var(--primary);
+    border-top: none;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.home-icon::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: 100%;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 4px solid var(--primary);
 }
 
 .universe-title {
@@ -54,12 +86,12 @@
 .tabs {
     display: flex;
     gap: 0.75rem;
-    background: #ffffff;
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 0.6rem;
+    padding: 0.5rem;
     margin-bottom: 2.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 14px var(--shadow);
 }
 
 .tab {
@@ -80,7 +112,7 @@
 }
 
 .tab:hover {
-    background: #f3f4ff;
+    background: #eef2ff;
     color: var(--primary);
 }
 
