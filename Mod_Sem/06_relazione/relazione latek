@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Progetto di Modellazione Concettuale del Web Semantico}}\
+
+\[6pt]
+    {\large Anno Accademico 2025/2026}\
+
+\[12pt]
+    {\large Studenti: Alessandro Olivero, Giovanni Grillo}
+\end{center}
+
+\vspace{1cm}
+
+\section*{Introduzione}
+
+Il presente progetto nasce all'interno del corso di \textit{Modellazione Concettuale del Web Semantico} e ha come obiettivo la progettazione, realizzazione e interrogazione di un'ontologia complessa, capace di rappresentare in modo formale e strutturato un insieme di universi narrativi. L'idea alla base del lavoro è quella di costruire un modello semantico che permetta di descrivere personaggi, luoghi, organizzazioni, opere e relazioni interne a uno o più universi, mantenendo al tempo stesso un elevato livello di generalità e riusabilità.
+
+L'ontologia è stata sviluppata seguendo i principi del Web Semantico e utilizzando gli standard W3C, in particolare RDF, RDFS e OWL. La modellazione è accompagnata da un insieme di query SPARQL, progettate per esplorare la struttura del grafo, verificare la correttezza del modello e dimostrare la capacità dell'ontologia di rispondere a interrogazioni complesse. Una parte del progetto è inoltre dedicata all'integrazione con fonti esterne, come Wikidata, tramite federated queries.
+
+\vspace{0.5cm}
+
+\section*{Obiettivi del Progetto}
+
+\begin{itemize}
+    \item Progettare un'ontologia modulare e scalabile, capace di rappresentare universi narrativi differenti.
+    \item Definire classi, proprietà e individui in modo coerente, evitando ridondanze e garantendo consistenza semantica.
+    \item Modellare relazioni significative tra personaggi, luoghi, organizzazioni e opere.
+    \item Implementare un insieme di query SPARQL in grado di esplorare il grafo e dimostrare la correttezza del modello.
+    \item Integrare l'ontologia con risorse esterne tramite federated queries.
+    \item Produrre una documentazione chiara, leggibile e strutturata.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 1: Descrizione Generale dell'Ontologia},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+L'ontologia rappresenta uno o più universi narrativi attraverso classi, proprietà e individui. Include entità come personaggi, luoghi, organizzazioni, opere e universi, collegate tramite relazioni semantiche significative. Il modello è estensibile, coerente e interrogabile tramite SPARQL, e costituisce la base per analisi semantiche e integrazioni con risorse esterne come Wikidata.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{Struttura Concettuale}
+
+La struttura concettuale dell'ontologia è stata definita seguendo un approccio top-down: si è partiti dall'identificazione delle entità fondamentali e delle loro relazioni, per poi procedere alla definizione delle classi e delle proprietà. Il risultato è un modello gerarchico, in cui le classi principali sono organizzate in modo da garantire coerenza semantica e facilità di estensione.
+
+La classe \texttt{Character} è una delle più centrali, poiché rappresenta gli attori principali delle narrazioni. Essa è collegata a luoghi, opere e organizzazioni tramite proprietà specifiche, permettendo di ricostruire percorsi narrativi, appartenenze e ruoli.
+
+La classe \texttt{Location} permette di modellare ambienti fisici o concettuali, mentre \texttt{Organization} rappresenta gruppi, ordini o istituzioni. La classe \texttt{Work} consente di collegare entità narrative alle opere in cui compaiono, mentre \texttt{Universe} funge da contenitore semantico per raggruppare entità coerenti.
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 2: Classi Principali},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+\begin{itemize}
+    \item \textbf{Character}: individui che rappresentano personaggi appartenenti a uno o più universi.
+    \item \textbf{Location}: luoghi fisici o concettuali rilevanti all'interno della narrazione.
+    \item \textbf{Organization}: gruppi, istituzioni o entità a cui i personaggi possono appartenere.
+    \item \textbf{Work}: opere letterarie, cinematografiche o artistiche.
+    \item \textbf{Universe}: macro-strutture narrative che raggruppano entità coerenti.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 3: Proprietà Principali},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+\begin{itemize}
+    \item \texttt{appearsIn}: collega un personaggio o un luogo a un'opera.
+    \item \texttt{belongsToUniverse}: collega un'entità all'universo narrativo di riferimento.
+    \item \texttt{memberOf}: collega un personaggio a un'organizzazione.
+    \item \texttt{mentors}: rappresenta relazioni di mentoring tra personaggi.
+    \item \texttt{description}: fornisce una descrizione testuale dell'entità.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{Utilizzo di Protégé per la Modellazione}
+
+La costruzione dell'ontologia è stata realizzata utilizzando \textbf{Protégé}, uno strumento fondamentale per la modellazione OWL. Protégé ha permesso di definire in modo visuale e strutturato le classi, le proprietà e gli individui che compongono l'ontologia degli universi narrativi.
+
+Le principali attività svolte in Protégé includono:
+
+\begin{itemize}
+    \item \textbf{Definizione delle classi}: creazione delle classi principali e organizzazione della gerarchia.
+    \item \textbf{Creazione delle proprietà}: definizione di proprietà oggetto e dato, con dominio e codominio.
+    \item \textbf{Inserimento degli individui}: popolamento dell'ontologia con personaggi, luoghi, opere e organizzazioni.
+    \item \textbf{Verifica con reasoner}: utilizzo di HermiT per controllare la consistenza del modello.
+    \item \textbf{Esportazione RDF/XML}: esportazione dell'ontologia per l'importazione in GraphDB.
+\end{itemize}
+
+Protégé ha garantito una modellazione chiara, coerente e facilmente estendibile, facilitando la gestione dell'intero ciclo di sviluppo dell'ontologia.
+
+\vspace{0.5cm}
+
+\section*{Modellazione OWL}
+
+La modellazione OWL ha permesso di definire formalmente le relazioni tra le entità. Le proprietà sono state arricchite con dominio, codominio e caratteristiche semantiche, permettendo inferenze automatiche tramite reasoner.
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 4: Esempio di Proprietà OWL},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+La proprietà \texttt{memberOf} è stata modellata come \textit{ObjectProperty} con:
+\begin{itemize}
+    \item \textbf{Dominio}: \texttt{Character}
+    \item \textbf{Codominio}: \texttt{Organization}
+\end{itemize}
+Essa rappresenta l'appartenenza di un personaggio a un gruppo o istituzione.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{Query SPARQL}
+
+Le query SPARQL sono state utilizzate per esplorare il grafo e verificare la correttezza del modello.
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 5: Query SPARQL -- Individui e Classi},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+\begin{verbatim}
+SELECT DISTINCT ?individual ?label ?class
+WHERE {
+  ?individual rdf:type ?class ;
+              rdfs:label ?label .
+  FILTER(isIRI(?individual))
+  FILTER(isIRI(?class))
+}
+ORDER BY ?class ?label
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{Integrazione con il Web Semantico}
+
+L'integrazione con Wikidata tramite federated queries permette di arricchire il grafo locale con informazioni esterne, come descrizioni, date e collegamenti a entità globali.
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=black,
+  title=\textbf{Box 6: Integrazione con Wikidata},
+  fonttitle=\bfseries,
+  arc=2mm,
+  boxrule=0.8pt
+]
+L'integrazione con Wikidata consente di estendere il grafo locale con dati provenienti dal Web Semantico, migliorando la ricchezza informativa dell'ontologia senza duplicare informazioni.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{Conclusioni}
+
+Il progetto ha permesso di progettare e realizzare un'ontologia per la rappresentazione di universi narrativi, dimostrando come gli strumenti del Web Semantico possano essere utilizzati per modellare domini complessi in modo formale e interrogabile. L'integrazione con Wikidata evidenzia il potenziale del Web Semantico come infrastruttura distribuita di conoscenza. Il modello sviluppato costituisce una base solida per future estensioni e arricchimenti.
+
+\end{document}
