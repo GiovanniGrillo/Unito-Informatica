@@ -17,7 +17,10 @@ export default function WorksList({ universeUri }) {
                 const results = data.results.bindings.map(b => ({
                     uri: b.work.value,
                     title: b.title.value,
-                    type: b.type?.value || 'NarrativeWork',
+                    type: (() => {
+                        const t = b.type?.value || 'NarrativeWork';
+                        return t === 'TelevisionSeries' ? 'TVSeries' : t;
+                    })(),
                     year: b.year?.value || null,
                     runtime: b.runtime?.value || null,
                     pages: b.pages?.value || null
@@ -73,11 +76,9 @@ export default function WorksList({ universeUri }) {
                     </button>
                 )}
 
-                {typeCounts.TVSeries > 0 && (
-                    <button className={filter === 'TVSeries' ? 'active' : ''} onClick={() => setFilter('TVSeries')}>
-                        Serie TV ({typeCounts.TVSeries})
-                    </button>
-                )}
+                <button className={filter === 'TVSeries' ? 'active' : ''} onClick={() => setFilter('TVSeries')}>
+                    Serie TV ({typeCounts.TVSeries})
+                </button>
             </div>
 
             <div className="cards-grid">

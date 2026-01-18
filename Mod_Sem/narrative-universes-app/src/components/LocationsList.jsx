@@ -110,7 +110,7 @@ export default function LocationsList({ universeUri }) {
                     className={`filter-btn ${filter === 'LiminalSpace' ? 'active' : ''}`}
                     onClick={() => setFilter('LiminalSpace')}
                 >
-                    Spazi di Confine ({typeCounts.LiminalSpace})
+                    Spazi Liminali ({typeCounts.LiminalSpace})
                 </button>
             </div>
 
