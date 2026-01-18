@@ -805,6 +805,15 @@ ontology:Weapon rdf:type owl:Class ;
                                                         rdfs:label "Origine Spirituale"@it .
 
 
+###  http://www.narrative-universes.org/ontology#AberforthDumbledore
+ontology:AberforthDumbledore rdf:type owl:NamedIndividual ,
+                                      ontology:HumanCharacter ;
+                             ontology:appearsIn ontology:HarryPotterAndTheDeathlyHallows_Book ;
+                             ontology:memberOf ontology:HogwartsSchool ;
+                             rdfs:comment "Fratello minore di Albus Silente, gestore del Paiolo Magico, compare principalmente nell'ultimo libro della saga"@it ;
+                             rdfs:label "Aberforth Silente"@it .
+
+
 ###  http://www.narrative-universes.org/ontology#AlbusDumbledore
 ontology:AlbusDumbledore rdf:type owl:NamedIndividual ,
                                   ontology:HumanCharacter ;
@@ -1074,6 +1083,19 @@ ontology:HarryPotter rdf:type owl:NamedIndividual ,
                      rdfs:label "Harry Potter"@it .
 
 
+###  http://www.narrative-universes.org/ontology#HarryPotterAndTheDeathlyHallows_Book
+ontology:HarryPotterAndTheDeathlyHallows_Book rdf:type owl:NamedIndividual ,
+                                                       ontology:Book ;
+                                              ontology:belongsToUniverse ontology:HarryPotterUniverse ;
+                                              ontology:setIn ontology:Hogwarts ;
+                                              ontology:numberOfPages 759 ;
+                                              ontology:publicationYear 2007 ;
+                                              ontology:rating "4.8"^^xsd:float ;
+                                              ontology:title "Harry Potter e i Doni della Morte" ;
+                                              rdfs:comment "Ultimo libro della saga di Harry Potter, pubblicato nel 2007, che conclude le avventure di Harry e dei suoi amici a Hogwarts"@it ;
+                                              rdfs:label "Harry Potter e i Doni della Morte"@it .
+
+
 ###  http://www.narrative-universes.org/ontology#HarryPotterUniverse
 ontology:HarryPotterUniverse rdf:type owl:NamedIndividual ,
                                       ontology:NarrativeUniverse ;
@@ -1082,18 +1104,18 @@ ontology:HarryPotterUniverse rdf:type owl:NamedIndividual ,
                              rdfs:label "Universo di Harry Potter"@it .
 
 
-###  http://www.narrative-universes.org/ontology#Hermione_Granger
-ontology:Hermione_Granger rdf:type owl:NamedIndividual ,
-                                   ontology:HumanCharacter ;
-                          ontology:alliedWith ontology:HarryPotter ;
-                          ontology:appearsIn ontology:ChamberOfSecrets_Book ,
-                                             ontology:PhilosophersStone_Book ,
-                                             ontology:PhilosophersStone_Movie ;
-                          ontology:belongsToUniverse ontology:HarryPotterUniverse ;
-                          ontology:memberOf ontology:HogwartsSchool ;
-                          ontology:description "Migliore amica di Harry, strega brillante e studiosa" ;
-                          rdfs:comment "Migliore amica di Harry, la più intelligente della sua generazione"@it ;
-                          rdfs:label "Hermione Granger"@it .
+###  http://www.narrative-universes.org/ontology#HermioneGranger
+ontology:HermioneGranger rdf:type owl:NamedIndividual ,
+                                  ontology:HumanCharacter ;
+                         ontology:alliedWith ontology:HarryPotter ;
+                         ontology:appearsIn ontology:ChamberOfSecrets_Book ,
+                                            ontology:PhilosophersStone_Book ,
+                                            ontology:PhilosophersStone_Movie ;
+                         ontology:belongsToUniverse ontology:HarryPotterUniverse ;
+                         ontology:memberOf ontology:HogwartsSchool ;
+                         ontology:description "Migliore amica di Harry, strega brillante e studiosa" ;
+                         rdfs:comment "Migliore amica di Harry, la più intelligente della sua generazione"@it ;
+                         rdfs:label "Hermione Granger"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#Hogwarts
@@ -1181,17 +1203,17 @@ ontology:LightningThief_Movie rdf:type owl:NamedIndividual ,
                               rdfs:label "Il Ladro di Fulmini (Film)"@it .
 
 
-###  http://www.narrative-universes.org/ontology#Lord_Voldemort
-ontology:Lord_Voldemort rdf:type owl:NamedIndividual ,
-                                 ontology:HumanCharacter ;
-                        ontology:appearsIn ontology:PhilosophersStone_Book ,
-                                           ontology:PhilosophersStone_Movie ;
-                        ontology:belongsToUniverse ontology:HarryPotterUniverse ;
-                        ontology:enemyOf ontology:AlbusDumbledore ,
-                                         ontology:HarryPotter ;
-                        ontology:description "Mago oscuro più potente e pericoloso di tutti i tempi, nemico principale di Harry Potter" ;
-                        rdfs:comment "L'antagonista principale, il mago oscuro"@it ;
-                        rdfs:label "Lord Voldemort"@it .
+###  http://www.narrative-universes.org/ontology#LordVoldemort
+ontology:LordVoldemort rdf:type owl:NamedIndividual ,
+                                ontology:HumanCharacter ;
+                       ontology:appearsIn ontology:PhilosophersStone_Book ,
+                                          ontology:PhilosophersStone_Movie ;
+                       ontology:belongsToUniverse ontology:HarryPotterUniverse ;
+                       ontology:enemyOf ontology:AlbusDumbledore ,
+                                        ontology:HarryPotter ;
+                       ontology:description "Mago oscuro più potente e pericoloso di tutti i tempi, nemico principale di Harry Potter" ;
+                       rdfs:comment "L'antagonista principale, il mago oscuro"@it ;
+                       rdfs:label "Lord Voldemort"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#LukeCastellan
@@ -1355,19 +1377,19 @@ ontology:Rivendell rdf:type owl:NamedIndividual ,
                    rdfs:label "Gran Burrone"@it .
 
 
-###  http://www.narrative-universes.org/ontology#Ron_Weasley
-ontology:Ron_Weasley rdf:type owl:NamedIndividual ,
-                              ontology:HumanCharacter ;
-                     ontology:alliedWith ontology:HarryPotter ,
-                                         ontology:Hermione_Granger ;
-                     ontology:appearsIn ontology:ChamberOfSecrets_Book ,
-                                        ontology:PhilosophersStone_Book ,
-                                        ontology:PhilosophersStone_Movie ;
-                     ontology:belongsToUniverse ontology:HarryPotterUniverse ;
-                     ontology:memberOf ontology:HogwartsSchool ;
-                     ontology:description "Migliore amico di Harry, leale e coraggioso membro della famiglia Weasley" ;
-                     rdfs:comment "Migliore amico di Harry, fedele compagno"@it ;
-                     rdfs:label "Ron Weasley"@it .
+###  http://www.narrative-universes.org/ontology#RonWeasley
+ontology:RonWeasley rdf:type owl:NamedIndividual ,
+                             ontology:HumanCharacter ;
+                    ontology:alliedWith ontology:HarryPotter ,
+                                        ontology:HermioneGranger ;
+                    ontology:appearsIn ontology:ChamberOfSecrets_Book ,
+                                       ontology:PhilosophersStone_Book ,
+                                       ontology:PhilosophersStone_Movie ;
+                    ontology:belongsToUniverse ontology:HarryPotterUniverse ;
+                    ontology:memberOf ontology:HogwartsSchool ;
+                    ontology:description "Migliore amico di Harry, leale e coraggioso membro della famiglia Weasley" ;
+                    rdfs:comment "Migliore amico di Harry, fedele compagno"@it ;
+                    rdfs:label "Ron Weasley"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#Sauron
