@@ -97,6 +97,7 @@ Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#HumanOrigi
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#PercyJackson_TVSeries>))
 Declaration(NamedIndividual(<http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin>))
+Declaration(NamedIndividual(ontology:AberforthDumbledore))
 Declaration(NamedIndividual(ontology:AlbusDumbledore))
 Declaration(NamedIndividual(ontology:Anduril))
 Declaration(NamedIndividual(ontology:AnnabethChase))
@@ -121,6 +122,7 @@ Declaration(NamedIndividual(ontology:FrodoBaggins))
 Declaration(NamedIndividual(ontology:Gandalf))
 Declaration(NamedIndividual(ontology:GroverUnderwood))
 Declaration(NamedIndividual(ontology:HarryPotter))
+Declaration(NamedIndividual(ontology:HarryPotterAndTheDeathlyHallows_Book))
 Declaration(NamedIndividual(ontology:HarryPotterUniverse))
 Declaration(NamedIndividual(ontology:HermioneGranger))
 Declaration(NamedIndividual(ontology:Hogwarts))
@@ -731,6 +733,14 @@ AnnotationAssertion(rdfs:comment <http://www.co-ode.org/ontologies/ont.owl#Spiri
 AnnotationAssertion(rdfs:label <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin> "Origine Spirituale"@it)
 ClassAssertion(ontology:OriginType <http://www.co-ode.org/ontologies/ont.owl#SpiritOrigin>)
 
+# Individual: ontology:AberforthDumbledore (Aberforth Silente)
+
+AnnotationAssertion(rdfs:comment ontology:AberforthDumbledore "Fratello minore di Albus Silente, gestore del Paiolo Magico, compare principalmente nell'ultimo libro della saga"@it)
+AnnotationAssertion(rdfs:label ontology:AberforthDumbledore "Aberforth Silente"@it)
+ClassAssertion(ontology:HumanCharacter ontology:AberforthDumbledore)
+ObjectPropertyAssertion(ontology:appearsIn ontology:AberforthDumbledore ontology:HarryPotterAndTheDeathlyHallows_Book)
+ObjectPropertyAssertion(ontology:memberOf ontology:AberforthDumbledore ontology:HogwartsSchool)
+
 # Individual: ontology:AlbusDumbledore (Albus Silente)
 
 AnnotationAssertion(rdfs:comment ontology:AlbusDumbledore "Preside di Hogwarts e mentore di Harry"@it)
@@ -975,6 +985,18 @@ ObjectPropertyAssertion(ontology:memberOf ontology:HarryPotter ontology:Hogwarts
 ObjectPropertyAssertion(ontology:possesses ontology:HarryPotter ontology:InvisibilityCloak)
 DataPropertyAssertion(ontology:birthYear ontology:HarryPotter "1980"^^xsd:integer)
 DataPropertyAssertion(ontology:description ontology:HarryPotter "Il ragazzo che è sopravvissuto, protagonista della saga, con una cicatrice a forma di fulmine sulla fronte")
+
+# Individual: ontology:HarryPotterAndTheDeathlyHallows_Book (Harry Potter e i Doni della Morte)
+
+AnnotationAssertion(rdfs:comment ontology:HarryPotterAndTheDeathlyHallows_Book "Ultimo libro della saga di Harry Potter, pubblicato nel 2007, che conclude le avventure di Harry e dei suoi amici a Hogwarts"@it)
+AnnotationAssertion(rdfs:label ontology:HarryPotterAndTheDeathlyHallows_Book "Harry Potter e i Doni della Morte"@it)
+ClassAssertion(ontology:Book ontology:HarryPotterAndTheDeathlyHallows_Book)
+ObjectPropertyAssertion(ontology:belongsToUniverse ontology:HarryPotterAndTheDeathlyHallows_Book ontology:HarryPotterUniverse)
+ObjectPropertyAssertion(ontology:setIn ontology:HarryPotterAndTheDeathlyHallows_Book ontology:Hogwarts)
+DataPropertyAssertion(ontology:numberOfPages ontology:HarryPotterAndTheDeathlyHallows_Book "759"^^xsd:decimal)
+DataPropertyAssertion(ontology:publicationYear ontology:HarryPotterAndTheDeathlyHallows_Book "2007"^^xsd:decimal)
+DataPropertyAssertion(ontology:rating ontology:HarryPotterAndTheDeathlyHallows_Book "4.8"^^xsd:float)
+DataPropertyAssertion(ontology:title ontology:HarryPotterAndTheDeathlyHallows_Book "Harry Potter e i Doni della Morte")
 
 # Individual: ontology:HarryPotterUniverse (Universo di Harry Potter)
 
