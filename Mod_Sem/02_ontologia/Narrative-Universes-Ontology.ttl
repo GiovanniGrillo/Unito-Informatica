@@ -808,7 +808,9 @@ ontology:Weapon rdf:type owl:Class ;
 ###  http://www.narrative-universes.org/ontology#AberforthDumbledore
 ontology:AberforthDumbledore rdf:type owl:NamedIndividual ,
                                       ontology:HumanCharacter ;
-                             ontology:appearsIn ontology:HarryPotterAndTheDeathlyHallows_Book ;
+                             ontology:appearsIn ontology:HarryPotterAndTheDeathlyHallows_Book ,
+                                                ontology:PhilosophersStone_Book ,
+                                                ontology:PhilosophersStone_Movie ;
                              ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                              ontology:memberOf ontology:HogwartsSchool ;
                              ontology:mentors ontology:HarryPotter ;
@@ -1072,7 +1074,8 @@ ontology:GroverUnderwood rdf:type owl:NamedIndividual ,
 ontology:HarryPotter rdf:type owl:NamedIndividual ,
                               ontology:HumanCharacter ,
                               ontology:Protagonist ;
-                     ontology:alliedWith ontology:AlbusDumbledore ;
+                     ontology:alliedWith ontology:AberforthDumbledore ,
+                                         ontology:AlbusDumbledore ;
                      ontology:appearsIn ontology:ChamberOfSecrets_Book ,
                                         ontology:PhilosophersStone_Book ,
                                         ontology:PhilosophersStone_Movie ;
