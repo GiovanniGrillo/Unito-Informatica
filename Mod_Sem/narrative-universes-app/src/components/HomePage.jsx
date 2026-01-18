@@ -107,6 +107,11 @@ export default function HomePage({ onSelectUniverse }) {
                     </div>
                 ))}
             </div>
+
+            <footer className="home-footer">
+                <p className="footer-title">Progetto d'esame – Modellazione Concettuale per il Web Semantico aa.2025/2026</p>
+                <p className="footer-authors">di Alessandro Olivero (matricola: 915069) e Giovanni Grillo (matricola: 989819)</p>
+            </footer>
         </div>
     );
 }
