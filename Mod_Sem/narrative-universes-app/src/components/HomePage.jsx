@@ -14,6 +14,7 @@ export default function HomePage({ onSelectUniverse }) {
                 const results = data.results.bindings.map(b => ({
                     uri: b.universe.value,
                     name: b.name.value,
+                    description: b.description?.value || '',
                     characters: parseInt(b.numCharacters.value),
                     locations: parseInt(b.numLocations.value),
                     works: parseInt(b.numWorks.value)
@@ -74,9 +75,11 @@ export default function HomePage({ onSelectUniverse }) {
 
                         <h2 className="universe-name">{universe.name}</h2>
 
-                        <p className="universe-description">
-                            Un mondo ricco di storie, personaggi e avventure.
-                        </p>
+                        {universe.description && (
+                            <p className="universe-description">
+                                {universe.description}
+                            </p>
+                        )}
 
                         <div className="universe-stats">
                             <div className="stat">

@@ -19,13 +19,14 @@ export async function getUniverses() {
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     
-    SELECT ?universe ?name 
+    SELECT ?universe ?name (SAMPLE(?desc) AS ?description)
            (COUNT(DISTINCT ?character) AS ?numCharacters) 
            (COUNT(DISTINCT ?location) AS ?numLocations)
            (COUNT(DISTINCT ?work) AS ?numWorks)
     WHERE {
       ?universe a ontology:NarrativeUniverse ;
                 rdfs:label ?name .
+      OPTIONAL { ?universe ontology:description ?desc }
       OPTIONAL { 
         ?character a ontology:Character ;
                    ontology:belongsToUniverse ?universe 
@@ -81,10 +82,15 @@ export async function getWorksByUniverse(universeUri) {
               ontology:belongsToUniverse <${universeUri}> ;
               rdfs:label ?title .
 
-        OPTIONAL { ?work rdf:type ?typeRaw .
-                   FILTER(STRSTARTS(STR(?typeRaw), STR(ontology:))) 
-                   BIND(STRAFTER(STR(?typeRaw), "#") AS ?type)
-        }
+        BIND(
+            IF(EXISTS { ?work a ontology:Book }, "Book",
+               IF(EXISTS { ?work a ontology:Movie }, "Movie",
+                  IF(EXISTS { ?work a ontology:TelevisionSeries }, "TVSeries",
+                     "NarrativeWork"
+                  )
+               )
+            ) AS ?type
+        )
 
         OPTIONAL { ?work ontology:publicationYear ?year }
         OPTIONAL { ?work ontology:runtime ?runtime }
