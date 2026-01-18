@@ -810,6 +810,7 @@ ontology:AberforthDumbledore rdf:type owl:NamedIndividual ,
                                       ontology:HumanCharacter ;
                              ontology:alliedWith ontology:HarryPotter ;
                              ontology:appearsIn ontology:HarryPotterAndTheDeathlyHallows_Book ;
+                             ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                              ontology:memberOf ontology:HogwartsSchool ;
                              ontology:mentors ontology:HarryPotter ;
                              rdfs:comment "Fratello minore di Albus Silente, gestore del Paiolo Magico, compare principalmente nell'ultimo libro della saga"@it ;
