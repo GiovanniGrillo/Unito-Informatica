@@ -17,7 +17,10 @@ export default function CharactersList({ universeUri }) {
             Protagonist: "Protagonista",
             Alleato: "Alleato",
             Antagonist: "Antagonista",
-            Mentor: "Mentore"
+            Mentor: "Mentore",
+            NonHumanCharacter: "Non Umano",
+            NONHUMANCHARACTER: "Non Umano",
+            HybridCharacter: "Ibrido"
         };
 
         return types
