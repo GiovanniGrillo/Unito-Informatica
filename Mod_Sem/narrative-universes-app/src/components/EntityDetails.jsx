@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getEntityDetails } from '../services/sparqlService';
 import './EntityDetails.css';
@@ -9,16 +9,44 @@ export default function EntityDetails() {
     const navigate = useNavigate();
 
     const [entity, setEntity] = useState(null);
+    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function load() {
+    const fetchEntity = useCallback(async () => {
+        try {
             const data = await getEntityDetails(uri);
             setEntity(data);
+            setError(null);
+        } catch (e) {
+            setError(e.message || 'Errore nel caricamento dei dettagli');
         }
-        load();
     }, [uri]);
 
-    if (!entity) return <div className="loading-state">Caricamento...</div>;
+    useEffect(() => {
+        const id = setTimeout(() => {
+            fetchEntity();
+        }, 0);
+        return () => clearTimeout(id);
+    }, [fetchEntity]);
+
+    if (!entity && !error) return (
+        <div className="loading-state">
+            <div className="spinner"></div>
+            <p>Caricamento dettagli...</p>
+        </div>
+    );
+
+    if (error) {
+        return (
+            <div className="error">
+                <h2>Errore</h2>
+                <p>{error}</p>
+                <p className="error-hint">
+                    Assicurati che GraphDB e il proxy server siano attivi
+                </p>
+                <button className="back-button" onClick={fetchEntity}>Riprova</button>
+            </div>
+        );
+    }
 
     const renderList = (title, items) => {
         if (!items || items.length === 0) return null;
@@ -51,7 +79,17 @@ export default function EntityDetails() {
 
             <div className="entity-details">
                 <h1>{entity.label}</h1>
-                <span className="type">{entity.type}</span>
+                {(() => {
+                    const typeLabels = {
+                        Character: "Personaggio",
+                        Location: "Luogo",
+                        NarrativeWork: "Opera Narrativa",
+                        Object: "Oggetto"
+                    };
+                    return (
+                        <span className="type">{typeLabels[entity.type] || entity.type}</span>
+                    );
+                })()}
 
                 {entity.description && (
                     <p className="description">{entity.description}</p>

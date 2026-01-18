@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getUniverseDetails } from '../services/sparqlService';
 import CharactersList from './CharactersList';
@@ -13,9 +13,10 @@ export default function UniverseDashboard() {
 
     const [universe, setUniverse] = useState(null);
     const [activeTab, setActiveTab] = useState('characters');
+    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function load() {
+    const fetchUniverse = useCallback(async () => {
+        try {
             const data = await getUniverseDetails(uri);
             const b = data.results.bindings[0];
             setUniverse({
@@ -25,15 +26,34 @@ export default function UniverseDashboard() {
                 locations: parseInt(b.numLocations.value),
                 works: parseInt(b.numWorks.value)
             });
+            setError(null);
+        } catch (e) {
+            setError(e.message || 'Errore nel caricamento dell’universo');
         }
-        load();
     }, [uri]);
 
-    if (!universe) {
+    useEffect(() => {
+        const id = setTimeout(() => {
+            fetchUniverse();
+        }, 0);
+        return () => clearTimeout(id);
+    }, [fetchUniverse]);
+
+    if (!universe && !error) {
         return (
             <div className="loading-state">
                 <div className="spinner"></div>
                 <p>Caricamento universo...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="error">
+                <h2>Errore</h2>
+                <p>{error}</p>
+                <button className="back-button" onClick={fetchUniverse}>Riprova</button>
             </div>
         );
     }

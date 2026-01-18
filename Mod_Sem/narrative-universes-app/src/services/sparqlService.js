@@ -237,6 +237,9 @@ export async function getLocationRelations(uri) {
         dangerLevel: data.results.bindings[0]?.danger?.value || null
     };
 }
+export async function getObjectRelations() {
+    return {};
+}
 export async function getWorkRelations(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>

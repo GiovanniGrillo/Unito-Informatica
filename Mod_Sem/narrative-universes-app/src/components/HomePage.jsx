@@ -7,27 +7,29 @@ export default function HomePage({ onSelectUniverse }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function loadUniverses() {
-            try {
-                const data = await getUniverses();
-                const results = data.results.bindings.map(b => ({
-                    uri: b.universe.value,
-                    name: b.name.value,
-                    description: b.description?.value || '',
-                    characters: parseInt(b.numCharacters.value),
-                    locations: parseInt(b.numLocations.value),
-                    works: parseInt(b.numWorks.value)
-                }));
-                setUniverses(results);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
+    async function fetchUniverses() {
+        setError(null);
+        setLoading(true);
+        try {
+            const data = await getUniverses();
+            const results = data.results.bindings.map(b => ({
+                uri: b.universe.value,
+                name: b.name.value,
+                description: b.description?.value || '',
+                characters: parseInt(b.numCharacters.value),
+                locations: parseInt(b.numLocations.value),
+                works: parseInt(b.numWorks.value)
+            }));
+            setUniverses(results);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
+    }
 
-        loadUniverses();
+    useEffect(() => {
+        fetchUniverses();
     }, []);
 
     if (loading) {
@@ -47,6 +49,7 @@ export default function HomePage({ onSelectUniverse }) {
                 <p className="error-hint">
                     Assicurati che GraphDB e il proxy server siano attivi
                 </p>
+                <button className="back-button" onClick={fetchUniverses}>Riprova</button>
             </div>
         );
     }
