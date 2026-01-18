@@ -808,11 +808,11 @@ ontology:Weapon rdf:type owl:Class ;
 ###  http://www.narrative-universes.org/ontology#AberforthDumbledore
 ontology:AberforthDumbledore rdf:type owl:NamedIndividual ,
                                       ontology:HumanCharacter ;
-                             ontology:alliedWith ontology:HarryPotter ;
                              ontology:appearsIn ontology:HarryPotterAndTheDeathlyHallows_Book ;
                              ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                              ontology:memberOf ontology:HogwartsSchool ;
                              ontology:mentors ontology:HarryPotter ;
+                             ontology:description "Fratello di Albus Silente, gestore del Paiolo Magico e un po’ burbero, aiuta Harry e i suoi amici nell’ultimo libro" ;
                              rdfs:comment "Fratello minore di Albus Silente, gestore del Paiolo Magico, compare principalmente nell'ultimo libro della saga"@it ;
                              rdfs:label "Aberforth Silente"@it .
 
