@@ -148,17 +148,9 @@ export async function getEntityDetails(uri) {
             FILTER(STRSTARTS(STR(?typeSub), STR(ontology:)))
         }
         BIND(
-            IF(EXISTS { <${uri}> ontology:hasPowerTypeEnum ?x }, "Object",
-               IF(EXISTS { <${uri}> ontology:grantsAbility ?y }, "Object",
-                  IF(EXISTS { <${uri}> ontology:canBeDestroyed ?z }, "Object", "")
-               )
-            ) AS ?typeDomain
-        )
-        BIND(
             COALESCE(
               STRAFTER(STR(?typeRaw), "#"),
               STRAFTER(STR(?typeSub), "#"),
-              ?typeDomain,
               "Unknown"
             ) AS ?type
         )

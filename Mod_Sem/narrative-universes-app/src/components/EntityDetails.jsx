@@ -121,19 +121,22 @@ export default function EntityDetails() {
                 {renderList("Sequel", entity.sequels)}
                 {renderList("Adattamenti", entity.adaptations)}
 
-                {renderList("Posseduto da", entity.owners)}
-                {renderList("Abilità conferite", entity.abilities)}
+                {entity.type === 'Object' && renderList("Posseduto da", entity.owners)}
+                {entity.type === 'Object' && renderList("Abilità conferite", entity.abilities)}
 
-                {((entity.powerType && entity.powerType.length > 0) || entity.canBeDestroyed !== null) && (
-                    <div className="section">
-                        <h3>Attributi</h3>
-                        {entity.powerType && (
-                            <p>Tipo di potere: {entity.powerType.split('#').pop()}</p>
-                        )}
-                        {entity.canBeDestroyed !== null && (
-                            <p>Può essere distrutto: {entity.canBeDestroyed === 'true' ? 'Sì' : 'No'}</p>
-                        )}
-                    </div>
+                {entity.type === 'Object' && (
+                    ((entity.powerType && entity.powerType.length > 0) ||
+                     (entity.canBeDestroyed === 'true' || entity.canBeDestroyed === 'false')) && (
+                        <div className="section">
+                            <h3>Attributi</h3>
+                            {entity.powerType && (
+                                <p>Tipo di potere: {entity.powerType.split('#').pop()}</p>
+                            )}
+                            {(entity.canBeDestroyed === 'true' || entity.canBeDestroyed === 'false') && (
+                                <p>Può essere distrutto: {entity.canBeDestroyed === 'true' ? 'Sì' : 'No'}</p>
+                            )}
+                        </div>
+                    )
                 )}
 
                 {entity.narrativeFunction && (
