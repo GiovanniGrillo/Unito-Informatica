@@ -162,4 +162,41 @@
 
 .footer-authors {
     font-size: 0.95rem;
+    margin-bottom: 1rem;
 }
+
+.footer-course-link {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-course-link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.footer-bottom-icon {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.github-link:hover {
+    color: var(--primary);
+    background: rgba(0, 0, 0, 0.04);
+}
+

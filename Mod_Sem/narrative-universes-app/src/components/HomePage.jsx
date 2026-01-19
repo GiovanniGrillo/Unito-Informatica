@@ -112,8 +112,30 @@ export default function HomePage({ onSelectUniverse }) {
             </div>
 
             <footer className="home-footer">
-                <p className="footer-title">Progetto d'esame – Modellazione Concettuale per il Web Semantico aa.2025/2026</p>
+                <a 
+                    href="https://informatica.i-learn.unito.it/course/view.php?id=3571" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="footer-course-link"
+                >
+                    Progetto d'esame – Modellazione Concettuale per il Web Semantico aa.2025/2026
+                </a>
                 <p className="footer-authors">di Alessandro Olivero (matricola: 915069) e Giovanni Grillo (matricola: 989819)</p>
+                
+                <div className="footer-bottom-icon">
+                    <a
+                        className="github-link"
+                        href="https://github.com/GiovanniGrillo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        title="GitHub"
+                    >
+                        <svg className="github-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+                            <path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.17-1.12-1.49-1.12-1.49-.91-.63.07-.62.07-.62 1 .07 1.53 1.04 1.53 1.04.9 1.53 2.36 1.09 2.94.83.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.58c.85 0 1.7.12 2.5.35 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.21 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.69.92.69 1.86v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2z"/>
+                        </svg>
+                    </a>
+                </div>
             </footer>
         </div>
     );
