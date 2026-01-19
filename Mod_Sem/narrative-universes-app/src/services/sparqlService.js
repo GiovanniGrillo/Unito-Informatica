@@ -393,3 +393,89 @@ export async function getMoviesFromWikidata(universeUri) {
 
     return executeQuery(query);
 }
+export async function getLotrMoviesFromWikidata(universeUri) {
+    const query = `
+    PREFIX ontology: <http://www.narrative-universes.org/ontology#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX wd: <http://www.wikidata.org/entity/>
+    PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+    
+    SELECT ?film ?title (MIN(?year) AS ?releaseYear) (SAMPLE(?directorName) AS ?director) (SAMPLE(?runtime) AS ?duration) ?source
+    WHERE {
+      {
+        ?film a ontology:Movie ;
+              rdfs:label ?title ;
+              ontology:belongsToUniverse <${universeUri}> .
+        OPTIONAL { ?film ontology:publicationYear ?year }
+        OPTIONAL { ?film ontology:runtime ?runtime }
+        BIND("Locale" AS ?source)
+        BIND("" AS ?directorName)
+      }
+      UNION
+      {
+        SERVICE <https://query.wikidata.org/sparql> {
+          VALUES ?wikidataFilm {
+            wd:Q164963
+            wd:Q131074
+            wd:Q80379
+            wd:Q719915
+            wd:Q919649
+          }
+          ?wikidataFilm rdfs:label ?title ;
+                        wdt:P577 ?releaseDate ;
+                        wdt:P57 ?directorEntity .
+          OPTIONAL { ?wikidataFilm wdt:P2047 ?runtime }
+          OPTIONAL { ?directorEntity rdfs:label ?directorName FILTER(LANG(?directorName)="en") }
+          FILTER(LANG(?title) = "en")
+          BIND(YEAR(?releaseDate) AS ?year)
+          BIND(?wikidataFilm AS ?film)
+          BIND("Wikidata" AS ?source)
+        }
+      }
+    }
+    GROUP BY ?film ?title ?source
+    ORDER BY ?releaseYear
+    `;
+    return executeQuery(query);
+}
+export async function getPercyJacksonMoviesFromWikidata(universeUri) {
+    const query = `
+    PREFIX ontology: <http://www.narrative-universes.org/ontology#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX wd: <http://www.wikidata.org/entity/>
+    PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+    
+    SELECT ?film ?title (MIN(?year) AS ?releaseYear) (SAMPLE(?directorName) AS ?director) (SAMPLE(?runtime) AS ?duration) ?source
+    WHERE {
+      {
+        ?film a ontology:Movie ;
+              rdfs:label ?title ;
+              ontology:belongsToUniverse <${universeUri}> .
+        OPTIONAL { ?film ontology:publicationYear ?year }
+        OPTIONAL { ?film ontology:runtime ?runtime }
+        BIND("Locale" AS ?source)
+        BIND("" AS ?directorName)
+      }
+      UNION
+      {
+        SERVICE <https://query.wikidata.org/sparql> {
+          VALUES ?wikidataFilm {
+            wd:Q2984104
+          }
+          ?wikidataFilm rdfs:label ?title ;
+                        wdt:P577 ?releaseDate ;
+                        wdt:P57 ?directorEntity .
+          OPTIONAL { ?wikidataFilm wdt:P2047 ?runtime }
+          OPTIONAL { ?directorEntity rdfs:label ?directorName FILTER(LANG(?directorName)="en") }
+          FILTER(LANG(?title) = "en")
+          BIND(YEAR(?releaseDate) AS ?year)
+          BIND(?wikidataFilm AS ?film)
+          BIND("Wikidata" AS ?source)
+        }
+      }
+    }
+    GROUP BY ?film ?title ?source
+    ORDER BY ?releaseYear
+    `;
+    return executeQuery(query);
+}

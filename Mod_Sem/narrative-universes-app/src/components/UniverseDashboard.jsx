@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { getUniverseDetails, getMoviesFromWikidata } from '../services/sparqlService';
+import { getUniverseDetails, getMoviesFromWikidata, getLotrMoviesFromWikidata, getPercyJacksonMoviesFromWikidata } from '../services/sparqlService';
 import CharactersList from './CharactersList';
 import LocationsList from './LocationsList';
 import WorksList from './WorksList';
@@ -35,10 +35,19 @@ export default function UniverseDashboard() {
     }
   }, [uri]);
 
-  const loadWikidataInfo = async () => {
+    const loadWikidataInfo = async () => {
     setLoadingWikidata(true);
     try {
-      const movies = await getMoviesFromWikidata(universe.uri);
+            let movies;
+            if (universe.uri.endsWith('#HarryPotterUniverse')) {
+                movies = await getMoviesFromWikidata(universe.uri);
+            } else if (universe.uri.endsWith('#MiddleEarthUniverse')) {
+                movies = await getLotrMoviesFromWikidata(universe.uri);
+            } else if (universe.uri.endsWith('#PercyJacksonUniverse')) {
+                movies = await getPercyJacksonMoviesFromWikidata(universe.uri);
+            } else {
+                movies = await getMoviesFromWikidata(universe.uri);
+            }
       setWikidataMovies(movies.results.bindings);
     } catch (err) {
       console.error('Errore caricamento Wikidata:', err);
