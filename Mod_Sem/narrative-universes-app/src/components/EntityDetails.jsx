@@ -84,7 +84,20 @@ export default function EntityDetails() {
                         Character: "Personaggio",
                         Location: "Luogo",
                         NarrativeWork: "Opera Narrativa",
-                        Object: "Oggetto"
+                        Object: "Oggetto",
+                        Organization: "Organizzazione",
+                        School: "Scuola",
+                        SafePlace: "Luogo Sicuro",
+                        DangerZone: "Zona Pericolosa",
+                        LiminalSpace: "Spazio di Confine",
+                        Ability: "Abilità",
+                        MagicalAbility: "Abilità Magica",
+                        HumanCharacter: "Personaggio",
+                        NonHumanCharacter: "Non Umano",
+                        HybridCharacter: "Ibrido",
+                        Book: "Libro",
+                        Movie: "Film",
+                        TelevisionSeries: "Serie TV"
                     };
                     return (
                         <span className="type">{typeLabels[entity.type] || entity.type}</span>
@@ -107,6 +120,21 @@ export default function EntityDetails() {
                 {renderList("Prequel", entity.prequels)}
                 {renderList("Sequel", entity.sequels)}
                 {renderList("Adattamenti", entity.adaptations)}
+
+                {renderList("Posseduto da", entity.owners)}
+                {renderList("Abilità conferite", entity.abilities)}
+
+                {((entity.powerType && entity.powerType.length > 0) || entity.canBeDestroyed !== null) && (
+                    <div className="section">
+                        <h3>Attributi</h3>
+                        {entity.powerType && (
+                            <p>Tipo di potere: {entity.powerType.split('#').pop()}</p>
+                        )}
+                        {entity.canBeDestroyed !== null && (
+                            <p>Può essere distrutto: {entity.canBeDestroyed === 'true' ? 'Sì' : 'No'}</p>
+                        )}
+                    </div>
+                )}
 
                 {entity.narrativeFunction && (
                     <div className="section">

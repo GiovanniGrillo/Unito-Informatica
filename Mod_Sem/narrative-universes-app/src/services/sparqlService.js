@@ -132,13 +132,36 @@ export async function getEntityDetails(uri) {
     const baseQuery = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-    SELECT ?type ?label ?description
+    SELECT ?type ?label (COALESCE(?desc, ?comment) AS ?description)
     WHERE {
         <${uri}> rdfs:label ?label .
-        OPTIONAL { <${uri}> ontology:description ?description }
-        <${uri}> rdf:type ?type .
-        FILTER(STRSTARTS(STR(?type), STR(ontology:)))
+        OPTIONAL { <${uri}> ontology:description ?desc }
+        OPTIONAL { <${uri}> rdfs:comment ?comment }
+        OPTIONAL {
+            <${uri}> rdf:type ?typeRaw .
+            FILTER(STRSTARTS(STR(?typeRaw), STR(ontology:)))
+        }
+        OPTIONAL {
+            <${uri}> rdf:type/rdfs:subClassOf* ?typeSub .
+            FILTER(STRSTARTS(STR(?typeSub), STR(ontology:)))
+        }
+        BIND(
+            IF(EXISTS { <${uri}> ontology:hasPowerTypeEnum ?x }, "Object",
+               IF(EXISTS { <${uri}> ontology:grantsAbility ?y }, "Object",
+                  IF(EXISTS { <${uri}> ontology:canBeDestroyed ?z }, "Object", "")
+               )
+            ) AS ?typeDomain
+        )
+        BIND(
+            COALESCE(
+              STRAFTER(STR(?typeRaw), "#"),
+              STRAFTER(STR(?typeSub), "#"),
+              ?typeDomain,
+              "Unknown"
+            ) AS ?type
+        )
     }
     `;
 
@@ -237,8 +260,33 @@ export async function getLocationRelations(uri) {
         dangerLevel: data.results.bindings[0]?.danger?.value || null
     };
 }
-export async function getObjectRelations() {
-    return {};
+export async function getObjectRelations(uri) {
+    const query = `
+    PREFIX ontology: <http://www.narrative-universes.org/ontology#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+    SELECT ?owner ?ability ?ptype ?destroyable
+    WHERE {
+        OPTIONAL { ?owner ontology:possesses <${uri}> }
+        OPTIONAL { <${uri}> ontology:grantsAbility ?ability }
+        OPTIONAL { <${uri}> ontology:hasPowerTypeEnum ?ptype }
+        OPTIONAL { <${uri}> ontology:canBeDestroyed ?destroyable }
+    }
+    `;
+
+    const data = await executeQuery(query);
+
+    const extract = field =>
+        [...new Set(data.results.bindings
+            .filter(b => b[field])
+            .map(b => b[field].value))];
+
+    return {
+        owners: extract('owner'),
+        abilities: extract('ability'),
+        powerType: extract('ptype')[0] || null,
+        canBeDestroyed: extract('destroyable')[0] || null
+    };
 }
 export async function getWorkRelations(uri) {
     const query = `

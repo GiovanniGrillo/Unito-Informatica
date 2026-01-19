@@ -96,24 +96,6 @@ ontology:belongsToUniverse rdf:type owl:ObjectProperty ;
                            rdfs:label "appartiene a universo"@it .
 
 
-###  http://www.narrative-universes.org/ontology#createdBy
-ontology:createdBy rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf owl:topObjectProperty ;
-                   rdfs:domain owl:Thing ;
-                   rdfs:range ontology:Character ;
-                   rdfs:comment "Collega un oggetto o organizzazione al personaggio che lo ha creato"@it ;
-                   rdfs:label "creato da"@it .
-
-
-###  http://www.narrative-universes.org/ontology#destroyedBy
-ontology:destroyedBy rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf owl:topObjectProperty ;
-                     rdfs:domain ontology:Object ;
-                     rdfs:range ontology:Character ;
-                     rdfs:comment "Collega un oggetto al personaggio che lo ha distrutto"@it ;
-                     rdfs:label "distrutto da"@it .
-
-
 ###  http://www.narrative-universes.org/ontology#enemyOf
 ontology:enemyOf rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf owl:topObjectProperty ;
@@ -185,12 +167,13 @@ ontology:hasPowerTypeEnum rdf:type owl:ObjectProperty ;
                           rdfs:label "ha tipo di potere"@it .
 
 
-###  http://www.narrative-universes.org/ontology#hasRole
-ontology:hasRole rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf owl:topObjectProperty ;
-                 rdfs:domain ontology:Character ;
-                 rdfs:comment "Collega un personaggio al suo ruolo narrativo"@it ;
-                 rdfs:label "ha ruolo"@it .
+###  http://www.narrative-universes.org/ontology#hosts
+ontology:hosts rdf:type owl:ObjectProperty ;
+               owl:inverseOf ontology:locatedAt ;
+               rdfs:domain ontology:Location ;
+               rdfs:range ontology:Organization ;
+               rdfs:comment "Indica quali organizzazioni si trovano in un luogo"@it ;
+               rdfs:label "ospita"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#indirectlyMentors
@@ -216,18 +199,9 @@ ontology:indirectlySetIn rdf:type owl:ObjectProperty ;
                          rdfs:label "Impostato indirettamente"@it .
 
 
-###  http://www.narrative-universes.org/ontology#influences
-ontology:influences rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf owl:topObjectProperty ;
-                    rdfs:domain owl:Thing ;
-                    rdfs:comment "Collega un personaggio, oggetto o organizzazione a un evento narrativo che influenza significativamente"@it ;
-                    rdfs:label "influenza"@it .
-
-
 ###  http://www.narrative-universes.org/ontology#locatedAt
 ontology:locatedAt rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf owl:topObjectProperty ;
-                   owl:inverseOf ontology:ospita ;
                    rdfs:domain ontology:Organization ;
                    rdfs:range ontology:Location ;
                    rdfs:comment "Collega un'organizzazione al luogo fisico dove si trova"@it ;
@@ -252,14 +226,6 @@ ontology:mentors rdf:type owl:ObjectProperty ;
                  rdfs:label "fa da mentore a"@it .
 
 
-###  http://www.narrative-universes.org/ontology#ospita
-ontology:ospita rdf:type owl:ObjectProperty ;
-                rdfs:domain ontology:Location ;
-                rdfs:range ontology:Organization ;
-                rdfs:comment "Indica quali organizzazioni si trovano in un luogo"@it ;
-                rdfs:label "ospita"@it .
-
-
 ###  http://www.narrative-universes.org/ontology#partOf
 ontology:partOf rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
@@ -281,7 +247,9 @@ ontology:possesses rdf:type owl:ObjectProperty ;
 
 ###  http://www.narrative-universes.org/ontology#prequelOf
 ontology:prequelOf rdf:type owl:ObjectProperty ;
-                   owl:inverseOf ontology:sequelOf .
+                   owl:inverseOf ontology:sequelOf ;
+                   rdfs:comment "Indica che un'opera narrativa è il prequel (storia precedente) di un'altra opera"@it ;
+                   rdfs:label "prequel di"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#sequelOf
@@ -332,14 +300,6 @@ ontology:canBeDestroyed rdf:type owl:DatatypeProperty ;
                         rdfs:label "può essere distrutto"@it .
 
 
-###  http://www.narrative-universes.org/ontology#dangerLevel
-ontology:dangerLevel rdf:type owl:DatatypeProperty ;
-                     rdfs:subPropertyOf owl:topDataProperty ;
-                     rdfs:range xsd:string ;
-                     rdfs:comment "Il livello di pericolo dell'entità: Low, Medium, High"@it ;
-                     rdfs:label "livello di pericolo"@it .
-
-
 ###  http://www.narrative-universes.org/ontology#description
 ontology:description rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf owl:topDataProperty ;
@@ -373,15 +333,6 @@ ontology:numberOfPages rdf:type owl:DatatypeProperty ;
                        rdfs:range xsd:integer ;
                        rdfs:comment "Il numero di pagine di un libro"@it ;
                        rdfs:label "numero di pagine"@it .
-
-
-###  http://www.narrative-universes.org/ontology#publicationDate
-ontology:publicationDate rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf owl:topDataProperty ;
-                         rdfs:domain ontology:NarrativeWork ;
-                         rdfs:range xsd:dateTime ;
-                         rdfs:comment "La data esatta di pubblicazione di un'opera"@it ;
-                         rdfs:label "data di pubblicazione"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#publicationYear
@@ -718,11 +669,6 @@ ontology:TVSeries rdf:type owl:Class ;
 ontology:Weapon rdf:type owl:Class ;
                 owl:equivalentClass [ owl:intersectionOf ( ontology:Object
                                                            [ rdf:type owl:Restriction ;
-                                                             owl:onProperty [ owl:inverseOf ontology:possesses
-                                                                            ] ;
-                                                             owl:someValuesFrom ontology:Character
-                                                           ]
-                                                           [ rdf:type owl:Restriction ;
                                                              owl:onProperty ontology:hasPowerTypeEnum ;
                                                              owl:hasValue <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower>
                                                            ]
@@ -763,7 +709,8 @@ ontology:Weapon rdf:type owl:Class ;
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#GondorianSword
-<http://www.co-ode.org/ontologies/ont.owl#GondorianSword> rdf:type owl:NamedIndividual ;
+<http://www.co-ode.org/ontologies/ont.owl#GondorianSword> rdf:type owl:NamedIndividual ,
+                                                                   ontology:Weapon ;
                                                           ontology:belongsToUniverse ontology:MiddleEarthUniverse ;
                                                           ontology:hasPowerTypeEnum <http://www.co-ode.org/ontologies/ont.owl#OrdinaryPower> ;
                                                           ontology:indirectlySetIn ontology:MiddleEarthUniverse ;
@@ -814,6 +761,7 @@ ontology:AberforthDumbledore rdf:type owl:NamedIndividual ,
                              ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                              ontology:memberOf ontology:HogwartsSchool ;
                              ontology:mentors ontology:HarryPotter ;
+                             ontology:birthYear 1884 ;
                              ontology:description "Fratello di Albus Silente, gestore del Paiolo Magico e un po’ burbero, aiuta Harry e i suoi amici nell’ultimo libro" ;
                              rdfs:comment "Fratello minore di Albus Silente, gestore del Paiolo Magico, compare principalmente nell'ultimo libro della saga"@it ;
                              rdfs:label "Aberforth Silente"@it .
@@ -828,17 +776,21 @@ ontology:AlbusDumbledore rdf:type owl:NamedIndividual ,
                          ontology:memberOf ontology:HogwartsSchool ;
                          ontology:mentors ontology:HarryPotter ;
                          ontology:possesses ontology:ElderWand ;
+                         ontology:birthYear 1881 ;
                          ontology:description "Preside di Hogwarts, mago più potente del suo tempo, mentore di Harry Potter" ;
                          rdfs:comment "Preside di Hogwarts e mentore di Harry"@it ;
                          rdfs:label "Albus Silente"@it .
 
 
 ###  http://www.narrative-universes.org/ontology#Anduril
-ontology:Anduril rdf:type owl:NamedIndividual ;
+ontology:Anduril rdf:type owl:NamedIndividual ,
+                          <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ;
                  ontology:belongsToUniverse ontology:MiddleEarthUniverse ;
                  ontology:grantsAbility ontology:KinglyAuthority ;
                  ontology:hasPowerTypeEnum ontology:SymbolicPower ;
                  ontology:canBeDestroyed "true"^^xsd:boolean ;
+                 ontology:description """È la spada leggendaria di Aragorn, forgiata dalle lame spezzate di Narsil.
+Appartiene alla categoria Armi Magiche e possiede la proprietà di simboleggiare legittimità regale e leadership, oltre a possedere un potere superiore nella battaglia contro le forze del male""" ;
                  rdfs:comment "Spada riforgiata di Aragorn, precedentemente Narsil"@it ;
                  rdfs:label "Andúril"@it .
 
@@ -854,6 +806,7 @@ ontology:AnnabethChase rdf:type owl:NamedIndividual ,
                        ontology:hasOriginType ontology:DivineOrigin ;
                        ontology:memberOf ontology:CampHalfBloodOrganization ;
                        ontology:possesses ontology:YankeeCap ;
+                       ontology:birthYear 1993 ;
                        ontology:description "Figlia di Atena, dea della saggezza, brillante stratega con talento per l'architettura e il combattimento" ;
                        rdfs:comment "Semidea figlia di Atena, architetta e stratega della squadra"@it ;
                        rdfs:label "Annabeth Chase"@it .
@@ -875,7 +828,8 @@ ontology:Aragorn rdf:type owl:NamedIndividual ,
 
 
 ###  http://www.narrative-universes.org/ontology#Binario9e3Quarti
-ontology:Binario9e3Quarti rdf:type owl:NamedIndividual ;
+ontology:Binario9e3Quarti rdf:type owl:NamedIndividual ,
+                                   ontology:LiminalSpace ;
                           ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                           ontology:description "Piattaforma magica nascosta nella stazione di King's Cross a Londra, accessibile attraversando il muro tra i binari 9 e 10. Da qui parte l'Hogwarts Express" ;
                           ontology:hasNarrativeFunction "Transizione" ;
@@ -887,6 +841,7 @@ ontology:Binario9e3Quarti rdf:type owl:NamedIndividual ;
 ontology:CampHalfBlood rdf:type owl:NamedIndividual ,
                                 ontology:SafePlace ;
                        ontology:belongsToUniverse ontology:PercyJacksonUniverse ;
+                       ontology:hosts ontology:CampHalfBloodOrganization ;
                        ontology:description "Campo estivo sulla costa di Long Island, unico rifugio sicuro per i semidei dove possono allenarsi e essere al sicuro dai mostri" ;
                        rdfs:comment "Campo di addestramento per semidei, protetto da barriere magiche"@it ;
                        rdfs:label "Campo Mezzosangue"@it .
@@ -972,11 +927,14 @@ ontology:DominationPower rdf:type owl:NamedIndividual ,
 
 
 ###  http://www.narrative-universes.org/ontology#ElderWand
-ontology:ElderWand rdf:type owl:NamedIndividual ;
+ontology:ElderWand rdf:type owl:NamedIndividual ,
+                            <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ;
                    ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                    ontology:grantsAbility ontology:UnbeatableMagic ;
                    ontology:hasPowerTypeEnum ontology:MagicalPower ;
                    ontology:canBeDestroyed "true"^^xsd:boolean ;
+                   ontology:description """È una delle bacchette magiche più potenti mai create, conferisce al suo possessore un potere magico superiore a qualsiasi altra bacchetta, rendendo i suoi incantesimi estremamente efficaci.
+Appartiene alla categoria degli Artefatti Magici e possiede la proprietà di amplificare la magia del mago che la utilizza, riconoscendo come padrone colui che sconfigge il precedente possessore""" ;
                    rdfs:comment "La bacchetta più potente, uno di Doni della Morte"@it ;
                    rdfs:label "Bacchetta di Sambuco"@it .
 
@@ -1119,6 +1077,7 @@ ontology:HermioneGranger rdf:type owl:NamedIndividual ,
                                             ontology:PhilosophersStone_Movie ;
                          ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                          ontology:memberOf ontology:HogwartsSchool ;
+                         ontology:birthYear 1979 ;
                          ontology:description "Migliore amica di Harry, strega brillante e studiosa" ;
                          rdfs:comment "Migliore amica di Harry, la più intelligente della sua generazione"@it ;
                          rdfs:label "Hermione Granger"@it .
@@ -1128,6 +1087,7 @@ ontology:HermioneGranger rdf:type owl:NamedIndividual ,
 ontology:Hogwarts rdf:type owl:NamedIndividual ,
                            ontology:SafePlace ;
                   ontology:belongsToUniverse ontology:HarryPotterUniverse ;
+                  ontology:hosts ontology:HogwartsSchool ;
                   ontology:description "Castello magico in Scozia, scuola di magia e stregoneria fondata dai quattro fondatori: Godric Grifondoro, Tosca Tassorosso, Corinna Corvonero e Salazar Serpeverde" ;
                   rdfs:comment "La scuola di Magia e Stregoneria di Hogwarts"@it ;
                   rdfs:label "Hogwarts"@it .
@@ -1157,6 +1117,9 @@ ontology:InvisibilityCloak rdf:type owl:NamedIndividual ;
                            ontology:grantsAbility ontology:TrueInvisibility ;
                            ontology:hasPowerTypeEnum ontology:MagicalPower ;
                            ontology:canBeDestroyed "false"^^xsd:boolean ;
+                           ontology:description """È un oggetto magico che, quando indossato, rende invisibile chi lo utilizza.
+Appartiene alla categoria degli Artefatti Magici e possiede la proprietà di conferire invisibilità temporanea al portatore.
+Viene spesso associato a personaggi che desiderano muoversi senza essere visti o eludere l’osservazione""" ;
                            rdfs:comment "Il mantello magico che rende invisibili"@it ;
                            rdfs:label "Mantello dell'Invisibilità"@it .
 
@@ -1184,6 +1147,7 @@ ontology:Legolas rdf:type owl:NamedIndividual ,
 ontology:LightningThief_Book rdf:type owl:NamedIndividual ,
                                       ontology:Book ;
                              ontology:belongsToUniverse ontology:PercyJacksonUniverse ;
+                             ontology:prequelOf ontology:SeaOfMonsters_Book ;
                              ontology:setIn ontology:CampHalfBlood ;
                              ontology:description "Percy scopre di essere un semidio e parte in una missione per impedire una guerra tra gli dei recuperando il fulmine di Zeus" ;
                              ontology:numberOfPages 377 ;
@@ -1217,6 +1181,7 @@ ontology:LordVoldemort rdf:type owl:NamedIndividual ,
                        ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                        ontology:enemyOf ontology:AlbusDumbledore ,
                                         ontology:HarryPotter ;
+                       ontology:birthYear 1926 ;
                        ontology:description "Mago oscuro più potente e pericoloso di tutti i tempi, nemico principale di Harry Potter" ;
                        rdfs:comment "L'antagonista principale, il mago oscuro"@it ;
                        rdfs:label "Lord Voldemort"@it .
@@ -1227,6 +1192,7 @@ ontology:LukeCastellan rdf:type owl:NamedIndividual ,
                                 ontology:HybridCharacter ;
                        ontology:belongsToUniverse ontology:PercyJacksonUniverse ;
                        ontology:hasOriginType ontology:DivineOrigin ;
+                       ontology:birthYear 1985 ;
                        ontology:description "Figlio di Hermes, ex campista esemplare corrotto dal rancore verso gli dei, diventa servitore di Crono" ;
                        rdfs:comment "Semidio figlio di Hermes, antagonista che tradisce il campo per servire Crono"@it ;
                        rdfs:label "Luke Castellan"@it .
@@ -1283,11 +1249,14 @@ ontology:MountOlympus rdf:type owl:NamedIndividual ,
 
 
 ###  http://www.narrative-universes.org/ontology#OneRing
-ontology:OneRing rdf:type owl:NamedIndividual ;
+ontology:OneRing rdf:type owl:NamedIndividual ,
+                          <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ;
                  ontology:belongsToUniverse ontology:MiddleEarthUniverse ;
                  ontology:grantsAbility ontology:DominationPower ;
                  ontology:hasPowerTypeEnum ontology:CorruptivePower ;
                  ontology:canBeDestroyed "true"^^xsd:boolean ;
+                 ontology:description """È un potente artefatto magico creato da Sauron per dominare gli altri Anelli del Potere.
+Conferisce al portatore un’enorme influenza sulla volontà altrui e amplifica le sue capacità, ma allo stesso tempo lo corrompe progressivamente""" ;
                  rdfs:comment "L'Anello del Potere forgiato da Sauron per dominare tutti gli altri anelli"@it ;
                  rdfs:label "Anello Unico"@it .
 
@@ -1329,6 +1298,7 @@ ontology:PhilosophersStone_Book rdf:type owl:NamedIndividual ,
                                 ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                                 ontology:hasMainProtagonist ontology:HarryPotter ;
                                 ontology:indirectlySetIn ontology:ForbiddenForest ;
+                                ontology:prequelOf ontology:ChamberOfSecrets_Book ;
                                 ontology:setIn ontology:Hogwarts ;
                                 ontology:description "Il primo libro della saga, racconta il primo anno di Harry a Hogwarts e la scoperta della Pietra Filosofale" ;
                                 ontology:numberOfPages 223 ;
@@ -1365,11 +1335,15 @@ ontology:PortaleMondoMorti rdf:type owl:NamedIndividual ,
 
 
 ###  http://www.narrative-universes.org/ontology#Riptide
-ontology:Riptide rdf:type owl:NamedIndividual ;
+ontology:Riptide rdf:type owl:NamedIndividual ,
+                          <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ;
                  ontology:belongsToUniverse ontology:PercyJacksonUniverse ;
                  ontology:grantsAbility ontology:CelestialBronzePower ;
                  ontology:hasPowerTypeEnum ontology:MagicalPower ;
                  ontology:canBeDestroyed "false"^^xsd:boolean ;
+                 ontology:description """È la spada magica di Percy Jackson, in grado di ritornare alla mano del proprietario quando viene persa o smarrita.
+Possiede la proprietà di trasformarsi da oggetto comune a spada divina al contatto con il suo utilizzatore.
+È efficace contro creature soprannaturali e mitologiche.""" ;
                  rdfs:comment "Spada di bronzo celestiale di Percy, si trasforma in una penna e ritorna sempre al suo proprietario"@it ;
                  rdfs:label "Riptide (Controcorrente)"@it .
 
@@ -1378,6 +1352,7 @@ ontology:Riptide rdf:type owl:NamedIndividual ;
 ontology:Rivendell rdf:type owl:NamedIndividual ,
                             ontology:SafePlace ;
                    ontology:belongsToUniverse ontology:MiddleEarthUniverse ;
+                   ontology:hosts ontology:FellowshipOfTheRing ;
                    ontology:description "Valle nascosta governata da Elrond Mezzelfo, ultimo rifugio di saggezza e bellezza elfica nella Terra di Mezzo" ;
                    rdfs:comment "Rifugio elfico di Elrond, luogo del Consiglio dove si forma la Compagnia dell'Anello"@it ;
                    rdfs:label "Gran Burrone"@it .
@@ -1393,6 +1368,7 @@ ontology:RonWeasley rdf:type owl:NamedIndividual ,
                                        ontology:PhilosophersStone_Movie ;
                     ontology:belongsToUniverse ontology:HarryPotterUniverse ;
                     ontology:memberOf ontology:HogwartsSchool ;
+                    ontology:birthYear 1980 ;
                     ontology:description "Migliore amico di Harry, leale e coraggioso membro della famiglia Weasley" ;
                     rdfs:comment "Migliore amico di Harry, fedele compagno"@it ;
                     rdfs:label "Ron Weasley"@it .
@@ -1478,11 +1454,13 @@ ontology:WaterControl rdf:type owl:NamedIndividual ,
 
 
 ###  http://www.narrative-universes.org/ontology#YankeeCap
-ontology:YankeeCap rdf:type owl:NamedIndividual ;
+ontology:YankeeCap rdf:type owl:NamedIndividual ,
+                            <http://www.co-ode.org/ontologies/ont.owl#PowerArtifact> ;
                    ontology:belongsToUniverse ontology:PercyJacksonUniverse ;
                    ontology:grantsAbility ontology:MagicalInvisibility ;
                    ontology:hasPowerTypeEnum ontology:MagicalPower ;
                    ontology:canBeDestroyed "true"^^xsd:boolean ;
+                   ontology:description "È un oggetto indossabile, tipicamente un cappello da baseball, appartenente ad Annabeth." ;
                    rdfs:comment "Berretto magico che rende invisibile chi lo indossa"@it ;
                    rdfs:label "Cappello Yankees di Annabeth"@it .
 
