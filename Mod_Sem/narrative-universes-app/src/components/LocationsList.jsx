@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getLocationsByUniverse } from '../services/sparqlService';
-import './LocationsList.css';
+import '../styles/LocationsList.css';
 
 export default function LocationsList({ universeUri }) {
     const [locations, setLocations] = useState([]);

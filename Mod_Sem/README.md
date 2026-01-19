@@ -36,8 +36,8 @@ Per visualizzare e modificare l'ontologia è necessario:
 ## Struttura del repository
 
 - `02_ontologia/`: file OWL e TTL dell'ontologia
-- `05_query/`: query SPARQL di esempio esportate da GraphDB
-- `06_relazione/`: relazione LaTeX del progetto
+- `03_query/`: query SPARQL di esempio esportate da GraphDB
+- `04_relazione/`: relazione LaTeX del progetto
 - `narrative-universes-app/`: demo web per esplorare gli universi
 
 ---

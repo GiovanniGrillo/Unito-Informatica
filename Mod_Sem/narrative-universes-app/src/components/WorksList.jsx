@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getWorksByUniverse } from '../services/sparqlService';
-import './WorksList.css';
+import '../styles/WorksList.css';
 
 export default function WorksList({ universeUri }) {
     const [works, setWorks] = useState([]);

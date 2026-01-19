@@ -4,7 +4,7 @@ import { getUniverseDetails } from '../services/sparqlService';
 import CharactersList from './CharactersList';
 import LocationsList from './LocationsList';
 import WorksList from './WorksList';
-import './UniverseDashboard.css';
+import '../styles/UniverseDashboard.css';
 
 export default function UniverseDashboard() {
     const [params] = useSearchParams();

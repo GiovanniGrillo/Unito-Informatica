@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getEntityDetails } from '../services/sparqlService';
-import './EntityDetails.css';
+import '../styles/EntityDetails.css';
 
 export default function EntityDetails() {
     const [params] = useSearchParams();

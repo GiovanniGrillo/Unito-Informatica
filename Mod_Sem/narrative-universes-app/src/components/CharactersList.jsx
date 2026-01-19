@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCharactersByUniverse } from '../services/sparqlService';
-import './CharactersList.css';
+import '../styles/CharactersList.css';
 
 export default function CharactersList({ universeUri }) {
     const [characters, setCharacters] = useState([]);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getUniverses } from '../services/sparqlService';
-import './HomePage.css';
+import '../styles/HomePage.css';
 
 export default function HomePage({ onSelectUniverse }) {
     const [universes, setUniverses] = useState([]);

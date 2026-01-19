@@ -163,6 +163,10 @@ body {
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
+.error .back-button {
+    display: inline-flex;
+    margin: 1rem auto 0;
+}
 
 /* ANIMAZIONI */
 @keyframes fadeIn {
