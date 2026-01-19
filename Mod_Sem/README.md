@@ -33,6 +33,30 @@ Per visualizzare e modificare l'ontologia è necessario:
 
 ---
 
+## Struttura del repository
+
+- `02_ontologia/`: file OWL e TTL dell'ontologia
+- `05_query/`: query SPARQL di esempio esportate da GraphDB
+- `06_relazione/`: relazione LaTeX del progetto
+- `narrative-universes-app/`: demo web per esplorare gli universi
+
+---
+
+## Avvio rapido demo web
+
+Prerequisiti:
+- GraphDB in locale con repository `narrative-universes`
+- Node.js 20+
+
+Passi:
+1. Avvio proxy GraphDB:
+   - `cd narrative-universes-app/server && npm i && npm start`
+2. Avvio applicazione web:
+   - `cd narrative-universes-app && npm i && npm run dev`
+3. Aprire il browser su l’URL mostrato da Vite
+
+---
+
 ## Autori
 
 - Giovanni Grillo  
