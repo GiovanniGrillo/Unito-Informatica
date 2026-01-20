@@ -10,10 +10,12 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:terms="http://purl.org/dc/terms/"
      xmlns:schema="http://schema.org/"
      xmlns:ontology="http://www.narrative-universes.org/ontology#">
     <owl:Ontology rdf:about="http://www.narrative-universes.org/ontology">
         <owl:versionIRI rdf:resource="http://www.narrative-universes.org/ontology/1.0"/>
+        <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
         <dc:creator>Alessandro Olivero</dc:creator>
         <dc:creator>Giovanni Grillo</dc:creator>
         <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2026-01-10T00:00:00</dc:date>
@@ -625,7 +627,7 @@
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Character">
         <rdfs:comment xml:lang="it">Un personaggio fittizio che appare in una o più opere narrative</rdfs:comment>
         <rdfs:label xml:lang="it">Personaggio</rdfs:label>
-        <skos:closeMatch rdf:resource="http://schema.org/Person"/>
+        <skos:closeMatch>http://www.wikidata.org/entity/Q95074</skos:closeMatch>
     </owl:Class>
     
 
@@ -722,7 +724,7 @@
     <owl:Class rdf:about="http://www.narrative-universes.org/ontology#Location">
         <rdfs:comment xml:lang="it">Un luogo o location all&apos;interno di un universo narrativo</rdfs:comment>
         <rdfs:label xml:lang="it">Luogo</rdfs:label>
-        <skos:closeMatch rdf:resource="http://schema.org/Place"/>
+        <skos:closeMatch>http://www.wikidata.org/entity/Q17334923</skos:closeMatch>
     </owl:Class>
     
 
@@ -782,7 +784,7 @@
         <rdfs:subClassOf rdf:resource="http://www.narrative-universes.org/ontology#NarrativeWork"/>
         <rdfs:comment xml:lang="it">Un film cinematografico</rdfs:comment>
         <rdfs:label xml:lang="it">Film</rdfs:label>
-        <skos:closeMatch rdf:resource="http://schema.org/Movie"/>
+        <skos:closeMatch>http://www.wikidata.org/entity/Q11424</skos:closeMatch>
     </owl:Class>
     
 

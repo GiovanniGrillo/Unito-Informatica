@@ -13,7 +13,7 @@
 
 <http://www.narrative-universes.org/ontology> rdf:type owl:Ontology ;
                                                owl:versionIRI <http://www.narrative-universes.org/ontology/1.0> ;
-                                               owl:imports schema:Place ;
+                                               owl:imports <http://www.w3.org/2004/02/skos/core> ;
                                                dc:creator "Alessandro Olivero" ,
                                                           "Giovanni Grillo" ;
                                                dc:date "2026-01-10T00:00:00"^^xsd:dateTime ;
@@ -447,7 +447,7 @@ ontology:Book rdf:type owl:Class ;
 ontology:Character rdf:type owl:Class ;
                    rdfs:comment "Un personaggio fittizio che appare in una o più opere narrative"@it ;
                    rdfs:label "Personaggio"@it ;
-                   skos:closeMatch schema:Person .
+                   skos:closeMatch "http://www.wikidata.org/entity/Q95074" .
 
 
 ###  http://www.narrative-universes.org/ontology#DangerZone
@@ -517,7 +517,7 @@ ontology:LiminalSpace rdf:type owl:Class ;
 ontology:Location rdf:type owl:Class ;
                   rdfs:comment "Un luogo o location all'interno di un universo narrativo"@it ;
                   rdfs:label "Luogo"@it ;
-                  skos:closeMatch schema:Place .
+                  skos:closeMatch "http://www.wikidata.org/entity/Q17334923" .
 
 
 ###  http://www.narrative-universes.org/ontology#MagicalAbility
@@ -560,7 +560,7 @@ ontology:Movie rdf:type owl:Class ;
                rdfs:subClassOf ontology:NarrativeWork ;
                rdfs:comment "Un film cinematografico"@it ;
                rdfs:label "Film"@it ;
-               skos:closeMatch schema:Movie .
+               skos:closeMatch "http://www.wikidata.org/entity/Q11424" .
 
 
 ###  http://www.narrative-universes.org/ontology#NarrativeUniverse
