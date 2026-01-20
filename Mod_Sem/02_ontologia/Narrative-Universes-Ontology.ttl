@@ -13,6 +13,7 @@
 
 <http://www.narrative-universes.org/ontology> rdf:type owl:Ontology ;
                                                owl:versionIRI <http://www.narrative-universes.org/ontology/1.0> ;
+                                               owl:imports schema:Place ;
                                                dc:creator "Alessandro Olivero" ,
                                                           "Giovanni Grillo" ;
                                                dc:date "2026-01-10T00:00:00"^^xsd:dateTime ;
