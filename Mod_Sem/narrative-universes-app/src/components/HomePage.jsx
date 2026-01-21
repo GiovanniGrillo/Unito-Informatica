@@ -2,16 +2,25 @@ import { useState, useEffect } from 'react';
 import { getUniverses } from '../services/sparqlService';
 import '../styles/HomePage.css';
 
+/**
+ * HomePage - Pagina principale dell'applicazione
+ * Mostra la lista degli universi narrativi disponibili
+ */
 export default function HomePage({ onSelectUniverse }) {
+    // Stato per memorizzare gli universi caricati
     const [universes, setUniverses] = useState([]);
+    // Stato per gestire il caricamento
     const [loading, setLoading] = useState(true);
+    // Stato per eventuali errori
     const [error, setError] = useState(null);
 
+    // Funzione per recuperare gli universi dal servizio SPARQL
     async function fetchUniverses() {
         setError(null);
         setLoading(true);
         try {
             const data = await getUniverses();
+            // Trasforma i risultati SPARQL in oggetti più semplici
             const results = data.results.bindings.map(b => ({
                 uri: b.universe.value,
                 name: b.name.value,
@@ -28,10 +37,12 @@ export default function HomePage({ onSelectUniverse }) {
         }
     }
 
+    // Carica gli universi al mount del componente
     useEffect(() => {
         fetchUniverses();
     }, []);
 
+    // Stato di caricamento
     if (loading) {
         return (
             <div className="loading">
@@ -41,6 +52,7 @@ export default function HomePage({ onSelectUniverse }) {
         );
     }
 
+    // Stato di errore
     if (error) {
         return (
             <div className="error">
@@ -54,6 +66,7 @@ export default function HomePage({ onSelectUniverse }) {
         );
     }
 
+    // Mapping universo -> sigla per le icone
     const universeEmojis = {
         "Universo di Harry Potter": "HP",
         "Universo di Percy Jackson": "PJ",
@@ -62,6 +75,7 @@ export default function HomePage({ onSelectUniverse }) {
 
     return (
         <div className="home-page">
+            {/* Header con titolo e descrizione */}
             <header className="hero">
                 <h1 className="hero-title">Esplora gli Universi Narrativi</h1>
                 <p className="hero-subtitle">
@@ -69,9 +83,11 @@ export default function HomePage({ onSelectUniverse }) {
                 </p>
             </header>
 
+            {/* Griglia delle card degli universi */}
             <div className="universes-grid">
                 {universes.map(universe => (
                     <div key={universe.uri} className="universe-card">
+                        {/* Icona/sigla dell'universo */}
                         <div className="universe-icon">
                             {universeEmojis[universe.name] || "NU"}
                         </div>
@@ -84,6 +100,7 @@ export default function HomePage({ onSelectUniverse }) {
                             </p>
                         )}
 
+                        {/* Statistiche: numero di personaggi, luoghi, opere */}
                         <div className="universe-stats">
                             <div className="stat">
                                 <span className="stat-number">{universe.characters}</span>
@@ -101,6 +118,7 @@ export default function HomePage({ onSelectUniverse }) {
                             </div>
                         </div>
 
+                        {/* Bottone per esplorare l'universo */}
                         <button
                             className="explore-button"
                             onClick={() => onSelectUniverse(universe)}
@@ -111,6 +129,7 @@ export default function HomePage({ onSelectUniverse }) {
                 ))}
             </div>
 
+            {/* Footer con crediti */}
             <footer className="home-footer">
                 <a 
                     href="https://informatica.i-learn.unito.it/course/view.php?id=3571" 

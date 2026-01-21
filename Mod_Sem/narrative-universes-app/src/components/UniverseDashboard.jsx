@@ -6,18 +6,28 @@ import LocationsList from './LocationsList';
 import WorksList from './WorksList';
 import '../styles/UniverseDashboard.css';
 
+/**
+ * UniverseDashboard - Dashboard principale di un universo narrativo
+ * Gestisce la navigazione a tab tra personaggi, luoghi, opere e dati esterni
+ */
 export default function UniverseDashboard() {
+  // Recupera l'URI dell'universo dai parametri URL
   const [params] = useSearchParams();
   const uri = params.get("uri");
   const navigate = useNavigate();
 
+  // Stato dell'universo selezionato
   const [universe, setUniverse] = useState(null);
+  // Tab attualmente attiva
   const [activeTab, setActiveTab] = useState('characters');
+  // Gestione errori
   const [error, setError] = useState(null);
 
+  // Dati film da Wikidata (caricati su richiesta)
   const [wikidataMovies, setWikidataMovies] = useState(null);
   const [loadingWikidata, setLoadingWikidata] = useState(false);
 
+  // Carica i dettagli dell'universo
   const fetchUniverse = useCallback(async () => {
     try {
       const data = await getUniverseDetails(uri);
@@ -35,19 +45,21 @@ export default function UniverseDashboard() {
     }
   }, [uri]);
 
-    const loadWikidataInfo = async () => {
+  // Carica i film da Wikidata in base all'universo
+  const loadWikidataInfo = async () => {
     setLoadingWikidata(true);
     try {
-            let movies;
-            if (universe.uri.endsWith('#HarryPotterUniverse')) {
-                movies = await getMoviesFromWikidata(universe.uri);
-            } else if (universe.uri.endsWith('#MiddleEarthUniverse')) {
-                movies = await getLotrMoviesFromWikidata(universe.uri);
-            } else if (universe.uri.endsWith('#PercyJacksonUniverse')) {
-                movies = await getPercyJacksonMoviesFromWikidata(universe.uri);
-            } else {
-                movies = await getMoviesFromWikidata(universe.uri);
-            }
+      let movies;
+      // Seleziona la query appropriata in base all'universo
+      if (universe.uri.endsWith('#HarryPotterUniverse')) {
+        movies = await getMoviesFromWikidata(universe.uri);
+      } else if (universe.uri.endsWith('#MiddleEarthUniverse')) {
+        movies = await getLotrMoviesFromWikidata(universe.uri);
+      } else if (universe.uri.endsWith('#PercyJacksonUniverse')) {
+        movies = await getPercyJacksonMoviesFromWikidata(universe.uri);
+      } else {
+        movies = await getMoviesFromWikidata(universe.uri);
+      }
       setWikidataMovies(movies.results.bindings);
     } catch (err) {
       console.error('Errore caricamento Wikidata:', err);
@@ -56,10 +68,12 @@ export default function UniverseDashboard() {
     }
   };
 
+  // Effetto per caricare l'universo al cambio di URI
   useEffect(() => {
     fetchUniverse();
   }, [fetchUniverse]);
 
+  // Stato di caricamento iniziale
   if (!universe && !error) {
     return (
       <div className="loading-state">
@@ -69,6 +83,7 @@ export default function UniverseDashboard() {
     );
   }
 
+  // Stato di errore
   if (error) {
     return (
       <div className="error">
@@ -79,6 +94,7 @@ export default function UniverseDashboard() {
     );
   }
 
+  // Definizione delle tab disponibili
   const tabs = [
     { id: 'characters', label: 'Personaggi', count: universe.characters },
     { id: 'locations', label: 'Luoghi', count: universe.locations },
@@ -88,13 +104,16 @@ export default function UniverseDashboard() {
 
   return (
     <div className="dashboard">
+      {/* Header con info universo */}
       <div className="dashboard-header">
         <div className="universe-info">
+          {/* Bottone per tornare alla home */}
           <button className="home-button" onClick={() => navigate('/')}>
             <span className="home-icon" aria-hidden="true" />
             <span className="sr-only">Torna alla home</span>
           </button>
           <h1 className="universe-title">{universe.name}</h1>
+          {/* Meta-info con conteggi */}
           <div className="universe-meta">
             <span className="meta-item">{universe.characters} Personaggi</span>
             <span className="meta-separator">•</span>
@@ -105,6 +124,7 @@ export default function UniverseDashboard() {
         </div>
       </div>
 
+      {/* Barra delle tab */}
       <div className="tabs">
         {tabs.map(tab => (
           <button
@@ -118,11 +138,13 @@ export default function UniverseDashboard() {
         ))}
       </div>
 
+      {/* Contenuto della tab attiva */}
       <div className="tab-content">
         {activeTab === 'characters' && <CharactersList universeUri={universe.uri} />}
         {activeTab === 'locations' && <LocationsList universeUri={universe.uri} />}
         {activeTab === 'works' && <WorksList universeUri={universe.uri} />}
 
+        {/* Tab Wikidata: carica dati esterni su richiesta */}
         {activeTab === 'wikidata' && (
           <div className="wikidata-content">
             {!wikidataMovies && !loadingWikidata ? (

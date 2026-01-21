@@ -1,5 +1,6 @@
 const GRAPHDB_ENDPOINT = 'http://localhost:3001/sparql';
 
+// Esegue una query SPARQL tramite proxy e restituisce JSON.
 export async function executeQuery(query) {
     const response = await fetch(GRAPHDB_ENDPOINT, {
         method: 'POST',
@@ -14,6 +15,7 @@ export async function executeQuery(query) {
     return await response.json();
 }
 
+// Recupera lista di tutti gli universi narrativi con statistiche.
 export async function getUniverses() {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -47,7 +49,7 @@ export async function getUniverses() {
     return executeQuery(query);
 }
 
-// Query: Personaggi per universo
+// Recupera personaggi per un dato universo.
 export async function getCharactersByUniverse(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -71,6 +73,7 @@ export async function getCharactersByUniverse(universeUri) {
     return executeQuery(query);
 }
 
+// Recupera opere narrative per un dato universo.
 export async function getWorksByUniverse(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -102,6 +105,7 @@ export async function getWorksByUniverse(universeUri) {
     return executeQuery(query);
 }
 
+// Recupera luoghi per un dato universo.
 export async function getLocationsByUniverse(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -128,6 +132,7 @@ export async function getLocationsByUniverse(universeUri) {
     return executeQuery(query);
 }
 
+// Recupera informazioni dettagliate e relazioni per un'entità.
 export async function getEntityDetails(uri) {
     const baseQuery = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -183,6 +188,7 @@ export async function getEntityDetails(uri) {
     };
 }
 
+// Recupera relazioni per un personaggio (alleati, nemici, ecc.).
 export async function getCharacterRelations(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -220,6 +226,7 @@ export async function getCharacterRelations(uri) {
     };
 }
 
+// Recupera relazioni per un luogo (opere, organizzazioni, ecc.).
 export async function getLocationRelations(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -252,6 +259,7 @@ export async function getLocationRelations(uri) {
         dangerLevel: data.results.bindings[0]?.danger?.value || null
     };
 }
+// Recupera relazioni per un oggetto (proprietari, abilità, ecc.).
 export async function getObjectRelations(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -280,6 +288,7 @@ export async function getObjectRelations(uri) {
         canBeDestroyed: extract('destroyable')[0] || null
     };
 }
+// Recupera relazioni per un'opera narrativa (personaggi, luoghi, ecc.).
 export async function getWorkRelations(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -314,6 +323,7 @@ export async function getWorkRelations(uri) {
 }
 
 
+// Recupera dettagli base e conteggi per un universo.
 export async function getUniverseDetails(uri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -336,7 +346,7 @@ export async function getUniverseDetails(uri) {
 
     return executeQuery(query);
 }
-// QUERY FEDERATA: Film locali + Wikidata (senza duplicati)
+// Recupera film da locale + Wikidata per universo Harry Potter.
 export async function getMoviesFromWikidata(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -393,6 +403,7 @@ export async function getMoviesFromWikidata(universeUri) {
 
     return executeQuery(query);
 }
+// Recupera film da locale + Wikidata per universo LOTR.
 export async function getLotrMoviesFromWikidata(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>
@@ -438,6 +449,7 @@ export async function getLotrMoviesFromWikidata(universeUri) {
     `;
     return executeQuery(query);
 }
+// Recupera film da locale + Wikidata per universo Percy Jackson.
 export async function getPercyJacksonMoviesFromWikidata(universeUri) {
     const query = `
     PREFIX ontology: <http://www.narrative-universes.org/ontology#>

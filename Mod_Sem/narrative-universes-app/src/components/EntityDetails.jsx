@@ -3,14 +3,22 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getEntityDetails } from '../services/sparqlService';
 import '../styles/EntityDetails.css';
 
+/**
+ * EntityDetails - Pagina di dettaglio per un'entita (personaggio, luogo, opera, oggetto)
+ * Mostra tutte le proprieta e relazioni dell'entita selezionata
+ */
 export default function EntityDetails() {
+    // Recupera l'URI dell'entita dai parametri URL
     const [params] = useSearchParams();
     const uri = params.get('uri');
     const navigate = useNavigate();
 
+    // Stato dell'entita caricata
     const [entity, setEntity] = useState(null);
+    // Gestione errori
     const [error, setError] = useState(null);
 
+    // Funzione per caricare i dettagli dell'entita
     const fetchEntity = useCallback(async () => {
         try {
             const data = await getEntityDetails(uri);
@@ -21,6 +29,7 @@ export default function EntityDetails() {
         }
     }, [uri]);
 
+    // Effetto per caricare l'entita (con piccolo delay per evitare race conditions)
     useEffect(() => {
         const id = setTimeout(() => {
             fetchEntity();
@@ -28,6 +37,7 @@ export default function EntityDetails() {
         return () => clearTimeout(id);
     }, [fetchEntity]);
 
+    // Stato di caricamento
     if (!entity && !error) return (
         <div className="loading-state">
             <div className="spinner"></div>
@@ -35,6 +45,7 @@ export default function EntityDetails() {
         </div>
     );
 
+    // Stato di errore
     if (error) {
         return (
             <div className="error">
@@ -48,6 +59,11 @@ export default function EntityDetails() {
         );
     }
 
+    /**
+     * Renderizza una lista di entita correlate come link cliccabili
+     * @param {string} title - Titolo della sezione
+     * @param {string[]} items - Array di URI delle entita correlate
+     */
     const renderList = (title, items) => {
         if (!items || items.length === 0) return null;
         return (
@@ -60,6 +76,7 @@ export default function EntityDetails() {
                             className="clickable"
                             onClick={() => navigate(`/entity?uri=${encodeURIComponent(i)}`)}
                         >
+                            {/* Estrae il nome dall'URI (dopo il #) */}
                             {i.split('#').pop()}
                         </li>
                     ))}
@@ -70,6 +87,7 @@ export default function EntityDetails() {
 
     return (
         <>
+            {/* Header con bottone indietro */}
             <header className="header">
                 <button className="back-button" onClick={() => navigate(-1)}>
                     <span className="back-icon" aria-hidden="true" />
@@ -79,6 +97,8 @@ export default function EntityDetails() {
 
             <div className="entity-details">
                 <h1>{entity.label}</h1>
+                
+                {/* Badge del tipo di entita con traduzione italiana */}
                 {(() => {
                     const typeLabels = {
                         Character: "Personaggio",
@@ -90,8 +110,8 @@ export default function EntityDetails() {
                         SafePlace: "Luogo Sicuro",
                         DangerZone: "Zona Pericolosa",
                         LiminalSpace: "Spazio di Confine",
-                        Ability: "Abilità",
-                        MagicalAbility: "Abilità Magica",
+                        Ability: "Abilita",
+                        MagicalAbility: "Abilita Magica",
                         HumanCharacter: "Personaggio",
                         NonHumanCharacter: "Non Umano",
                         HybridCharacter: "Ibrido",
@@ -104,16 +124,18 @@ export default function EntityDetails() {
                     );
                 })()}
 
+                {/* Descrizione dell'entita */}
                 {entity.description && (
                     <p className="description">{entity.description}</p>
                 )}
 
+                {/* Sezioni relazioni: alleati, nemici, mentori, ecc. */}
                 {renderList("Alleati", entity.allies)}
                 {renderList("Nemici", entity.enemies)}
                 {renderList("Mentori", entity.mentors)}
                 {renderList("Allievi", entity.students)}
                 {renderList("Oggetti posseduti", entity.objects)}
-                {renderList("Abilità", entity.abilities)}
+                {renderList("Abilita", entity.abilities)}
                 {renderList("Opere", entity.works)}
                 {renderList("Organizzazioni", entity.organizations)}
                 {renderList("Luoghi ambientazione", entity.locations)}
@@ -121,9 +143,11 @@ export default function EntityDetails() {
                 {renderList("Sequel", entity.sequels)}
                 {renderList("Adattamenti", entity.adaptations)}
 
+                {/* Sezioni specifiche per gli oggetti */}
                 {entity.type === 'Object' && renderList("Posseduto da", entity.owners)}
-                {entity.type === 'Object' && renderList("Abilità conferite", entity.abilities)}
+                {entity.type === 'Object' && renderList("Abilita conferite", entity.abilities)}
 
+                {/* Attributi speciali degli oggetti (tipo potere, distruttibilita) */}
                 {entity.type === 'Object' && (
                     ((entity.powerType && entity.powerType.length > 0) ||
                      (entity.canBeDestroyed === 'true' || entity.canBeDestroyed === 'false')) && (
@@ -133,12 +157,13 @@ export default function EntityDetails() {
                                 <p>Tipo di potere: {entity.powerType.split('#').pop()}</p>
                             )}
                             {(entity.canBeDestroyed === 'true' || entity.canBeDestroyed === 'false') && (
-                                <p>Può essere distrutto: {entity.canBeDestroyed === 'true' ? 'Sì' : 'No'}</p>
+                                <p>Puo essere distrutto: {entity.canBeDestroyed === 'true' ? 'Si' : 'No'}</p>
                             )}
                         </div>
                     )
                 )}
 
+                {/* Funzione narrativa del luogo/personaggio */}
                 {entity.narrativeFunction && (
                     <div className="section">
                         <h3>Funzione narrativa</h3>
@@ -146,6 +171,7 @@ export default function EntityDetails() {
                     </div>
                 )}
 
+                {/* Livello di pericolo per zone pericolose */}
                 {entity.dangerLevel && (
                     <div className="section">
                         <h3>Livello di pericolo</h3>
